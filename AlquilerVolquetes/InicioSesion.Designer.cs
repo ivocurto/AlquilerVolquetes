@@ -103,6 +103,7 @@
             Controls.Add(txtUsuario);
             Name = "InicioSesion";
             Text = "InicioSesion";
+            Load += InicioSesion_Load;
             ResumeLayout(false);
             PerformLayout();
         }

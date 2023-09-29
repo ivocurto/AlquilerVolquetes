@@ -17,6 +17,8 @@ namespace AlquilerVolquetes
             InitializeComponent();
         }
 
+        
+
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
@@ -29,7 +31,14 @@ namespace AlquilerVolquetes
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            PantallaPincipal pp = new PantallaPincipal
+            PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
+            pantallaPrincipal.Show();
+            this.Hide();
+        }
+
+        private void InicioSesion_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
