@@ -1,20 +1,21 @@
 ﻿namespace Clases
 {
-    public class Ususario
+    public class Usuario
     {
-        private string NombreUsuario;
-        private string MailUsusario;
-        private string ClaveUsuario;
+        private string nombreUsuario;
+        private string mailUsusario;
+        private string claveUsuario;
 
-        public Ususario(string nombreUsuario, string mailUsusario, string claveUsuario)
+        
+        public Usuario(string nombreUsuario, string mailUsusario, string claveUsuario)
         {
-            NombreUsuario1 = nombreUsuario;
-            MailUsusario1 = mailUsusario;
-            ClaveUsuario1 = claveUsuario;
+            NombreUsuario = nombreUsuario;
+            MailUsusario = mailUsusario;
+            ClaveUsuario = claveUsuario;
         }
 
-        public string NombreUsuario1 { get => NombreUsuario; set => NombreUsuario = value; }
-        public string MailUsusario1 { get => MailUsusario; set => MailUsusario = value; }
-        public string ClaveUsuario1 { get => ClaveUsuario; set => ClaveUsuario = value; }
+        public string NombreUsuario { get => nombreUsuario; set => nombreUsuario = value; }
+        public string MailUsusario { get => mailUsusario; set => mailUsusario = value; }
+        public string ClaveUsuario { get => claveUsuario; set => claveUsuario = value; }
     }
 }

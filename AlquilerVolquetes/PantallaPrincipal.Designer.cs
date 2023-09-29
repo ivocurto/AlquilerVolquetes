@@ -1,6 +1,6 @@
 ﻿namespace AlquilerVolquetes
 {
-    partial class PantallaPrincipal
+    partial class PantallaPrincipal : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +37,8 @@
             ClientSize = new Size(800, 450);
             Name = "PantallaPrincipal";
             Text = "PantallaPrincipal";
+            FormClosing += PantallaPrincipal_FormClosing;
+            FormClosed += PantallaPrincipal_FormClosed;
             Load += PantallaPrincipal_Load;
             ResumeLayout(false);
         }

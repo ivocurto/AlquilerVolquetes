@@ -17,20 +17,35 @@ namespace AlquilerVolquetes
             InitializeComponent();
         }
 
-        //private void PantallaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
-        //{
-        //    // Mostrar un cuadro de diálogo de confirmación
-        //    DialogResult resultado = MessageBox.Show("¿Estás seguro de que deseas salir?", "Confirmar cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-        //    // Si el usuario elige "No", cancela el cierre de la aplicación
-        //    if (resultado == DialogResult.No)
-        //    {
-        //        e.Cancel = true;
-        //    }
-        //}
-
         private void PantallaPrincipal_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void PantallaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void PantallaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            List<Form> formulariosACerrar = new List<Form>();
+
+            // Agregar todos los formularios abiertos (excepto el principal) a la lista
+            foreach (Form formulario in Application.OpenForms)
+            {
+                if (formulario != this)
+                {
+                    formulariosACerrar.Add(formulario);
+                }
+            }
+
+            // Cerrar los formularios en la lista
+            foreach (Form formulario in formulariosACerrar)
+            {
+                formulario.Close();
+            }
+
 
         }
     }

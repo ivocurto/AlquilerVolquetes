@@ -38,43 +38,45 @@
             // 
             // txtUsuario
             // 
-            txtUsuario.Location = new Point(307, 113);
+            txtUsuario.Location = new Point(351, 151);
+            txtUsuario.Margin = new Padding(3, 4, 3, 4);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(184, 23);
+            txtUsuario.Size = new Size(210, 27);
             txtUsuario.TabIndex = 0;
             txtUsuario.TextChanged += textBox1_TextChanged;
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(307, 95);
+            lblNombre.Location = new Point(351, 127);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(52, 15);
+            lblNombre.Size = new Size(65, 20);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Ususario";
             // 
             // lblClave
             // 
             lblClave.AutoSize = true;
-            lblClave.Location = new Point(307, 164);
+            lblClave.Location = new Point(351, 219);
             lblClave.Name = "lblClave";
-            lblClave.Size = new Size(67, 15);
+            lblClave.Size = new Size(83, 20);
             lblClave.TabIndex = 2;
             lblClave.Text = "Contraseña";
             // 
             // txtClave
             // 
-            txtClave.Location = new Point(307, 182);
+            txtClave.Location = new Point(351, 243);
+            txtClave.Margin = new Padding(3, 4, 3, 4);
             txtClave.Name = "txtClave";
-            txtClave.Size = new Size(184, 23);
+            txtClave.Size = new Size(210, 27);
             txtClave.TabIndex = 3;
             // 
             // lblRegistrarse
             // 
             lblRegistrarse.AutoSize = true;
-            lblRegistrarse.Location = new Point(307, 218);
+            lblRegistrarse.Location = new Point(351, 291);
             lblRegistrarse.Name = "lblRegistrarse";
-            lblRegistrarse.Size = new Size(184, 15);
+            lblRegistrarse.Size = new Size(233, 20);
             lblRegistrarse.TabIndex = 4;
             lblRegistrarse.TabStop = true;
             lblRegistrarse.Text = "¿No tienes una cuenta? Registrate";
@@ -82,9 +84,10 @@
             // 
             // btnIngresar
             // 
-            btnIngresar.Location = new Point(359, 267);
+            btnIngresar.Location = new Point(410, 356);
+            btnIngresar.Margin = new Padding(3, 4, 3, 4);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(75, 23);
+            btnIngresar.Size = new Size(86, 31);
             btnIngresar.TabIndex = 5;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = true;
@@ -92,17 +95,19 @@
             // 
             // InicioSesion
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(btnIngresar);
             Controls.Add(lblRegistrarse);
             Controls.Add(txtClave);
             Controls.Add(lblClave);
             Controls.Add(lblNombre);
             Controls.Add(txtUsuario);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "InicioSesion";
             Text = "InicioSesion";
+            FormClosing += InicioSesion_FormClosing;
             Load += InicioSesion_Load;
             ResumeLayout(false);
             PerformLayout();
