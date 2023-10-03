@@ -135,6 +135,7 @@
             Controls.Add(txtUsuario);
             Name = "RegistroUsuario";
             Text = "Form1";
+            FormClosed += RegistroUsuario_FormClosed;
             Load += RegistroUsuario_Load;
             ResumeLayout(false);
             PerformLayout();

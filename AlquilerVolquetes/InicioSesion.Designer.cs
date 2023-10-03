@@ -108,6 +108,7 @@
             Name = "InicioSesion";
             Text = "InicioSesion";
             FormClosing += InicioSesion_FormClosing;
+            FormClosed += InicioSesion_FormClosed;
             Load += InicioSesion_Load;
             ResumeLayout(false);
             PerformLayout();

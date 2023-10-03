@@ -15,14 +15,14 @@ namespace AlquilerVolquetes
     {
         protected List<Usuario> usuarios = new List<Usuario>();
         protected Usuario fran = new Usuario("Franco", "francoferrari226@gmail.com", "papa");
-        
+
         public InicioSesion()
         {
             InitializeComponent();
             usuarios.Add(fran);
         }
 
-        public InicioSesion(Usuario usuario) 
+        public InicioSesion(Usuario usuario)
         {
             InitializeComponent();
             usuarios.Add(usuario);
@@ -30,7 +30,7 @@ namespace AlquilerVolquetes
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            RegistroUsuario registro = new RegistroUsuario();
+            RegistroUsuario registro = new RegistroUsuario(usuarios);
             registro.Show();
             this.Hide();
         }
@@ -42,24 +42,23 @@ namespace AlquilerVolquetes
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            
-                string nombreUsuario = txtUsuario.Text;
-                string clave = txtClave.Text;
 
-                foreach (var usuario in usuarios)
+            string nombreUsuario = txtUsuario.Text;
+            string clave = txtClave.Text;
+
+            foreach (var usuario in usuarios)
+            {
+                if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
-                    if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
-                    {
-                        PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
-                        pantallaPrincipal.Show();
-                        this.Hide();
-                        return; 
-                    }
+                    PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
+                    pantallaPrincipal.Show();
+                    this.Hide();
+                    return;
                 }
-
-                // Si llegas aquí, significa que no se encontró una coincidencia válida.
-                MessageBox.Show("Nombre de usuario o clave incorrectos", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            MessageBox.Show("Nombre de usuario o clave incorrectos", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
         private void InicioSesion_Load(object sender, EventArgs e)
         {
@@ -68,7 +67,25 @@ namespace AlquilerVolquetes
 
         private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
+        }
+
+        private void InicioSesion_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            List<Form> formulariosACerrar = new List<Form>();
+
+            foreach (Form formulario in Application.OpenForms)
+            {
+                if (formulario != this)
+                {
+                    formulariosACerrar.Add(formulario);
+                }
+            }
+
+            foreach (Form formulario in formulariosACerrar)
+            {
+                formulario.Close();
+            }
         }
     }
 }

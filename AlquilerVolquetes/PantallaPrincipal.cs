@@ -31,7 +31,6 @@ namespace AlquilerVolquetes
         {
             List<Form> formulariosACerrar = new List<Form>();
 
-            // Agregar todos los formularios abiertos (excepto el principal) a la lista
             foreach (Form formulario in Application.OpenForms)
             {
                 if (formulario != this)
@@ -40,7 +39,6 @@ namespace AlquilerVolquetes
                 }
             }
 
-            // Cerrar los formularios en la lista
             foreach (Form formulario in formulariosACerrar)
             {
                 formulario.Close();
