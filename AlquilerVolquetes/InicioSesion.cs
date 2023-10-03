@@ -13,13 +13,13 @@ namespace AlquilerVolquetes
 {
     public partial class InicioSesion : Form
     {
-        protected List<Usuario> usuarios = new List<Usuario>();
-        protected Usuario fran = new Usuario("Franco", "francoferrari226@gmail.com", "papa");
+        protected static List<Usuario> usuarios = new List<Usuario>();
+        protected static Usuario a = new Usuario("a", "francoferrari226@gmail.com", "a");
 
         public InicioSesion()
         {
             InitializeComponent();
-            usuarios.Add(fran);
+            usuarios.Add(a);
         }
 
         public InicioSesion(Usuario usuario)
