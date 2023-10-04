@@ -55,9 +55,10 @@
             // 
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1244, 25);
+            toolStrip1.Size = new Size(1064, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
+            toolStrip1.ItemClicked += toolStrip1_ItemClicked;
             // 
             // pictureBox1
             // 
@@ -198,7 +199,7 @@
             // 
             // btnAgregarAlCarrito
             // 
-            btnAgregarAlCarrito.Location = new Point(963, 666);
+            btnAgregarAlCarrito.Location = new Point(797, 620);
             btnAgregarAlCarrito.Name = "btnAgregarAlCarrito";
             btnAgregarAlCarrito.Size = new Size(255, 49);
             btnAgregarAlCarrito.TabIndex = 13;
@@ -207,7 +208,7 @@
             // 
             // btnCarrito
             // 
-            btnCarrito.Location = new Point(1168, 51);
+            btnCarrito.Location = new Point(990, 68);
             btnCarrito.Name = "btnCarrito";
             btnCarrito.Size = new Size(50, 45);
             btnCarrito.TabIndex = 14;
@@ -218,7 +219,7 @@
             // 
             lstProductos.FormattingEnabled = true;
             lstProductos.ItemHeight = 15;
-            lstProductos.Location = new Point(963, 506);
+            lstProductos.Location = new Point(797, 456);
             lstProductos.Name = "lstProductos";
             lstProductos.Size = new Size(255, 154);
             lstProductos.TabIndex = 15;
@@ -227,7 +228,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1244, 741);
+            ClientSize = new Size(1064, 681);
             Controls.Add(lstProductos);
             Controls.Add(btnCarrito);
             Controls.Add(btnAgregarAlCarrito);
@@ -245,6 +246,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(toolStrip1);
             Name = "PantallaPrincipal";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PantallaPrincipal";
             FormClosing += PantallaPrincipal_FormClosing;
             FormClosed += PantallaPrincipal_FormClosed;

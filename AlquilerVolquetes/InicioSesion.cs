@@ -50,8 +50,8 @@ namespace AlquilerVolquetes
             {
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
-                    PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
-                    pantallaPrincipal.Show();
+                    PantallaInicio pantallaInicio = new PantallaInicio();
+                    pantallaInicio.Show();
                     this.Hide();
                     return;
                 }

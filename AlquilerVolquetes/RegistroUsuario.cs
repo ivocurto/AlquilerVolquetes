@@ -20,11 +20,6 @@ namespace AlquilerVolquetes
             listaUsuarios = lista;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             string clave = txtClave.Text;
@@ -125,5 +120,13 @@ namespace AlquilerVolquetes
                 formulario.Close();
             }
         }
+
+        private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            InicioSesion inicio = new InicioSesion();
+            inicio.Show();
+            this.Hide();
+        }
+
     }
 }
