@@ -12,9 +12,11 @@ namespace AlquilerVolquetes
 {
     public partial class PantallaPrincipal : Form
     {
+
         public PantallaPrincipal()
         {
             InitializeComponent();
+
         }
 
         private void PantallaPrincipal_Load(object sender, EventArgs e)
@@ -46,12 +48,47 @@ namespace AlquilerVolquetes
 
 
         }
-
+        //Chico
         private void btnVolqueteChico_Click(object sender, EventArgs e)
         {
 
+            this.lblCantidadVolqueteChico.Text = Incrementar_Label(this.lblCantidadVolqueteChico.Text);
+            this.lblPrecioChico.Text = ($"${int.Parse(this.lblCantidadVolqueteChico.Text) * 800}");
+
+        }
+        private void btnRestarVolqueteChico_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteChico.Text = Decrementar_Label(this.lblCantidadVolqueteChico.Text);
+            this.lblPrecioChico.Text = ($"${int.Parse(this.lblCantidadVolqueteChico.Text) * 800}");
+
         }
 
+        //Mediano
+        private void btnAgregarVolqueteMediano_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteMediano.Text = Incrementar_Label(this.lblCantidadVolqueteMediano.Text);
+            this.lblPrecioMediano.Text = ($"${int.Parse(this.lblCantidadVolqueteMediano.Text) * 1200}");
+
+        }
+        private void btnRestarVolqueteMediano_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteMediano.Text = Decrementar_Label(this.lblCantidadVolqueteMediano.Text);
+            this.lblPrecioMediano.Text = ($"${int.Parse(this.lblCantidadVolqueteMediano.Text) * 1200}");
+        }
+        //Grande
+        private void btnAgregarVolqueteGrande_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteGrande.Text = Incrementar_Label(this.lblCantidadVolqueteGrande.Text);
+            this.lblPrecioGrande.Text = ($"${int.Parse(this.lblCantidadVolqueteGrande.Text) * 1600}");
+
+        }
+        private void btnRestarVolqueteGrande_Click(object sender, EventArgs e)
+        {
+
+            this.lblCantidadVolqueteGrande.Text = Decrementar_Label(this.lblCantidadVolqueteGrande.Text);
+            this.lblPrecioGrande.Text = ($"${int.Parse(this.lblCantidadVolqueteGrande.Text) * 1600}");
+
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -61,5 +98,22 @@ namespace AlquilerVolquetes
         {
 
         }
+        private string Incrementar_Label(string label)
+        {
+            int valor = int.Parse(label);
+            if (valor < 8) { valor++; }
+
+            return ($"{valor}");
+        }
+
+        private string Decrementar_Label(string label)
+        {
+            int valor = int.Parse(label);
+            if (valor > 0) { valor--; }
+
+            return ($"{valor}");
+        }
+
+
     }
 }

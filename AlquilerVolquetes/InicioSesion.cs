@@ -12,7 +12,9 @@ using System.Windows.Forms;
 namespace AlquilerVolquetes
 {
     public partial class InicioSesion : Form
-    {
+    {   
+
+    
         protected static List<Usuario> usuarios = new List<Usuario>();
         protected static Usuario a = new Usuario("a", "francoferrari226@gmail.com", "a");
 
