@@ -46,6 +46,9 @@
             btnAgregarAlCarrito = new Button();
             btnCarrito = new Button();
             lstProductos = new ListBox();
+            lblPrecioChico = new Label();
+            lblPrecioMediano = new Label();
+            lblPrecioGrande = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -53,9 +56,10 @@
             // 
             // toolStrip1
             // 
+            toolStrip1.ImageScalingSize = new Size(20, 20);
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1064, 25);
+            toolStrip1.Size = new Size(1216, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             toolStrip1.ItemClicked += toolStrip1_ItemClicked;
@@ -63,9 +67,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(29, 51);
+            pictureBox1.Location = new Point(33, 68);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(296, 202);
+            pictureBox1.Size = new Size(338, 269);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -75,10 +80,10 @@
             btnAgregarVolqueteChico.BackColor = Color.Green;
             btnAgregarVolqueteChico.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             btnAgregarVolqueteChico.ForeColor = SystemColors.ButtonHighlight;
-            btnAgregarVolqueteChico.Location = new Point(351, 81);
+            btnAgregarVolqueteChico.Location = new Point(401, 108);
             btnAgregarVolqueteChico.Margin = new Padding(1);
             btnAgregarVolqueteChico.Name = "btnAgregarVolqueteChico";
-            btnAgregarVolqueteChico.Size = new Size(55, 54);
+            btnAgregarVolqueteChico.Size = new Size(63, 72);
             btnAgregarVolqueteChico.TabIndex = 2;
             btnAgregarVolqueteChico.Text = "+";
             btnAgregarVolqueteChico.UseVisualStyleBackColor = false;
@@ -86,9 +91,10 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(29, 274);
+            pictureBox2.Location = new Point(33, 365);
+            pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(296, 202);
+            pictureBox2.Size = new Size(338, 269);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
@@ -96,9 +102,10 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(29, 499);
+            pictureBox3.Location = new Point(33, 665);
+            pictureBox3.Margin = new Padding(3, 4, 3, 4);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(296, 202);
+            pictureBox3.Size = new Size(338, 269);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 4;
             pictureBox3.TabStop = false;
@@ -108,72 +115,77 @@
             btnAgregarVolqueteMediano.BackColor = Color.Green;
             btnAgregarVolqueteMediano.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             btnAgregarVolqueteMediano.ForeColor = SystemColors.ButtonHighlight;
-            btnAgregarVolqueteMediano.Location = new Point(351, 305);
+            btnAgregarVolqueteMediano.Location = new Point(401, 407);
             btnAgregarVolqueteMediano.Margin = new Padding(1);
             btnAgregarVolqueteMediano.Name = "btnAgregarVolqueteMediano";
-            btnAgregarVolqueteMediano.Size = new Size(55, 54);
+            btnAgregarVolqueteMediano.Size = new Size(63, 72);
             btnAgregarVolqueteMediano.TabIndex = 5;
             btnAgregarVolqueteMediano.Text = "+";
             btnAgregarVolqueteMediano.UseVisualStyleBackColor = false;
+            btnAgregarVolqueteMediano.Click += btnAgregarVolqueteMediano_Click;
             // 
             // btnAgregarVolqueteGrande
             // 
             btnAgregarVolqueteGrande.BackColor = Color.Green;
             btnAgregarVolqueteGrande.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             btnAgregarVolqueteGrande.ForeColor = SystemColors.ButtonHighlight;
-            btnAgregarVolqueteGrande.Location = new Point(351, 533);
+            btnAgregarVolqueteGrande.Location = new Point(401, 711);
             btnAgregarVolqueteGrande.Margin = new Padding(1);
             btnAgregarVolqueteGrande.Name = "btnAgregarVolqueteGrande";
-            btnAgregarVolqueteGrande.Size = new Size(55, 54);
+            btnAgregarVolqueteGrande.Size = new Size(63, 72);
             btnAgregarVolqueteGrande.TabIndex = 6;
             btnAgregarVolqueteGrande.Text = "+";
             btnAgregarVolqueteGrande.UseVisualStyleBackColor = false;
+            btnAgregarVolqueteGrande.Click += btnAgregarVolqueteGrande_Click;
             // 
             // btnRestarVolqueteChico
             // 
             btnRestarVolqueteChico.BackColor = Color.Red;
             btnRestarVolqueteChico.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             btnRestarVolqueteChico.ForeColor = SystemColors.ButtonHighlight;
-            btnRestarVolqueteChico.Location = new Point(351, 158);
+            btnRestarVolqueteChico.Location = new Point(401, 211);
             btnRestarVolqueteChico.Margin = new Padding(1);
             btnRestarVolqueteChico.Name = "btnRestarVolqueteChico";
-            btnRestarVolqueteChico.Size = new Size(55, 54);
+            btnRestarVolqueteChico.Size = new Size(63, 72);
             btnRestarVolqueteChico.TabIndex = 7;
             btnRestarVolqueteChico.Text = "-";
             btnRestarVolqueteChico.UseVisualStyleBackColor = false;
+            btnRestarVolqueteChico.Click += btnRestarVolqueteChico_Click;
             // 
             // btnRestarVolqueteMediano
             // 
             btnRestarVolqueteMediano.BackColor = Color.Red;
             btnRestarVolqueteMediano.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             btnRestarVolqueteMediano.ForeColor = SystemColors.ButtonHighlight;
-            btnRestarVolqueteMediano.Location = new Point(351, 386);
+            btnRestarVolqueteMediano.Location = new Point(401, 515);
             btnRestarVolqueteMediano.Margin = new Padding(1);
             btnRestarVolqueteMediano.Name = "btnRestarVolqueteMediano";
-            btnRestarVolqueteMediano.Size = new Size(55, 54);
+            btnRestarVolqueteMediano.Size = new Size(63, 72);
             btnRestarVolqueteMediano.TabIndex = 8;
             btnRestarVolqueteMediano.Text = "-";
             btnRestarVolqueteMediano.UseVisualStyleBackColor = false;
+            btnRestarVolqueteMediano.Click += btnRestarVolqueteMediano_Click;
             // 
             // btnRestarVolqueteGrande
             // 
             btnRestarVolqueteGrande.BackColor = Color.Red;
             btnRestarVolqueteGrande.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
             btnRestarVolqueteGrande.ForeColor = SystemColors.ButtonHighlight;
-            btnRestarVolqueteGrande.Location = new Point(351, 610);
+            btnRestarVolqueteGrande.Location = new Point(401, 813);
             btnRestarVolqueteGrande.Margin = new Padding(1);
             btnRestarVolqueteGrande.Name = "btnRestarVolqueteGrande";
-            btnRestarVolqueteGrande.Size = new Size(55, 54);
+            btnRestarVolqueteGrande.Size = new Size(63, 72);
             btnRestarVolqueteGrande.TabIndex = 9;
             btnRestarVolqueteGrande.Text = "-";
             btnRestarVolqueteGrande.UseVisualStyleBackColor = false;
+            btnRestarVolqueteGrande.Click += btnRestarVolqueteGrande_Click;
             // 
             // lblCantidadVolqueteChico
             // 
             lblCantidadVolqueteChico.AutoSize = true;
-            lblCantidadVolqueteChico.Location = new Point(457, 140);
+            lblCantidadVolqueteChico.Location = new Point(486, 188);
             lblCantidadVolqueteChico.Name = "lblCantidadVolqueteChico";
-            lblCantidadVolqueteChico.Size = new Size(13, 15);
+            lblCantidadVolqueteChico.Size = new Size(17, 20);
             lblCantidadVolqueteChico.TabIndex = 10;
             lblCantidadVolqueteChico.Text = "0";
             lblCantidadVolqueteChico.Click += label1_Click;
@@ -181,35 +193,37 @@
             // lblCantidadVolqueteMediano
             // 
             lblCantidadVolqueteMediano.AutoSize = true;
-            lblCantidadVolqueteMediano.Location = new Point(457, 368);
+            lblCantidadVolqueteMediano.Location = new Point(486, 487);
             lblCantidadVolqueteMediano.Name = "lblCantidadVolqueteMediano";
-            lblCantidadVolqueteMediano.Size = new Size(13, 15);
+            lblCantidadVolqueteMediano.Size = new Size(17, 20);
             lblCantidadVolqueteMediano.TabIndex = 11;
             lblCantidadVolqueteMediano.Text = "0";
             // 
             // lblCantidadVolqueteGrande
             // 
             lblCantidadVolqueteGrande.AutoSize = true;
-            lblCantidadVolqueteGrande.Location = new Point(457, 595);
+            lblCantidadVolqueteGrande.Location = new Point(486, 792);
             lblCantidadVolqueteGrande.Name = "lblCantidadVolqueteGrande";
-            lblCantidadVolqueteGrande.Size = new Size(13, 15);
+            lblCantidadVolqueteGrande.Size = new Size(17, 20);
             lblCantidadVolqueteGrande.TabIndex = 12;
             lblCantidadVolqueteGrande.Text = "0";
             // 
             // btnAgregarAlCarrito
             // 
-            btnAgregarAlCarrito.Location = new Point(797, 620);
+            btnAgregarAlCarrito.Location = new Point(911, 827);
+            btnAgregarAlCarrito.Margin = new Padding(3, 4, 3, 4);
             btnAgregarAlCarrito.Name = "btnAgregarAlCarrito";
-            btnAgregarAlCarrito.Size = new Size(255, 49);
+            btnAgregarAlCarrito.Size = new Size(291, 65);
             btnAgregarAlCarrito.TabIndex = 13;
             btnAgregarAlCarrito.Text = "AGREGAR AL CARRITO";
             btnAgregarAlCarrito.UseVisualStyleBackColor = true;
             // 
             // btnCarrito
             // 
-            btnCarrito.Location = new Point(990, 68);
+            btnCarrito.Location = new Point(1131, 91);
+            btnCarrito.Margin = new Padding(3, 4, 3, 4);
             btnCarrito.Name = "btnCarrito";
-            btnCarrito.Size = new Size(50, 45);
+            btnCarrito.Size = new Size(57, 60);
             btnCarrito.TabIndex = 14;
             btnCarrito.Text = "CART";
             btnCarrito.UseVisualStyleBackColor = true;
@@ -217,17 +231,48 @@
             // lstProductos
             // 
             lstProductos.FormattingEnabled = true;
-            lstProductos.ItemHeight = 15;
-            lstProductos.Location = new Point(797, 456);
+            lstProductos.ItemHeight = 20;
+            lstProductos.Location = new Point(911, 608);
+            lstProductos.Margin = new Padding(3, 4, 3, 4);
             lstProductos.Name = "lstProductos";
-            lstProductos.Size = new Size(255, 154);
+            lstProductos.Size = new Size(291, 204);
             lstProductos.TabIndex = 15;
+            // 
+            // lblPrecioChico
+            // 
+            lblPrecioChico.AutoSize = true;
+            lblPrecioChico.Location = new Point(521, 188);
+            lblPrecioChico.Name = "lblPrecioChico";
+            lblPrecioChico.Size = new Size(25, 20);
+            lblPrecioChico.TabIndex = 16;
+            lblPrecioChico.Text = "$0";
+            // 
+            // lblPrecioMediano
+            // 
+            lblPrecioMediano.AutoSize = true;
+            lblPrecioMediano.Location = new Point(521, 487);
+            lblPrecioMediano.Name = "lblPrecioMediano";
+            lblPrecioMediano.Size = new Size(25, 20);
+            lblPrecioMediano.TabIndex = 17;
+            lblPrecioMediano.Text = "$0";
+            // 
+            // lblPrecioGrande
+            // 
+            lblPrecioGrande.AutoSize = true;
+            lblPrecioGrande.Location = new Point(521, 792);
+            lblPrecioGrande.Name = "lblPrecioGrande";
+            lblPrecioGrande.Size = new Size(25, 20);
+            lblPrecioGrande.TabIndex = 18;
+            lblPrecioGrande.Text = "$0";
             // 
             // PantallaPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 681);
+            ClientSize = new Size(1216, 908);
+            Controls.Add(lblPrecioGrande);
+            Controls.Add(lblPrecioMediano);
+            Controls.Add(lblPrecioChico);
             Controls.Add(lstProductos);
             Controls.Add(btnCarrito);
             Controls.Add(btnAgregarAlCarrito);
@@ -244,6 +289,7 @@
             Controls.Add(btnAgregarVolqueteChico);
             Controls.Add(pictureBox1);
             Controls.Add(toolStrip1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "PantallaPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PantallaPrincipal";
@@ -276,5 +322,8 @@
         private Button btnAgregarAlCarrito;
         private Button btnCarrito;
         private ListBox lstProductos;
+        private Label lblPrecioChico;
+        private Label lblPrecioMediano;
+        private Label lblPrecioGrande;
     }
 }
