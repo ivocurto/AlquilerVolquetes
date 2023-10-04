@@ -82,7 +82,6 @@
             btnAgregarVolqueteChico.TabIndex = 2;
             btnAgregarVolqueteChico.Text = "+";
             btnAgregarVolqueteChico.UseVisualStyleBackColor = false;
-            btnAgregarVolqueteChico.Click += btnVolqueteChico_Click;
             // 
             // pictureBox2
             // 

@@ -71,6 +71,7 @@
             txtClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
             txtClave.Location = new Point(386, 329);
             txtClave.Name = "txtClave";
+            txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = " Contraseña";
             txtClave.Size = new Size(318, 36);
             txtClave.TabIndex = 4;
@@ -80,6 +81,7 @@
             txtReClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
             txtReClave.Location = new Point(386, 399);
             txtReClave.Name = "txtReClave";
+            txtReClave.PasswordChar = '*';
             txtReClave.PlaceholderText = " Repetir contraseña";
             txtReClave.Size = new Size(318, 36);
             txtReClave.TabIndex = 5;

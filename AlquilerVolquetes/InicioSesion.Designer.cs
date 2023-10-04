@@ -87,6 +87,7 @@
             txtClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
             txtClave.Location = new Point(386, 295);
             txtClave.Name = "txtClave";
+            txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = " Contraseña";
             txtClave.Size = new Size(318, 36);
             txtClave.TabIndex = 3;
