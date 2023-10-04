@@ -12,15 +12,15 @@ using System.Windows.Forms;
 namespace AlquilerVolquetes
 {
     public partial class InicioSesion : Form
-    {   
+    {
         protected static List<Usuario> usuarios = new List<Usuario>();
-        protected static Usuario fran = new Usuario("Franco", "francoferrari226@gmail.com", "papa");
+        protected static Usuario a = new Usuario("a", "francoferrari226@gmail.com", "a");
 
         public InicioSesion()
         {
 
             InitializeComponent();
-            usuarios.Add(fran);
+            usuarios.Add(a);
         }
 
         public InicioSesion(Usuario usuario)
@@ -51,8 +51,8 @@ namespace AlquilerVolquetes
             {
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
-                    PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
-                    pantallaPrincipal.Show();
+                    PantallaInicio pantallaInicio = new PantallaInicio();
+                    pantallaInicio.Show();
                     this.Hide();
                     return;
                 }

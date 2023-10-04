@@ -46,5 +46,20 @@ namespace AlquilerVolquetes
 
 
         }
+
+        private void btnVolqueteChico_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

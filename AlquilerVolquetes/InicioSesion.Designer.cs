@@ -29,54 +29,41 @@
         private void InitializeComponent()
         {
             txtUsuario = new TextBox();
-            lblNombre = new Label();
-            lblClave = new Label();
-            txtClave = new TextBox();
+            lblLogin = new Label();
             lblRegistrarse = new LinkLabel();
             btnIngresar = new Button();
+            txtClave = new TextBox();
             SuspendLayout();
             // 
             // txtUsuario
             // 
-            txtUsuario.Location = new Point(351, 151);
-            txtUsuario.Margin = new Padding(3, 4, 3, 4);
+            txtUsuario.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            txtUsuario.Location = new Point(386, 225);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(210, 27);
-            txtUsuario.TabIndex = 0;
+            txtUsuario.PlaceholderText = " Usuario";
+            txtUsuario.Size = new Size(318, 36);
+            txtUsuario.TabIndex = 2;
             txtUsuario.TextChanged += textBox1_TextChanged;
             // 
-            // lblNombre
+            // lblLogin
             // 
-            lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(351, 127);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(65, 20);
-            lblNombre.TabIndex = 1;
-            lblNombre.Text = "Ususario";
-            // 
-            // lblClave
-            // 
-            lblClave.AutoSize = true;
-            lblClave.Location = new Point(351, 219);
-            lblClave.Name = "lblClave";
-            lblClave.Size = new Size(83, 20);
-            lblClave.TabIndex = 2;
-            lblClave.Text = "Contraseña";
-            // 
-            // txtClave
-            // 
-            txtClave.Location = new Point(351, 243);
-            txtClave.Margin = new Padding(3, 4, 3, 4);
-            txtClave.Name = "txtClave";
-            txtClave.Size = new Size(210, 27);
-            txtClave.TabIndex = 3;
+            lblLogin.AutoSize = true;
+            lblLogin.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLogin.ForeColor = SystemColors.ControlDarkDark;
+            lblLogin.Location = new Point(386, 150);
+            lblLogin.Name = "lblLogin";
+            lblLogin.Size = new Size(308, 48);
+            lblLogin.TabIndex = 0;
+            lblLogin.Text = "INICIAR SESIÓN";
             // 
             // lblRegistrarse
             // 
             lblRegistrarse.AutoSize = true;
-            lblRegistrarse.Location = new Point(351, 291);
+            lblRegistrarse.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblRegistrarse.LinkColor = Color.DimGray;
+            lblRegistrarse.Location = new Point(460, 360);
             lblRegistrarse.Name = "lblRegistrarse";
-            lblRegistrarse.Size = new Size(233, 20);
+            lblRegistrarse.Size = new Size(244, 21);
             lblRegistrarse.TabIndex = 4;
             lblRegistrarse.TabStop = true;
             lblRegistrarse.Text = "¿No tienes una cuenta? Registrate";
@@ -84,29 +71,39 @@
             // 
             // btnIngresar
             // 
-            btnIngresar.Location = new Point(410, 356);
-            btnIngresar.Margin = new Padding(3, 4, 3, 4);
+            btnIngresar.BackColor = Color.DeepSkyBlue;
+            btnIngresar.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            btnIngresar.ForeColor = SystemColors.ButtonHighlight;
+            btnIngresar.Location = new Point(386, 400);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(86, 31);
-            btnIngresar.TabIndex = 5;
-            btnIngresar.Text = "Ingresar";
-            btnIngresar.UseVisualStyleBackColor = true;
+            btnIngresar.Size = new Size(318, 55);
+            btnIngresar.TabIndex = 1;
+            btnIngresar.Text = "INGRESAR";
+            btnIngresar.UseVisualStyleBackColor = false;
             btnIngresar.Click += btnIngresar_Click;
+            // 
+            // txtClave
+            // 
+            txtClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            txtClave.Location = new Point(386, 295);
+            txtClave.Name = "txtClave";
+            txtClave.PlaceholderText = " Contraseña";
+            txtClave.Size = new Size(318, 36);
+            txtClave.TabIndex = 3;
             // 
             // InicioSesion
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(1064, 681);
+            Controls.Add(txtClave);
             Controls.Add(btnIngresar);
             Controls.Add(lblRegistrarse);
-            Controls.Add(txtClave);
-            Controls.Add(lblClave);
-            Controls.Add(lblNombre);
+            Controls.Add(lblLogin);
             Controls.Add(txtUsuario);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "InicioSesion";
-            Text = "InicioSesion";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Iniciar Sesión";
             FormClosing += InicioSesion_FormClosing;
             FormClosed += InicioSesion_FormClosed;
             Load += InicioSesion_Load;
@@ -117,10 +114,9 @@
         #endregion
 
         private TextBox txtUsuario;
-        private Label lblNombre;
-        private Label lblClave;
-        private TextBox txtClave;
+        private Label lblLogin;
         private LinkLabel lblRegistrarse;
         private Button btnIngresar;
+        private TextBox txtClave;
     }
 }
