@@ -12,7 +12,7 @@ namespace AlquilerVolquetes
 {
     public partial class PantallaPrincipal : Form
     {
-
+        //asda
         public PantallaPrincipal()
         {
             InitializeComponent();
