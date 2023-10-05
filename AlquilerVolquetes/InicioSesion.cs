@@ -25,7 +25,7 @@ namespace AlquilerVolquetes
         protected static List<Usuario> usuarios = new List<Usuario>();
         protected static Usuario a = new Usuario("a", "francoferrari226@gmail.com", "a");
 
-        string rutaArchivoJson = "../../../archivos_datos/usuarios.json";
+        string rutaArchivoJson = "usuarios.json";
         public InicioSesion()
         {
             InitializeComponent();
@@ -57,6 +57,7 @@ namespace AlquilerVolquetes
             }
 
             usuarios.Add(usuario);
+            usuario.IndexUsuario = usuarios.Count() - 1;
 
             string jsonUsuarios = JsonConvert.SerializeObject(usuarios);
             File.WriteAllText(rutaArchivoJson, jsonUsuarios);
@@ -79,7 +80,6 @@ namespace AlquilerVolquetes
 
             string nombreUsuario = txtUsuario.Text;
             string clave = txtClave.Text;
-
             foreach (var usuario in usuarios)
             {
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
