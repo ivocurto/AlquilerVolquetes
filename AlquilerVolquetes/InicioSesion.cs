@@ -20,7 +20,6 @@ namespace AlquilerVolquetes
 
 
         protected static List<Usuario> usuarios = new List<Usuario>();
-        protected static Usuario a = new Usuario("a", "francoferrari226@gmail.com", "a");
 
         string rutaArchivoJson = "usuarios.json";
         public InicioSesion()

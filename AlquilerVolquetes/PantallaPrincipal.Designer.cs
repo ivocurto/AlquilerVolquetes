@@ -32,7 +32,6 @@
             toolStrip1 = new ToolStrip();
             pictureBox1 = new PictureBox();
             btnAgregarVolqueteChico = new Button();
-            pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             btnAgregarVolqueteMediano = new Button();
             btnAgregarVolqueteGrande = new Button();
@@ -43,15 +42,17 @@
             lblCantidadVolqueteChico = new Label();
             lblCantidadVolqueteMediano = new Label();
             lblCantidadVolqueteGrande = new Label();
-            btnAgregarAlCarrito = new Button();
             btnCarrito = new Button();
             lstProductos = new ListBox();
             lblPrecioChico = new Label();
             lblPrecioMediano = new Label();
             lblPrecioGrande = new Label();
+            btnAgregarAlCarrito = new Button();
+            lblPrecioTotal = new Label();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
@@ -86,16 +87,6 @@
             btnAgregarVolqueteChico.Text = "+";
             btnAgregarVolqueteChico.UseVisualStyleBackColor = false;
             btnAgregarVolqueteChico.Click += btnAgregarVolqueteChico_Click;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(29, 274);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(296, 202);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
@@ -204,32 +195,29 @@
             lblCantidadVolqueteGrande.TabIndex = 12;
             lblCantidadVolqueteGrande.Text = "0";
             // 
-            // btnAgregarAlCarrito
-            // 
-            btnAgregarAlCarrito.Location = new Point(797, 620);
-            btnAgregarAlCarrito.Name = "btnAgregarAlCarrito";
-            btnAgregarAlCarrito.Size = new Size(255, 49);
-            btnAgregarAlCarrito.TabIndex = 13;
-            btnAgregarAlCarrito.Text = "AGREGAR AL CARRITO";
-            btnAgregarAlCarrito.UseVisualStyleBackColor = true;
-            // 
             // btnCarrito
             // 
-            btnCarrito.Location = new Point(990, 68);
+            btnCarrito.Location = new Point(1014, 0);
             btnCarrito.Name = "btnCarrito";
             btnCarrito.Size = new Size(50, 45);
             btnCarrito.TabIndex = 14;
             btnCarrito.Text = "CART";
             btnCarrito.UseVisualStyleBackColor = true;
+            btnCarrito.Click += btnCarrito_Click;
             // 
             // lstProductos
             // 
+            lstProductos.BackColor = Color.White;
+            lstProductos.BorderStyle = BorderStyle.None;
+            lstProductos.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            lstProductos.ForeColor = SystemColors.MenuText;
             lstProductos.FormattingEnabled = true;
-            lstProductos.ItemHeight = 15;
-            lstProductos.Location = new Point(797, 456);
+            lstProductos.ItemHeight = 23;
+            lstProductos.Location = new Point(797, 431);
             lstProductos.Name = "lstProductos";
-            lstProductos.Size = new Size(255, 154);
+            lstProductos.Size = new Size(255, 138);
             lstProductos.TabIndex = 15;
+            lstProductos.SelectedIndexChanged += lstProductos_SelectedIndexChanged;
             // 
             // lblPrecioChico
             // 
@@ -258,17 +246,53 @@
             lblPrecioGrande.TabIndex = 18;
             lblPrecioGrande.Text = "$0";
             // 
+            // btnAgregarAlCarrito
+            // 
+            btnAgregarAlCarrito.BackColor = Color.DeepSkyBlue;
+            btnAgregarAlCarrito.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAgregarAlCarrito.ForeColor = SystemColors.ButtonHighlight;
+            btnAgregarAlCarrito.Location = new Point(797, 623);
+            btnAgregarAlCarrito.Name = "btnAgregarAlCarrito";
+            btnAgregarAlCarrito.Size = new Size(255, 55);
+            btnAgregarAlCarrito.TabIndex = 19;
+            btnAgregarAlCarrito.Text = "AGREGAR AL CARRITO";
+            btnAgregarAlCarrito.UseVisualStyleBackColor = false;
+            btnAgregarAlCarrito.Click += btnAgregarAlCarrito_Click;
+            // 
+            // lblPrecioTotal
+            // 
+            lblPrecioTotal.AutoSize = true;
+            lblPrecioTotal.Font = new Font("Bahnschrift SemiBold SemiConden", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblPrecioTotal.Location = new Point(869, 584);
+            lblPrecioTotal.Name = "lblPrecioTotal";
+            lblPrecioTotal.Size = new Size(107, 25);
+            lblPrecioTotal.TabIndex = 20;
+            lblPrecioTotal.Text = "   TOTAL: $0";
+            lblPrecioTotal.Click += lblPrecioTotal_Click;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(29, 273);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(296, 202);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 21;
+            pictureBox2.TabStop = false;
+            // 
             // PantallaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1064, 681);
+            Controls.Add(pictureBox2);
+            Controls.Add(lblPrecioTotal);
+            Controls.Add(btnAgregarAlCarrito);
             Controls.Add(lblPrecioGrande);
             Controls.Add(lblPrecioMediano);
             Controls.Add(lblPrecioChico);
             Controls.Add(lstProductos);
             Controls.Add(btnCarrito);
-            Controls.Add(btnAgregarAlCarrito);
             Controls.Add(lblCantidadVolqueteGrande);
             Controls.Add(lblCantidadVolqueteMediano);
             Controls.Add(lblCantidadVolqueteChico);
@@ -278,7 +302,6 @@
             Controls.Add(btnAgregarVolqueteGrande);
             Controls.Add(btnAgregarVolqueteMediano);
             Controls.Add(pictureBox3);
-            Controls.Add(pictureBox2);
             Controls.Add(btnAgregarVolqueteChico);
             Controls.Add(pictureBox1);
             Controls.Add(toolStrip1);
@@ -287,8 +310,8 @@
             Text = "PantallaPrincipal";
             FormClosed += PantallaPrincipal_FormClosed;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -297,7 +320,6 @@
 
         private ToolStrip toolStrip1;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         public Button btnAgregarVolqueteChico;
         public Button btnAgregarVolqueteMediano;
@@ -315,5 +337,8 @@
         private Label lblPrecioChico;
         private Label lblPrecioMediano;
         private Label lblPrecioGrande;
+        private Button btnIngresar;
+        private Label lblPrecioTotal;
+        private PictureBox pictureBox2;
     }
 }
