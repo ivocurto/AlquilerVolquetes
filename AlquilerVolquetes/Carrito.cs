@@ -83,11 +83,27 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-            FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(diccionarioCarrito, precioVChico, precioVMediano, precioVGrande);
-            formularioDeAlquiler.Show();
-            this.DialogResult = DialogResult.OK;
-            // Cierra el formulario de diálogo.
-            this.Close();
+            bool flag = false;
+            foreach (var clave in diccionarioCarrito)
+            {
+                int cant = clave.Value;
+                if (cant > 0)
+                {
+                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(diccionarioCarrito, precioVChico, precioVMediano, precioVGrande);
+                    formularioDeAlquiler.Show();
+                    this.DialogResult = DialogResult.OK;
+                    // Cierra el formulario de diálogo.
+                    this.Close();
+                    flag = true;
+                    break;
+                }  
+            }
+            if (flag == false)
+            {
+                MessageBox.Show("Debe agregar por lo menos un produto al carrito para alquilar", "Carrito vacío", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+
 
         }
     }

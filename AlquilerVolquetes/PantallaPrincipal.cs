@@ -100,6 +100,10 @@ namespace AlquilerVolquetes
         public PantallaPrincipal()
         {
             InitializeComponent();
+            lstProductos.DrawMode = DrawMode.OwnerDrawFixed;
+            this.lblPrecioChico.Text = ($"${precioVChico}");
+            this.lblPrecioMediano.Text = ($"${precioVMediano}");
+            this.lblPrecioGrande.Text = ($"${precioVGrande}");
 
         }
 
@@ -120,49 +124,6 @@ namespace AlquilerVolquetes
             {
                 formulario.Close();
             }
-
-
-        }
-        //Chico
-        private void btnAgregarVolqueteChico_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteChico.Text = Incrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
-            this.lblPrecioChico.Text = ($"${int.Parse(this.lblCantidadVolqueteChico.Text) * precioVChico}");
-
-
-        }
-        private void btnRestarVolqueteChico_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteChico.Text = Decrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
-            this.lblPrecioChico.Text = ($"${int.Parse(this.lblCantidadVolqueteChico.Text) * precioVChico}");
-
-        }
-
-        //Mediano
-        private void btnAgregarVolqueteMediano_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteMediano.Text = Incrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
-            this.lblPrecioMediano.Text = ($"${int.Parse(this.lblCantidadVolqueteMediano.Text) * precioVMediano}");
-
-        }
-        private void btnRestarVolqueteMediano_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteMediano.Text = Decrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
-            this.lblPrecioMediano.Text = ($"${int.Parse(this.lblCantidadVolqueteMediano.Text) * precioVMediano}");
-        }
-        //Grande
-        private void btnAgregarVolqueteGrande_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteGrande.Text = Incrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
-            this.lblPrecioGrande.Text = ($"${int.Parse(this.lblCantidadVolqueteGrande.Text) * precioVGrande}");
-
-        }
-        private void btnRestarVolqueteGrande_Click(object sender, EventArgs e)
-        {
-
-            this.lblCantidadVolqueteGrande.Text = Decrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
-            this.lblPrecioGrande.Text = ($"${int.Parse(this.lblCantidadVolqueteGrande.Text) * precioVGrande}");
-
         }
 
         private string Incrementar_Label(object sender, EventArgs e, int id, string label)
@@ -227,7 +188,102 @@ namespace AlquilerVolquetes
                 }
                 productosSumados.Remove(id);
                 lstProductos.Items.Clear();
+                lblCantidadVolqueteChico.Text = "0";
+                lblCantidadVolqueteMediano.Text = "0";
+                lblCantidadVolqueteGrande.Text = "0";
+                lblPrecioTotal.Text = "   TOTAL: $0";
+
             }
         }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            Carrito carrito = new Carrito(productosEnElCarrito, precioVChico, precioVMediano, precioVGrande);
+            DialogResult result = carrito.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.Hide();
+            }
+        }
+
+        private void btnSumarVC_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteChico.Text = Incrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
+        }
+
+        private void btnSumarVM_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteMediano.Text = Incrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
+        }
+
+        private void btnSumarVG_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteGrande.Text = Incrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
+        }
+
+        private void btnRestarVC_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteChico.Text = Decrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
+        }
+
+        private void btnRestarVM_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteMediano.Text = Decrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
+
+        }
+
+        private void btnRestarVG_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteGrande.Text = Decrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
+
+        }
+
+        private void lblCantidadVolqueteGrande_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPrecioGrande_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lstProductos_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            lstProductos.ItemHeight = 30;
+            int paddingVertical = 6; // Ajusta la cantidad de espaciado vertical deseado
+
+            if (e.Index >= 0)
+            {
+                e.DrawBackground();
+
+                // Obtén el texto del elemento.
+                string itemText = lstProductos.Items[e.Index].ToString();
+
+                // Establece un color de fondo alternativo para cada elemento.
+                Color backColor = e.Index % 2 == 0 ? Color.LightGray : Color.White;
+                using (Brush brush = new SolidBrush(backColor))
+                {
+                    e.Graphics.FillRectangle(brush, e.Bounds);
+                }
+
+                // Ajusta el rectángulo de dibujo para incluir el espaciado vertical.
+                Rectangle textBounds = new Rectangle(
+                    e.Bounds.Left,
+                    e.Bounds.Top + paddingVertical,
+                    e.Bounds.Width,
+                    e.Bounds.Height - paddingVertical
+                );
+
+                // Establece el color de texto.
+                using (Brush brush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.DrawString(itemText, lstProductos.Font, brush, textBounds);
+                }
+            }
+        }
+
+
+
     }
 }

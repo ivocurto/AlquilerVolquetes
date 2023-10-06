@@ -38,13 +38,15 @@
             textBox2 = new TextBox();
             label1 = new Label();
             label2 = new Label();
+            lblTotal = new Label();
+            linkLabel1 = new LinkLabel();
             SuspendLayout();
             // 
             // lblTituloFormularioDePago
             // 
             lblTituloFormularioDePago.AutoSize = true;
             lblTituloFormularioDePago.Font = new Font("Bahnschrift SemiBold SemiConden", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTituloFormularioDePago.Location = new Point(416, 78);
+            lblTituloFormularioDePago.Location = new Point(424, 53);
             lblTituloFormularioDePago.Name = "lblTituloFormularioDePago";
             lblTituloFormularioDePago.Size = new Size(222, 29);
             lblTituloFormularioDePago.TabIndex = 22;
@@ -54,11 +56,12 @@
             // 
             lblProductos.AutoSize = true;
             lblProductos.Font = new Font("Bahnschrift SemiLight", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblProductos.Location = new Point(93, 175);
+            lblProductos.Location = new Point(93, 125);
+            lblProductos.MaximumSize = new Size(850, 75);
             lblProductos.Name = "lblProductos";
-            lblProductos.Size = new Size(572, 23);
+            lblProductos.Size = new Size(54, 69);
             lblProductos.TabIndex = 23;
-            lblProductos.Text = "Usted va a comprar 1 volquete chico y 2 volquete grande por $5000";
+            lblProductos.Text = "Texto\r\nTexto\r\nTexto\r\n";
             // 
             // btnAlquilar
             // 
@@ -71,6 +74,7 @@
             btnAlquilar.TabIndex = 24;
             btnAlquilar.Text = "PAGAR";
             btnAlquilar.UseVisualStyleBackColor = false;
+            btnAlquilar.Click += btnAlquilar_Click;
             // 
             // txtNombre
             // 
@@ -115,7 +119,7 @@
             textBox2.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
             textBox2.Location = new Point(93, 378);
             textBox2.Name = "textBox2";
-            textBox2.PlaceholderText = " Teléfono/Celular";
+            textBox2.PlaceholderText = " Correo electrónico";
             textBox2.Size = new Size(656, 36);
             textBox2.TabIndex = 29;
             // 
@@ -138,11 +142,34 @@
             label2.Size = new Size(0, 23);
             label2.TabIndex = 31;
             // 
+            // lblTotal
+            // 
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Bahnschrift SemiBold SemiConden", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotal.Location = new Point(424, 529);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(179, 29);
+            lblTotal.TabIndex = 32;
+            lblTotal.Text = "PRECIO TOTAL: $0";
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(512, 619);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(39, 15);
+            linkLabel1.TabIndex = 33;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Volver";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // FormularioDeAlquiler
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1064, 681);
+            Controls.Add(linkLabel1);
+            Controls.Add(lblTotal);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBox2);
@@ -157,7 +184,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormularioDeAlquiler";
             FormClosed += FormularioDeAlquiler_FormClosed;
-            Load += FormularioDeAlquiler_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -174,5 +200,7 @@
         private TextBox textBox2;
         private Label label1;
         private Label label2;
+        private Label lblTotal;
+        private LinkLabel linkLabel1;
     }
 }

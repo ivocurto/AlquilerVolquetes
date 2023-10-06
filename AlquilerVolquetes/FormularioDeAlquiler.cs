@@ -44,40 +44,36 @@ namespace AlquilerVolquetes
                 switch (idEnLista)
                 {
                     case 0:
-                        producto = "VOLQUETE CHICO";
+                        producto = "volquete(s) chico(s)";
                         precio = precioVChico;
                         break;
                     case 1:
-                        producto = "VOLQUETE MEDIANO";
+                        producto = "volquete(s) mediano(s)";
                         precio = precioVMediano;
                         break;
                     case 2:
-                        producto = "VOLQUETE GRANDE";
+                        producto = "volquete(s) grande(s)";
                         precio = precioVGrande;
                         break;
                 }
                 if (flag == false)
                 {
-                    formato = $"{cantidad} {producto} ${precio * cantidad}";
+                    formato = $"{cantidad} {producto} por ${precio * cantidad}";
                     formatoTotal = formato;
                     flag = true;
                 }
                 else
                 {
-                    formato = $"{cantidad} {producto} ${precio * cantidad}";
-                    formatoTotal = $"{formatoTotal}, {formato} ";
+                    formato = $"{cantidad} {producto} por ${precio * cantidad}";
+                    formatoTotal = $"{formatoTotal}, {formato}";
                 }
 
 
                 precioTotal += precio * cantidad;
             }
 
-            this.lblProductos.Text = $"USTED VA A COMPRAR {formatoTotal} POR UN PRECIO TOTAL DE ${precioTotal}";
-        }
-
-        private void FormularioDeAlquiler_Load(object sender, EventArgs e)
-        {
-
+            this.lblProductos.Text = $"Usted va a comprar {formatoTotal}.";
+            this.lblTotal.Text = $"PRECIO TOTAL: ${precioTotal}";
         }
 
         private void FormularioDeAlquiler_FormClosed(object sender, FormClosedEventArgs e)
@@ -97,6 +93,28 @@ namespace AlquilerVolquetes
                 formulario.Close();
             }
 
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
+            pantallaPrincipal.Show();
+            this.Hide();
+        }
+
+        private void btnAlquilar_Click(object sender, EventArgs e)
+        {
+            CompraExitosa compraExitosa = new CompraExitosa();
+            DialogResult result = compraExitosa.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.Hide();
+                MisVolquetes misVolquetes = new MisVolquetes();
+                misVolquetes.Show();
+                // llevar al formulario de pago
+            }
+            
         }
     }
 }
