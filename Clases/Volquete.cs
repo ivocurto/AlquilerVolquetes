@@ -9,16 +9,22 @@ namespace Clases
 
     public class Volquete
     {
-        private float capacidad;
-        private string sedeActual;
+        private int id;
+        private int cantidad;
+        private string medidaVolquete;
+        private int precioUnitario;
 
-        public Volquete(float capacidad, string sedeActual)
+        public Volquete(int id, string medidaVolquete, int precioUnitario)
         {
-            this.Capacidad = capacidad;
-            this.SedeActual = sedeActual;
+            this.Id = id;
+            this.Cantidad = 0;
+            this.MedidaVolquete = medidaVolquete;
+            this.PrecioUnitario = precioUnitario;
         }
 
-        public float Capacidad { get => capacidad; set => capacidad = value; }
-        public string SedeActual { get => sedeActual; set => sedeActual = value; }
+        public int Id { get => id; set => id = value; }
+        public int Cantidad { get => cantidad; set => cantidad = value; }
+        public string MedidaVolquete { get => medidaVolquete; set => medidaVolquete = value; }
+        public int PrecioUnitario { get => precioUnitario; set => precioUnitario = value; }
     }
 }

@@ -4,10 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Clases;
+
 using static System.Windows.Forms.DataFormats;
 
 namespace AlquilerVolquetes
@@ -21,52 +24,56 @@ namespace AlquilerVolquetes
         int precioVGrande = 2400;
         private Dictionary<int, int> productosSumados = new Dictionary<int, int>();
         private Dictionary<int, int> productosEnElCarrito = new Dictionary<int, int>();
+        private List<Volquete> volquetes = new List<Volquete>();
+        private Volquete volqueteChico = new Volquete(0, "VOLQUETE CHICO", 800);
+        private Volquete volqueteMediano = new Volquete(1, "VOLQUETE MEDIANO", 1600);
+        private Volquete volqueteGrande = new Volquete(2, "VOLQUETE GRANDE", 2400);
+
+        public PantallaPrincipal()
+        {
+            InitializeComponent();
+            volquetes.Add(volqueteChico);
+            volquetes.Add(volqueteMediano);
+            volquetes.Add(volqueteGrande);
+            lstProductos.DrawMode = DrawMode.OwnerDrawFixed;
+            this.lblPrecioChico.Text = ($"${precioVChico}");
+            this.lblPrecioMediano.Text = ($"${precioVMediano}");
+            this.lblPrecioGrande.Text = ($"${precioVGrande}");
+
+        }
 
         private void Sumar_Al_Carrito(object sender, EventArgs e, int id)
         {
-            if (!productosSumados.ContainsKey(id))
+            
+            if (volquetes[id].Cantidad == 0)
             {
-                productosSumados.Add(id, 1); // Agrega el producto con la cantidad 1
+                volquetes[id].Cantidad = 1; // Agrega el producto con la cantidad 1
             }
             else
             {
-                productosSumados[id]++; // Le suma 1 a la cantidad del producto con el ID dado
+                volquetes[id].Cantidad++; // Le suma 1 a la cantidad del producto con el ID dado
             }
 
             // Actualizar la lista de productos en el carrito
             ActualizarListaCarrito();
+            
         }
 
         private void ActualizarListaCarrito()
         {
             lstProductos.Items.Clear();
             int precioTotal = 0;
-            foreach (var clave in productosSumados)
+            foreach (Volquete volquete in volquetes)
             {
-                int idEnLista = clave.Key;
-                string producto = "";
-                string formato;
-                int precio = 0;
-                switch (idEnLista)
+               if (volquete.Cantidad != 0)
                 {
-                    case 0:
-                        producto = "VOLQUETE CHICO";
-                        precio = precioVChico;
-                        break;
-                    case 1:
-                        producto = "VOLQUETE MEDIANO";
-                        precio = precioVMediano;
-                        break;
-                    case 2:
-                        producto = "VOLQUETE GRANDE";
-                        precio = precioVGrande;
-                        break;
+                    string formato;
+                    formato = $"{volquete.Cantidad} {volquete.MedidaVolquete} ${volquete.PrecioUnitario * volquete.Cantidad}";
+                    precioTotal += volquete.PrecioUnitario * volquete.Cantidad;
+                    lstProductos.Items.Add(formato);
                 }
-                int cantidad = clave.Value;
-                //lstProductos.Items.Add($"{clave.Key}, {productosSumados[clave.Key]}");
-                formato = $"{cantidad} {producto} ${precio * cantidad}";
-                precioTotal += precio * cantidad;
-                lstProductos.Items.Add(formato);
+                
+                
             }
             if (precioTotal == 0)
             {
@@ -81,13 +88,10 @@ namespace AlquilerVolquetes
 
         private void Restar_Al_Carrito(object sender, EventArgs e, int id)
         {
-            if (productosSumados.ContainsKey(id))
+            if (volquetes[id].Cantidad > 0)
             {
-                productosSumados[id]--; // Le resta 1 a la cantidad
-                if (productosSumados[id] == 0)
-                {
-                    productosSumados.Remove(id); // Si la cantidad llega a 0, elimina el producto del carrito
-                }
+                volquetes[id].Cantidad--; // Le resta 1 a la cantidad
+                
 
                 ActualizarListaCarrito(); // Actualizar la lista de productos en el carrito
             }
@@ -97,15 +101,7 @@ namespace AlquilerVolquetes
         //
 
         //Iniciar formulario
-        public PantallaPrincipal()
-        {
-            InitializeComponent();
-            lstProductos.DrawMode = DrawMode.OwnerDrawFixed;
-            this.lblPrecioChico.Text = ($"${precioVChico}");
-            this.lblPrecioMediano.Text = ($"${precioVMediano}");
-            this.lblPrecioGrande.Text = ($"${precioVGrande}");
-
-        }
+        
 
         //Cerrar formulario
         private void PantallaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
