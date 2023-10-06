@@ -54,6 +54,7 @@ namespace AlquilerVolquetes
             }
 
             usuarios.Add(usuario);
+            usuario.IndexUsuario = usuarios.Count() - 1;
 
             string jsonUsuarios = JsonConvert.SerializeObject(usuarios);
             File.WriteAllText(rutaArchivoJson, jsonUsuarios);
@@ -76,7 +77,6 @@ namespace AlquilerVolquetes
 
             string nombreUsuario = txtUsuario.Text;
             string clave = txtClave.Text;
-
             foreach (var usuario in usuarios)
             {
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)

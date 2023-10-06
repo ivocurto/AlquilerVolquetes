@@ -5,6 +5,7 @@
         private string nombreUsuario;
         private string mailUsusario;
         private string claveUsuario;
+        private int indexUsuario;
 
         
         public Usuario(string nombreUsuario, string mailUsusario, string claveUsuario)
@@ -17,5 +18,6 @@
         public string NombreUsuario { get => nombreUsuario; set => nombreUsuario = value; }
         public string MailUsusario { get => mailUsusario; set => mailUsusario = value; }
         public string ClaveUsuario { get => claveUsuario; set => claveUsuario = value; }
+        public int IndexUsuario { get => indexUsuario; set => indexUsuario = value; }
     }
 }
