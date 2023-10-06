@@ -13,9 +13,6 @@ using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
 
-
-
-
 namespace AlquilerVolquetes
 {
     public partial class InicioSesion : Form
@@ -25,7 +22,7 @@ namespace AlquilerVolquetes
         protected static List<Usuario> usuarios = new List<Usuario>();
         protected static Usuario a = new Usuario("a", "francoferrari226@gmail.com", "a");
 
-        string rutaArchivoJson = "../../../archivos_datos/usuarios.json";
+        string rutaArchivoJson = "usuarios.json";
         public InicioSesion()
         {
             InitializeComponent();
