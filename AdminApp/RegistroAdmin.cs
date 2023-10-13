@@ -1,28 +1,32 @@
-ï»¿using Clases;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using AlquilerVolquetes;
+using Clases;
+using Newtonsoft.Json;
 
-namespace AlquilerVolquetes
+namespace AdminApp
 {
     public partial class RegistroAdmin : Form
     {
+        public List<Usuario> listaAdmins;
+        string rutaArchivoJson = "admin.json";
         public RegistroAdmin()
         {
             InitializeComponent();
+            listaAdmins = new List<Usuario>();
+            try
+            {
+                string json = File.ReadAllText(rutaArchivoJson);
+
+                listaAdmins = JsonConvert.DeserializeObject<List<Usuario>>(json);
+
+            }
+            catch (Exception ex)
+            {
+
+                string json = JsonConvert.SerializeObject(listaAdmins);
+                File.WriteAllText(rutaArchivoJson, json);
+            }
         }
-        public List<Usuario> listaUsuarios;
-        public RegistroAdmin(List<Usuario> lista)
-        {
-            InitializeComponent();
-            listaUsuarios = lista;
-        }
+    
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
@@ -37,9 +41,9 @@ namespace AlquilerVolquetes
             {
                 MessageBox.Show("Por favor, completa todos los campos.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!ValidarContraseÃ±a(datosUsuario))
+            else if (!ValidarContraseña(datosUsuario))
             {
-                MessageBox.Show("Las contraseÃ±as no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Las contraseñas no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!ComprobarExistenciaUsuario(datosUsuario))
             {
@@ -48,15 +52,22 @@ namespace AlquilerVolquetes
             else
             {
                 Usuario usuario = new Usuario(nombre, mail, clave);
-                listaUsuarios.Add(usuario);
-                InicioSesion inicio = new InicioSesion(usuario);
-                inicio.Show();
-                this.Hide();
+
+                if (listaAdmins == null)
+                {
+                    listaAdmins = new List<Usuario>();
+                }
+
+                listaAdmins.Add(usuario);
+                usuario.IndexUsuario = listaAdmins.Count() - 1;
+
+                string jsonUsuarios = JsonConvert.SerializeObject(listaAdmins);
+                File.WriteAllText(rutaArchivoJson, jsonUsuarios);
             }
         }
 
 
-        private void RegistroUsuario_Load(object sender, EventArgs e)
+        private void RegistroAdmin_Load(object sender, EventArgs e)
         {
         }
 
@@ -70,7 +81,7 @@ namespace AlquilerVolquetes
             return datos;
         }
 
-        private bool ValidarContraseÃ±a(List<string> datos)
+        private bool ValidarContraseña(List<string> datos)
         {
 
             if (datos[1] == datos[3])
@@ -95,19 +106,22 @@ namespace AlquilerVolquetes
 
         private bool ComprobarExistenciaUsuario(List<string> lista)
         {
-
-            foreach (Usuario usuario in listaUsuarios)
+            if(listaAdmins != null)
             {
-                if (usuario.NombreUsuario == lista[0] || usuario.MailUsusario == lista[2])
+                foreach (Usuario usuario in listaAdmins)
                 {
-                    return false;
+                    if (usuario.NombreUsuario == lista[0] || usuario.MailUsusario == lista[2])
+                    {
+                        return false;
+                    }
                 }
+
             }
 
             return true;
         }
 
-        private void RegistroUsuario_FormClosed(object sender, FormClosedEventArgs e)
+        private void RegistroAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {
             List<Form> formulariosACerrar = new List<Form>();
 
@@ -130,11 +144,6 @@ namespace AlquilerVolquetes
             InicioSesion inicio = new InicioSesion();
             inicio.Show();
             this.Hide();
-        }
-
-        private void RegistroAdmin_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
