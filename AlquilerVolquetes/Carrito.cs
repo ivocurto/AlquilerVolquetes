@@ -29,30 +29,18 @@ namespace AlquilerVolquetes
         {
             lstProductosEnCarrito.Items.Clear();
             int precioTotal = 0;
-            foreach (var volquete in volquetes)
+            foreach (Volquete volquete in volquetes)
             {
-                
-                string producto = "";
-                string formato;
-                int precio = 0;
-                switch (volquete.Id)
-                {
-                    case 0:
-                        producto = "VOLQUETE CHICO";
-                        break;
-                    case 1:
-                        producto = "VOLQUETE MEDIANO";
-                        break;
-                    case 2:
-                        producto = "VOLQUETE GRANDE";
-                        
-                        break;
+                if (volquete.Cantidad != 0) {
+                    string producto = "";
+                    string formato;
+                    int precio;
+                    precio = volquete.PrecioUnitario;
+                    //lstProductos.Items.Add($"{clave.Key}, {productosSumados[clave.Key]}");
+                    formato = volquete.ToString();
+                    precioTotal += precio * volquete.Cantidad;
+                    lstProductosEnCarrito.Items.Add(formato);
                 }
-                precio = volquete.PrecioUnitario;
-                //lstProductos.Items.Add($"{clave.Key}, {productosSumados[clave.Key]}");
-                formato = volquete.ToString();
-                precioTotal += precio * volquete.Cantidad;
-                lstProductosEnCarrito.Items.Add(formato);
             }
             if (precioTotal == 0)
             {
