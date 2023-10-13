@@ -202,7 +202,7 @@
             // btnCarrito
             // 
             btnCarrito.Image = (Image)resources.GetObject("btnCarrito.Image");
-            btnCarrito.Location = new Point(1145, 13);
+            btnCarrito.Location = new Point(1136, 24);
             btnCarrito.Margin = new Padding(3, 4, 3, 4);
             btnCarrito.Name = "btnCarrito";
             btnCarrito.Padding = new Padding(6, 7, 6, 7);
@@ -289,7 +289,7 @@
             pbNotificacion.BackColor = Color.Transparent;
             pbNotificacion.Image = (Image)resources.GetObject("pbNotificacion.Image");
             pbNotificacion.ImageLocation = "";
-            pbNotificacion.Location = new Point(767, 315);
+            pbNotificacion.Location = new Point(786, 264);
             pbNotificacion.Margin = new Padding(3, 4, 3, 4);
             pbNotificacion.Name = "pbNotificacion";
             pbNotificacion.Padding = new Padding(6, 7, 6, 7);
@@ -329,7 +329,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PantallaPrincipal";
             FormClosed += PantallaPrincipal_FormClosed;
-            Load += PantallaPrincipal_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
