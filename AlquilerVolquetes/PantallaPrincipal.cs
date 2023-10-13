@@ -19,11 +19,6 @@ namespace AlquilerVolquetes
     {
         //LISTA CARRITO
         //LISTA CARRITO
-        int precioVChico = 800;
-        int precioVMediano = 1600;
-        int precioVGrande = 2400;
-        private Dictionary<int, int> productosSumados = new Dictionary<int, int>();
-        private Dictionary<int, int> productosEnElCarrito = new Dictionary<int, int>();
         private List<Volquete> volquetes = new List<Volquete>();
         private List<Volquete> volquetesCarrito = new List<Volquete>();
         private Volquete volqueteChico = new Volquete(0, "VOLQUETE CHICO", 800);
@@ -44,9 +39,9 @@ namespace AlquilerVolquetes
             volquetesCarrito.Add(volqueteMedianoCarrito);
             volquetesCarrito.Add(volqueteGrandeCarrito);
             lstProductos.DrawMode = DrawMode.OwnerDrawFixed;
-            this.lblPrecioChico.Text = ($"${precioVChico}");
-            this.lblPrecioMediano.Text = ($"${precioVMediano}");
-            this.lblPrecioGrande.Text = ($"${precioVGrande}");
+            this.lblPrecioChico.Text = ($"${volqueteChico.PrecioUnitario}");
+            this.lblPrecioMediano.Text = ($"${volqueteMediano.PrecioUnitario}");
+            this.lblPrecioGrande.Text = ($"${volqueteGrande.PrecioUnitario}");
            
         }
 
