@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,18 +13,14 @@ namespace AlquilerVolquetes
 {
     public partial class Carrito : Form
     {
-        private Dictionary<int, int> diccionarioCarrito;
-        private int precioVChico;
-        private int precioVMediano;
-        private int precioVGrande;
-        public Carrito(Dictionary<int, int> dict, int precioC, int precioM, int precioG)
+        private List<Volquete> volquetes;
+        
+        public Carrito(List<Volquete> lista)
         {
             InitializeComponent();
             this.MinimizeBox = false;
-            diccionarioCarrito = dict;
-            precioVChico = precioC;
-            precioVMediano = precioM;
-            precioVGrande = precioG;
+            volquetes = lista;
+            
             MostrarListaCarrito();
 
         }
@@ -32,31 +29,29 @@ namespace AlquilerVolquetes
         {
             lstProductosEnCarrito.Items.Clear();
             int precioTotal = 0;
-            foreach (var clave in diccionarioCarrito)
+            foreach (var volquete in volquetes)
             {
-                int idEnLista = clave.Key;
+                
                 string producto = "";
                 string formato;
                 int precio = 0;
-                switch (idEnLista)
+                switch (volquete.Id)
                 {
                     case 0:
                         producto = "VOLQUETE CHICO";
-                        precio = precioVChico;
                         break;
                     case 1:
                         producto = "VOLQUETE MEDIANO";
-                        precio = precioVMediano;
                         break;
                     case 2:
                         producto = "VOLQUETE GRANDE";
-                        precio = precioVGrande;
+                        
                         break;
                 }
-                int cantidad = clave.Value;
+                precio = volquete.PrecioUnitario;
                 //lstProductos.Items.Add($"{clave.Key}, {productosSumados[clave.Key]}");
-                formato = $"{cantidad} {producto} ${precio * cantidad}";
-                precioTotal += precio * cantidad;
+                formato = volquete.ToString();
+                precioTotal += precio * volquete.Cantidad;
                 lstProductosEnCarrito.Items.Add(formato);
             }
             if (precioTotal == 0)
@@ -77,19 +72,19 @@ namespace AlquilerVolquetes
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            diccionarioCarrito.Clear();
+            lstProductosEnCarrito.Items.Clear();
             MostrarListaCarrito();
         }
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
             bool flag = false;
-            foreach (var clave in diccionarioCarrito)
+            foreach (var volquete in volquetes)
             {
-                int cant = clave.Value;
+                int cant = volquete.Cantidad;
                 if (cant > 0)
                 {
-                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(diccionarioCarrito, precioVChico, precioVMediano, precioVGrande);
+                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(volquetes);
                     formularioDeAlquiler.Show();
                     this.DialogResult = DialogResult.OK;
                     // Cierra el formulario de diálogo.

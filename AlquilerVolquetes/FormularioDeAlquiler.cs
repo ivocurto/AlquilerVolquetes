@@ -14,62 +14,61 @@ namespace AlquilerVolquetes
 {
     public partial class FormularioDeAlquiler : Form
     {
-        private Dictionary<int, int> diccionarioCarrito;
-        int precioVChico;
-        int precioVMediano;
-        int precioVGrande;
+        private List<Volquete> volquetes;
         string formatoTotal;
         int precioTotal;
-        public FormularioDeAlquiler(Dictionary<int, int> dict, int precioVC, int precioVM, int precioVG)
+        public FormularioDeAlquiler(List<Volquete> lista)
         {
             InitializeComponent();
-            diccionarioCarrito = dict;
-            precioVChico = precioVC;
-            precioVMediano = precioVM;
-            precioVGrande = precioVG;
+            volquetes = lista;
+            
             MostrarProductosAComprar();
         }
 
         private void MostrarProductosAComprar()
         {
+            string formatoTotal = "";
             bool flag = false;
-            foreach (var clave in diccionarioCarrito)
+            int precioTotal = 0;
+            foreach (var volquete in volquetes)
             {
-                int idEnLista = clave.Key;
-                int cantidad = clave.Value;
+                
                 string producto = "";
                 string formato;
+                
 
                 int precio = 0;
-                switch (idEnLista)
+                switch (volquete.Id)
                 {
                     case 0:
                         producto = "volquete(s) chico(s)";
-                        precio = precioVChico;
+                        
                         break;
                     case 1:
                         producto = "volquete(s) mediano(s)";
-                        precio = precioVMediano;
+                        
                         break;
                     case 2:
                         producto = "volquete(s) grande(s)";
-                        precio = precioVGrande;
+                        
                         break;
+
                 }
+                precio = volquete.PrecioUnitario;
                 if (flag == false)
                 {
-                    formato = $"{cantidad} {producto} por ${precio * cantidad}";
+                    formato = volquete.ToString();
                     formatoTotal = formato;
                     flag = true;
                 }
                 else
                 {
-                    formato = $"{cantidad} {producto} por ${precio * cantidad}";
+                    formato = volquete.ToString();
                     formatoTotal = $"{formatoTotal}, {formato}";
                 }
 
 
-                precioTotal += precio * cantidad;
+                precioTotal += precio * volquete.Cantidad;
             }
 
             this.lblProductos.Text = $"Usted va a comprar {formatoTotal}.";

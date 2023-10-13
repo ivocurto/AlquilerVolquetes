@@ -21,10 +21,14 @@ namespace Clases
             this.MedidaVolquete = medidaVolquete;
             this.PrecioUnitario = precioUnitario;
         }
-
         public int Id { get => id; set => id = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public string MedidaVolquete { get => medidaVolquete; set => medidaVolquete = value; }
         public int PrecioUnitario { get => precioUnitario; set => precioUnitario = value; }
+        public override string ToString()
+        {
+            return $"{Cantidad} {MedidaVolquete} ${PrecioUnitario * Cantidad}";
+        }
     }
+        
 }
