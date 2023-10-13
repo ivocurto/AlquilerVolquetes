@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,16 @@ namespace AlquilerVolquetes
 {
     public partial class MisVolquetes : Form
     {
-        public MisVolquetes()
+        public Usuario usuarioActual;
+        public MisVolquetes(Usuario usuario)
         {
             InitializeComponent();
+            usuarioActual = usuario;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            PantallaInicio pantallaInicio = new PantallaInicio();
+            PantallaInicio pantallaInicio = new PantallaInicio(usuarioActual);
             pantallaInicio.Show();
             this.Hide();
         }

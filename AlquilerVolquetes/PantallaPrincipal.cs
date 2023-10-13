@@ -19,27 +19,25 @@ namespace AlquilerVolquetes
     {
         //LISTA CARRITO
         //LISTA CARRITO
-        int precioVChico = 800;
-        int precioVMediano = 1600;
-        int precioVGrande = 2400;
-        private Dictionary<int, int> productosSumados = new Dictionary<int, int>();
-        private Dictionary<int, int> productosEnElCarrito = new Dictionary<int, int>();
+        public Usuario usuarioAcutal;
+        
         private List<Volquete> volquetes = new List<Volquete>();
         private List<Volquete> volquetesCarrito = new List<Volquete>();
         private Volquete volqueteChico = new Volquete(0, "VOLQUETE CHICO", 800);
         private Volquete volqueteMediano = new Volquete(1, "VOLQUETE MEDIANO", 1600);
         private Volquete volqueteGrande = new Volquete(2, "VOLQUETE GRANDE", 2400);
 
-        public PantallaPrincipal()
+        public PantallaPrincipal(Usuario usuario)
         {
             InitializeComponent();
+            usuarioAcutal = usuario;
             volquetes.Add(volqueteChico);
             volquetes.Add(volqueteMediano);
             volquetes.Add(volqueteGrande);
             lstProductos.DrawMode = DrawMode.OwnerDrawFixed;
-            this.lblPrecioChico.Text = ($"${precioVChico}");
-            this.lblPrecioMediano.Text = ($"${precioVMediano}");
-            this.lblPrecioGrande.Text = ($"${precioVGrande}");
+            this.lblPrecioChico.Text = ($"${volqueteChico.PrecioUnitario}");
+            this.lblPrecioMediano.Text = ($"${volqueteMediano.PrecioUnitario}");
+            this.lblPrecioGrande.Text = ($"${volqueteGrande.PrecioUnitario}");
 
         }
 
@@ -186,7 +184,7 @@ namespace AlquilerVolquetes
 
         private void btnCarrito_Click(object sender, EventArgs e)
         {
-            Carrito carrito = new Carrito(volquetes);
+            Carrito carrito = new Carrito(volquetes, usuarioAcutal);
             DialogResult result = carrito.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -199,7 +197,7 @@ namespace AlquilerVolquetes
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            Carrito carrito = new Carrito(volquetes);
+            Carrito carrito = new Carrito(volquetes, usuarioAcutal);
             DialogResult result = carrito.ShowDialog();
 
             if (result == DialogResult.OK)

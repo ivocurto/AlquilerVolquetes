@@ -12,16 +12,19 @@ using static System.Windows.Forms.DataFormats;
 
 namespace AlquilerVolquetes
 {
+
     public partial class FormularioDeAlquiler : Form
     {
         private List<Volquete> volquetes;
         string formatoTotal;
+        public Usuario usuarioActual;
         int precioTotal;
-        public FormularioDeAlquiler(List<Volquete> lista)
+        public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario)
         {
             InitializeComponent();
             volquetes = lista;
-            
+            usuarioActual = usuario;
+
             MostrarProductosAComprar();
         }
 
@@ -32,25 +35,25 @@ namespace AlquilerVolquetes
             int precioTotal = 0;
             foreach (var volquete in volquetes)
             {
-                
+
                 string producto = "";
                 string formato;
-                
+
 
                 int precio = 0;
                 switch (volquete.Id)
                 {
                     case 0:
                         producto = "volquete(s) chico(s)";
-                        
+
                         break;
                     case 1:
                         producto = "volquete(s) mediano(s)";
-                        
+
                         break;
                     case 2:
                         producto = "volquete(s) grande(s)";
-                        
+
                         break;
 
                 }
@@ -96,7 +99,7 @@ namespace AlquilerVolquetes
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
+            PantallaPrincipal pantallaPrincipal = new PantallaPrincipal(usuarioActual);
             pantallaPrincipal.Show();
             this.Hide();
         }
@@ -109,11 +112,16 @@ namespace AlquilerVolquetes
             if (result == DialogResult.OK)
             {
                 this.Hide();
-                MisVolquetes misVolquetes = new MisVolquetes();
+                MisVolquetes misVolquetes = new MisVolquetes(usuarioActual);
                 misVolquetes.Show();
                 // llevar al formulario de pago
             }
-            
+
+        }
+
+        private void FormularioDeAlquiler_Load(object sender, EventArgs e)
+        {
+            txtMail.Text = usuarioActual.MailUsusario;
         }
     }
 }

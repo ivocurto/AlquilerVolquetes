@@ -14,10 +14,12 @@ namespace AlquilerVolquetes
     public partial class Carrito : Form
     {
         private List<Volquete> volquetes;
-        
-        public Carrito(List<Volquete> lista)
+        public Usuario usuarioAcutal;
+
+        public Carrito(List<Volquete> lista, Usuario usuario)
         {
             InitializeComponent();
+            usuarioAcutal = usuario;
             this.MinimizeBox = false;
             volquetes = lista;
             
@@ -84,7 +86,7 @@ namespace AlquilerVolquetes
                 int cant = volquete.Cantidad;
                 if (cant > 0)
                 {
-                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(volquetes);
+                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(volquetes, usuarioAcutal);
                     formularioDeAlquiler.Show();
                     this.DialogResult = DialogResult.OK;
                     // Cierra el formulario de diálogo.

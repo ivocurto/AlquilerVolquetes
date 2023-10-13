@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,16 @@ namespace AlquilerVolquetes
 {
     public partial class PantallaInicio : Form
     {
-        public PantallaInicio()
+        public Usuario usuarioAcutal;
+        public PantallaInicio(Usuario usuario)
         {
+            usuarioAcutal = usuario;
             InitializeComponent();
         }
 
         private void btnAlquilarVolquetes_Click(object sender, EventArgs e)
         {
-            PantallaPrincipal pantallaPrincipal = new PantallaPrincipal();
+            PantallaPrincipal pantallaPrincipal = new PantallaPrincipal(usuarioAcutal);
             pantallaPrincipal.Show();
             this.Hide();
         }
@@ -50,7 +53,7 @@ namespace AlquilerVolquetes
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            MisVolquetes misVolquetes = new MisVolquetes();
+            MisVolquetes misVolquetes = new MisVolquetes(usuarioAcutal);
             misVolquetes.Show();
         }
     }
