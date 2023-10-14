@@ -77,14 +77,14 @@ namespace AlquilerVolquetes
                 volquetesCarrito[volquete.Id].Cantidad += volquete.Cantidad; // Le suma 1 a la cantidad del producto con el ID dado
                 volquete.Cantidad = 0;
             }
-                lstProductos.Items.Clear();
-                lblCantidadVolqueteChico.Text = $"{volquetesCarrito[0].Cantidad}";
-                lblCantidadVolqueteMediano.Text = $"{volquetesCarrito[1].Cantidad}";
-                lblCantidadVolqueteGrande.Text = $"{volquetesCarrito[2].Cantidad}";
-                lblCantidadVolqueteChico.Text = "0";
-                lblCantidadVolqueteMediano.Text = "0";
-                lblCantidadVolqueteGrande.Text = "0";
-                lblPrecioTotal.Text = "   TOTAL: $0";
+            lstProductos.Items.Clear();
+            lblCantidadVolqueteChico.Text = $"{volquetesCarrito[0].Cantidad}";
+            lblCantidadVolqueteMediano.Text = $"{volquetesCarrito[1].Cantidad}";
+            lblCantidadVolqueteGrande.Text = $"{volquetesCarrito[2].Cantidad}";
+            lblCantidadVolqueteChico.Text = "0";
+            lblCantidadVolqueteMediano.Text = "0";
+            lblCantidadVolqueteGrande.Text = "0";
+            lblPrecioTotal.Text = "   TOTAL: $0";
 
 
         }

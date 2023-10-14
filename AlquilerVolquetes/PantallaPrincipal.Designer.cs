@@ -66,10 +66,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(33, 47);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Location = new Point(29, 35);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(338, 249);
+            pictureBox1.Size = new Size(296, 187);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -77,10 +76,9 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(33, 601);
-            pictureBox3.Margin = new Padding(3, 4, 3, 4);
+            pictureBox3.Location = new Point(29, 451);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(338, 269);
+            pictureBox3.Size = new Size(296, 202);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 4;
             pictureBox3.TabStop = false;
@@ -89,9 +87,9 @@
             // 
             lblCantidadVolqueteChico.AutoSize = true;
             lblCantidadVolqueteChico.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblCantidadVolqueteChico.Location = new Point(486, 167);
+            lblCantidadVolqueteChico.Location = new Point(425, 125);
             lblCantidadVolqueteChico.Name = "lblCantidadVolqueteChico";
-            lblCantidadVolqueteChico.Size = new Size(25, 29);
+            lblCantidadVolqueteChico.Size = new Size(19, 23);
             lblCantidadVolqueteChico.TabIndex = 10;
             lblCantidadVolqueteChico.Text = "0";
             // 
@@ -99,9 +97,9 @@
             // 
             lblCantidadVolqueteMediano.AutoSize = true;
             lblCantidadVolqueteMediano.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblCantidadVolqueteMediano.Location = new Point(486, 465);
+            lblCantidadVolqueteMediano.Location = new Point(425, 349);
             lblCantidadVolqueteMediano.Name = "lblCantidadVolqueteMediano";
-            lblCantidadVolqueteMediano.Size = new Size(25, 29);
+            lblCantidadVolqueteMediano.Size = new Size(19, 23);
             lblCantidadVolqueteMediano.TabIndex = 11;
             lblCantidadVolqueteMediano.Text = "0";
             // 
@@ -109,9 +107,9 @@
             // 
             lblCantidadVolqueteGrande.AutoSize = true;
             lblCantidadVolqueteGrande.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblCantidadVolqueteGrande.Location = new Point(486, 743);
+            lblCantidadVolqueteGrande.Location = new Point(425, 557);
             lblCantidadVolqueteGrande.Name = "lblCantidadVolqueteGrande";
-            lblCantidadVolqueteGrande.Size = new Size(25, 29);
+            lblCantidadVolqueteGrande.Size = new Size(19, 23);
             lblCantidadVolqueteGrande.TabIndex = 12;
             lblCantidadVolqueteGrande.Text = "0";
             lblCantidadVolqueteGrande.Click += lblCantidadVolqueteGrande_Click;
@@ -123,11 +121,10 @@
             lstProductos.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
             lstProductos.ForeColor = SystemColors.MenuText;
             lstProductos.FormattingEnabled = true;
-            lstProductos.ItemHeight = 28;
-            lstProductos.Location = new Point(911, 624);
-            lstProductos.Margin = new Padding(3, 4, 3, 4);
+            lstProductos.ItemHeight = 23;
+            lstProductos.Location = new Point(797, 445);
             lstProductos.Name = "lstProductos";
-            lstProductos.Size = new Size(291, 112);
+            lstProductos.Size = new Size(255, 92);
             lstProductos.TabIndex = 15;
             lstProductos.DrawItem += lstProductos_DrawItem;
             lstProductos.SelectedIndexChanged += lstProductos_SelectedIndexChanged;
@@ -136,9 +133,9 @@
             // 
             lblPrecioChico.AutoSize = true;
             lblPrecioChico.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPrecioChico.Location = new Point(521, 167);
+            lblPrecioChico.Location = new Point(456, 125);
             lblPrecioChico.Name = "lblPrecioChico";
-            lblPrecioChico.Size = new Size(37, 29);
+            lblPrecioChico.Size = new Size(29, 23);
             lblPrecioChico.TabIndex = 16;
             lblPrecioChico.Text = "$0";
             // 
@@ -146,9 +143,9 @@
             // 
             lblPrecioMediano.AutoSize = true;
             lblPrecioMediano.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPrecioMediano.Location = new Point(521, 465);
+            lblPrecioMediano.Location = new Point(456, 349);
             lblPrecioMediano.Name = "lblPrecioMediano";
-            lblPrecioMediano.Size = new Size(37, 29);
+            lblPrecioMediano.Size = new Size(29, 23);
             lblPrecioMediano.TabIndex = 17;
             lblPrecioMediano.Text = "$0";
             // 
@@ -156,9 +153,9 @@
             // 
             lblPrecioGrande.AutoSize = true;
             lblPrecioGrande.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPrecioGrande.Location = new Point(521, 743);
+            lblPrecioGrande.Location = new Point(456, 557);
             lblPrecioGrande.Name = "lblPrecioGrande";
-            lblPrecioGrande.Size = new Size(37, 29);
+            lblPrecioGrande.Size = new Size(29, 23);
             lblPrecioGrande.TabIndex = 18;
             lblPrecioGrande.Text = "$0";
             lblPrecioGrande.Click += lblPrecioGrande_Click;
@@ -168,10 +165,9 @@
             btnAgregarAlCarrito.BackColor = Color.DeepSkyBlue;
             btnAgregarAlCarrito.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnAgregarAlCarrito.ForeColor = SystemColors.ButtonHighlight;
-            btnAgregarAlCarrito.Location = new Point(911, 803);
-            btnAgregarAlCarrito.Margin = new Padding(3, 4, 3, 4);
+            btnAgregarAlCarrito.Location = new Point(797, 602);
             btnAgregarAlCarrito.Name = "btnAgregarAlCarrito";
-            btnAgregarAlCarrito.Size = new Size(291, 73);
+            btnAgregarAlCarrito.Size = new Size(255, 55);
             btnAgregarAlCarrito.TabIndex = 19;
             btnAgregarAlCarrito.Text = "AGREGAR AL CARRITO";
             btnAgregarAlCarrito.UseVisualStyleBackColor = false;
@@ -181,9 +177,9 @@
             // 
             lblPrecioTotal.AutoSize = true;
             lblPrecioTotal.Font = new Font("Bahnschrift SemiBold SemiConden", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblPrecioTotal.Location = new Point(993, 756);
+            lblPrecioTotal.Location = new Point(869, 567);
             lblPrecioTotal.Name = "lblPrecioTotal";
-            lblPrecioTotal.Size = new Size(134, 33);
+            lblPrecioTotal.Size = new Size(107, 25);
             lblPrecioTotal.TabIndex = 20;
             lblPrecioTotal.Text = "   TOTAL: $0";
             lblPrecioTotal.Click += lblPrecioTotal_Click;
@@ -191,10 +187,9 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(33, 315);
-            pictureBox2.Margin = new Padding(3, 4, 3, 4);
+            pictureBox2.Location = new Point(29, 236);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(338, 269);
+            pictureBox2.Size = new Size(296, 202);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 21;
             pictureBox2.TabStop = false;
@@ -202,11 +197,10 @@
             // btnCarrito
             // 
             btnCarrito.Image = (Image)resources.GetObject("btnCarrito.Image");
-            btnCarrito.Location = new Point(1136, 24);
-            btnCarrito.Margin = new Padding(3, 4, 3, 4);
+            btnCarrito.Location = new Point(994, 18);
             btnCarrito.Name = "btnCarrito";
-            btnCarrito.Padding = new Padding(6, 7, 6, 7);
-            btnCarrito.Size = new Size(57, 67);
+            btnCarrito.Padding = new Padding(5);
+            btnCarrito.Size = new Size(50, 50);
             btnCarrito.SizeMode = PictureBoxSizeMode.StretchImage;
             btnCarrito.TabIndex = 22;
             btnCarrito.TabStop = false;
@@ -215,10 +209,9 @@
             // btnSumarVC
             // 
             btnSumarVC.Image = (Image)resources.GetObject("btnSumarVC.Image");
-            btnSumarVC.Location = new Point(407, 101);
-            btnSumarVC.Margin = new Padding(3, 4, 3, 4);
+            btnSumarVC.Location = new Point(356, 76);
             btnSumarVC.Name = "btnSumarVC";
-            btnSumarVC.Size = new Size(40, 47);
+            btnSumarVC.Size = new Size(35, 35);
             btnSumarVC.SizeMode = PictureBoxSizeMode.StretchImage;
             btnSumarVC.TabIndex = 23;
             btnSumarVC.TabStop = false;
@@ -227,10 +220,9 @@
             // btnSumarVM
             // 
             btnSumarVM.Image = (Image)resources.GetObject("btnSumarVM.Image");
-            btnSumarVM.Location = new Point(407, 397);
-            btnSumarVM.Margin = new Padding(3, 4, 3, 4);
+            btnSumarVM.Location = new Point(356, 298);
             btnSumarVM.Name = "btnSumarVM";
-            btnSumarVM.Size = new Size(40, 47);
+            btnSumarVM.Size = new Size(35, 35);
             btnSumarVM.SizeMode = PictureBoxSizeMode.StretchImage;
             btnSumarVM.TabIndex = 24;
             btnSumarVM.TabStop = false;
@@ -239,10 +231,9 @@
             // btnSumarVG
             // 
             btnSumarVG.Image = (Image)resources.GetObject("btnSumarVG.Image");
-            btnSumarVG.Location = new Point(407, 684);
-            btnSumarVG.Margin = new Padding(3, 4, 3, 4);
+            btnSumarVG.Location = new Point(356, 513);
             btnSumarVG.Name = "btnSumarVG";
-            btnSumarVG.Size = new Size(40, 47);
+            btnSumarVG.Size = new Size(35, 35);
             btnSumarVG.SizeMode = PictureBoxSizeMode.StretchImage;
             btnSumarVG.TabIndex = 25;
             btnSumarVG.TabStop = false;
@@ -251,10 +242,9 @@
             // btnRestarVC
             // 
             btnRestarVC.Image = (Image)resources.GetObject("btnRestarVC.Image");
-            btnRestarVC.Location = new Point(407, 176);
-            btnRestarVC.Margin = new Padding(3, 4, 3, 4);
+            btnRestarVC.Location = new Point(356, 132);
             btnRestarVC.Name = "btnRestarVC";
-            btnRestarVC.Size = new Size(40, 47);
+            btnRestarVC.Size = new Size(35, 35);
             btnRestarVC.SizeMode = PictureBoxSizeMode.StretchImage;
             btnRestarVC.TabIndex = 26;
             btnRestarVC.TabStop = false;
@@ -263,10 +253,9 @@
             // btnRestarVM
             // 
             btnRestarVM.Image = (Image)resources.GetObject("btnRestarVM.Image");
-            btnRestarVM.Location = new Point(407, 472);
-            btnRestarVM.Margin = new Padding(3, 4, 3, 4);
+            btnRestarVM.Location = new Point(356, 354);
             btnRestarVM.Name = "btnRestarVM";
-            btnRestarVM.Size = new Size(40, 47);
+            btnRestarVM.Size = new Size(35, 35);
             btnRestarVM.SizeMode = PictureBoxSizeMode.StretchImage;
             btnRestarVM.TabIndex = 27;
             btnRestarVM.TabStop = false;
@@ -275,10 +264,9 @@
             // btnRestarVG
             // 
             btnRestarVG.Image = (Image)resources.GetObject("btnRestarVG.Image");
-            btnRestarVG.Location = new Point(407, 759);
-            btnRestarVG.Margin = new Padding(3, 4, 3, 4);
+            btnRestarVG.Location = new Point(356, 569);
             btnRestarVG.Name = "btnRestarVG";
-            btnRestarVG.Size = new Size(40, 47);
+            btnRestarVG.Size = new Size(35, 35);
             btnRestarVG.SizeMode = PictureBoxSizeMode.StretchImage;
             btnRestarVG.TabIndex = 28;
             btnRestarVG.TabStop = false;
@@ -289,21 +277,20 @@
             pbNotificacion.BackColor = Color.Transparent;
             pbNotificacion.Image = (Image)resources.GetObject("pbNotificacion.Image");
             pbNotificacion.ImageLocation = "";
-            pbNotificacion.Location = new Point(786, 264);
-            pbNotificacion.Margin = new Padding(3, 4, 3, 4);
+            pbNotificacion.Location = new Point(978, 99);
             pbNotificacion.Name = "pbNotificacion";
-            pbNotificacion.Padding = new Padding(6, 7, 6, 7);
-            pbNotificacion.Size = new Size(51, 43);
+            pbNotificacion.Padding = new Padding(5);
+            pbNotificacion.Size = new Size(45, 32);
             pbNotificacion.SizeMode = PictureBoxSizeMode.StretchImage;
             pbNotificacion.TabIndex = 29;
             pbNotificacion.TabStop = false;
             // 
             // PantallaPrincipal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1216, 908);
+            ClientSize = new Size(1064, 681);
             Controls.Add(pbNotificacion);
             Controls.Add(btnRestarVG);
             Controls.Add(btnRestarVM);
@@ -324,7 +311,6 @@
             Controls.Add(lblCantidadVolqueteChico);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "PantallaPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PantallaPrincipal";

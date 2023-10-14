@@ -31,23 +31,46 @@ namespace AlquilerVolquetes
 
             if (!ComprobarStringVacio(datosUsuario))
             {
-                MessageBox.Show("Por favor, completa todos los campos.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ModalErrorAlRegistrarse clavesDiferentes = new ModalErrorAlRegistrarse("stringVacio");
+                DialogResult result = clavesDiferentes.ShowDialog();
             }
             else if (!ValidarContraseña(datosUsuario))
             {
-                MessageBox.Show("Las contraseñas no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ModalErrorAlRegistrarse clavesDiferentes = new ModalErrorAlRegistrarse("claves");
+                DialogResult result = clavesDiferentes.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtClave.Text = "";
+                    txtReClave.Text = "";
+                }
             }
             else if (!ComprobarExistenciaUsuario(datosUsuario))
             {
-                MessageBox.Show("El nombre de usuario o el correo ya existen.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ModalErrorAlRegistrarse clavesDiferentes = new ModalErrorAlRegistrarse("existenciaUsuario");
+                DialogResult result = clavesDiferentes.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtMail.Text = "";
+                    txtUsuario.Text = "";
+                    txtClave.Text = "";
+                    txtReClave.Text = "";
+                }
             }
             else
             {
-                Usuario usuario = new Usuario(nombre, mail, clave);
-                listaUsuarios.Add(usuario);
-                InicioSesion inicio = new InicioSesion(usuario);
-                inicio.Show();
-                this.Hide();
+                ModalExitoLogin exitoLogin = new ModalExitoLogin("register");
+                DialogResult answer = exitoLogin.ShowDialog();
+                if (answer == DialogResult.OK)
+                {
+                    Usuario usuario = new Usuario(nombre, mail, clave);
+                    listaUsuarios.Add(usuario);
+                    InicioSesion inicio = new InicioSesion(usuario);
+                    inicio.Show();
+                    this.Hide();
+                }
+                
             }
         }
 

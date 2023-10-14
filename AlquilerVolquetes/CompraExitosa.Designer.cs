@@ -60,7 +60,7 @@
             btnAceptar.BackColor = Color.DeepSkyBlue;
             btnAceptar.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnAceptar.ForeColor = SystemColors.ButtonHighlight;
-            btnAceptar.Location = new Point(150, 221);
+            btnAceptar.Location = new Point(148, 208);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(255, 55);
             btnAceptar.TabIndex = 25;
@@ -81,15 +81,15 @@
             Name = "CompraExitosa";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CompraExitosa";
+            Load += CompraExitosa_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label lblCompraExitosa;
-        private PictureBox pictureBox1;
         private Button btnAceptar;
+        public Label lblCompraExitosa;
+        public PictureBox pictureBox1;
     }
 }

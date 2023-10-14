@@ -47,7 +47,7 @@ namespace AlquilerVolquetes
             }
             if (precioTotal == 0)
             {
-                this.lblPrecioTotalEnCarrito.Text = "  TOTAL:  0";
+                this.lblPrecioTotalEnCarrito.Text = "  TOTAL:  $0";
             }
             else
             {
@@ -63,8 +63,11 @@ namespace AlquilerVolquetes
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            lstProductosEnCarrito.Items.Clear();
-            MostrarListaCarrito();
+            foreach (Volquete volquete in volquetes)
+            {
+                volquete.Cantidad = 0;
+            }
+                MostrarListaCarrito();
         }
 
         private void btnAlquilar_Click(object sender, EventArgs e)
@@ -86,7 +89,12 @@ namespace AlquilerVolquetes
             }
             if (flag == false)
             {
-                MessageBox.Show("Debe agregar por lo menos un produto al carrito para alquilar", "Carrito vacío", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ModalCarritoVacio carritoVacio = new ModalCarritoVacio();
+                DialogResult answer = carritoVacio.ShowDialog();
+                if (answer == DialogResult.OK)
+                {
+                    this.Close();
+                }
             }
 
 

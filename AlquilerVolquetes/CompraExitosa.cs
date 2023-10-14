@@ -24,5 +24,14 @@ namespace AlquilerVolquetes
             this.Close();
 
         }
+
+        private void CompraExitosa_Load(object sender, EventArgs e)
+        {
+            // Configura el tamaño del formulario
+            this.Width = 570;
+            this.Height = 288;
+            // Aparezca siempre centrado:
+            this.StartPosition = FormStartPosition.CenterScreen;
+        }
     }
 }

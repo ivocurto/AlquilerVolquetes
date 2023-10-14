@@ -81,15 +81,28 @@ namespace AlquilerVolquetes
             {
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
-                    usuarioAcutal = usuario;
-                    PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
-                    pantallaInicio.Show();
-                    this.Hide();
-                    return;
+                    //aca va el logueado correctamente
+                    ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
+                    DialogResult answer = exitoLogin.ShowDialog();
+                    if (answer == DialogResult.OK)
+                    {
+                        usuarioAcutal = usuario;
+                        PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
+                        pantallaInicio.Show();
+                        this.Hide();
+                        return;
+                    }
+                    
                 }
             }
+            ModalErrorLogin ususarioIncorrecto = new ModalErrorLogin("ususarioIncorrecto");
+            DialogResult result = ususarioIncorrecto.ShowDialog();
 
-            MessageBox.Show("Nombre de usuario o clave incorrectos", "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (result == DialogResult.OK)
+            {
+                txtClave.Text = "";
+                txtUsuario.Text = "";
+            }
         }
 
         private void InicioSesion_Load(object sender, EventArgs e)

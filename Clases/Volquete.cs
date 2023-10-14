@@ -27,7 +27,7 @@ namespace Clases
         public int PrecioUnitario { get => precioUnitario; set => precioUnitario = value; }
         public override string ToString()
         {
-            return $"{Cantidad} {MedidaVolquete} ${PrecioUnitario * Cantidad}";
+            return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}";
         }
     }
         
