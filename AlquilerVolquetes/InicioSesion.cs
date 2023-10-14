@@ -20,6 +20,7 @@ namespace AlquilerVolquetes
 
 
         protected static List<Usuario> usuarios = new List<Usuario>();
+        public Usuario usuarioAcutal;
 
         string rutaArchivoJson = "usuarios.json";
         public InicioSesion()
@@ -80,7 +81,8 @@ namespace AlquilerVolquetes
             {
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
-                    PantallaInicio pantallaInicio = new PantallaInicio();
+                    usuarioAcutal = usuario;
+                    PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
                     pantallaInicio.Show();
                     this.Hide();
                     return;

@@ -14,13 +14,15 @@ namespace AlquilerVolquetes
     public partial class Carrito : Form
     {
         private List<Volquete> volquetes;
-        
-        public Carrito(List<Volquete> lista)
+        public Usuario usuarioActual;
+
+        public Carrito(List<Volquete> lista, Usuario usuario)
         {
             InitializeComponent();
+            usuarioActual = usuario;
             this.MinimizeBox = false;
             volquetes = lista;
-            
+
             MostrarListaCarrito();
 
         }
@@ -31,7 +33,8 @@ namespace AlquilerVolquetes
             int precioTotal = 0;
             foreach (Volquete volquete in volquetes)
             {
-                if (volquete.Cantidad != 0) {
+                if (volquete.Cantidad != 0)
+                {
                     string producto = "";
                     string formato;
                     int precio;
@@ -72,22 +75,23 @@ namespace AlquilerVolquetes
                 int cant = volquete.Cantidad;
                 if (cant > 0)
                 {
-                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(volquetes);
+                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(volquetes, usuarioActual);
                     formularioDeAlquiler.Show();
                     this.DialogResult = DialogResult.OK;
                     // Cierra el formulario de diálogo.
                     this.Close();
                     flag = true;
                     break;
-                }  
+                }
             }
             if (flag == false)
             {
                 MessageBox.Show("Debe agregar por lo menos un produto al carrito para alquilar", "Carrito vacío", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
 
 
         }
     }
 }
+

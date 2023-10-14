@@ -9,21 +9,27 @@ namespace Clases
 {
     public class Cliente : Usuario
     {
+        private List<Volquete> volquetesPedidos;
+        private List<Volquete> volquetesInstalados;
         private string direccion;
         private string telefono;
-        private List<Volquete> carrito;
+        private int valorCompra;
 
+        
 
-        public Cliente(string nombreUsuario, string mailUsuario, string claveUsuario, string direccion, string telefono, List<Volquete> carrito)
-            : base(nombreUsuario, mailUsuario, claveUsuario)
+        public Cliente(string nombreUsuario, string mailUsusario, string claveUsuario, List<Volquete> volquetesPedidos, List<Volquete> volquetesInstalados, string direccion, string telefono, int valorCompra) : base(nombreUsuario, mailUsusario, claveUsuario)
         {
+            this.volquetesPedidos = volquetesPedidos;
+            this.volquetesInstalados = volquetesInstalados;
             this.Direccion = direccion;
             this.Telefono = telefono;
-            this.Carrito = carrito;
+            this.ValorCompra = valorCompra;
         }
 
+        public List<Volquete> VolquetesPedidos { get => volquetesPedidos; set => volquetesPedidos = value; }
+        public List<Volquete> VolquetesInstalados { get => volquetesInstalados; set => volquetesInstalados = value; }
         public string Direccion { get => direccion; set => direccion = value; }
         public string Telefono { get => telefono; set => telefono = value; }
-        public List<Volquete> Carrito { get => carrito; set => carrito = value; }
+        public int ValorCompra { get => valorCompra; set => valorCompra = value; }
     }
 }
