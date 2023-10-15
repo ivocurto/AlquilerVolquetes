@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlquilerVolquetes", "AlquilerVolquetes\AlquilerVolquetes.csproj", "{019DE9A1-84B9-4580-8ABC-3464E17B039B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlquilerVolquetes", "AlquilerVolquetes\AlquilerVolquetes.csproj", "{019DE9A1-84B9-4580-8ABC-3464E17B039B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clases", "Clases\Clases.csproj", "{C9C1D1DB-C9F0-4261-91C2-F84A0F78C37E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clases", "Clases\Clases.csproj", "{C9C1D1DB-C9F0-4261-91C2-F84A0F78C37E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminApp", "AdminApp\AdminApp.csproj", "{64B47FD7-ABBC-43B9-8999-AB7636570A2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C9C1D1DB-C9F0-4261-91C2-F84A0F78C37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9C1D1DB-C9F0-4261-91C2-F84A0F78C37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9C1D1DB-C9F0-4261-91C2-F84A0F78C37E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64B47FD7-ABBC-43B9-8999-AB7636570A2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B47FD7-ABBC-43B9-8999-AB7636570A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B47FD7-ABBC-43B9-8999-AB7636570A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B47FD7-ABBC-43B9-8999-AB7636570A2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
