@@ -14,10 +14,25 @@ namespace AlquilerVolquetes
     public partial class PantallaInicio : Form
     {
         public Usuario usuarioAcutal;
+        private Cliente clienteActual;
+        private List<Cliente> clientes;
         public PantallaInicio(Usuario usuario)
         {
-            usuarioAcutal = usuario;
             InitializeComponent();
+            usuarioAcutal = usuario;
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("clientes.json");
+            if (clientes is not null ) 
+            {
+            foreach(Cliente cliente in clientes)
+            {
+                if(cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
+                {
+                    clienteActual = cliente;
+                    break;
+                }
+            }
+
+            }
         }
 
         private void btnAlquilarVolquetes_Click(object sender, EventArgs e)
@@ -53,7 +68,16 @@ namespace AlquilerVolquetes
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            MisVolquetes misVolquetes = new MisVolquetes(usuarioAcutal);
+            MisVolquetes misVolquetes;
+            if(clienteActual != null)
+            {
+                 misVolquetes = new MisVolquetes(usuarioAcutal, clienteActual);
+            }
+            else
+            {
+                 misVolquetes = new MisVolquetes(usuarioAcutal);
+            }
+            
             misVolquetes.Show();
         }
     }

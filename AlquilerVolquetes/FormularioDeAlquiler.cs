@@ -17,13 +17,30 @@ namespace AlquilerVolquetes
     {
         private List<Volquete> volquetes;
         public Usuario usuarioActual;
+        private List<Cliente> listaClientes;
+        private string path = "clientes.json";
         public int precioTotal;
+        public int indexCliente;
+        private bool existeCliente = false;
         public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario)
         {
             InitializeComponent();
             volquetes = lista;
             usuarioActual = usuario;
+            listaClientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(path);
+            if(listaClientes is not null)
+            {
+                foreach (var cliente in listaClientes)
+                {
+                    if(cliente.MailUsusario == usuarioActual.MailUsusario)
+                    {
+                        existeCliente = true;
+                        indexCliente = cliente.IdCliente;
+                        break;
+                    }
+                }
 
+            }
             MostrarProductosAComprar();
         }
 
@@ -90,7 +107,39 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-            Cliente cliente = new Cliente(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes,txtDireccion.Text, txtTelefono.Text, precioTotal);
+            Cliente cliente;
+            if (listaClientes is null)
+            {
+                listaClientes = new List<Cliente>();
+            }
+
+            if (existeCliente == false)
+            {
+                cliente = new Cliente(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes, txtDireccion.Text, txtTelefono.Text, precioTotal);
+
+                if (listaClientes.Count > 0)
+                {
+                    cliente.IdCliente = listaClientes.Max(c => c.IdCliente) + 1;
+                }
+                else
+                {
+                    cliente.IdCliente = 1;
+                }
+
+                listaClientes.Add(cliente);
+            }
+            else
+            {
+                cliente = listaClientes[indexCliente];
+                for(int i = 0;i < cliente.VolquetesPedidos.Count();)
+                {
+                    cliente.VolquetesPedidos[i].Cantidad += volquetes[i].Cantidad;
+
+                }
+                cliente.ValorCompra += precioTotal;
+            }
+
+            JsonFileManager.SaveToJsonGeneric<List<Cliente>>(path, listaClientes);
             CompraExitosa compraExitosa = new CompraExitosa();
             DialogResult result = compraExitosa.ShowDialog();
 

@@ -46,7 +46,8 @@ namespace Clases
             }
             catch (Exception ex)
             {
-                // Manejar la excepción o registrarla según tus necesidades.
+                string json = JsonConvert.SerializeObject(default(T));
+                File.WriteAllText(filePath, json);
             }
 
             return item;
