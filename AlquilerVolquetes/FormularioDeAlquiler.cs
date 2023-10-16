@@ -17,13 +17,17 @@ namespace AlquilerVolquetes
     {
         private List<Volquete> volquetes;
         public Usuario usuarioActual;
+        private List<Cliente> listaClientes;
+        private string path = "pedidos.json";
         public int precioTotal;
+        
         public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario)
         {
             InitializeComponent();
             volquetes = lista;
             usuarioActual = usuario;
-
+            listaClientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(path);
+            
             MostrarProductosAComprar();
         }
 
@@ -90,7 +94,29 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-            Cliente cliente = new Cliente(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes,txtDireccion.Text, txtTelefono.Text, precioTotal);
+            Cliente cliente;
+            if (listaClientes is null)
+            {
+                listaClientes = new List<Cliente>();
+            }
+
+            
+                cliente = new Cliente(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes, txtDireccion.Text, txtTelefono.Text, precioTotal);
+
+                if (listaClientes.Count > 1)
+                {
+                    cliente.IdCliente = listaClientes.Count()-1;
+                }
+                else
+                {
+                    cliente.IdCliente = 0;
+                }
+
+                listaClientes.Add(cliente);
+            
+           
+
+            JsonFileManager.SaveToJsonGeneric<List<Cliente>>(path, listaClientes);
             CompraExitosa compraExitosa = new CompraExitosa();
             DialogResult result = compraExitosa.ShowDialog();
 

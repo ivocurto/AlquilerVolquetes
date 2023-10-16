@@ -14,7 +14,7 @@ namespace Clases
         private string direccion;
         private string telefono;
         private int valorCompra;
-
+        private int idCliente;
         
 
         public Cliente(string nombreUsuario, string mailUsusario, string claveUsuario,ERolUsuario rol , List<Volquete> volquetesPedidos, List<Volquete> volquetesInstalados, string direccion, string telefono, int valorCompra) : base(nombreUsuario, mailUsusario, claveUsuario, rol)
@@ -31,5 +31,6 @@ namespace Clases
         public string Direccion { get => direccion; set => direccion = value; }
         public string Telefono { get => telefono; set => telefono = value; }
         public int ValorCompra { get => valorCompra; set => valorCompra = value; }
+        public int IdCliente { get => idCliente; set => idCliente = value; }
     }
 }

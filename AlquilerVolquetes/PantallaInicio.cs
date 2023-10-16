@@ -15,11 +15,25 @@ namespace AlquilerVolquetes
     {
         PantallaPrincipal pantallaPrincipal;
         public Usuario usuarioAcutal;
-        private bool flagPantallaPrincipal = false;
+        private Cliente clienteActual;
+        private List<Cliente> clientes;
         public PantallaInicio(Usuario usuario)
         {
-            usuarioAcutal = usuario;
             InitializeComponent();
+            usuarioAcutal = usuario;
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("clientes.json");
+            if (clientes is not null ) 
+            {
+            foreach(Cliente cliente in clientes)
+            {
+                if(cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
+                {
+                    clienteActual = cliente;
+                    break;
+                }
+            }
+
+            }
         }
 
         private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,7 +83,18 @@ namespace AlquilerVolquetes
 
         private void lblBienvenida_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MisVolquetes misVolquetes;
+            if(clienteActual != null)
+            {
+                 misVolquetes = new MisVolquetes(usuarioAcutal, clienteActual);
+            }
+            else
+            {
+                 misVolquetes = new MisVolquetes(usuarioAcutal);
+            }
+            
+            misVolquetes.Show();
         }
     }
 }

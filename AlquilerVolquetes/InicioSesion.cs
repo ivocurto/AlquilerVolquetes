@@ -27,56 +27,36 @@ namespace AlquilerVolquetes
         public InicioSesion()
         {
             InitializeComponent();
-            try
-            {
-                string json = File.ReadAllText(rutaArchivoJson);
-
-                usuarios = JsonConvert.DeserializeObject<List<Usuario>>(json);
+            usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
 
             }
             catch (Exception ex)
             {
 
-                string json = JsonConvert.SerializeObject(usuarios);
-                File.WriteAllText(rutaArchivoJson, json);
-            }
+            data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
-            try
+            if (data.CheckboxValue == true)
             {
-                string datajson = File.ReadAllText(filePath);
-                data = JsonConvert.DeserializeObject<DataContainer>(datajson);
-
-                if (data.CheckboxValue == true)
-                {
-                    txtUsuario.Text = data.UserObject.NombreUsuario;
-                    txtClave.Text = data.UserObject.ClaveUsuario;
-                    cbAutoLogin.Checked = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                string datajson = JsonConvert.SerializeObject(data);
-                File.WriteAllText(filePath, datajson);
+                txtUsuario.Text = data.UserObject.NombreUsuario;
+                txtClave.Text = data.UserObject.ClaveUsuario;
+                cbAutoLogin.Checked = true;
             }
         }
 
         public InicioSesion(Usuario usuario)
-        {
+         {
             InitializeComponent();
 
-            if (File.Exists(rutaArchivoJson))
-            {
-                string json = File.ReadAllText(rutaArchivoJson);
-                usuarios = JsonConvert.DeserializeObject<List<Usuario>>(json);
+            usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
 
-            }
+
+
 
             usuarios.Add(usuario);
             usuario.IndexUsuario = usuarios.Count() - 1;
 
-            string jsonUsuarios = JsonConvert.SerializeObject(usuarios);
-            File.WriteAllText(rutaArchivoJson, jsonUsuarios);
-        }
+            JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
+            }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -86,40 +66,36 @@ namespace AlquilerVolquetes
         }
 
 
-        private void btnIngresar_Click(object sender, EventArgs e)
-        {
-            string nombreUsuario = txtUsuario.Text;
-            string clave = txtClave.Text;
-            Usuario usuarioAcutal = null;
-
-            foreach (var usuario in usuarios)
-            {
-                if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
-                {
-                    usuarioAcutal = usuario;
-                    break; // Salir del bucle
-                }
             }
 
-            if (usuarioAcutal != null)
+            private void btnIngresar_Click(object sender, EventArgs e)
             {
-                // Usuario válido
-                ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
-                DialogResult answer = exitoLogin.ShowDialog();
 
-                if (answer == DialogResult.OK)
+                string nombreUsuario = txtUsuario.Text;
+                string clave = txtClave.Text;
+                foreach (var usuario in usuarios)
                 {
-                    data = new DataContainer(checkbox, usuarioAcutal);
-                    string jsonString = JsonConvert.SerializeObject(data);
-                    File.WriteAllText(filePath, jsonString);
+                    if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
+                    {
+                        //aca va el logueado correctamente
+                        ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
+                        DialogResult answer = exitoLogin.ShowDialog();
+                        if (answer == DialogResult.OK)
+                        {
+                            data = new DataContainer(checkbox, usuario);
+                        //string jsonString = JsonConvert.SerializeObject(data);
+                           JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
 
-                    PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
-                    pantallaInicio.Show();
-                    this.Hide();
+                            
+                            usuarioAcutal = usuario;
+                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
+                            pantallaInicio.Show();
+                            this.Hide();
+                            return;
+                        }
+
+                    }
                 }
-            }
-            else
-            {
                 ModalErrorLogin ususarioIncorrecto = new ModalErrorLogin("ususarioIncorrecto");
                 DialogResult result = ususarioIncorrecto.ShowDialog();
 
