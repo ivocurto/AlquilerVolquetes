@@ -131,26 +131,6 @@ namespace AlquilerVolquetes
 
         //Iniciar formulario
 
-
-        //Cerrar formulario
-        private void PantallaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            List<Form> formulariosACerrar = new List<Form>();
-
-            foreach (Form formulario in Application.OpenForms)
-            {
-                if (formulario != this)
-                {
-                    formulariosACerrar.Add(formulario);
-                }
-            }
-
-            foreach (Form formulario in formulariosACerrar)
-            {
-                formulario.Close();
-            }
-        }
-
         private string Incrementar_Label(object sender, EventArgs e, int id, string label)
         {
             int valor = int.Parse(label);
@@ -173,16 +153,6 @@ namespace AlquilerVolquetes
             }
 
             return ($"{valor}");
-        }
-
-        private void lstProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPrecioTotal_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnCarrito_Click(object sender, EventArgs e)
@@ -272,8 +242,6 @@ namespace AlquilerVolquetes
                 }
             }
         }
-
-
 
     }
 

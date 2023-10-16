@@ -13,26 +13,38 @@ namespace AlquilerVolquetes
 {
     public partial class PantallaInicio : Form
     {
+        PantallaPrincipal pantallaPrincipal;
         public Usuario usuarioAcutal;
+        private bool flagPantallaPrincipal = false;
         public PantallaInicio(Usuario usuario)
         {
             usuarioAcutal = usuario;
             InitializeComponent();
         }
 
-        private void btnAlquilarVolquetes_Click(object sender, EventArgs e)
+        private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PantallaPrincipal pantallaPrincipal = new PantallaPrincipal(usuarioAcutal);
-            pantallaPrincipal.Show();
-            this.Hide();
+            //PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
+            //pantallaInicio.MdiParent = this;
+            //pantallaInicio.Show();
         }
 
-        private void PantallaInicio_Load(object sender, EventArgs e)
+        private void aLQUILARVOLQUETESToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (flagPantallaPrincipal == false)
+            {
+                pantallaPrincipal = new PantallaPrincipal(usuarioAcutal);
+                pantallaPrincipal.MdiParent = this;
+                pantallaPrincipal.Show();
+                flagPantallaPrincipal = true;
+            } else
+            {
+                pantallaPrincipal.Show();
+            }
+            
         }
 
-        private void PantallaInicio_FormClosed(object sender, FormClosedEventArgs e)
+        private void PantallaInicio_FormClosing(object sender, FormClosingEventArgs e)
         {
             List<Form> formulariosACerrar = new List<Form>();
 
@@ -50,11 +62,14 @@ namespace AlquilerVolquetes
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAlquilarVolquetes_Click_1(object sender, EventArgs e)
         {
-            this.Hide();
-            MisVolquetes misVolquetes = new MisVolquetes(usuarioAcutal);
-            misVolquetes.Show();
+
+        }
+
+        private void lblBienvenida_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

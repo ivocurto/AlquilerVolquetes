@@ -1,24 +1,21 @@
-﻿    using Clases;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows.Forms;
-    using System.Text.Json;
-    using System.Text.Json.Serialization;
-    using Newtonsoft.Json;
+﻿using Clases;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-
-
-    namespace AlquilerVolquetes
-    {
+namespace AlquilerVolquetes
+{
     public partial class InicioSesion : Form
     {
-
 
         protected static List<Usuario> usuarios = new List<Usuario>();
         public Usuario usuarioAcutal;
@@ -26,6 +23,7 @@
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
         private DataContainer data;
+
         public InicioSesion()
         {
             InitializeComponent();
@@ -60,71 +58,68 @@
                 string datajson = JsonConvert.SerializeObject(data);
                 File.WriteAllText(filePath, datajson);
             }
-
-            
         }
 
         public InicioSesion(Usuario usuario)
-         {
-                InitializeComponent();
+        {
+            InitializeComponent();
 
-                if (File.Exists(rutaArchivoJson))
+            if (File.Exists(rutaArchivoJson))
+            {
+                string json = File.ReadAllText(rutaArchivoJson);
+                usuarios = JsonConvert.DeserializeObject<List<Usuario>>(json);
+
+            }
+
+            usuarios.Add(usuario);
+            usuario.IndexUsuario = usuarios.Count() - 1;
+
+            string jsonUsuarios = JsonConvert.SerializeObject(usuarios);
+            File.WriteAllText(rutaArchivoJson, jsonUsuarios);
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RegistroUsuario registro = new RegistroUsuario(usuarios);
+            registro.Show();
+            this.Hide();
+        }
+
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = txtUsuario.Text;
+            string clave = txtClave.Text;
+            Usuario usuarioAcutal = null;
+
+            foreach (var usuario in usuarios)
+            {
+                if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
-                    string json = File.ReadAllText(rutaArchivoJson);
-                    usuarios = JsonConvert.DeserializeObject<List<Usuario>>(json);
-                
+                    usuarioAcutal = usuario;
+                    break; // Salir del bucle
                 }
-
-            
-            
-
-                usuarios.Add(usuario);
-                usuario.IndexUsuario = usuarios.Count() - 1;
-
-                string jsonUsuarios = JsonConvert.SerializeObject(usuarios);
-                File.WriteAllText(rutaArchivoJson, jsonUsuarios);
             }
 
-            private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+            if (usuarioAcutal != null)
             {
-                RegistroUsuario registro = new RegistroUsuario(usuarios);
-                registro.Show();
-                this.Hide();
-            }
+                // Usuario válido
+                ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
+                DialogResult answer = exitoLogin.ShowDialog();
 
-            private void textBox1_TextChanged(object sender, EventArgs e)
-            {
-
-            }
-
-            private void btnIngresar_Click(object sender, EventArgs e)
-            {
-
-                string nombreUsuario = txtUsuario.Text;
-                string clave = txtClave.Text;
-                foreach (var usuario in usuarios)
+                if (answer == DialogResult.OK)
                 {
-                    if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
-                    {
-                        //aca va el logueado correctamente
-                        ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
-                        DialogResult answer = exitoLogin.ShowDialog();
-                        if (answer == DialogResult.OK)
-                        {
-                            data = new DataContainer(checkbox, usuario);
-                            string jsonString = JsonConvert.SerializeObject(data);
-                        
+                    data = new DataContainer(checkbox, usuarioAcutal);
+                    string jsonString = JsonConvert.SerializeObject(data);
+                    File.WriteAllText(filePath, jsonString);
 
-                            File.WriteAllText(filePath, jsonString);
-                            usuarioAcutal = usuario;
-                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
-                            pantallaInicio.Show();
-                            this.Hide();
-                            return;
-                        }
-
-                    }
+                    PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
+                    pantallaInicio.Show();
+                    this.Hide();
                 }
+            }
+            else
+            {
                 ModalErrorLogin ususarioIncorrecto = new ModalErrorLogin("ususarioIncorrecto");
                 DialogResult result = ususarioIncorrecto.ShowDialog();
 
@@ -134,39 +129,16 @@
                     txtUsuario.Text = "";
                 }
             }
+        }
 
-            private void InicioSesion_Load(object sender, EventArgs e)
-            {
+        private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
+        {
+            checkbox = cbAutoLogin.Checked;
 
-            }
+        }
 
-            private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
-            {
-
-            }
-
-            private void InicioSesion_FormClosed(object sender, FormClosedEventArgs e)
-            {
-                List<Form> formulariosACerrar = new List<Form>();
-
-                foreach (Form formulario in Application.OpenForms)
-                {
-                    if (formulario != this)
-                    {
-                        formulariosACerrar.Add(formulario);
-                    }
-                }
-
-                foreach (Form formulario in formulariosACerrar)
-                {
-                    formulario.Close();
-                }
-            }
-
-            private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
-            {
-                checkbox = cbAutoLogin.Checked;
-
-            }
+        private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
+        {
         }
     }
+}

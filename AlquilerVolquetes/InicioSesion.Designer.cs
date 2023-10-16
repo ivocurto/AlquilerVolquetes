@@ -39,22 +39,20 @@
             // txtUsuario
             // 
             txtUsuario.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUsuario.Location = new Point(441, 300);
-            txtUsuario.Margin = new Padding(3, 4, 3, 4);
+            txtUsuario.Location = new Point(386, 225);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.PlaceholderText = " Usuario";
-            txtUsuario.Size = new Size(363, 44);
+            txtUsuario.Size = new Size(318, 36);
             txtUsuario.TabIndex = 2;
-            txtUsuario.TextChanged += textBox1_TextChanged;
             // 
             // lblLogin
             // 
             lblLogin.AutoSize = true;
             lblLogin.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
             lblLogin.ForeColor = SystemColors.ControlDarkDark;
-            lblLogin.Location = new Point(441, 200);
+            lblLogin.Location = new Point(386, 150);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(384, 60);
+            lblLogin.Size = new Size(308, 48);
             lblLogin.TabIndex = 0;
             lblLogin.Text = "INICIAR SESIÓN";
             // 
@@ -63,9 +61,9 @@
             lblRegistrarse.AutoSize = true;
             lblRegistrarse.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblRegistrarse.LinkColor = Color.DimGray;
-            lblRegistrarse.Location = new Point(441, 469);
+            lblRegistrarse.Location = new Point(386, 352);
             lblRegistrarse.Name = "lblRegistrarse";
-            lblRegistrarse.Size = new Size(305, 28);
+            lblRegistrarse.Size = new Size(244, 21);
             lblRegistrarse.TabIndex = 4;
             lblRegistrarse.TabStop = true;
             lblRegistrarse.Text = "¿No tienes una cuenta? Registrate";
@@ -76,10 +74,9 @@
             btnIngresar.BackColor = Color.DeepSkyBlue;
             btnIngresar.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
             btnIngresar.ForeColor = SystemColors.ButtonHighlight;
-            btnIngresar.Location = new Point(441, 574);
-            btnIngresar.Margin = new Padding(3, 4, 3, 4);
+            btnIngresar.Location = new Point(386, 430);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(363, 73);
+            btnIngresar.Size = new Size(318, 55);
             btnIngresar.TabIndex = 1;
             btnIngresar.Text = "INGRESAR";
             btnIngresar.UseVisualStyleBackColor = false;
@@ -88,20 +85,20 @@
             // txtClave
             // 
             txtClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtClave.Location = new Point(441, 393);
-            txtClave.Margin = new Padding(3, 4, 3, 4);
+            txtClave.Location = new Point(386, 295);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = " Contraseña";
-            txtClave.Size = new Size(363, 44);
+            txtClave.Size = new Size(318, 36);
             txtClave.TabIndex = 3;
             // 
             // cbAutoLogin
             // 
             cbAutoLogin.AutoSize = true;
-            cbAutoLogin.Location = new Point(441, 525);
+            cbAutoLogin.Location = new Point(386, 394);
+            cbAutoLogin.Margin = new Padding(3, 2, 3, 2);
             cbAutoLogin.Name = "cbAutoLogin";
-            cbAutoLogin.Size = new Size(214, 24);
+            cbAutoLogin.Size = new Size(173, 19);
             cbAutoLogin.TabIndex = 5;
             cbAutoLogin.Text = "Mantener inicio automático";
             cbAutoLogin.UseVisualStyleBackColor = true;
@@ -109,22 +106,19 @@
             // 
             // InicioSesion
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1216, 908);
+            ClientSize = new Size(1064, 681);
             Controls.Add(cbAutoLogin);
             Controls.Add(txtClave);
             Controls.Add(btnIngresar);
             Controls.Add(lblRegistrarse);
             Controls.Add(lblLogin);
             Controls.Add(txtUsuario);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "InicioSesion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Iniciar Sesión";
             FormClosing += InicioSesion_FormClosing;
-            FormClosed += InicioSesion_FormClosed;
-            Load += InicioSesion_Load;
             ResumeLayout(false);
             PerformLayout();
         }
