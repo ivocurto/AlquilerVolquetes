@@ -29,60 +29,32 @@
         public InicioSesion()
         {
             InitializeComponent();
-            try
+            usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
+
+
+            data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
+
+            if (data.CheckboxValue == true)
             {
-                string json = File.ReadAllText(rutaArchivoJson);
-
-                usuarios = JsonConvert.DeserializeObject<List<Usuario>>(json);
-
+                txtUsuario.Text = data.UserObject.NombreUsuario;
+                txtClave.Text = data.UserObject.ClaveUsuario;
+                cbAutoLogin.Checked = true;
             }
-            catch (Exception ex)
-            {
-
-                string json = JsonConvert.SerializeObject(usuarios);
-                File.WriteAllText(rutaArchivoJson, json);
-            }
-
-            try
-            {
-                string datajson = File.ReadAllText(filePath);
-                data = JsonConvert.DeserializeObject<DataContainer>(datajson);
-
-                if (data.CheckboxValue == true)
-                {
-                    txtUsuario.Text = data.UserObject.NombreUsuario;
-                    txtClave.Text = data.UserObject.ClaveUsuario;
-                    cbAutoLogin.Checked = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                string datajson = JsonConvert.SerializeObject(data);
-                File.WriteAllText(filePath, datajson);
-            }
-
-            
         }
 
         public InicioSesion(Usuario usuario)
          {
-                InitializeComponent();
+            InitializeComponent();
 
-                if (File.Exists(rutaArchivoJson))
-                {
-                    string json = File.ReadAllText(rutaArchivoJson);
-                    usuarios = JsonConvert.DeserializeObject<List<Usuario>>(json);
-                
-                }
+            usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
 
-            
-            
 
-                usuarios.Add(usuario);
-                usuario.IndexUsuario = usuarios.Count() - 1;
 
-                string jsonUsuarios = JsonConvert.SerializeObject(usuarios);
-                File.WriteAllText(rutaArchivoJson, jsonUsuarios);
+
+            usuarios.Add(usuario);
+            usuario.IndexUsuario = usuarios.Count() - 1;
+
+            JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
             }
 
             private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -112,10 +84,10 @@
                         if (answer == DialogResult.OK)
                         {
                             data = new DataContainer(checkbox, usuario);
-                            string jsonString = JsonConvert.SerializeObject(data);
-                        
+                        //string jsonString = JsonConvert.SerializeObject(data);
+                           JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
 
-                            File.WriteAllText(filePath, jsonString);
+                            
                             usuarioAcutal = usuario;
                             PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
                             pantallaInicio.Show();
