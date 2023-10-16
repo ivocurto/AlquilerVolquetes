@@ -17,6 +17,7 @@ namespace AlquilerVolquetes
     {
         private List<Volquete> volquetes;
         public Usuario usuarioActual;
+        public int precioTotal;
         public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario)
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace AlquilerVolquetes
         {
             string formatoTotal = "";
             bool flag = false;
-            int precioTotal = 0;
+            precioTotal = 0;
             foreach (Volquete volquete in volquetes)
             {
                 if (volquete.Cantidad > 0)
@@ -54,7 +55,7 @@ namespace AlquilerVolquetes
 
                     precioTotal += precio * volquete.Cantidad;
                 }
-                
+
             }
 
             this.lblProductos.Text = $"Usted va a comprar {formatoTotal}.";
@@ -89,13 +90,14 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
+            Cliente cliente = new Cliente(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes,txtDireccion.Text, txtTelefono.Text, precioTotal);
             CompraExitosa compraExitosa = new CompraExitosa();
             DialogResult result = compraExitosa.ShowDialog();
 
             if (result == DialogResult.OK)
             {
                 this.Hide();
-                MisVolquetes misVolquetes = new MisVolquetes(usuarioActual);
+                MisVolquetes misVolquetes = new MisVolquetes(usuarioActual, cliente);
                 misVolquetes.Show();
                 // llevar al formulario de pago
             }

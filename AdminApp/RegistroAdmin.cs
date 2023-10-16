@@ -1,19 +1,29 @@
 using AlquilerVolquetes;
 using Clases;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace AdminApp
 {
     public partial class RegistroAdmin : Form
     {
         public List<Usuario> listaAdmins;
-        string rutaArchivoJson = "admin.json";
+        string rutaArchivoJson = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\usuarios.json";
         public RegistroAdmin()
         {
             InitializeComponent();
+            
+
+            
+            
             listaAdmins = new List<Usuario>();
             try
             {
+
+
+                
+
                 string json = File.ReadAllText(rutaArchivoJson);
 
                 listaAdmins = JsonConvert.DeserializeObject<List<Usuario>>(json);
@@ -51,7 +61,7 @@ namespace AdminApp
             }
             else
             {
-                Usuario usuario = new Usuario(nombre, mail, clave);
+                Usuario usuario = new Usuario(nombre, mail, clave, ERolUsuario.Admin);
 
                 if (listaAdmins == null)
                 {

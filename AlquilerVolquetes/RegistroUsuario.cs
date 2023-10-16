@@ -45,7 +45,7 @@ namespace AlquilerVolquetes
                     txtReClave.Text = "";
                 }
             }
-            else if (!ComprobarExistenciaUsuario(datosUsuario))
+            else if (!ComprobarExistenciaUsuario(datosUsuario, listaUsuarios))
             {
                 ModalErrorAlRegistrarse clavesDiferentes = new ModalErrorAlRegistrarse("existenciaUsuario");
                 DialogResult result = clavesDiferentes.ShowDialog();
@@ -64,7 +64,7 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)
                 {
-                    Usuario usuario = new Usuario(nombre, mail, clave);
+                    Usuario usuario = new Usuario(nombre, mail, clave, ERolUsuario.Usuario);
                     listaUsuarios.Add(usuario);
                     InicioSesion inicio = new InicioSesion(usuario);
                     inicio.Show();
@@ -112,9 +112,9 @@ namespace AlquilerVolquetes
             return true;
         }
 
-        private bool ComprobarExistenciaUsuario(List<string> lista)
+        private bool ComprobarExistenciaUsuario(List<string> lista, List<Usuario> listaUsuarios)
         {
-
+            
             foreach (Usuario usuario in listaUsuarios)
             {
                 if (usuario.NombreUsuario == lista[0] || usuario.MailUsusario == lista[2])

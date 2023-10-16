@@ -14,10 +14,18 @@ namespace AlquilerVolquetes
     public partial class MisVolquetes : Form
     {
         public Usuario usuarioActual;
+        public Cliente cliente;
         public MisVolquetes(Usuario usuario)
         {
             InitializeComponent();
             usuarioActual = usuario;
+            
+        }
+        public MisVolquetes(Usuario usuario, Cliente clientee)
+        {
+            InitializeComponent();
+            usuarioActual = usuario;
+            cliente = clientee;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -33,7 +33,7 @@
             btnAlquilar = new Button();
             txtNombre = new TextBox();
             txtApellido = new TextBox();
-            textBox1 = new TextBox();
+            txtDireccion = new TextBox();
             txtTelefono = new TextBox();
             txtMail = new TextBox();
             label1 = new Label();
@@ -97,15 +97,15 @@
             txtApellido.Size = new Size(363, 44);
             txtApellido.TabIndex = 26;
             // 
-            // textBox1
+            // txtDireccion
             // 
-            textBox1.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.Location = new Point(106, 361);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = " Dirección a la que desea enviar";
-            textBox1.Size = new Size(749, 44);
-            textBox1.TabIndex = 27;
+            txtDireccion.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDireccion.Location = new Point(106, 361);
+            txtDireccion.Margin = new Padding(3, 4, 3, 4);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.PlaceholderText = " Dirección a la que desea enviar";
+            txtDireccion.Size = new Size(749, 44);
+            txtDireccion.TabIndex = 27;
             // 
             // txtTelefono
             // 
@@ -180,7 +180,7 @@
             Controls.Add(label1);
             Controls.Add(txtMail);
             Controls.Add(txtTelefono);
-            Controls.Add(textBox1);
+            Controls.Add(txtDireccion);
             Controls.Add(txtApellido);
             Controls.Add(txtNombre);
             Controls.Add(btnAlquilar);
@@ -203,7 +203,7 @@
         private Button btnAlquilar;
         private TextBox txtNombre;
         private TextBox txtApellido;
-        private TextBox textBox1;
+        private TextBox txtDireccion;
         private TextBox txtTelefono;
         private TextBox txtMail;
         private Label label1;

@@ -17,7 +17,7 @@ namespace Clases
 
         
 
-        public Cliente(string nombreUsuario, string mailUsusario, string claveUsuario, List<Volquete> volquetesPedidos, List<Volquete> volquetesInstalados, string direccion, string telefono, int valorCompra) : base(nombreUsuario, mailUsusario, claveUsuario)
+        public Cliente(string nombreUsuario, string mailUsusario, string claveUsuario,ERolUsuario rol , List<Volquete> volquetesPedidos, List<Volquete> volquetesInstalados, string direccion, string telefono, int valorCompra) : base(nombreUsuario, mailUsusario, claveUsuario, rol)
         {
             this.volquetesPedidos = volquetesPedidos;
             this.volquetesInstalados = volquetesInstalados;
