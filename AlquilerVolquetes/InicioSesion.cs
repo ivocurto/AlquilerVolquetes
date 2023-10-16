@@ -29,10 +29,6 @@ namespace AlquilerVolquetes
             InitializeComponent();
             usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
 
-            }
-            catch (Exception ex)
-            {
-
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
             if (data.CheckboxValue == true)
@@ -48,10 +44,6 @@ namespace AlquilerVolquetes
             InitializeComponent();
 
             usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
-
-
-
-
             usuarios.Add(usuario);
             usuario.IndexUsuario = usuarios.Count() - 1;
 
@@ -65,45 +57,41 @@ namespace AlquilerVolquetes
             this.Hide();
         }
 
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
 
-            }
-
-            private void btnIngresar_Click(object sender, EventArgs e)
+            string nombreUsuario = txtUsuario.Text;
+            string clave = txtClave.Text;
+            foreach (var usuario in usuarios)
             {
-
-                string nombreUsuario = txtUsuario.Text;
-                string clave = txtClave.Text;
-                foreach (var usuario in usuarios)
+                if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
-                    if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
+                    //aca va el logueado correctamente
+                    ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
+                    DialogResult answer = exitoLogin.ShowDialog();
+                    if (answer == DialogResult.OK)
                     {
-                        //aca va el logueado correctamente
-                        ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
-                        DialogResult answer = exitoLogin.ShowDialog();
-                        if (answer == DialogResult.OK)
-                        {
-                            data = new DataContainer(checkbox, usuario);
-                        //string jsonString = JsonConvert.SerializeObject(data);
-                           JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
+                        data = new DataContainer(checkbox, usuario);
+                    //string jsonString = JsonConvert.SerializeObject(data);
+                        JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
 
                             
-                            usuarioAcutal = usuario;
-                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
-                            pantallaInicio.Show();
-                            this.Hide();
-                            return;
-                        }
-
+                        usuarioAcutal = usuario;
+                        PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+                        pantallaInicio.Show();
+                        this.Hide();
+                        return;
                     }
-                }
-                ModalErrorLogin ususarioIncorrecto = new ModalErrorLogin("ususarioIncorrecto");
-                DialogResult result = ususarioIncorrecto.ShowDialog();
 
-                if (result == DialogResult.OK)
-                {
-                    txtClave.Text = "";
-                    txtUsuario.Text = "";
                 }
+            }
+            ModalErrorLogin ususarioIncorrecto = new ModalErrorLogin("ususarioIncorrecto");
+            DialogResult result = ususarioIncorrecto.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                txtClave.Text = "";
+                txtUsuario.Text = "";
             }
         }
 

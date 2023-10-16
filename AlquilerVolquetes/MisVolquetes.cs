@@ -30,29 +30,6 @@ namespace AlquilerVolquetes
             esCliente = true;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            PantallaInicio pantallaInicio = new PantallaInicio(usuarioActual);
-            pantallaInicio.Show();
-            this.Hide();
-        }
 
-        private void MisVolquetes_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            List<Form> formulariosACerrar = new List<Form>();
-
-            foreach (Form formulario in Application.OpenForms)
-            {
-                if (formulario != this)
-                {
-                    formulariosACerrar.Add(formulario);
-                }
-            }
-
-            foreach (Form formulario in formulariosACerrar)
-            {
-                formulario.Close();
-            }
-        }
     }
 }

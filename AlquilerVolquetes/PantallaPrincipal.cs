@@ -199,15 +199,6 @@ namespace AlquilerVolquetes
 
         }
 
-        private void lblCantidadVolqueteGrande_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPrecioGrande_Click(object sender, EventArgs e)
-        {
-        }
-
         private void lstProductos_DrawItem(object sender, DrawItemEventArgs e)
         {
             lstProductos.ItemHeight = 30;

@@ -41,13 +41,19 @@
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
+            // lblBienvenida
+            // 
+            lblBienvenida.Location = new Point(0, 0);
+            lblBienvenida.Name = "lblBienvenida";
+            lblBienvenida.Size = new Size(100, 23);
+            lblBienvenida.TabIndex = 34;
+            // 
             // btnAlquilarVolquetes
             // 
             btnAlquilarVolquetes.Location = new Point(0, 0);
             btnAlquilarVolquetes.Name = "btnAlquilarVolquetes";
             btnAlquilarVolquetes.Size = new Size(75, 23);
-            btnAlquilarVolquetes.TabIndex = 32;
-            btnAlquilarVolquetes.Click += btnAlquilarVolquetes_Click_1;
+            btnAlquilarVolquetes.TabIndex = 34;
             // 
             // button1
             // 
@@ -93,6 +99,7 @@
             mISVOLQUETESToolStripMenuItem.Name = "mISVOLQUETESToolStripMenuItem";
             mISVOLQUETESToolStripMenuItem.Size = new Size(123, 21);
             mISVOLQUETESToolStripMenuItem.Text = "MIS VOLQUETES";
+            mISVOLQUETESToolStripMenuItem.Click += mISVOLQUETESToolStripMenuItem_Click;
             // 
             // sOBRENOSOTROSToolStripMenuItem
             // 
@@ -105,6 +112,7 @@
             cERRARSESIÓNToolStripMenuItem.Name = "cERRARSESIÓNToolStripMenuItem";
             cERRARSESIÓNToolStripMenuItem.Size = new Size(126, 21);
             cERRARSESIÓNToolStripMenuItem.Text = "CERRAR SESIÓN";
+            cERRARSESIÓNToolStripMenuItem.Click += cERRARSESIÓNToolStripMenuItem_Click;
             // 
             // PantallaInicio
             // 
@@ -134,10 +142,10 @@
         private Button button1;
         private Button button2;
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem hOMEToolStripMenuItem;
         private ToolStripMenuItem aLQUILARVOLQUETESToolStripMenuItem;
         private ToolStripMenuItem mISVOLQUETESToolStripMenuItem;
         private ToolStripMenuItem sOBRENOSOTROSToolStripMenuItem;
         private ToolStripMenuItem cERRARSESIÓNToolStripMenuItem;
+        private ToolStripMenuItem hOMEToolStripMenuItem;
     }
 }

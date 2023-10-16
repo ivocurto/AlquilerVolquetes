@@ -112,7 +112,6 @@
             lblCantidadVolqueteGrande.Size = new Size(19, 23);
             lblCantidadVolqueteGrande.TabIndex = 12;
             lblCantidadVolqueteGrande.Text = "0";
-            lblCantidadVolqueteGrande.Click += lblCantidadVolqueteGrande_Click;
             // 
             // lstProductos
             // 
@@ -157,7 +156,6 @@
             lblPrecioGrande.Size = new Size(29, 23);
             lblPrecioGrande.TabIndex = 18;
             lblPrecioGrande.Text = "$0";
-            lblPrecioGrande.Click += lblPrecioGrande_Click;
             // 
             // btnAgregarAlCarrito
             // 
@@ -310,10 +308,9 @@
             Controls.Add(lblCantidadVolqueteChico);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
-            Enabled = false;
             FormBorderStyle = FormBorderStyle.None;
             Name = "PantallaPrincipal";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PantallaPrincipal";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
