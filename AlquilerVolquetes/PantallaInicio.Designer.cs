@@ -32,70 +32,105 @@
             btnAlquilarVolquetes = new Button();
             button1 = new Button();
             button2 = new Button();
+            menuStrip1 = new MenuStrip();
+            hOMEToolStripMenuItem = new ToolStripMenuItem();
+            aLQUILARVOLQUETESToolStripMenuItem = new ToolStripMenuItem();
+            mISVOLQUETESToolStripMenuItem = new ToolStripMenuItem();
+            sOBRENOSOTROSToolStripMenuItem = new ToolStripMenuItem();
+            cERRARSESIÓNToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // lblBienvenida
             // 
-            lblBienvenida.AutoSize = true;
-            lblBienvenida.Font = new Font("Bahnschrift SemiBold Condensed", 48F, FontStyle.Bold, GraphicsUnit.Point);
-            lblBienvenida.Location = new Point(389, 118);
+            lblBienvenida.Location = new Point(0, 0);
             lblBienvenida.Name = "lblBienvenida";
-            lblBienvenida.Size = new Size(306, 77);
-            lblBienvenida.TabIndex = 0;
-            lblBienvenida.Text = "Bienvenido/a";
+            lblBienvenida.Size = new Size(100, 23);
+            lblBienvenida.TabIndex = 34;
             // 
             // btnAlquilarVolquetes
             // 
-            btnAlquilarVolquetes.BackColor = Color.RoyalBlue;
-            btnAlquilarVolquetes.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAlquilarVolquetes.ForeColor = Color.White;
-            btnAlquilarVolquetes.Location = new Point(46, 354);
+            btnAlquilarVolquetes.Location = new Point(0, 0);
             btnAlquilarVolquetes.Name = "btnAlquilarVolquetes";
-            btnAlquilarVolquetes.Size = new Size(260, 241);
-            btnAlquilarVolquetes.TabIndex = 1;
-            btnAlquilarVolquetes.Text = "ALQUILAR VOLQUETES";
-            btnAlquilarVolquetes.UseVisualStyleBackColor = false;
-            btnAlquilarVolquetes.Click += btnAlquilarVolquetes_Click;
+            btnAlquilarVolquetes.Size = new Size(75, 23);
+            btnAlquilarVolquetes.TabIndex = 34;
             // 
             // button1
             // 
-            button1.BackColor = Color.RoyalBlue;
-            button1.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(416, 354);
+            button1.Location = new Point(0, 0);
             button1.Name = "button1";
-            button1.Size = new Size(260, 241);
-            button1.TabIndex = 2;
-            button1.Text = "VER VOLQUETES ALQUILADOS";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 33;
             // 
             // button2
             // 
-            button2.BackColor = Color.RoyalBlue;
-            button2.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(765, 354);
+            button2.Location = new Point(0, 0);
             button2.Name = "button2";
-            button2.Size = new Size(260, 241);
-            button2.TabIndex = 3;
-            button2.Text = "SOBRE NOSOTROS";
-            button2.UseVisualStyleBackColor = false;
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 32;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.BackColor = Color.DeepSkyBlue;
+            menuStrip1.Font = new Font("Bahnschrift Light", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { hOMEToolStripMenuItem, aLQUILARVOLQUETESToolStripMenuItem, mISVOLQUETESToolStripMenuItem, sOBRENOSOTROSToolStripMenuItem, cERRARSESIÓNToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1096, 25);
+            menuStrip1.TabIndex = 31;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // hOMEToolStripMenuItem
+            // 
+            hOMEToolStripMenuItem.Name = "hOMEToolStripMenuItem";
+            hOMEToolStripMenuItem.Size = new Size(58, 21);
+            hOMEToolStripMenuItem.Text = "HOME";
+            hOMEToolStripMenuItem.Click += hOMEToolStripMenuItem_Click;
+            // 
+            // aLQUILARVOLQUETESToolStripMenuItem
+            // 
+            aLQUILARVOLQUETESToolStripMenuItem.Name = "aLQUILARVOLQUETESToolStripMenuItem";
+            aLQUILARVOLQUETESToolStripMenuItem.Size = new Size(164, 21);
+            aLQUILARVOLQUETESToolStripMenuItem.Text = "ALQUILAR VOLQUETES";
+            aLQUILARVOLQUETESToolStripMenuItem.Click += aLQUILARVOLQUETESToolStripMenuItem_Click;
+            // 
+            // mISVOLQUETESToolStripMenuItem
+            // 
+            mISVOLQUETESToolStripMenuItem.Name = "mISVOLQUETESToolStripMenuItem";
+            mISVOLQUETESToolStripMenuItem.Size = new Size(123, 21);
+            mISVOLQUETESToolStripMenuItem.Text = "MIS VOLQUETES";
+            mISVOLQUETESToolStripMenuItem.Click += mISVOLQUETESToolStripMenuItem_Click;
+            // 
+            // sOBRENOSOTROSToolStripMenuItem
+            // 
+            sOBRENOSOTROSToolStripMenuItem.Name = "sOBRENOSOTROSToolStripMenuItem";
+            sOBRENOSOTROSToolStripMenuItem.Size = new Size(139, 21);
+            sOBRENOSOTROSToolStripMenuItem.Text = "SOBRE NOSOTROS";
+            // 
+            // cERRARSESIÓNToolStripMenuItem
+            // 
+            cERRARSESIÓNToolStripMenuItem.Name = "cERRARSESIÓNToolStripMenuItem";
+            cERRARSESIÓNToolStripMenuItem.Size = new Size(126, 21);
+            cERRARSESIÓNToolStripMenuItem.Text = "CERRAR SESIÓN";
+            cERRARSESIÓNToolStripMenuItem.Click += cERRARSESIÓNToolStripMenuItem_Click;
             // 
             // PantallaInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 681);
+            ClientSize = new Size(1096, 707);
+            Controls.Add(menuStrip1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(btnAlquilarVolquetes);
             Controls.Add(lblBienvenida);
+            IsMdiContainer = true;
             Name = "PantallaInicio";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio";
-            FormClosed += PantallaInicio_FormClosed;
-            Load += PantallaInicio_Load;
+            FormClosing += PantallaInicio_FormClosing;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -106,5 +141,11 @@
         private Button btnAlquilarVolquetes;
         private Button button1;
         private Button button2;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem aLQUILARVOLQUETESToolStripMenuItem;
+        private ToolStripMenuItem mISVOLQUETESToolStripMenuItem;
+        private ToolStripMenuItem sOBRENOSOTROSToolStripMenuItem;
+        private ToolStripMenuItem cERRARSESIÓNToolStripMenuItem;
+        private ToolStripMenuItem hOMEToolStripMenuItem;
     }
 }

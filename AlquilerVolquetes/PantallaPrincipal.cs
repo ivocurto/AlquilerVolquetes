@@ -31,12 +31,14 @@ namespace AlquilerVolquetes
         private Volquete volqueteChicoCarrito = new Volquete(0, "VOLQUETE CHICO", 800);
         private Volquete volqueteMedianoCarrito = new Volquete(1, "VOLQUETE MEDIANO", 1600);
         private Volquete volqueteGrandeCarrito = new Volquete(2, "VOLQUETE GRANDE", 2400);
+        private Form pantallaInicio;
 
 
-        public PantallaPrincipal(Usuario usuario)
+        public PantallaPrincipal(Usuario usuario, Form padre)
         {
             InitializeComponent();
             usuarioAcutal = usuario;
+            pantallaInicio = padre;
             volquetes.Add(volqueteChico);
             volquetes.Add(volqueteMediano);
             volquetes.Add(volqueteGrande);
@@ -131,26 +133,6 @@ namespace AlquilerVolquetes
 
         //Iniciar formulario
 
-
-        //Cerrar formulario
-        private void PantallaPrincipal_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            List<Form> formulariosACerrar = new List<Form>();
-
-            foreach (Form formulario in Application.OpenForms)
-            {
-                if (formulario != this)
-                {
-                    formulariosACerrar.Add(formulario);
-                }
-            }
-
-            foreach (Form formulario in formulariosACerrar)
-            {
-                formulario.Close();
-            }
-        }
-
         private string Incrementar_Label(object sender, EventArgs e, int id, string label)
         {
             int valor = int.Parse(label);
@@ -175,19 +157,9 @@ namespace AlquilerVolquetes
             return ($"{valor}");
         }
 
-        private void lstProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPrecioTotal_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCarrito_Click(object sender, EventArgs e)
         {
-            Carrito carrito = new Carrito(volquetesCarrito, usuarioAcutal);
+            Carrito carrito = new Carrito(volquetesCarrito, usuarioAcutal, pantallaInicio);
             DialogResult result = carrito.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -229,15 +201,6 @@ namespace AlquilerVolquetes
 
         }
 
-        private void lblCantidadVolqueteGrande_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPrecioGrande_Click(object sender, EventArgs e)
-        {
-        }
-
         private void lstProductos_DrawItem(object sender, DrawItemEventArgs e)
         {
             lstProductos.ItemHeight = 30;
@@ -272,8 +235,6 @@ namespace AlquilerVolquetes
                 }
             }
         }
-
-
 
     }
 

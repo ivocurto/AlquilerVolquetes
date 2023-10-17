@@ -15,13 +15,15 @@ namespace AlquilerVolquetes
     {
         private List<Volquete> volquetes;
         public Usuario usuarioActual;
+        private Form formularioPrincipal;
 
-        public Carrito(List<Volquete> lista, Usuario usuario)
+        public Carrito(List<Volquete> lista, Usuario usuario, Form formPrincipal)
         {
             InitializeComponent();
             usuarioActual = usuario;
             this.MinimizeBox = false;
             volquetes = lista;
+            formularioPrincipal = formPrincipal;
 
             MostrarListaCarrito();
 
@@ -78,11 +80,15 @@ namespace AlquilerVolquetes
                 int cant = volquete.Cantidad;
                 if (cant > 0)
                 {
-                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(volquetes, usuarioActual);
+                    FormularioDeAlquiler formularioDeAlquiler = new FormularioDeAlquiler(volquetes, usuarioActual, formularioPrincipal);
+
+                    // Mostrar el formulario de alquiler antes de cerrar el formulario actual
+                    formularioPrincipal.Hide();
                     formularioDeAlquiler.Show();
+
+                    // Establecer el resultado del formulario actual
                     this.DialogResult = DialogResult.OK;
-                    // Cierra el formulario de diálogo.
-                    this.Close();
+
                     flag = true;
                     break;
                 }
@@ -96,10 +102,8 @@ namespace AlquilerVolquetes
                     this.Close();
                 }
             }
-
-
-
         }
+
     }
 }
 

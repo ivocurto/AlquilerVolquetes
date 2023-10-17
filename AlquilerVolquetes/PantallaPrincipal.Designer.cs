@@ -112,7 +112,6 @@
             lblCantidadVolqueteGrande.Size = new Size(19, 23);
             lblCantidadVolqueteGrande.TabIndex = 12;
             lblCantidadVolqueteGrande.Text = "0";
-            lblCantidadVolqueteGrande.Click += lblCantidadVolqueteGrande_Click;
             // 
             // lstProductos
             // 
@@ -127,7 +126,6 @@
             lstProductos.Size = new Size(255, 92);
             lstProductos.TabIndex = 15;
             lstProductos.DrawItem += lstProductos_DrawItem;
-            lstProductos.SelectedIndexChanged += lstProductos_SelectedIndexChanged;
             // 
             // lblPrecioChico
             // 
@@ -158,7 +156,6 @@
             lblPrecioGrande.Size = new Size(29, 23);
             lblPrecioGrande.TabIndex = 18;
             lblPrecioGrande.Text = "$0";
-            lblPrecioGrande.Click += lblPrecioGrande_Click;
             // 
             // btnAgregarAlCarrito
             // 
@@ -182,7 +179,6 @@
             lblPrecioTotal.Size = new Size(107, 25);
             lblPrecioTotal.TabIndex = 20;
             lblPrecioTotal.Text = "   TOTAL: $0";
-            lblPrecioTotal.Click += lblPrecioTotal_Click;
             // 
             // pictureBox2
             // 
@@ -197,7 +193,7 @@
             // btnCarrito
             // 
             btnCarrito.Image = (Image)resources.GetObject("btnCarrito.Image");
-            btnCarrito.Location = new Point(994, 18);
+            btnCarrito.Location = new Point(978, 43);
             btnCarrito.Name = "btnCarrito";
             btnCarrito.Padding = new Padding(5);
             btnCarrito.Size = new Size(50, 50);
@@ -291,6 +287,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1064, 681);
+            ControlBox = false;
             Controls.Add(pbNotificacion);
             Controls.Add(btnRestarVG);
             Controls.Add(btnRestarVM);
@@ -311,10 +308,10 @@
             Controls.Add(lblCantidadVolqueteChico);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "PantallaPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PantallaPrincipal";
-            FormClosed += PantallaPrincipal_FormClosed;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

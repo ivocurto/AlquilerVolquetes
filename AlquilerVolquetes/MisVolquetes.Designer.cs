@@ -55,6 +55,7 @@
             lstEnviando.Name = "lstEnviando";
             lstEnviando.Size = new Size(608, 184);
             lstEnviando.TabIndex = 24;
+            lstEnviando.DrawItem += lstEnviando_DrawItem;
             // 
             // lstColocados
             // 
@@ -87,30 +88,29 @@
             // 
             // linkLabel1
             // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(511, 592);
+            linkLabel1.Location = new Point(0, 0);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(39, 15);
-            linkLabel1.TabIndex = 34;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Volver";
-            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            linkLabel1.Size = new Size(100, 23);
+            linkLabel1.TabIndex = 0;
             // 
             // MisVolquetes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1064, 681);
+            ControlBox = false;
             Controls.Add(linkLabel1);
             Controls.Add(lblColocados);
             Controls.Add(lblEnviando);
             Controls.Add(lstColocados);
             Controls.Add(lstEnviando);
             Controls.Add(lblTituloMisVolquetes);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "MisVolquetes";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MisVolquetes";
-            FormClosed += MisVolquetes_FormClosed;
+            Load += MisVolquetes_Load;
+            Shown += MisVolquetes_Shown;
             ResumeLayout(false);
             PerformLayout();
         }

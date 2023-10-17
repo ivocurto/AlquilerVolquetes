@@ -30,28 +30,62 @@ namespace AlquilerVolquetes
             esCliente = true;
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void lstEnviando_DrawItem(object sender, DrawItemEventArgs e)
         {
-            PantallaInicio pantallaInicio = new PantallaInicio(usuarioActual);
-            pantallaInicio.Show();
-            this.Hide();
-        }
+            lstEnviando.ItemHeight = 30;
+            int paddingVertical = 6; // Ajusta la cantidad de espaciado vertical deseado
 
-        private void MisVolquetes_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            List<Form> formulariosACerrar = new List<Form>();
-
-            foreach (Form formulario in Application.OpenForms)
+            if (e.Index >= 0)
             {
-                if (formulario != this)
+                e.DrawBackground();
+
+                // Obtén el texto del elemento.
+                string itemText = lstEnviando.Items[e.Index].ToString();
+
+                // Establece un color de fondo alternativo para cada elemento.
+                Color backColor = e.Index % 2 == 0 ? Color.LightGray : Color.White;
+                using (Brush brush = new SolidBrush(backColor))
                 {
-                    formulariosACerrar.Add(formulario);
+                    e.Graphics.FillRectangle(brush, e.Bounds);
+                }
+
+                // Ajusta el rectángulo de dibujo para incluir el espaciado vertical.
+                Rectangle textBounds = new Rectangle(
+                    e.Bounds.Left,
+                    e.Bounds.Top + paddingVertical,
+                    e.Bounds.Width,
+                    e.Bounds.Height - paddingVertical
+                );
+
+                // Establece el color de texto.
+                using (Brush brush = new SolidBrush(Color.Black))
+                {
+                    e.Graphics.DrawString(itemText, lstEnviando.Font, brush, textBounds);
                 }
             }
+        }
 
-            foreach (Form formulario in formulariosACerrar)
+        private void MisVolquetes_Load(object sender, EventArgs e)
+        {
+            if (esCliente == true)
             {
-                formulario.Close();
+                foreach (Volquete volquete in cliente.VolquetesPedidos)
+                {
+                    lstColocados.Items.Add(volquete);
+                }
+
+            }
+        }
+
+        private void MisVolquetes_Shown(object sender, EventArgs e)
+        {
+            if (esCliente == true)
+            {
+                foreach (Volquete volquete in cliente.VolquetesPedidos)
+                {
+                    lstColocados.Items.Add(volquete);
+                }
+
             }
         }
     }
