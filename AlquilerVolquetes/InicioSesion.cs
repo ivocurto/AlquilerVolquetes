@@ -21,7 +21,9 @@
 
 
         protected static List<Usuario> usuarios = new List<Usuario>();
+        private List<Cliente> clientes = new List<Cliente>();
         public Usuario usuarioAcutal;
+        public List<Cliente> clienteActual;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
@@ -30,7 +32,7 @@
         {
             InitializeComponent();
             usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
-
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("pedidos.json");
 
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
@@ -89,6 +91,15 @@
 
                             
                             usuarioAcutal = usuario;
+                            foreach(Cliente cliente in clientes)
+                        {
+                            if(cliente.MailUsusario == usuario.MailUsusario)
+                            {
+                                clienteActual.Add(cliente);
+                            }
+
+
+                        }
                             PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
                             pantallaInicio.Show();
                             this.Hide();
@@ -133,7 +144,8 @@
                 {
                     formulario.Close();
                 }
-            }
+                ClienteActual.EstablecerCliente(clientes);
+        }
 
             private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
             {
