@@ -31,12 +31,14 @@ namespace AlquilerVolquetes
         private Volquete volqueteChicoCarrito = new Volquete(0, "VOLQUETE CHICO", 800);
         private Volquete volqueteMedianoCarrito = new Volquete(1, "VOLQUETE MEDIANO", 1600);
         private Volquete volqueteGrandeCarrito = new Volquete(2, "VOLQUETE GRANDE", 2400);
+        private Form pantallaInicio;
 
 
-        public PantallaPrincipal(Usuario usuario)
+        public PantallaPrincipal(Usuario usuario, Form padre)
         {
             InitializeComponent();
             usuarioAcutal = usuario;
+            pantallaInicio = padre;
             volquetes.Add(volqueteChico);
             volquetes.Add(volqueteMediano);
             volquetes.Add(volqueteGrande);
@@ -157,7 +159,7 @@ namespace AlquilerVolquetes
 
         private void btnCarrito_Click(object sender, EventArgs e)
         {
-            Carrito carrito = new Carrito(volquetesCarrito, usuarioAcutal);
+            Carrito carrito = new Carrito(volquetesCarrito, usuarioAcutal, pantallaInicio);
             DialogResult result = carrito.ShowDialog();
 
             if (result == DialogResult.OK)

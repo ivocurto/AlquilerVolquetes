@@ -55,6 +55,7 @@
             lstEnviando.Name = "lstEnviando";
             lstEnviando.Size = new Size(608, 184);
             lstEnviando.TabIndex = 24;
+            lstEnviando.DrawItem += lstEnviando_DrawItem;
             // 
             // lstColocados
             // 
@@ -85,6 +86,12 @@
             lblColocados.TabIndex = 27;
             lblColocados.Text = "VOLQUETES COLOCADOS";
             // 
+            // linkLabel1
+            // 
+            linkLabel1.Location = new Point(0, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(100, 23);
+            linkLabel1.TabIndex = 0;
             // 
             // MisVolquetes
             // 
@@ -102,6 +109,8 @@
             Name = "MisVolquetes";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MisVolquetes";
+            Load += MisVolquetes_Load;
+            Shown += MisVolquetes_Shown;
             ResumeLayout(false);
             PerformLayout();
         }

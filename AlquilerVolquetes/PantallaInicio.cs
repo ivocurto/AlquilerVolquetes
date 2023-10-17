@@ -23,6 +23,7 @@ namespace AlquilerVolquetes
         private bool flagMisVolquetes = false;
         private List<Form> formsAbiertos = new List<Form>();
         private Form inicioS;
+        Button dummyButton = new Button();
         public PantallaInicio(Usuario usuario, Form inicioSesion)
         {
             InitializeComponent();
@@ -43,6 +44,30 @@ namespace AlquilerVolquetes
             }
         }
 
+        public PantallaInicio(Usuario usuario, Form inicioSesion, bool abrirMisVolquetes)
+        {
+            InitializeComponent();
+            inicioS = inicioSesion;
+            usuarioAcutal = usuario;
+
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("clientes.json");
+            if (clientes is not null)
+            {
+                foreach (Cliente cliente in clientes)
+                {
+                    if (cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
+                    {
+                        clienteActual = cliente;
+                        break;
+                    }
+                }
+            }
+            if (abrirMisVolquetes == true)
+            {
+                mISVOLQUETESToolStripMenuItem_Click(dummyButton, EventArgs.Empty);
+            }
+        }
+
         private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
@@ -50,7 +75,7 @@ namespace AlquilerVolquetes
             //pantallaInicio.Show();
         }
 
-        private void aLQUILARVOLQUETESToolStripMenuItem_Click(object sender, EventArgs e)
+        public void aLQUILARVOLQUETESToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (flagPantallaPrincipal == false)
             {
@@ -60,7 +85,7 @@ namespace AlquilerVolquetes
                 }
 
                 flagPantallaPrincipal = true;
-                pantallaPrincipal = new PantallaPrincipal(usuarioAcutal);
+                pantallaPrincipal = new PantallaPrincipal(usuarioAcutal, this);
                 pantallaPrincipal.MdiParent = this;
                 formsAbiertos.Add(pantallaPrincipal);
                 pantallaPrincipal.Show();
