@@ -17,10 +17,11 @@ namespace AlquilerVolquetes
     {
         private List<Volquete> volquetes;
         public Usuario usuarioActual;
-        private List<Cliente> listaClientes;
+        private List<Pedido> listaPedidos;
         private string path = "pedidos.json";
         public int precioTotal;
         private Form formPrincipal;
+        private List<Pedido> pedidosDelCliente;
 
         public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario, Form formularioPrincipal)
         {
@@ -28,7 +29,12 @@ namespace AlquilerVolquetes
             volquetes = lista;
             usuarioActual = usuario;
             formPrincipal = formularioPrincipal;
-            listaClientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(path);
+            listaPedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
+            pedidosDelCliente = ClienteActual.ObtenerCliente();
+            if (listaPedidos == null)
+            {
+                listaPedidos = new List<Pedido>();
+            }
 
             MostrarProductosAComprar();
         }
@@ -89,31 +95,39 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-            Cliente cliente;
-            if (listaClientes is null)
+            Pedido pedido;
+            if (listaPedidos is null)
             {
-                listaClientes = new List<Cliente>();
+                listaPedidos = new List<Pedido>();
             }
 
-            cliente = new Cliente(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes, txtDireccion.Text, txtTelefono.Text, precioTotal);
+            pedido = new Pedido(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes, txtDireccion.Text, txtTelefono.Text, precioTotal);
 
-            if (listaClientes.Count > 1)
+            if (listaPedidos.Count > 1)
             {
-                cliente.IdCliente = listaClientes.Count() - 1;
+                pedido.IdCliente = listaPedidos.Count() - 1;
             }
             else
             {
-                cliente.IdCliente = 0;
+                pedido.IdCliente = 0;
             }
 
-            listaClientes.Add(cliente);
+            listaPedidos.Add(pedido);
 
-            JsonFileManager.SaveToJsonGeneric<List<Cliente>>(path, listaClientes);
+            JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, listaPedidos);
             CompraExitosa compraExitosa = new CompraExitosa();
             DialogResult result = compraExitosa.ShowDialog();
 
             if (result == DialogResult.OK)
             {
+                if (listaPedidos == null || listaPedidos.Count == 0)
+                {
+                    // Realiza alguna acción o muestra un mensaje de error si es necesario.
+                    MessageBox.Show("La lista de pedidos está vacía o es nula.");
+                } else
+                {
+                    MessageBox.Show("La lista de pedidos esta llena.");
+                }
                 this.Hide();
                 formPrincipal.Show();
                 // llevar al formulario de pago
