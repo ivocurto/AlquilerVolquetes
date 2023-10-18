@@ -48,17 +48,17 @@
             // 
             lstPedidosTotales.FormattingEnabled = true;
             lstPedidosTotales.ItemHeight = 15;
-            lstPedidosTotales.Location = new Point(184, 100);
+            lstPedidosTotales.Location = new Point(34, 100);
             lstPedidosTotales.Name = "lstPedidosTotales";
-            lstPedidosTotales.Size = new Size(696, 454);
+            lstPedidosTotales.Size = new Size(1018, 454);
             lstPedidosTotales.TabIndex = 2;
             // 
             // btnEliminarPedido
             // 
-            btnEliminarPedido.BackColor = Color.DeepSkyBlue;
+            btnEliminarPedido.BackColor = Color.Red;
             btnEliminarPedido.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnEliminarPedido.ForeColor = SystemColors.ButtonHighlight;
-            btnEliminarPedido.Location = new Point(184, 572);
+            btnEliminarPedido.Location = new Point(34, 577);
             btnEliminarPedido.Name = "btnEliminarPedido";
             btnEliminarPedido.Size = new Size(363, 69);
             btnEliminarPedido.TabIndex = 25;
