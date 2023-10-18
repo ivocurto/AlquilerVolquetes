@@ -20,18 +20,26 @@ namespace AdminApp
             InitializeComponent();
             pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
             // Enlaza la lista de pedidos al ListBox
-            foreach (Pedido pedido in pedidos)
+            if(pedidos is not null)
             {
-                indexPedido = pedido.IdCliente;
-                string formato = "";
-                foreach (Volquete volquete in pedido.VolquetesPedidos)
+                foreach (Pedido pedido in pedidos)
                 {
-                    if (volquete.Cantidad != 0)
+                    indexPedido = pedido.IdCliente;
+                    string formato = "";
+                    if (pedido.VolquetesPedidos.Count() > 0)
                     {
-                        formato += volquete.ToString() + " - ";
+                        foreach (Volquete volquete in pedido.VolquetesPedidos)
+                        {
+                            if (volquete.Cantidad != 0)
+                            {
+                                formato += volquete.ToString() + " - ";
+                            }
+                        }
+                        lstPedidosTotales.Items.Add($"USUARIO: {pedido.NombreUsuario.ToUpper()} VOLQUETES A INSTALAR: {formato}");
+
                     }
                 }
-                lstPedidosTotales.Items.Add($"USUARIO: {pedido.NombreUsuario.ToUpper()} VOLQUETES A INSTALAR: {formato}");
+
             }
 
         }
