@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,13 +32,17 @@ namespace AlquilerVolquetes
 
             if (!ComprobarStringVacio(datosUsuario))
             {
-                ModalErrorAlRegistrarse clavesDiferentes = new ModalErrorAlRegistrarse("stringVacio");
-                DialogResult result = clavesDiferentes.ShowDialog();
+                ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    //
+                }
             }
             else if (!ValidarContraseña(datosUsuario))
             {
-                ModalErrorAlRegistrarse clavesDiferentes = new ModalErrorAlRegistrarse("claves");
-                DialogResult result = clavesDiferentes.ShowDialog();
+                ModalError modal = new ModalError("Las contraseñas no coinciden", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
@@ -47,8 +52,8 @@ namespace AlquilerVolquetes
             }
             else if (!ComprobarExistenciaUsuario(datosUsuario, listaUsuarios))
             {
-                ModalErrorAlRegistrarse clavesDiferentes = new ModalErrorAlRegistrarse("existenciaUsuario");
-                DialogResult result = clavesDiferentes.ShowDialog();
+                ModalError modal = new ModalError("El nombre de usuario o el correo ya existen", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
@@ -58,9 +63,19 @@ namespace AlquilerVolquetes
                     txtReClave.Text = "";
                 }
             }
+            else if (!IsEmailFormat(mail))
+            {
+                ModalError modal = new ModalError("Formato de mail inválido", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtMail.Text = "";
+                }
+            }
             else
             {
-                ModalExitoLogin exitoLogin = new ModalExitoLogin("register");
+                ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)
                 {
@@ -70,7 +85,7 @@ namespace AlquilerVolquetes
                     inicio.Show();
                     this.Hide();
                 }
-                
+
             }
         }
 
@@ -114,7 +129,7 @@ namespace AlquilerVolquetes
 
         private bool ComprobarExistenciaUsuario(List<string> lista, List<Usuario> listaUsuarios)
         {
-            
+
             foreach (Usuario usuario in listaUsuarios)
             {
                 if (usuario.NombreUsuario == lista[0] || usuario.MailUsusario == lista[2])
@@ -149,6 +164,12 @@ namespace AlquilerVolquetes
             InicioSesion inicio = new InicioSesion();
             inicio.Show();
             this.Hide();
+        }
+        private static bool IsEmailFormat(string input)
+        {
+            // Utilizamos una expresión regular para verificar el formato de correo electrónico.
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+            return Regex.IsMatch(input, emailPattern);
         }
 
     }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AlquilerVolquetes
 {
@@ -95,7 +96,7 @@ namespace AlquilerVolquetes
             }
             if (flag == false)
             {
-                ModalCarritoVacio carritoVacio = new ModalCarritoVacio();
+                ModalError carritoVacio = new ModalError("Debe agregar por lo menos un produto al carrito para alquilar", "ERROR");
                 DialogResult answer = carritoVacio.ShowDialog();
                 if (answer == DialogResult.OK)
                 {

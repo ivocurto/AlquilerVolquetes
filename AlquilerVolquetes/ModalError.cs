@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace AlquilerVolquetes
 {
-    public partial class ModalErrorLogin : AlquilerVolquetes.CompraExitosa
+    public partial class ModalError : AlquilerVolquetes.ModalExito
     {
         string tipoDeError;
-        public ModalErrorLogin(string error)
+        public ModalError(string error, string titulo) : base(titulo)
         {
             InitializeComponent();
             tipoDeError = error;
@@ -21,12 +21,7 @@ namespace AlquilerVolquetes
 
         private void ModalErrorLogin_Load(object sender, EventArgs e)
         {
-            switch (tipoDeError)
-            {
-                case "ususarioIncorrecto":
-                    lblTipoDeError.Text = "Nombre de usuario o clave incorrectos";
-                    break;
-            }
+            lblTipoDeError.Text = tipoDeError;
         }
     }
 }

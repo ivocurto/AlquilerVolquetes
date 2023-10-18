@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InicioSesion));
             txtUsuario = new TextBox();
             lblLogin = new Label();
             lblRegistrarse = new LinkLabel();
@@ -115,6 +116,7 @@
             Controls.Add(lblRegistrarse);
             Controls.Add(lblLogin);
             Controls.Add(txtUsuario);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "InicioSesion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Iniciar Sesión";

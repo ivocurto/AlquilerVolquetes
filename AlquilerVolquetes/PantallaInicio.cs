@@ -17,8 +17,8 @@ namespace AlquilerVolquetes
         MisVolquetes misVolquetes;
         InicioSesion inicioSesion;
         public Usuario usuarioAcutal;
-        private Cliente clienteActual;
-        private List<Cliente> clientes;
+        private Pedido pedidoActual;
+        private List<Pedido> clientes;
         private bool flagPantallaPrincipal = false;
         private bool flagMisVolquetes = false;
         private List<Form> formsAbiertos = new List<Form>();
@@ -29,15 +29,15 @@ namespace AlquilerVolquetes
             InitializeComponent();
             inicioS = inicioSesion;
             usuarioAcutal = usuario;
-            
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("clientes.json");
+
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("clientes.json");
             if (clientes is not null)
             {
-                foreach (Cliente cliente in clientes)
+                foreach (Pedido cliente in clientes)
                 {
                     if (cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
                     {
-                        clienteActual = cliente;
+                        pedidoActual = cliente;
                         break;
                     }
                 }
@@ -50,14 +50,14 @@ namespace AlquilerVolquetes
             inicioS = inicioSesion;
             usuarioAcutal = usuario;
 
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("clientes.json");
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("clientes.json");
             if (clientes is not null)
             {
-                foreach (Cliente cliente in clientes)
+                foreach (Pedido cliente in clientes)
                 {
                     if (cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
                     {
-                        clienteActual = cliente;
+                        pedidoActual = cliente;
                         break;
                     }
                 }
@@ -104,16 +104,8 @@ namespace AlquilerVolquetes
             if (flagMisVolquetes == false)
             {
                 flagMisVolquetes = true;
-                if (clienteActual != null)
-                {
-                    misVolquetes = new MisVolquetes(usuarioAcutal, clienteActual);
-                    formsAbiertos.Add(misVolquetes);
-                }
-                else
-                {
-                    misVolquetes = new MisVolquetes(usuarioAcutal);
-                    formsAbiertos.Add(misVolquetes);
-                }
+                misVolquetes = new MisVolquetes(usuarioAcutal);
+                formsAbiertos.Add(misVolquetes);
                 misVolquetes.MdiParent = this;
                 misVolquetes.Show();
             }

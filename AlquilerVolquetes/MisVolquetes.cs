@@ -13,21 +13,38 @@ namespace AlquilerVolquetes
 {
     public partial class MisVolquetes : Form
     {
+        private List<Pedido> pedidoActual;
         public Usuario usuarioActual;
-        public Cliente cliente;
         private bool esCliente;
         public MisVolquetes(Usuario usuario)
         {
             InitializeComponent();
             usuarioActual = usuario;
-            esCliente = false;
+            this.Activated += new EventHandler(MisVolquetes_Activated); // Suscribir al evento Activated
         }
-        public MisVolquetes(Usuario usuario, Cliente clientee)
+        private void MisVolquetes_Activated(object sender, EventArgs e)
         {
-            InitializeComponent();
-            usuarioActual = usuario;
-            cliente = clientee;
-            esCliente = true;
+            pedidoActual = ClienteActual.ObtenerCliente();
+
+            esCliente = false;
+            if (pedidoActual is not null)
+            {
+                esCliente = true;
+            }
+            if (esCliente == true)
+            {
+                lstEnviando.Items.Clear();
+                foreach (Pedido pedido in pedidoActual)
+                {
+                    foreach (Volquete volquete in pedido.VolquetesPedidos)
+                    {
+                        if (volquete.Cantidad != 0)
+                        {
+                            lstEnviando.Items.Add(volquete);
+                        }
+                    }
+                }
+            }
         }
 
         private void lstEnviando_DrawItem(object sender, DrawItemEventArgs e)
@@ -62,30 +79,6 @@ namespace AlquilerVolquetes
                 {
                     e.Graphics.DrawString(itemText, lstEnviando.Font, brush, textBounds);
                 }
-            }
-        }
-
-        private void MisVolquetes_Load(object sender, EventArgs e)
-        {
-            if (esCliente == true)
-            {
-                foreach (Volquete volquete in cliente.VolquetesPedidos)
-                {
-                    lstColocados.Items.Add(volquete);
-                }
-
-            }
-        }
-
-        private void MisVolquetes_Shown(object sender, EventArgs e)
-        {
-            if (esCliente == true)
-            {
-                foreach (Volquete volquete in cliente.VolquetesPedidos)
-                {
-                    lstColocados.Items.Add(volquete);
-                }
-
             }
         }
     }

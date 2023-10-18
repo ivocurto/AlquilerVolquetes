@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroUsuario));
             lblRegister = new Label();
             txtMail = new TextBox();
             txtUsuario = new TextBox();
@@ -124,6 +125,7 @@
             Controls.Add(txtUsuario);
             Controls.Add(txtMail);
             Controls.Add(lblRegister);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "RegistroUsuario";
             StartPosition = FormStartPosition.CenterScreen;

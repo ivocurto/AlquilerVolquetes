@@ -75,7 +75,7 @@ namespace AlquilerVolquetes
 
             foreach (Volquete volquete in volquetes)
             {
-
+                volquetesCarrito[volquete.Id].Cantidad = 0;
                 volquetesCarrito[volquete.Id].Cantidad += volquete.Cantidad; // Le suma 1 a la cantidad del producto con el ID dado
                 volquete.Cantidad = 0;
             }

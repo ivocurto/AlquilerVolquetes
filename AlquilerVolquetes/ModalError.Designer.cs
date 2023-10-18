@@ -1,6 +1,6 @@
 ﻿namespace AlquilerVolquetes
 {
-    partial class ModalCarritoVacio
+    partial class ModalError
     {
         /// <summary>
         /// Required designer variable.
@@ -28,46 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModalCarritoVacio));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModalError));
             lblTipoDeError = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // lblCompraExitosa
+            // lblTitulo
             // 
-            lblCompraExitosa.Location = new Point(242, 31);
-            lblCompraExitosa.Size = new Size(77, 29);
-            lblCompraExitosa.Text = "ERROR";
+            lblTitulo.AutoSize = false;
+            lblTitulo.Location = new Point(105, 26);
+            lblTitulo.Size = new Size(350, 29);
+            lblTitulo.Text = "TITULO";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(230, 74);
+            pictureBox1.Location = new Point(228, 68);
             // 
             // lblTipoDeError
             // 
             lblTipoDeError.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTipoDeError.Location = new Point(37, 183);
+            lblTipoDeError.Location = new Point(75, 179);
             lblTipoDeError.Name = "lblTipoDeError";
-            lblTipoDeError.Size = new Size(495, 19);
+            lblTipoDeError.Size = new Size(400, 19);
             lblTipoDeError.TabIndex = 27;
-            lblTipoDeError.Text = "Debe agregar por lo menos un produto al carrito para alquilar";
+            lblTipoDeError.Text = "texto";
             lblTipoDeError.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // ModalCarritoVacio
+            // ModalErrorLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(570, 288);
             Controls.Add(lblTipoDeError);
-            Name = "ModalCarritoVacio";
-            Text = "ModalCarritoVacio";
-            Controls.SetChildIndex(lblCompraExitosa, 0);
+            Name = "ModalErrorLogin";
+            Text = "ModalErrorLogin";
+            Load += ModalErrorLogin_Load;
+            Controls.SetChildIndex(lblTitulo, 0);
             Controls.SetChildIndex(pictureBox1, 0);
             Controls.SetChildIndex(lblTipoDeError, 0);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion

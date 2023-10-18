@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormularioDeAlquiler));
             lblTituloFormularioDePago = new Label();
             lblProductos = new Label();
             btnAlquilar = new Button();
@@ -176,6 +177,7 @@
             Controls.Add(btnAlquilar);
             Controls.Add(lblProductos);
             Controls.Add(lblTituloFormularioDePago);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormularioDeAlquiler";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormularioDeAlquiler";

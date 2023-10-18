@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Text.RegularExpressions;
 using Clases;
-using static System.Windows.Forms.DataFormats;
 
 namespace AlquilerVolquetes
 {
@@ -17,10 +8,13 @@ namespace AlquilerVolquetes
     {
         private List<Volquete> volquetes;
         public Usuario usuarioActual;
-        private List<Cliente> listaClientes;
+        private List<Pedido> listaClientes;
         private string path = "pedidos.json";
         public int precioTotal;
         private Form formPrincipal;
+        private List<Pedido> pedidoActual;
+
+
 
         public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario, Form formularioPrincipal)
         {
@@ -28,8 +22,8 @@ namespace AlquilerVolquetes
             volquetes = lista;
             usuarioActual = usuario;
             formPrincipal = formularioPrincipal;
-            listaClientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(path);
-
+            listaClientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
+            pedidoActual = ClienteActual.ObtenerCliente();
             MostrarProductosAComprar();
         }
 
@@ -89,41 +83,102 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-            Cliente cliente;
-            if (listaClientes is null)
+            string apellido = txtApellido.Text;
+            string direccion = txtDireccion.Text;
+            string mail = txtMail.Text;
+            string nombre = txtNombre.Text;
+            string telefono = txtTelefono.Text;
+            List<string> datosUsuario = CrearListaDeDatosDeUsuario(apellido, nombre, mail, direccion, telefono);
+            if (!ComprobarStringVacio(datosUsuario))
             {
-                listaClientes = new List<Cliente>();
+                ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
+                DialogResult resultado = modal.ShowDialog();
+                if (resultado == DialogResult.OK)
+                {
+                    //
+                }
             }
-
-            cliente = new Cliente(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes, txtDireccion.Text, txtTelefono.Text, precioTotal);
-
-            if (listaClientes.Count > 1)
+            else if (!IsEmailFormat(mail))
             {
-                cliente.IdCliente = listaClientes.Count() - 1;
-            }
-            else
+                ModalError clavesDiferentes = new ModalError("Formato de mail inválido", "ERROR AL REGISTRARSE");
+                DialogResult resultado = clavesDiferentes.ShowDialog();
+
+                if (resultado == DialogResult.OK)
+                {
+                    txtMail.Text = "";
+                }
+            } else
             {
-                cliente.IdCliente = 0;
+                Pedido cliente;
+                if (listaClientes is null)
+                {
+                    listaClientes = new List<Pedido>();
+                }
+
+                cliente = new Pedido(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes, txtDireccion.Text, txtTelefono.Text, precioTotal);
+
+                if (listaClientes.Count > 1)
+                {
+                    cliente.IdCliente = listaClientes.Count() - 1;
+                }
+                else
+                {
+                    cliente.IdCliente = 0;
+                }
+
+                listaClientes.Add(cliente);
+                if (pedidoActual is null)
+                {
+                    pedidoActual = new List<Pedido>();
+                }
+                pedidoActual.Add(cliente);
+                ClienteActual.EstablecerCliente(pedidoActual);
+
+                JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, listaClientes);
+                ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
+                DialogResult result = compraExitosa.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    this.Hide();
+                    formPrincipal.Show();
+                    // llevar al formulario de pago
+                }
             }
-
-            listaClientes.Add(cliente);
-
-            JsonFileManager.SaveToJsonGeneric<List<Cliente>>(path, listaClientes);
-            CompraExitosa compraExitosa = new CompraExitosa();
-            DialogResult result = compraExitosa.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                this.Hide();
-                formPrincipal.Show();
-                // llevar al formulario de pago
-            }
-
         }
 
         private void FormularioDeAlquiler_Load(object sender, EventArgs e)
         {
             txtMail.Text = usuarioActual.MailUsusario;
+        }
+        private static bool IsEmailFormat(string input)
+        {
+            // Utilizamos una expresión regular para verificar el formato de correo electrónico.
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+            return Regex.IsMatch(input, emailPattern);
+        }
+        private bool ComprobarStringVacio(List<string> lista)
+        {
+
+            foreach (string s in lista)
+            {
+                if (s == "" || s == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private List<string> CrearListaDeDatosDeUsuario(string apellido, string nombre, string mail, string direccion, string telefono)
+        {
+            List<string> datos = new List<string>();
+            datos.Add(apellido);
+            datos.Add(nombre);
+            datos.Add(mail);
+            datos.Add(direccion);
+            datos.Add(telefono);
+            return datos;
         }
     }
 }

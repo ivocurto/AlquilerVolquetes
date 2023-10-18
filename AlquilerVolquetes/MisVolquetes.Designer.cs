@@ -109,8 +109,6 @@
             Name = "MisVolquetes";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MisVolquetes";
-            Load += MisVolquetes_Load;
-            Shown += MisVolquetes_Shown;
             ResumeLayout(false);
             PerformLayout();
         }

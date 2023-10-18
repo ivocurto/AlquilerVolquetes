@@ -18,9 +18,9 @@ namespace AlquilerVolquetes
     {
 
         protected static List<Usuario> usuarios = new List<Usuario>();
-        private List<Cliente> clientes = new List<Cliente>();
+        private List<Pedido> clientes = new List<Pedido>();
         public Usuario usuarioAcutal;
-        public List<Cliente> clienteActual;
+        public List<Pedido> pedidoActual;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
@@ -30,8 +30,8 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
             usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("pedidos.json");
-
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
+            pedidoActual = ClienteActual.ObtenerCliente();
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
             if (data.CheckboxValue == true)
@@ -43,7 +43,7 @@ namespace AlquilerVolquetes
         }
 
         public InicioSesion(Usuario usuario)
-         {
+        {
             InitializeComponent();
 
             usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
@@ -51,7 +51,7 @@ namespace AlquilerVolquetes
             usuario.IndexUsuario = usuarios.Count() - 1;
 
             JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
-            }
+        }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -70,34 +70,41 @@ namespace AlquilerVolquetes
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
                 {
                     //aca va el logueado correctamente
-                    ModalExitoLogin exitoLogin = new ModalExitoLogin("login");
+                    ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
                     DialogResult answer = exitoLogin.ShowDialog();
                     if (answer == DialogResult.OK)
                     {
                         data = new DataContainer(checkbox, usuario);
-                    //string jsonString = JsonConvert.SerializeObject(data);
                         JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-
-                            
-                            usuarioAcutal = usuario;
-                            foreach(Cliente cliente in clientes)
+                        usuarioAcutal = usuario;
+                        if (clientes is not null)
                         {
-                            if(cliente.MailUsusario == usuario.MailUsusario)
+                            if (pedidoActual is not null)
                             {
-                                clienteActual.Add(cliente);
+                                pedidoActual.Clear();
                             }
-
-
+                            else
+                            {
+                                pedidoActual = new List<Pedido>();
+                            }
+                            foreach (Pedido cliente in clientes)
+                            {
+                                if (cliente.MailUsusario == usuario.MailUsusario)
+                                {
+                                    pedidoActual.Add(cliente);
+                                }
+                            }
                         }
-                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
-                            pantallaInicio.Show();
-                            this.Hide();
-                            return;
-                        }
+                        ClienteActual.EstablecerCliente(pedidoActual);
+                        PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+                        pantallaInicio.Show();
+                        this.Hide();
+                        return;
+                    }
 
                 }
             }
-            ModalErrorLogin ususarioIncorrecto = new ModalErrorLogin("ususarioIncorrecto");
+            ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
             DialogResult result = ususarioIncorrecto.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -110,7 +117,6 @@ namespace AlquilerVolquetes
         private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
         {
             checkbox = cbAutoLogin.Checked;
-
         }
 
         private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaInicio));
             lblBienvenida = new Label();
             btnAlquilarVolquetes = new Button();
             button1 = new Button();
@@ -124,6 +125,7 @@
             Controls.Add(button1);
             Controls.Add(btnAlquilarVolquetes);
             Controls.Add(lblBienvenida);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             Name = "PantallaInicio";
             StartPosition = FormStartPosition.CenterScreen;

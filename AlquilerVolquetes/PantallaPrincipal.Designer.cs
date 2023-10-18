@@ -49,7 +49,6 @@
             btnRestarVC = new PictureBox();
             btnRestarVM = new PictureBox();
             btnRestarVG = new PictureBox();
-            pbNotificacion = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -60,7 +59,6 @@
             ((System.ComponentModel.ISupportInitialize)btnRestarVC).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnRestarVM).BeginInit();
             ((System.ComponentModel.ISupportInitialize)btnRestarVG).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbNotificacion).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -268,19 +266,6 @@
             btnRestarVG.TabStop = false;
             btnRestarVG.Click += btnRestarVG_Click;
             // 
-            // pbNotificacion
-            // 
-            pbNotificacion.BackColor = Color.Transparent;
-            pbNotificacion.Image = (Image)resources.GetObject("pbNotificacion.Image");
-            pbNotificacion.ImageLocation = "";
-            pbNotificacion.Location = new Point(978, 99);
-            pbNotificacion.Name = "pbNotificacion";
-            pbNotificacion.Padding = new Padding(5);
-            pbNotificacion.Size = new Size(45, 32);
-            pbNotificacion.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbNotificacion.TabIndex = 29;
-            pbNotificacion.TabStop = false;
-            // 
             // PantallaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -288,7 +273,6 @@
             BackColor = SystemColors.Control;
             ClientSize = new Size(1064, 681);
             ControlBox = false;
-            Controls.Add(pbNotificacion);
             Controls.Add(btnRestarVG);
             Controls.Add(btnRestarVM);
             Controls.Add(btnRestarVC);
@@ -322,7 +306,6 @@
             ((System.ComponentModel.ISupportInitialize)btnRestarVC).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnRestarVM).EndInit();
             ((System.ComponentModel.ISupportInitialize)btnRestarVG).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbNotificacion).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -349,6 +332,5 @@
         private PictureBox btnRestarVC;
         private PictureBox btnRestarVM;
         private PictureBox btnRestarVG;
-        private PictureBox pbNotificacion;
     }
 }

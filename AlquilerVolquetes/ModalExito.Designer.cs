@@ -1,6 +1,6 @@
 ﻿namespace AlquilerVolquetes
 {
-    partial class CompraExitosa
+    partial class ModalExito
     {
         /// <summary>
         /// Required designer variable.
@@ -28,68 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompraExitosa));
-            lblCompraExitosa = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModalExito));
+            lblTitulo = new Label();
             pictureBox1 = new PictureBox();
-            btnAceptar = new Button();
+            btnAgregarAlCarrito = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // lblCompraExitosa
+            // lblTitulo
             // 
-            lblCompraExitosa.AutoSize = true;
-            lblCompraExitosa.Font = new Font("Bahnschrift SemiBold SemiConden", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCompraExitosa.Location = new Point(191, 31);
-            lblCompraExitosa.Name = "lblCompraExitosa";
-            lblCompraExitosa.Size = new Size(178, 29);
-            lblCompraExitosa.TabIndex = 22;
-            lblCompraExitosa.Text = "COMPRA EXITOSA";
+            lblTitulo.Font = new Font("Bahnschrift", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.Location = new Point(104, 40);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(350, 27);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "label1";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
+            pictureBox1.ErrorImage = null;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(230, 92);
+            pictureBox1.Location = new Point(229, 85);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(100, 99);
+            pictureBox1.Size = new Size(100, 97);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 23;
+            pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
-            // btnAceptar
+            // btnAgregarAlCarrito
             // 
-            btnAceptar.BackColor = Color.DeepSkyBlue;
-            btnAceptar.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAceptar.ForeColor = SystemColors.ButtonHighlight;
-            btnAceptar.Location = new Point(148, 208);
-            btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(255, 55);
-            btnAceptar.TabIndex = 25;
-            btnAceptar.Text = "ACEPTAR";
-            btnAceptar.UseVisualStyleBackColor = false;
-            btnAceptar.Click += btnAceptar_Click;
+            btnAgregarAlCarrito.BackColor = Color.DeepSkyBlue;
+            btnAgregarAlCarrito.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAgregarAlCarrito.ForeColor = SystemColors.ButtonHighlight;
+            btnAgregarAlCarrito.Location = new Point(150, 205);
+            btnAgregarAlCarrito.Name = "btnAgregarAlCarrito";
+            btnAgregarAlCarrito.Size = new Size(255, 55);
+            btnAgregarAlCarrito.TabIndex = 20;
+            btnAgregarAlCarrito.Text = "ACEPTAR";
+            btnAgregarAlCarrito.UseVisualStyleBackColor = false;
+            btnAgregarAlCarrito.Click += btnAgregarAlCarrito_Click;
             // 
-            // CompraExitosa
+            // ModalExito
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
             ClientSize = new Size(570, 288);
-            Controls.Add(btnAceptar);
+            Controls.Add(btnAgregarAlCarrito);
             Controls.Add(pictureBox1);
-            Controls.Add(lblCompraExitosa);
-            FormBorderStyle = FormBorderStyle.None;
-            Name = "CompraExitosa";
+            Controls.Add(lblTitulo);
+            Name = "ModalExito";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CompraExitosa";
-            Load += CompraExitosa_Load;
+            Text = "ModalExitoLogin";
+            Load += ModalExitoLogin_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Button btnAceptar;
-        public Label lblCompraExitosa;
+        private Button btnAgregarAlCarrito;
+        public Label lblTitulo;
         public PictureBox pictureBox1;
     }
 }
