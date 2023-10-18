@@ -16,15 +16,29 @@ namespace AlquilerVolquetes
         private List<Pedido> pedidoActual;
         public Usuario usuarioActual;
         private bool esCliente;
+        private List<Pedido> pedidos;
         public MisVolquetes(Usuario usuario)
         {
             InitializeComponent();
+
             usuarioActual = usuario;
             this.Activated += new EventHandler(MisVolquetes_Activated); // Suscribir al evento Activated
         }
         private void MisVolquetes_Activated(object sender, EventArgs e)
         {
-            pedidoActual = ClienteActual.ObtenerCliente();
+            pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
+            pedidoActual = new List<Pedido>();
+            if (pedidos is not null)
+            {
+                foreach (Pedido pedido in pedidos)
+                {
+                    if (pedido.MailUsusario == usuarioActual.MailUsusario)
+                    {
+                        pedidoActual.Add(pedido);
+                    }
+                }
+
+            }
 
             esCliente = false;
             if (pedidoActual is not null)

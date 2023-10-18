@@ -12,9 +12,6 @@ namespace AlquilerVolquetes
         private string path = "pedidos.json";
         public int precioTotal;
         private Form formPrincipal;
-        private List<Pedido> pedidoActual;
-
-
 
         public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario, Form formularioPrincipal)
         {
@@ -23,7 +20,6 @@ namespace AlquilerVolquetes
             usuarioActual = usuario;
             formPrincipal = formularioPrincipal;
             listaClientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
-            pedidoActual = ClienteActual.ObtenerCliente();
             MostrarProductosAComprar();
         }
 
@@ -127,12 +123,6 @@ namespace AlquilerVolquetes
                 }
 
                 listaClientes.Add(cliente);
-                if (pedidoActual is null)
-                {
-                    pedidoActual = new List<Pedido>();
-                }
-                pedidoActual.Add(cliente);
-                ClienteActual.EstablecerCliente(pedidoActual);
 
                 JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, listaClientes);
                 ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using AdminApp;
 
 namespace AlquilerVolquetes
 {
@@ -18,9 +19,7 @@ namespace AlquilerVolquetes
     {
 
         protected static List<Usuario> usuarios = new List<Usuario>();
-        private List<Pedido> clientes = new List<Pedido>();
         public Usuario usuarioAcutal;
-        public List<Pedido> pedidoActual;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
@@ -30,8 +29,6 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
             usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
-            pedidoActual = ClienteActual.ObtenerCliente();
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
             if (data.CheckboxValue == true)
@@ -71,35 +68,27 @@ namespace AlquilerVolquetes
                 {
                     //aca va el logueado correctamente
                     ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
+
                     DialogResult answer = exitoLogin.ShowDialog();
                     if (answer == DialogResult.OK)
                     {
                         data = new DataContainer(checkbox, usuario);
                         JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
                         usuarioAcutal = usuario;
-                        if (clientes is not null)
+                        if (usuarioAcutal.Rol == ERolUsuario.Admin)
                         {
-                            if (pedidoActual is not null)
-                            {
-                                pedidoActual.Clear();
-                            }
-                            else
-                            {
-                                pedidoActual = new List<Pedido>();
-                            }
-                            foreach (Pedido cliente in clientes)
-                            {
-                                if (cliente.MailUsusario == usuario.MailUsusario)
-                                {
-                                    pedidoActual.Add(cliente);
-                                }
-                            }
+                            PanelAdmin panelAdmin = new PanelAdmin();
+                            panelAdmin.Show();
+                            this.Hide();
+                            return;
                         }
-                        ClienteActual.EstablecerCliente(pedidoActual);
-                        PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
-                        pantallaInicio.Show();
-                        this.Hide();
-                        return;
+                        else
+                        {
+                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+                            pantallaInicio.Show();
+                            this.Hide();
+                            
+                        }
                     }
 
                 }
