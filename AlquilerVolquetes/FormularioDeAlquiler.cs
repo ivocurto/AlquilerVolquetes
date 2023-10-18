@@ -110,8 +110,9 @@ namespace AlquilerVolquetes
                 {
                     listaClientes = new List<Pedido>();
                 }
+                List<Volquete> volquetesInstalar = new List<Volquete>();
 
-                cliente = new Pedido(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetes, txtDireccion.Text, txtTelefono.Text, precioTotal);
+                cliente = new Pedido(usuarioActual.NombreUsuario, usuarioActual.MailUsusario, usuarioActual.ClaveUsuario, usuarioActual.Rol, volquetes, volquetesInstalar, txtDireccion.Text, txtTelefono.Text, precioTotal);
 
                 if (listaClientes.Count > 1)
                 {
