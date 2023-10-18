@@ -87,7 +87,6 @@ namespace AlquilerVolquetes
                             PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
                             pantallaInicio.Show();
                             this.Hide();
-                            return;
                             
                         }
                     }
@@ -102,7 +101,6 @@ namespace AlquilerVolquetes
                 txtClave.Text = "";
                 txtUsuario.Text = "";
             }
-            
         }
 
         private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
