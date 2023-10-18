@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             lblLogin = new Label();
-            checkedListBox1 = new CheckedListBox();
+            lstPedidosTotales = new ListBox();
+            btnEliminarPedido = new Button();
             SuspendLayout();
             // 
             // lblLogin
@@ -43,20 +44,35 @@
             lblLogin.TabIndex = 1;
             lblLogin.Text = "PANEL ADMIN";
             // 
-            // checkedListBox1
+            // lstPedidosTotales
             // 
-            checkedListBox1.FormattingEnabled = true;
-            checkedListBox1.Location = new Point(155, 106);
-            checkedListBox1.Name = "checkedListBox1";
-            checkedListBox1.Size = new Size(749, 526);
-            checkedListBox1.TabIndex = 2;
+            lstPedidosTotales.FormattingEnabled = true;
+            lstPedidosTotales.ItemHeight = 15;
+            lstPedidosTotales.Location = new Point(184, 100);
+            lstPedidosTotales.Name = "lstPedidosTotales";
+            lstPedidosTotales.Size = new Size(696, 454);
+            lstPedidosTotales.TabIndex = 2;
+            // 
+            // btnEliminarPedido
+            // 
+            btnEliminarPedido.BackColor = Color.DeepSkyBlue;
+            btnEliminarPedido.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEliminarPedido.ForeColor = SystemColors.ButtonHighlight;
+            btnEliminarPedido.Location = new Point(184, 572);
+            btnEliminarPedido.Name = "btnEliminarPedido";
+            btnEliminarPedido.Size = new Size(363, 69);
+            btnEliminarPedido.TabIndex = 25;
+            btnEliminarPedido.Text = "ELIMINAR PEDIDO SELECCIONADO";
+            btnEliminarPedido.UseVisualStyleBackColor = false;
+            btnEliminarPedido.Click += btnEliminarPedido_Click;
             // 
             // PanelAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1064, 681);
-            Controls.Add(checkedListBox1);
+            Controls.Add(btnEliminarPedido);
+            Controls.Add(lstPedidosTotales);
             Controls.Add(lblLogin);
             Name = "PanelAdmin";
             StartPosition = FormStartPosition.CenterScreen;
@@ -69,6 +85,7 @@
         #endregion
 
         private Label lblLogin;
-        private CheckedListBox checkedListBox1;
+        private ListBox lstPedidosTotales;
+        private Button btnEliminarPedido;
     }
 }
