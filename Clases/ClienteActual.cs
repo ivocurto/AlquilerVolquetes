@@ -8,14 +8,14 @@ namespace Clases
 {
     public class ClienteActual
     {
-        private static List<Pedido> clienteActual;
+        private static List<Cliente> clienteActual;
 
-        public static List<Pedido> ObtenerCliente()
+        public static List<Cliente> ObtenerCliente()
         {
             return clienteActual;
         }
 
-        public static void EstablecerCliente(List<Pedido> cliente)
+        public static void EstablecerCliente(List<Cliente> cliente)
         {
             clienteActual = cliente;
         }

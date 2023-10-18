@@ -17,8 +17,8 @@ namespace AlquilerVolquetes
         MisVolquetes misVolquetes;
         InicioSesion inicioSesion;
         public Usuario usuarioAcutal;
-        private Pedido clienteActual;
-        private List<Pedido> clientes;
+        private Cliente clienteActual;
+        private List<Cliente> clientes;
         private bool flagPantallaPrincipal = false;
         private bool flagMisVolquetes = false;
         private List<Form> formsAbiertos = new List<Form>();
@@ -30,10 +30,10 @@ namespace AlquilerVolquetes
             inicioS = inicioSesion;
             usuarioAcutal = usuario;
             
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("clientes.json");
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("clientes.json");
             if (clientes is not null)
             {
-                foreach (Pedido cliente in clientes)
+                foreach (Cliente cliente in clientes)
                 {
                     if (cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
                     {
@@ -50,10 +50,10 @@ namespace AlquilerVolquetes
             inicioS = inicioSesion;
             usuarioAcutal = usuario;
 
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("clientes.json");
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("clientes.json");
             if (clientes is not null)
             {
-                foreach (Pedido cliente in clientes)
+                foreach (Cliente cliente in clientes)
                 {
                     if (cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
                     {
@@ -106,7 +106,7 @@ namespace AlquilerVolquetes
                 flagMisVolquetes = true;
                 if (clienteActual != null)
                 {
-                    misVolquetes = new MisVolquetes(usuarioAcutal);
+                    misVolquetes = new MisVolquetes(usuarioAcutal, clienteActual);
                     formsAbiertos.Add(misVolquetes);
                 }
                 else

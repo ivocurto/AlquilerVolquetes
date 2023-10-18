@@ -146,7 +146,7 @@
             // 
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Bahnschrift SemiBold SemiConden", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTotal.Location = new Point(443, 530);
+            lblTotal.Location = new Point(424, 529);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(179, 29);
             lblTotal.TabIndex = 32;

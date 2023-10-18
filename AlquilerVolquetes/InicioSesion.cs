@@ -18,9 +18,9 @@ namespace AlquilerVolquetes
     {
 
         protected static List<Usuario> usuarios = new List<Usuario>();
-        private List<Pedido> pedidos = new List<Pedido>();
+        private List<Cliente> clientes = new List<Cliente>();
         public Usuario usuarioAcutal;
-        public List<Pedido> pedidosActuales;
+        public List<Cliente> clienteActual;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
@@ -30,7 +30,7 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
             usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
-            pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("pedidos.json");
 
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
@@ -80,14 +80,16 @@ namespace AlquilerVolquetes
 
                             
                             usuarioAcutal = usuario;
-                            foreach(Pedido pedido in pedidos)
+                            foreach(Cliente cliente in clientes)
                         {
-                                if(pedido.MailUsusario == usuarioAcutal.MailUsusario && pedidosActuales is not null)
-                                {
-                                    pedidosActuales.Add(pedido);
-                                }
+                            if(cliente.MailUsusario == usuario.MailUsusario)
+                            {
+                                clienteActual.Add(cliente);
+                            }
+
+
                         }
-                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
                             pantallaInicio.Show();
                             this.Hide();
                             return;
@@ -108,6 +110,7 @@ namespace AlquilerVolquetes
         private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
         {
             checkbox = cbAutoLogin.Checked;
+
         }
 
         private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
