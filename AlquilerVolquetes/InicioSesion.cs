@@ -87,6 +87,7 @@ namespace AlquilerVolquetes
                             PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
                             pantallaInicio.Show();
                             this.Hide();
+                            return;
                             
                         }
                     }
