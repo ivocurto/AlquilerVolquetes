@@ -90,5 +90,30 @@ namespace AdminApp
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (lstPedidosTotales.SelectedItem != null)
+            {
+                DialogResult result = MessageBox.Show("¿Desea aceptar el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    int selectedIndex = lstPedidosTotales.SelectedIndex;
+
+                    if (selectedIndex >= 0)
+                    {
+                        pedidos[selectedIndex].VolquetesInstalados = pedidos[selectedIndex].VolquetesPedidos;
+
+                        pedidos[selectedIndex].VolquetesPedidos = new List<Volquete>();
+
+
+                        JsonFileManager.SaveToJsonGeneric("pedidos.json", pedidos);
+
+                        lstPedidosTotales.Items.RemoveAt(selectedIndex);
+                    }
+                }
+            }
+        }
     }
 }
