@@ -15,12 +15,14 @@ namespace AlquilerVolquetes
     {
         PantallaPrincipal pantallaPrincipal;
         MisVolquetes misVolquetes;
+        Home home;
         InicioSesion inicioSesion;
         public Usuario usuarioAcutal;
         private Pedido pedidoActual;
         private List<Pedido> clientes;
         private bool flagPantallaPrincipal = false;
         private bool flagMisVolquetes = false;
+        private bool flagHome = false;
         private List<Form> formsAbiertos = new List<Form>();
         private Form inicioS;
         Button dummyButton = new Button();
@@ -41,6 +43,14 @@ namespace AlquilerVolquetes
                         break;
                     }
                 }
+            }
+
+            if (flagHome == false)
+            {
+                home = new Home();
+                home.MdiParent = this;
+                flagHome = true;
+                home.Show();
             }
         }
 
@@ -70,9 +80,9 @@ namespace AlquilerVolquetes
 
         private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal);
-            //pantallaInicio.MdiParent = this;
-            //pantallaInicio.Show();
+            EsconderForms();
+
+            home.Show();
         }
 
         public void aLQUILARVOLQUETESToolStripMenuItem_Click(object sender, EventArgs e)

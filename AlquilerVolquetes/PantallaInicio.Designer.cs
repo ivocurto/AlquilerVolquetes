@@ -37,7 +37,6 @@
             hOMEToolStripMenuItem = new ToolStripMenuItem();
             aLQUILARVOLQUETESToolStripMenuItem = new ToolStripMenuItem();
             mISVOLQUETESToolStripMenuItem = new ToolStripMenuItem();
-            sOBRENOSOTROSToolStripMenuItem = new ToolStripMenuItem();
             cERRARSESIÓNToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -74,7 +73,7 @@
             // 
             menuStrip1.BackColor = Color.DeepSkyBlue;
             menuStrip1.Font = new Font("Bahnschrift Light", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { hOMEToolStripMenuItem, aLQUILARVOLQUETESToolStripMenuItem, mISVOLQUETESToolStripMenuItem, sOBRENOSOTROSToolStripMenuItem, cERRARSESIÓNToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { hOMEToolStripMenuItem, aLQUILARVOLQUETESToolStripMenuItem, mISVOLQUETESToolStripMenuItem, cERRARSESIÓNToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1096, 25);
@@ -101,12 +100,6 @@
             mISVOLQUETESToolStripMenuItem.Size = new Size(123, 21);
             mISVOLQUETESToolStripMenuItem.Text = "MIS VOLQUETES";
             mISVOLQUETESToolStripMenuItem.Click += mISVOLQUETESToolStripMenuItem_Click;
-            // 
-            // sOBRENOSOTROSToolStripMenuItem
-            // 
-            sOBRENOSOTROSToolStripMenuItem.Name = "sOBRENOSOTROSToolStripMenuItem";
-            sOBRENOSOTROSToolStripMenuItem.Size = new Size(139, 21);
-            sOBRENOSOTROSToolStripMenuItem.Text = "SOBRE NOSOTROS";
             // 
             // cERRARSESIÓNToolStripMenuItem
             // 
@@ -146,7 +139,6 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem aLQUILARVOLQUETESToolStripMenuItem;
         private ToolStripMenuItem mISVOLQUETESToolStripMenuItem;
-        private ToolStripMenuItem sOBRENOSOTROSToolStripMenuItem;
         private ToolStripMenuItem cERRARSESIÓNToolStripMenuItem;
         private ToolStripMenuItem hOMEToolStripMenuItem;
     }
