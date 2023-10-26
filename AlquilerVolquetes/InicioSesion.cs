@@ -12,6 +12,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using AdminApp;
+using System.Drawing.Drawing2D;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Reflection.Emit;
 
 namespace AlquilerVolquetes
 {
@@ -24,6 +27,7 @@ namespace AlquilerVolquetes
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
         private DataContainer data;
+
 
         public InicioSesion()
         {
@@ -88,7 +92,7 @@ namespace AlquilerVolquetes
                             pantallaInicio.Show();
                             this.Hide();
                             return;
-                            
+
                         }
                     }
 
@@ -112,5 +116,76 @@ namespace AlquilerVolquetes
         private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
         {
         }
+
+        private void lblLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void InicioSesion_Load(object sender, EventArgs e)
+        {
+            lblUsusario.Visible = false;
+            lblClave.Visible = false;
+            MostrarLabel(txtUsuario, lblUsusario);
+            MostrarLabel(txtClave, lblClave);
+        }
+
+        private void txtClave_TextChanged_1(object sender, EventArgs e)
+        {
+            MostrarLabel(txtClave, lblClave);
+        }
+
+        private void txtUsuario_TextChanged_1(object sender, EventArgs e)
+        {
+            MostrarLabel(txtUsuario, lblUsusario);
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MostrarLabel(System.Windows.Forms.TextBox textBox, System.Windows.Forms.Label label)
+        {
+            if (VerificarEstadoTxtBox(textBox))
+            {
+                label.Visible = true;
+            }
+            else
+            {
+                label.Visible = false;
+            }
+        }
+
+        private bool VerificarEstadoTxtBox(System.Windows.Forms.TextBox textBox)
+        {
+            if (textBox.Text == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
     }
 }

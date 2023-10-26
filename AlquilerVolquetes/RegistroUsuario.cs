@@ -23,9 +23,9 @@ namespace AlquilerVolquetes
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            string clave = txtClave.Text;
+            string clave = txtClaver.Text;
             string reClave = txtReClave.Text;
-            string nombre = txtUsuario.Text;
+            string nombre = txtUsuarior.Text;
             string mail = txtMail.Text;
 
             List<string> datosUsuario = CrearListaDeDatosDeUsuario(clave, nombre, mail, reClave);
@@ -46,7 +46,7 @@ namespace AlquilerVolquetes
 
                 if (result == DialogResult.OK)
                 {
-                    txtClave.Text = "";
+                    txtClaver.Text = "";
                     txtReClave.Text = "";
                 }
             }
@@ -58,8 +58,8 @@ namespace AlquilerVolquetes
                 if (result == DialogResult.OK)
                 {
                     txtMail.Text = "";
-                    txtUsuario.Text = "";
-                    txtClave.Text = "";
+                    txtUsuarior.Text = "";
+                    txtClaver.Text = "";
                     txtReClave.Text = "";
                 }
             }
@@ -172,5 +172,61 @@ namespace AlquilerVolquetes
             return Regex.IsMatch(input, emailPattern);
         }
 
+        private void lblRegister_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblUsusario_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblClave_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnIngresar_Click_1(object sender, EventArgs e)
+        {
+        }
     }
 }
