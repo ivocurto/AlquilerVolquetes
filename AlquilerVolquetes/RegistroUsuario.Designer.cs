@@ -31,6 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroUsuario));
             lblRegistrarse = new LinkLabel();
             pnlLogin = new Panel();
+            lblCorreo = new Label();
+            txtCorreo = new TextBox();
+            pictureBox4 = new PictureBox();
+            lblReClave = new Label();
+            txtReClave = new TextBox();
+            pictureBox3 = new PictureBox();
             lblUsusario = new Label();
             txtUsuario = new TextBox();
             lblClave = new Label();
@@ -39,17 +45,11 @@
             txtClave = new TextBox();
             btnIngresar = new Button();
             pictureBox2 = new PictureBox();
-            lblReClave = new Label();
-            txtReClave = new TextBox();
-            pictureBox3 = new PictureBox();
-            lblCorreo = new Label();
-            txtMail = new TextBox();
-            pictureBox4 = new PictureBox();
             pnlLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // lblRegistrarse
@@ -71,7 +71,7 @@
             pnlLogin.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             pnlLogin.BackColor = Color.White;
             pnlLogin.Controls.Add(lblCorreo);
-            pnlLogin.Controls.Add(txtMail);
+            pnlLogin.Controls.Add(txtCorreo);
             pnlLogin.Controls.Add(pictureBox4);
             pnlLogin.Controls.Add(lblReClave);
             pnlLogin.Controls.Add(txtReClave);
@@ -90,17 +90,104 @@
             pnlLogin.Size = new Size(412, 414);
             pnlLogin.TabIndex = 17;
             // 
+            // lblCorreo
+            // 
+            lblCorreo.AutoSize = true;
+            lblCorreo.BackColor = Color.FromArgb(51, 171, 215);
+            lblCorreo.Enabled = false;
+            lblCorreo.FlatStyle = FlatStyle.Flat;
+            lblCorreo.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblCorreo.ForeColor = Color.White;
+            lblCorreo.Location = new Point(119, 110);
+            lblCorreo.Margin = new Padding(0);
+            lblCorreo.Name = "lblCorreo";
+            lblCorreo.Size = new Size(185, 25);
+            lblCorreo.TabIndex = 73;
+            lblCorreo.Text = "Correo electrónico";
+            lblCorreo.Click += label2_Click;
+            // 
+            // txtCorreo
+            // 
+            txtCorreo.Anchor = AnchorStyles.None;
+            txtCorreo.BackColor = Color.FromArgb(51, 171, 215);
+            txtCorreo.BorderStyle = BorderStyle.None;
+            txtCorreo.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtCorreo.ForeColor = Color.White;
+            txtCorreo.Location = new Point(114, 111);
+            txtCorreo.Margin = new Padding(0);
+            txtCorreo.Name = "txtCorreo";
+            txtCorreo.Size = new Size(214, 23);
+            txtCorreo.TabIndex = 93;
+            txtCorreo.TextChanged += textBox3_TextChanged;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Anchor = AnchorStyles.None;
+            pictureBox4.BackgroundImageLayout = ImageLayout.None;
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(3, 102);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(412, 40);
+            pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox4.TabIndex = 92;
+            pictureBox4.TabStop = false;
+            pictureBox4.Click += pictureBox4_Click;
+            // 
+            // lblReClave
+            // 
+            lblReClave.AutoSize = true;
+            lblReClave.BackColor = Color.FromArgb(51, 171, 215);
+            lblReClave.Enabled = false;
+            lblReClave.FlatStyle = FlatStyle.Flat;
+            lblReClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblReClave.ForeColor = Color.White;
+            lblReClave.Location = new Point(119, 256);
+            lblReClave.Name = "lblReClave";
+            lblReClave.Size = new Size(135, 25);
+            lblReClave.TabIndex = 71;
+            lblReClave.Text = "Repetir clave";
+            lblReClave.Click += label1_Click;
+            // 
+            // txtReClave
+            // 
+            txtReClave.Anchor = AnchorStyles.None;
+            txtReClave.BackColor = Color.FromArgb(51, 171, 215);
+            txtReClave.BorderStyle = BorderStyle.None;
+            txtReClave.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtReClave.ForeColor = Color.White;
+            txtReClave.Location = new Point(116, 258);
+            txtReClave.Margin = new Padding(0);
+            txtReClave.Name = "txtReClave";
+            txtReClave.Size = new Size(214, 23);
+            txtReClave.TabIndex = 90;
+            txtReClave.UseSystemPasswordChar = true;
+            txtReClave.TextChanged += textBox1_TextChanged;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.None;
+            pictureBox3.BackgroundImageLayout = ImageLayout.None;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(3, 248);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(412, 40);
+            pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox3.TabIndex = 89;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
+            // 
             // lblUsusario
             // 
             lblUsusario.AutoSize = true;
             lblUsusario.BackColor = Color.FromArgb(51, 171, 215);
+            lblUsusario.Enabled = false;
             lblUsusario.FlatStyle = FlatStyle.Flat;
             lblUsusario.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblUsusario.ForeColor = Color.White;
-            lblUsusario.Location = new Point(113, 159);
+            lblUsusario.Location = new Point(119, 160);
             lblUsusario.Name = "lblUsusario";
             lblUsusario.Size = new Size(85, 25);
-            lblUsusario.TabIndex = 88;
+            lblUsusario.TabIndex = 78;
             lblUsusario.Text = "Usuario";
             lblUsusario.Click += lblUsusario_Click;
             // 
@@ -122,13 +209,14 @@
             // 
             lblClave.AutoSize = true;
             lblClave.BackColor = Color.FromArgb(51, 171, 215);
+            lblClave.Enabled = false;
             lblClave.FlatStyle = FlatStyle.Flat;
             lblClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblClave.ForeColor = Color.White;
-            lblClave.Location = new Point(111, 208);
+            lblClave.Location = new Point(119, 208);
             lblClave.Name = "lblClave";
             lblClave.Size = new Size(64, 25);
-            lblClave.TabIndex = 86;
+            lblClave.TabIndex = 76;
             lblClave.Text = "Clave";
             lblClave.Click += lblClave_Click;
             // 
@@ -205,89 +293,6 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
-            // lblReClave
-            // 
-            lblReClave.AutoSize = true;
-            lblReClave.BackColor = Color.FromArgb(51, 171, 215);
-            lblReClave.FlatStyle = FlatStyle.Flat;
-            lblReClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblReClave.ForeColor = Color.White;
-            lblReClave.Location = new Point(111, 256);
-            lblReClave.Name = "lblReClave";
-            lblReClave.Size = new Size(135, 25);
-            lblReClave.TabIndex = 91;
-            lblReClave.Text = "Repetir clave";
-            lblReClave.Click += label1_Click;
-            // 
-            // txtReClave
-            // 
-            txtReClave.Anchor = AnchorStyles.None;
-            txtReClave.BackColor = Color.FromArgb(51, 171, 215);
-            txtReClave.BorderStyle = BorderStyle.None;
-            txtReClave.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            txtReClave.ForeColor = Color.White;
-            txtReClave.Location = new Point(116, 258);
-            txtReClave.Margin = new Padding(0);
-            txtReClave.Name = "txtReClave";
-            txtReClave.Size = new Size(214, 23);
-            txtReClave.TabIndex = 90;
-            txtReClave.UseSystemPasswordChar = true;
-            txtReClave.TextChanged += textBox1_TextChanged;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Anchor = AnchorStyles.None;
-            pictureBox3.BackgroundImageLayout = ImageLayout.None;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(3, 248);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(412, 40);
-            pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox3.TabIndex = 89;
-            pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
-            // 
-            // lblCorreo
-            // 
-            lblCorreo.AutoSize = true;
-            lblCorreo.BackColor = Color.FromArgb(51, 171, 215);
-            lblCorreo.FlatStyle = FlatStyle.Flat;
-            lblCorreo.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lblCorreo.ForeColor = Color.White;
-            lblCorreo.Location = new Point(113, 110);
-            lblCorreo.Name = "lblCorreo";
-            lblCorreo.Size = new Size(185, 25);
-            lblCorreo.TabIndex = 94;
-            lblCorreo.Text = "Correo electrónico";
-            lblCorreo.Click += label2_Click;
-            // 
-            // txtMail
-            // 
-            txtMail.Anchor = AnchorStyles.None;
-            txtMail.BackColor = Color.FromArgb(51, 171, 215);
-            txtMail.BorderStyle = BorderStyle.None;
-            txtMail.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            txtMail.ForeColor = Color.White;
-            txtMail.Location = new Point(114, 111);
-            txtMail.Margin = new Padding(0);
-            txtMail.Name = "txtMail";
-            txtMail.Size = new Size(214, 23);
-            txtMail.TabIndex = 93;
-            txtMail.TextChanged += textBox3_TextChanged;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Anchor = AnchorStyles.None;
-            pictureBox4.BackgroundImageLayout = ImageLayout.None;
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(3, 102);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(412, 40);
-            pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox4.TabIndex = 92;
-            pictureBox4.TabStop = false;
-            pictureBox4.Click += pictureBox4_Click;
-            // 
             // RegistroUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -306,17 +311,14 @@
             Load += RegistroUsuario_Load;
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private TextBox txtMail;
-        private TextBox txtUsuarior;
-        private TextBox txtClaver;
         private TextBox txtReClave;
         private LinkLabel lblRegistrarse;
         private Panel pnlLogin;
@@ -334,5 +336,6 @@
         private Label lblReClave;
         public TextBox textBox1;
         private PictureBox pictureBox3;
+        public TextBox txtCorreo;
     }
 }

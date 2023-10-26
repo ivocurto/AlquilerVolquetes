@@ -149,10 +149,11 @@
             // 
             lblClave.AutoSize = true;
             lblClave.BackColor = Color.FromArgb(51, 171, 215);
+            lblClave.Enabled = false;
             lblClave.FlatStyle = FlatStyle.Flat;
             lblClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblClave.ForeColor = Color.White;
-            lblClave.Location = new Point(111, 200);
+            lblClave.Location = new Point(114, 200);
             lblClave.Name = "lblClave";
             lblClave.Size = new Size(64, 25);
             lblClave.TabIndex = 86;
@@ -177,6 +178,7 @@
             // 
             lblUsusario.AutoSize = true;
             lblUsusario.BackColor = Color.FromArgb(51, 171, 215);
+            lblUsusario.Enabled = false;
             lblUsusario.FlatStyle = FlatStyle.Flat;
             lblUsusario.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblUsusario.ForeColor = Color.White;

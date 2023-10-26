@@ -23,10 +23,10 @@ namespace AlquilerVolquetes
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            string clave = txtClaver.Text;
+            string clave = txtClave.Text;
             string reClave = txtReClave.Text;
-            string nombre = txtUsuarior.Text;
-            string mail = txtMail.Text;
+            string nombre = txtUsuario.Text;
+            string mail = txtCorreo.Text;
 
             List<string> datosUsuario = CrearListaDeDatosDeUsuario(clave, nombre, mail, reClave);
 
@@ -46,7 +46,7 @@ namespace AlquilerVolquetes
 
                 if (result == DialogResult.OK)
                 {
-                    txtClaver.Text = "";
+                    txtClave.Text = "";
                     txtReClave.Text = "";
                 }
             }
@@ -57,9 +57,9 @@ namespace AlquilerVolquetes
 
                 if (result == DialogResult.OK)
                 {
-                    txtMail.Text = "";
-                    txtUsuarior.Text = "";
-                    txtClaver.Text = "";
+                    txtCorreo.Text = "";
+                    txtUsuario.Text = "";
+                    txtClave.Text = "";
                     txtReClave.Text = "";
                 }
             }
@@ -70,7 +70,7 @@ namespace AlquilerVolquetes
 
                 if (result == DialogResult.OK)
                 {
-                    txtMail.Text = "";
+                    txtCorreo.Text = "";
                 }
             }
             else
@@ -92,6 +92,35 @@ namespace AlquilerVolquetes
 
         private void RegistroUsuario_Load(object sender, EventArgs e)
         {
+
+            MostrarLabel(txtUsuario, lblUsusario);
+            MostrarLabel(txtClave, lblClave);
+            MostrarLabel(txtCorreo, lblCorreo);
+            MostrarLabel(txtReClave, lblReClave);
+        }
+
+        private void MostrarLabel(TextBox textBox, Label label)
+        {
+            if (VerificarEstadoTxtBox(textBox))
+            {
+                label.Visible = true;
+            }
+            else
+            {
+                label.Visible = false;
+            }
+        }
+
+        private bool VerificarEstadoTxtBox(TextBox textBox)
+        {
+            if (textBox.Text == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private List<string> CrearListaDeDatosDeUsuario(string clave, string nombre, string mail, string reClave)
@@ -183,6 +212,7 @@ namespace AlquilerVolquetes
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
+            MostrarLabel(txtCorreo, lblCorreo);
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -195,6 +225,7 @@ namespace AlquilerVolquetes
 
         private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
+            MostrarLabel(txtUsuario, lblUsusario);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -207,6 +238,7 @@ namespace AlquilerVolquetes
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+            MostrarLabel(txtClave, lblClave);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -219,6 +251,7 @@ namespace AlquilerVolquetes
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            MostrarLabel(txtReClave, lblReClave);
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
