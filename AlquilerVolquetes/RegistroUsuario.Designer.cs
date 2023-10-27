@@ -104,7 +104,6 @@
             lblCorreo.Size = new Size(185, 25);
             lblCorreo.TabIndex = 73;
             lblCorreo.Text = "Correo electrónico";
-            lblCorreo.Click += label2_Click;
             // 
             // txtCorreo
             // 
@@ -131,7 +130,6 @@
             pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox4.TabIndex = 92;
             pictureBox4.TabStop = false;
-            pictureBox4.Click += pictureBox4_Click;
             // 
             // lblReClave
             // 
@@ -146,7 +144,6 @@
             lblReClave.Size = new Size(135, 25);
             lblReClave.TabIndex = 71;
             lblReClave.Text = "Repetir clave";
-            lblReClave.Click += label1_Click;
             // 
             // txtReClave
             // 
@@ -174,7 +171,6 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox3.TabIndex = 89;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
             // 
             // lblUsusario
             // 
@@ -189,7 +185,6 @@
             lblUsusario.Size = new Size(85, 25);
             lblUsusario.TabIndex = 78;
             lblUsusario.Text = "Usuario";
-            lblUsusario.Click += lblUsusario_Click;
             // 
             // txtUsuario
             // 
@@ -218,7 +213,6 @@
             lblClave.Size = new Size(64, 25);
             lblClave.TabIndex = 76;
             lblClave.Text = "Clave";
-            lblClave.Click += lblClave_Click;
             // 
             // lblRegister
             // 
@@ -232,7 +226,6 @@
             lblRegister.TabIndex = 13;
             lblRegister.Text = "REGISTRO";
             lblRegister.TextAlign = ContentAlignment.MiddleCenter;
-            lblRegister.Click += lblRegister_Click;
             // 
             // pictureBox1
             // 
@@ -245,7 +238,6 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // txtClave
             // 
@@ -291,7 +283,6 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 83;
             pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
             // 
             // RegistroUsuario
             // 
@@ -307,7 +298,7 @@
             Name = "RegistroUsuario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrar";
-            FormClosed += RegistroUsuario_FormClosed;
+            FormClosing += RegistroUsuario_FormClosing;
             Load += RegistroUsuario_Load;
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();

@@ -23,75 +23,6 @@ namespace AlquilerVolquetes
             listaUsuarios = lista;
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
-        {
-            string clave = txtClave.Text;
-            string reClave = txtReClave.Text;
-            string nombre = txtUsuario.Text;
-            string mail = txtCorreo.Text;
-
-            List<string> datosUsuario = CrearListaDeDatosDeUsuario(clave, nombre, mail, reClave);
-
-            if (!ComprobarStringVacio(datosUsuario))
-            {
-                ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
-                DialogResult result = modal.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    //
-                }
-            }
-            else if (!ValidarContraseña(datosUsuario))
-            {
-                ModalError modal = new ModalError("Las contraseñas no coinciden", "ERROR AL REGISTRARSE");
-                DialogResult result = modal.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    txtClave.Text = "";
-                    txtReClave.Text = "";
-                }
-            }
-            else if (!ComprobarExistenciaUsuario(datosUsuario, listaUsuarios))
-            {
-                ModalError modal = new ModalError("El nombre de usuario o el correo ya existen", "ERROR AL REGISTRARSE");
-                DialogResult result = modal.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    txtCorreo.Text = "";
-                    txtUsuario.Text = "";
-                    txtClave.Text = "";
-                    txtReClave.Text = "";
-                }
-            }
-            else if (!IsEmailFormat(mail))
-            {
-                ModalError modal = new ModalError("Formato de mail inválido", "ERROR AL REGISTRARSE");
-                DialogResult result = modal.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    txtCorreo.Text = "";
-                }
-            }
-            else
-            {
-                ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
-                DialogResult answer = exitoLogin.ShowDialog();
-                if (answer == DialogResult.OK)
-                {
-                    Usuario usuario = new Usuario(nombre, mail, clave, ERolUsuario.Usuario);
-                    listaUsuarios.Add(usuario);
-                    InicioSesion inicio = new InicioSesion(usuario);
-                    inicio.Show();
-                    this.Hide();
-                }
-
-            }
-        }
-
-
         private void RegistroUsuario_Load(object sender, EventArgs e)
         {
 
@@ -172,8 +103,45 @@ namespace AlquilerVolquetes
             return true;
         }
 
-        private void RegistroUsuario_FormClosed(object sender, FormClosedEventArgs e)
+        private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            previousSize = this.Size;
+            InicioSesion inicio = new InicioSesion();
+            inicio.Size = previousSize;
+            inicio.Show();
+            this.Hide();
+        }
+        private static bool IsEmailFormat(string input)
+        {
+            // Utilizamos una expresión regular para verificar el formato de correo electrónico.
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+            return Regex.IsMatch(input, emailPattern);
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtCorreo, lblCorreo);
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtUsuario, lblUsusario);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtClave, lblClave);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtReClave, lblReClave);
+        }
+
+        private void RegistroUsuario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.FormClosing -= RegistroUsuario_FormClosing;
+
             List<Form> formulariosACerrar = new List<Form>();
 
             foreach (Form formulario in Application.OpenForms)
@@ -190,80 +158,68 @@ namespace AlquilerVolquetes
             }
         }
 
-        private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            previousSize = this.Size;
-            InicioSesion inicio = new InicioSesion();
-            inicio.Size = previousSize;
-            inicio.Show();
-            this.Hide();
-        }
-        private static bool IsEmailFormat(string input)
-        {
-            // Utilizamos una expresión regular para verificar el formato de correo electrónico.
-            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
-            return Regex.IsMatch(input, emailPattern);
-        }
-
-        private void lblRegister_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            MostrarLabel(txtCorreo, lblCorreo);
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lblUsusario_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void txtUsuario_TextChanged(object sender, EventArgs e)
-        {
-            MostrarLabel(txtUsuario, lblUsusario);
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lblClave_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            MostrarLabel(txtClave, lblClave);
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            MostrarLabel(txtReClave, lblReClave);
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-        }
-
         private void btnIngresar_Click_1(object sender, EventArgs e)
         {
+            string clave = txtClave.Text;
+            string reClave = txtReClave.Text;
+            string nombre = txtUsuario.Text;
+            string mail = txtCorreo.Text;
+
+            List<string> datosUsuario = CrearListaDeDatosDeUsuario(clave, nombre, mail, reClave);
+
+            if (!ComprobarStringVacio(datosUsuario))
+            {
+                ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
+            }
+            else if (!ValidarContraseña(datosUsuario))
+            {
+                ModalError modal = new ModalError("Las contraseñas no coinciden", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtClave.Text = "";
+                    txtReClave.Text = "";
+                }
+            }
+            else if (!ComprobarExistenciaUsuario(datosUsuario, listaUsuarios))
+            {
+                ModalError modal = new ModalError("El nombre de usuario o el correo ya existen", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtCorreo.Text = "";
+                    txtUsuario.Text = "";
+                    txtClave.Text = "";
+                    txtReClave.Text = "";
+                }
+            }
+            else if (!IsEmailFormat(mail))
+            {
+                ModalError modal = new ModalError("Formato de mail inválido", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtCorreo.Text = "";
+                }
+            }
+            else
+            {
+                ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
+                DialogResult answer = exitoLogin.ShowDialog();
+                if (answer == DialogResult.OK)
+                {
+                    Usuario usuario = new Usuario(nombre, mail, clave, ERolUsuario.Usuario);
+                    listaUsuarios.Add(usuario);
+                    InicioSesion inicio = new InicioSesion(usuario);
+                    inicio.Show();
+                    this.Hide();
+                }
+
+            }
         }
     }
 }

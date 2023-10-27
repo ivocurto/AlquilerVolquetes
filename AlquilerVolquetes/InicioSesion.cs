@@ -115,28 +115,6 @@ namespace AlquilerVolquetes
             checkbox = cbAutoLogin.Checked;
         }
 
-        private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        }
-
-        private void lblLogin_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtUsuario_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txtClave_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void InicioSesion_Load(object sender, EventArgs e)
         {
             lblUsusario.Visible = false;
@@ -153,15 +131,6 @@ namespace AlquilerVolquetes
         private void txtUsuario_TextChanged_1(object sender, EventArgs e)
         {
             MostrarLabel(txtUsuario, lblUsusario);
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void MostrarLabel(System.Windows.Forms.TextBox textBox, System.Windows.Forms.Label label)
@@ -188,6 +157,24 @@ namespace AlquilerVolquetes
             }
         }
 
+        private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.FormClosing -= InicioSesion_FormClosing;
 
+            List<Form> formulariosACerrar = new List<Form>();
+
+            foreach (Form formulario in Application.OpenForms)
+            {
+                if (formulario != this)
+                {
+                    formulariosACerrar.Add(formulario);
+                }
+            }
+
+            foreach (Form formulario in formulariosACerrar)
+            {
+                formulario.Close();
+            }
+        }
     }
 }

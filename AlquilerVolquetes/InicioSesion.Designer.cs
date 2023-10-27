@@ -56,7 +56,6 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 83;
             pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
             // 
             // cbAutoLogin
             // 
@@ -143,7 +142,6 @@
             lblLogin.TabIndex = 13;
             lblLogin.Text = "INICIAR SESIÓN";
             lblLogin.TextAlign = ContentAlignment.MiddleCenter;
-            lblLogin.Click += lblLogin_Click;
             // 
             // lblClave
             // 
@@ -158,7 +156,6 @@
             lblClave.Size = new Size(64, 25);
             lblClave.TabIndex = 86;
             lblClave.Text = "Clave";
-            lblClave.Click += label1_Click;
             // 
             // txtUsuario
             // 
@@ -207,7 +204,6 @@
             pnlLogin.Name = "pnlLogin";
             pnlLogin.Size = new Size(412, 414);
             pnlLogin.TabIndex = 6;
-            pnlLogin.Paint += panel1_Paint;
             // 
             // InicioSesion
             // 
