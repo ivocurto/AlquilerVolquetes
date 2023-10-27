@@ -1,26 +1,24 @@
 ﻿namespace Clases
 {
-    public class Usuario
+    public abstract class Usuario
     {
-        private string nombreUsuario;
-        private string mailUsusario;
-        private string claveUsuario;
-        private int indexUsuario;
-        private ERolUsuario rol;
+        protected string nombreUsuario;
+        protected string mailUsuario;
+        protected string claveUsuario;
+        protected int indexUsuario;
 
-        
-        public Usuario(string nombreUsuario, string mailUsusario, string claveUsuario, ERolUsuario rol)
+        public Usuario(string nombreUsuario, string mailUsuario, string claveUsuario)
         {
             NombreUsuario = nombreUsuario;
-            MailUsusario = mailUsusario;
+            MailUsuario = mailUsuario;
             ClaveUsuario = claveUsuario;
-            Rol = rol;
+            
         }
 
         public string NombreUsuario { get => nombreUsuario; set => nombreUsuario = value; }
-        public string MailUsusario { get => mailUsusario; set => mailUsusario = value; }
+        public string MailUsuario { get => mailUsuario; set => mailUsuario = value; }
         public string ClaveUsuario { get => claveUsuario; set => claveUsuario = value; }
         public int IndexUsuario { get => indexUsuario; set => indexUsuario = value; }
-        public ERolUsuario Rol { get => rol; set => rol = value; }
     }
+
 }

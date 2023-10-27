@@ -14,10 +14,10 @@ namespace AlquilerVolquetes
 {
     public partial class RegistroUsuario : Form
     {
-
         private Size previousSize;
-        public List<Usuario> listaUsuarios;
-        public RegistroUsuario(List<Usuario> lista)
+        public List<Cliente> listaUsuarios;
+
+        public RegistroUsuario(List<Cliente> lista)
         {
             InitializeComponent();
             listaUsuarios = lista;
@@ -25,7 +25,6 @@ namespace AlquilerVolquetes
 
         private void RegistroUsuario_Load(object sender, EventArgs e)
         {
-
             MostrarLabel(txtUsuario, lblUsusario);
             MostrarLabel(txtClave, lblClave);
             MostrarLabel(txtCorreo, lblCorreo);
@@ -34,7 +33,7 @@ namespace AlquilerVolquetes
 
         private void MostrarLabel(TextBox textBox, Label label)
         {
-            if (VerificarEstadoTxtBox(textBox))
+            if (VerificarEstadoTxtBox(textBox.Text)) // Cambio aquí
             {
                 label.Visible = true;
             }
@@ -44,64 +43,11 @@ namespace AlquilerVolquetes
             }
         }
 
-        private bool VerificarEstadoTxtBox(TextBox textBox)
+        private bool VerificarEstadoTxtBox(string texto) // Cambio aquí
         {
-            if (textBox.Text == "")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return string.IsNullOrWhiteSpace(texto);
         }
 
-        private List<string> CrearListaDeDatosDeUsuario(string clave, string nombre, string mail, string reClave)
-        {
-            List<string> datos = new List<string>();
-            datos.Add(nombre);
-            datos.Add(clave);
-            datos.Add(mail);
-            datos.Add(reClave);
-            return datos;
-        }
-
-        private bool ValidarContraseña(List<string> datos)
-        {
-
-            if (datos[1] == datos[3])
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool ComprobarStringVacio(List<string> lista)
-        {
-
-            foreach (string s in lista)
-            {
-                if (s == "" || s == null)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private bool ComprobarExistenciaUsuario(List<string> lista, List<Usuario> listaUsuarios)
-        {
-
-            foreach (Usuario usuario in listaUsuarios)
-            {
-                if (usuario.NombreUsuario == lista[0] || usuario.MailUsusario == lista[2])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
 
         private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -110,12 +56,6 @@ namespace AlquilerVolquetes
             inicio.Size = previousSize;
             inicio.Show();
             this.Hide();
-        }
-        private static bool IsEmailFormat(string input)
-        {
-            // Utilizamos una expresión regular para verificar el formato de correo electrónico.
-            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
-            return Regex.IsMatch(input, emailPattern);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -165,14 +105,14 @@ namespace AlquilerVolquetes
             string nombre = txtUsuario.Text;
             string mail = txtCorreo.Text;
 
-            List<string> datosUsuario = CrearListaDeDatosDeUsuario(clave, nombre, mail, reClave);
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(clave, nombre, mail, reClave);
 
-            if (!ComprobarStringVacio(datosUsuario))
+            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
             {
                 ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
                 DialogResult result = modal.ShowDialog();
             }
-            else if (!ValidarContraseña(datosUsuario))
+            else if (!ManejoDeValidaciones.ValidarContraseña(datosUsuario))
             {
                 ModalError modal = new ModalError("Las contraseñas no coinciden", "ERROR AL REGISTRARSE");
                 DialogResult result = modal.ShowDialog();
@@ -183,7 +123,7 @@ namespace AlquilerVolquetes
                     txtReClave.Text = "";
                 }
             }
-            else if (!ComprobarExistenciaUsuario(datosUsuario, listaUsuarios))
+            else if (!ManejoDeValidaciones.ComprobarExistenciaUsuario(datosUsuario, listaUsuarios))
             {
                 ModalError modal = new ModalError("El nombre de usuario o el correo ya existen", "ERROR AL REGISTRARSE");
                 DialogResult result = modal.ShowDialog();
@@ -196,7 +136,7 @@ namespace AlquilerVolquetes
                     txtReClave.Text = "";
                 }
             }
-            else if (!IsEmailFormat(mail))
+            else if (!ManejoDeValidaciones.IsEmailFormat(mail))
             {
                 ModalError modal = new ModalError("Formato de mail inválido", "ERROR AL REGISTRARSE");
                 DialogResult result = modal.ShowDialog();
@@ -212,13 +152,12 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)
                 {
-                    Usuario usuario = new Usuario(nombre, mail, clave, ERolUsuario.Usuario);
+                    Cliente usuario = new Cliente(nombre, mail, clave);
                     listaUsuarios.Add(usuario);
                     InicioSesion inicio = new InicioSesion(usuario);
                     inicio.Show();
                     this.Hide();
                 }
-
             }
         }
     }

@@ -8,8 +8,8 @@ namespace AdminApp
 {
     public partial class RegistroAdmin : Form
     {
-        public List<Usuario> listaAdmins;
-        string rutaArchivoJson = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\usuarios.json";
+        public List<Admin> listaAdmins;
+        string rutaArchivoJson = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
         public RegistroAdmin()
         {
             InitializeComponent();
@@ -17,7 +17,7 @@ namespace AdminApp
 
 
 
-            listaAdmins = new List<Usuario>();
+            listaAdmins = new List<Admin>();
             try
             {
 
@@ -26,7 +26,7 @@ namespace AdminApp
 
                 string json = File.ReadAllText(rutaArchivoJson);
 
-                listaAdmins = JsonConvert.DeserializeObject<List<Usuario>>(json);
+                listaAdmins = JsonConvert.DeserializeObject<List<Admin>>(json);
 
             }
             catch (Exception ex)
@@ -61,11 +61,11 @@ namespace AdminApp
             }
             else
             {
-                Usuario usuario = new Usuario(nombre, mail, clave, ERolUsuario.Admin);
+                Admin usuario = new Admin(nombre, mail, clave);
 
                 if (listaAdmins == null)
                 {
-                    listaAdmins = new List<Usuario>();
+                    listaAdmins = new List<Admin>();
                 }
 
                 listaAdmins.Add(usuario);
@@ -128,7 +128,7 @@ namespace AdminApp
             {
                 foreach (Usuario usuario in listaAdmins)
                 {
-                    if (usuario.NombreUsuario == lista[0] || usuario.MailUsusario == lista[2])
+                    if (usuario.NombreUsuario == lista[0] || usuario.MailUsuario == lista[2])
                     {
                         return false;
                     }

@@ -21,42 +21,62 @@ namespace AlquilerVolquetes
     public partial class InicioSesion : Form
     {
 
-        protected static List<Usuario> usuarios = new List<Usuario>();
+        protected static List<Cliente> usuarios = new List<Cliente>();
+        protected static List<Admin> admins = new List<Admin>();
         public Usuario usuarioAcutal;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
+        string rutaArchivoJsonAdmin = "admins.json";
         private DataContainer data;
         private Size previousSize;
 
         public InicioSesion()
         {
             InitializeComponent();
-            usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
+            usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
-            if (data.CheckboxValue == true)
-            {
-                txtUsuario.Text = data.UserObject.NombreUsuario;
-                txtClave.Text = data.UserObject.ClaveUsuario;
-                cbAutoLogin.Checked = true;
-            }
+            //if (data.CheckboxValue == true)
+            //{
+            //    txtUsuario.Text = data.UserObject.NombreUsuario;
+            //    txtClave.Text = data.UserObject.ClaveUsuario;
+            //    cbAutoLogin.Checked = true;
+            //}
         }
 
-        public InicioSesion(Usuario usuario)
+        public InicioSesion(Cliente usuario)
         {
             InitializeComponent();
 
-            usuarios = JsonFileManager.LoadFromJson<Usuario>(rutaArchivoJson);
+            usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
+            if(usuarios is null)
+            {
+                usuarios = new List<Cliente>();
+            }
             usuarios.Add(usuario);
             usuario.IndexUsuario = usuarios.Count() - 1;
 
             JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
         }
 
+        public InicioSesion(Admin admin)
+        {
+            InitializeComponent();
+
+            admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoJsonAdmin);
+            admins.Add(admin);
+            admin.IndexUsuario = admins.Count() - 1;
+
+            JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
+        }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             previousSize = this.Size;
+            if(usuarios is null)
+            {
+                usuarios = new List<Cliente>();
+            }
             RegistroUsuario registro = new RegistroUsuario(usuarios);
             registro.Size = previousSize;
             registro.Show();
@@ -81,23 +101,43 @@ namespace AlquilerVolquetes
                         data = new DataContainer(checkbox, usuario);
                         JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
                         usuarioAcutal = usuario;
-                        if (usuarioAcutal.Rol == ERolUsuario.Admin)
-                        {
-                            PanelAdmin panelAdmin = new PanelAdmin();
-                            panelAdmin.Show();
-                            this.Hide();
-                            return;
-                        }
-                        else
-                        {
+                        
+                        
+                            usuarioAcutal = usuario;
                             PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
                             pantallaInicio.Show();
                             this.Hide();
                             return;
 
-                        }
+                        
+                        
                     }
 
+                }
+                foreach( var admin in admins)
+                {
+                    if(admin.NombreUsuario == nombreUsuario && admin.ClaveUsuario== clave)
+                    {
+                        ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
+
+                        DialogResult answer = exitoLogin.ShowDialog();
+                        if (answer == DialogResult.OK)
+                        {
+                            data = new DataContainer(checkbox, usuario);
+                            JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
+                            usuarioAcutal = usuario;
+
+
+                            PanelAdmin panelAdmin = new PanelAdmin();
+                            panelAdmin.Show();
+                            this.Hide();
+                            return;
+
+
+
+                        }
+                        
+                    }
                 }
             }
             ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");

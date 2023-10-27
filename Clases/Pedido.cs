@@ -17,7 +17,7 @@ namespace Clases
         private int idCliente;
         
 
-        public Pedido(string nombreUsuario, string mailUsusario, string claveUsuario,ERolUsuario rol , List<Volquete> volquetesPedidos, List<Volquete> volquetesInstalados, string direccion, string telefono, int valorCompra) : base(nombreUsuario, mailUsusario, claveUsuario, rol)
+        public Pedido(string nombreUsuario, string mailUsusario, string claveUsuario , List<Volquete> volquetesPedidos, List<Volquete> volquetesInstalados, string direccion, string telefono, int valorCompra) : base(nombreUsuario, mailUsusario, claveUsuario)
         {
             this.volquetesPedidos = volquetesPedidos;
             this.volquetesInstalados = volquetesInstalados;

@@ -32,7 +32,7 @@ namespace AlquilerVolquetes
             {
                 foreach (Pedido pedido in pedidos)
                 {
-                    if (pedido.MailUsusario == usuarioActual.MailUsusario)
+                    if (pedido.MailUsuario == usuarioActual.MailUsuario)
                     {
                         pedidoActual.Add(pedido);
                     }
