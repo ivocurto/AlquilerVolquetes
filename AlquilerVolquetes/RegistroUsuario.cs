@@ -14,6 +14,8 @@ namespace AlquilerVolquetes
 {
     public partial class RegistroUsuario : Form
     {
+
+        private Size previousSize;
         public List<Usuario> listaUsuarios;
         public RegistroUsuario(List<Usuario> lista)
         {
@@ -190,7 +192,9 @@ namespace AlquilerVolquetes
 
         private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            previousSize = this.Size;
             InicioSesion inicio = new InicioSesion();
+            inicio.Size = previousSize;
             inicio.Show();
             this.Hide();
         }

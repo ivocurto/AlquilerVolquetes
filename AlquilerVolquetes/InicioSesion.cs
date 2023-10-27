@@ -27,7 +27,7 @@ namespace AlquilerVolquetes
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
         private DataContainer data;
-
+        private Size previousSize;
 
         public InicioSesion()
         {
@@ -56,7 +56,9 @@ namespace AlquilerVolquetes
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            previousSize = this.Size;
             RegistroUsuario registro = new RegistroUsuario(usuarios);
+            registro.Size = previousSize;
             registro.Show();
             this.Hide();
         }
