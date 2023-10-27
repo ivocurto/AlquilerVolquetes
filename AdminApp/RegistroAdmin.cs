@@ -13,16 +13,16 @@ namespace AdminApp
         public RegistroAdmin()
         {
             InitializeComponent();
-            
 
-            
-            
+
+
+
             listaAdmins = new List<Usuario>();
             try
             {
 
 
-                
+
 
                 string json = File.ReadAllText(rutaArchivoJson);
 
@@ -36,7 +36,7 @@ namespace AdminApp
                 File.WriteAllText(rutaArchivoJson, json);
             }
         }
-    
+
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
@@ -73,6 +73,14 @@ namespace AdminApp
 
                 string jsonUsuarios = JsonConvert.SerializeObject(listaAdmins);
                 File.WriteAllText(rutaArchivoJson, jsonUsuarios);
+                ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
+                DialogResult answer = exitoLogin.ShowDialog();
+                if (answer == DialogResult.OK)
+                {
+                    InicioSesion inicio = new InicioSesion(usuario);
+                    inicio.Show();
+                    this.Hide();
+                }
             }
         }
 
@@ -116,7 +124,7 @@ namespace AdminApp
 
         private bool ComprobarExistenciaUsuario(List<string> lista)
         {
-            if(listaAdmins != null)
+            if (listaAdmins != null)
             {
                 foreach (Usuario usuario in listaAdmins)
                 {

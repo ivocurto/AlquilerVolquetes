@@ -12,6 +12,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using AdminApp;
+using System.Drawing.Drawing2D;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Reflection.Emit;
 
 namespace AlquilerVolquetes
 {
@@ -24,6 +27,7 @@ namespace AlquilerVolquetes
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
         private DataContainer data;
+        private Size previousSize;
 
         public InicioSesion()
         {
@@ -52,7 +56,9 @@ namespace AlquilerVolquetes
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            previousSize = this.Size;
             RegistroUsuario registro = new RegistroUsuario(usuarios);
+            registro.Size = previousSize;
             registro.Show();
             this.Hide();
         }
@@ -88,7 +94,7 @@ namespace AlquilerVolquetes
                             pantallaInicio.Show();
                             this.Hide();
                             return;
-                            
+
                         }
                     }
 
@@ -109,8 +115,66 @@ namespace AlquilerVolquetes
             checkbox = cbAutoLogin.Checked;
         }
 
+        private void InicioSesion_Load(object sender, EventArgs e)
+        {
+            lblUsusario.Visible = false;
+            lblClave.Visible = false;
+            MostrarLabel(txtUsuario, lblUsusario);
+            MostrarLabel(txtClave, lblClave);
+        }
+
+        private void txtClave_TextChanged_1(object sender, EventArgs e)
+        {
+            MostrarLabel(txtClave, lblClave);
+        }
+
+        private void txtUsuario_TextChanged_1(object sender, EventArgs e)
+        {
+            MostrarLabel(txtUsuario, lblUsusario);
+        }
+
+        private void MostrarLabel(System.Windows.Forms.TextBox textBox, System.Windows.Forms.Label label)
+        {
+            if (VerificarEstadoTxtBox(textBox))
+            {
+                label.Visible = true;
+            }
+            else
+            {
+                label.Visible = false;
+            }
+        }
+
+        private bool VerificarEstadoTxtBox(System.Windows.Forms.TextBox textBox)
+        {
+            if (textBox.Text == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.FormClosing -= InicioSesion_FormClosing;
+
+            List<Form> formulariosACerrar = new List<Form>();
+
+            foreach (Form formulario in Application.OpenForms)
+            {
+                if (formulario != this)
+                {
+                    formulariosACerrar.Add(formulario);
+                }
+            }
+
+            foreach (Form formulario in formulariosACerrar)
+            {
+                formulario.Close();
+            }
         }
     }
 }

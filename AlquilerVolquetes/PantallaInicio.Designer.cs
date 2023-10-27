@@ -124,6 +124,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio";
             FormClosing += PantallaInicio_FormClosing;
+            Load += PantallaInicio_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

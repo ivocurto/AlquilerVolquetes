@@ -133,7 +133,6 @@ namespace AlquilerVolquetes
 
         private void PantallaInicio_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Desasociar el manejador de eventos FormClosing para evitar llamadas recursivas
             this.FormClosing -= PantallaInicio_FormClosing;
 
             List<Form> formulariosACerrar = new List<Form>();
@@ -161,5 +160,9 @@ namespace AlquilerVolquetes
             }
         }
 
+        private void PantallaInicio_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

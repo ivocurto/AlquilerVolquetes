@@ -38,52 +38,48 @@
             lblRegister.AutoSize = true;
             lblRegister.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
             lblRegister.ForeColor = SystemColors.ControlDarkDark;
-            lblRegister.Location = new Point(430, 154);
+            lblRegister.Location = new Point(376, 116);
             lblRegister.Name = "lblRegister";
-            lblRegister.Size = new Size(415, 60);
+            lblRegister.Size = new Size(332, 48);
             lblRegister.TabIndex = 16;
             lblRegister.Text = "GENERAR ADMIN";
             // 
             // txtMail
             // 
             txtMail.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtMail.Location = new Point(441, 252);
-            txtMail.Margin = new Padding(3, 4, 3, 4);
+            txtMail.Location = new Point(386, 189);
             txtMail.Name = "txtMail";
             txtMail.PlaceholderText = " Correo electrónico";
-            txtMail.Size = new Size(363, 44);
+            txtMail.Size = new Size(318, 36);
             txtMail.TabIndex = 2;
             // 
             // txtUsuario
             // 
             txtUsuario.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUsuario.Location = new Point(441, 345);
-            txtUsuario.Margin = new Padding(3, 4, 3, 4);
+            txtUsuario.Location = new Point(386, 259);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.PlaceholderText = " Ususario";
-            txtUsuario.Size = new Size(363, 44);
+            txtUsuario.Size = new Size(318, 36);
             txtUsuario.TabIndex = 3;
             // 
             // txtClave
             // 
             txtClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtClave.Location = new Point(441, 439);
-            txtClave.Margin = new Padding(3, 4, 3, 4);
+            txtClave.Location = new Point(386, 329);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = " Contraseña";
-            txtClave.Size = new Size(363, 44);
+            txtClave.Size = new Size(318, 36);
             txtClave.TabIndex = 4;
             // 
             // txtReClave
             // 
             txtReClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtReClave.Location = new Point(441, 532);
-            txtReClave.Margin = new Padding(3, 4, 3, 4);
+            txtReClave.Location = new Point(386, 399);
             txtReClave.Name = "txtReClave";
             txtReClave.PasswordChar = '*';
             txtReClave.PlaceholderText = " Repetir contraseña";
-            txtReClave.Size = new Size(363, 44);
+            txtReClave.Size = new Size(318, 36);
             txtReClave.TabIndex = 5;
             // 
             // btnIngresar
@@ -91,10 +87,9 @@
             btnIngresar.BackColor = Color.DeepSkyBlue;
             btnIngresar.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
             btnIngresar.ForeColor = SystemColors.ButtonHighlight;
-            btnIngresar.Location = new Point(441, 668);
-            btnIngresar.Margin = new Padding(3, 4, 3, 4);
+            btnIngresar.Location = new Point(386, 501);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(363, 73);
+            btnIngresar.Size = new Size(318, 55);
             btnIngresar.TabIndex = 1;
             btnIngresar.Text = "GENERAR";
             btnIngresar.UseVisualStyleBackColor = false;
@@ -105,19 +100,19 @@
             lblRegistrarse.AutoSize = true;
             lblRegistrarse.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblRegistrarse.LinkColor = Color.DimGray;
-            lblRegistrarse.Location = new Point(484, 613);
+            lblRegistrarse.Location = new Point(604, 461);
             lblRegistrarse.Name = "lblRegistrarse";
-            lblRegistrarse.Size = new Size(284, 28);
+            lblRegistrarse.Size = new Size(100, 21);
             lblRegistrarse.TabIndex = 6;
             lblRegistrarse.TabStop = true;
-            lblRegistrarse.Text = "¿Desea eliminar alguna cuenta?";
+            lblRegistrarse.Text = "Iniciar sesión";
             lblRegistrarse.LinkClicked += lblRegistrarse_LinkClicked;
             // 
             // RegistroAdmin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1216, 908);
+            ClientSize = new Size(1064, 681);
             Controls.Add(lblRegistrarse);
             Controls.Add(btnIngresar);
             Controls.Add(txtReClave);
@@ -125,6 +120,7 @@
             Controls.Add(txtUsuario);
             Controls.Add(txtMail);
             Controls.Add(lblRegister);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "RegistroAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrar";
