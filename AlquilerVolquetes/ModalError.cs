@@ -13,6 +13,7 @@ namespace AlquilerVolquetes
     public partial class ModalError : AlquilerVolquetes.ModalExito
     {
         string tipoDeError;
+
         public ModalError(string error, string titulo) : base(titulo)
         {
             InitializeComponent();
