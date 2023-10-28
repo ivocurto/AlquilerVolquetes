@@ -27,7 +27,16 @@ namespace Clases
         {
             if (listaUsuarios == null)
             {
-                return true; // Otra lógica que desees seguir si la lista de usuarios es nula.
+                return true;
+            }
+
+            return !listaUsuarios.Any(usuario => usuario.NombreUsuario == lista[0] || usuario.MailUsuario == lista[2]);
+        }
+        public static bool ComprobarExistenciaAdmin(List<string> lista, List<Admin> listaUsuarios)
+        {
+            if (listaUsuarios == null)
+            {
+                return true;
             }
 
             return !listaUsuarios.Any(usuario => usuario.NombreUsuario == lista[0] || usuario.MailUsuario == lista[2]);

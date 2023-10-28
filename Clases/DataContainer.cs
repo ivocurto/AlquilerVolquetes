@@ -9,9 +9,9 @@ namespace Clases
     public class DataContainer
     {
         public bool CheckboxValue;
-        public Usuario UserObject;
+        public Cliente UserObject;
 
-        public DataContainer(bool checkboxValue, Usuario userObject)
+        public DataContainer(bool checkboxValue, Cliente userObject)
         {
             CheckboxValue = checkboxValue;
             UserObject = userObject;

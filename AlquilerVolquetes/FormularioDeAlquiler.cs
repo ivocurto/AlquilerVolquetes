@@ -6,13 +6,13 @@ namespace AlquilerVolquetes
     public partial class FormularioDeAlquiler : Form
     {
         private List<Volquete> volquetes;
-        public Usuario usuarioActual;
+        public Cliente usuarioActual;
         private List<Pedido> listaClientes;
         private string path = "pedidos.json";
         public int precioTotal;
         private Form formPrincipal;
 
-        public FormularioDeAlquiler(List<Volquete> lista, Usuario usuario, Form formularioPrincipal)
+        public FormularioDeAlquiler(List<Volquete> lista, Cliente usuario, Form formularioPrincipal)
         {
             InitializeComponent();
             volquetes = lista;
@@ -106,16 +106,9 @@ namespace AlquilerVolquetes
                 }
                 List<Volquete> volquetesInstalar = new List<Volquete>();
 
-                cliente = new Pedido(usuarioActual.NombreUsuario, usuarioActual.MailUsuario, usuarioActual.ClaveUsuario, volquetes, volquetesInstalar, txtDireccion.Text, txtTelefono.Text, precioTotal);
+                cliente = new Pedido( volquetes, volquetesInstalar, usuarioActual.NombreUsuario);
 
-                if (listaClientes.Count > 1)
-                {
-                    cliente.IdCliente = listaClientes.Count() - 1;
-                }
-                else
-                {
-                    cliente.IdCliente = 0;
-                }
+                
 
                 listaClientes.Add(cliente);
 

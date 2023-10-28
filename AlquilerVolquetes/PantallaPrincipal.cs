@@ -21,7 +21,7 @@ namespace AlquilerVolquetes
     {
         //LISTA CARRITO
         //LISTA CARRITO
-        public Usuario usuarioAcutal;
+        public Cliente usuarioAcutal;
 
         private List<Volquete> volquetes = new List<Volquete>();
         private List<Volquete> volquetesCarrito = new List<Volquete>();
@@ -34,7 +34,7 @@ namespace AlquilerVolquetes
         private Form pantallaInicio;
 
 
-        public PantallaPrincipal(Usuario usuario, Form padre)
+        public PantallaPrincipal(Cliente usuario, Form padre)
         {
             InitializeComponent();
             usuarioAcutal = usuario;

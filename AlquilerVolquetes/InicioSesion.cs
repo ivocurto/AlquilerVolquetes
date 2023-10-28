@@ -23,7 +23,7 @@ namespace AlquilerVolquetes
 
         protected static List<Cliente> usuarios = new List<Cliente>();
         protected static List<Admin> admins = new List<Admin>();
-        public Usuario usuarioAcutal;
+        public Cliente usuarioAcutal;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
@@ -36,13 +36,13 @@ namespace AlquilerVolquetes
             InitializeComponent();
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
-
-            //if (data.CheckboxValue == true)
-            //{
-            //    txtUsuario.Text = data.UserObject.NombreUsuario;
-            //    txtClave.Text = data.UserObject.ClaveUsuario;
-            //    cbAutoLogin.Checked = true;
-            //}
+            
+            if (data != null && data.CheckboxValue == true)
+            {
+                txtUsuario.Text = data.UserObject.NombreUsuario;
+                txtClave.Text = data.UserObject.ClaveUsuario;
+                cbAutoLogin.Checked = true;
+            }
         }
 
         public InicioSesion(Cliente usuario)

@@ -10,6 +10,7 @@ namespace AdminApp
     {
         public List<Admin> listaAdmins;
         string rutaArchivoJson = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
+        public List<Cliente> clientes;
         public RegistroAdmin()
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace AdminApp
                 string json = JsonConvert.SerializeObject(listaAdmins);
                 File.WriteAllText(rutaArchivoJson, json);
             }
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
         }
 
 
@@ -45,19 +47,23 @@ namespace AdminApp
             string nombre = txtUsuario.Text;
             string mail = txtMail.Text;
 
-            List<string> datosUsuario = CrearListaDeDatosDeUsuario(clave, nombre, mail, reClave);
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(clave, nombre, mail, reClave);
 
-            if (!ComprobarStringVacio(datosUsuario))
+            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
             {
                 MessageBox.Show("Por favor, completa todos los campos.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!ValidarContraseña(datosUsuario))
+            else if (!ManejoDeValidaciones.ValidarContraseña(datosUsuario))
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!ComprobarExistenciaUsuario(datosUsuario))
+            else if (!ManejoDeValidaciones.ComprobarExistenciaUsuario(datosUsuario, clientes))
             {
                 MessageBox.Show("El nombre de usuario o el correo ya existen.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if(!ManejoDeValidaciones.ComprobarExistenciaAdmin(datosUsuario, listaAdmins))
+            {
+
             }
             else
             {
@@ -89,55 +95,7 @@ namespace AdminApp
         {
         }
 
-        private List<string> CrearListaDeDatosDeUsuario(string clave, string nombre, string mail, string reClave)
-        {
-            List<string> datos = new List<string>();
-            datos.Add(nombre);
-            datos.Add(clave);
-            datos.Add(mail);
-            datos.Add(reClave);
-            return datos;
-        }
-
-        private bool ValidarContraseña(List<string> datos)
-        {
-
-            if (datos[1] == datos[3])
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool ComprobarStringVacio(List<string> lista)
-        {
-
-            foreach (string s in lista)
-            {
-                if (s == "" || s == null)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private bool ComprobarExistenciaUsuario(List<string> lista)
-        {
-            if (listaAdmins != null)
-            {
-                foreach (Usuario usuario in listaAdmins)
-                {
-                    if (usuario.NombreUsuario == lista[0] || usuario.MailUsuario == lista[2])
-                    {
-                        return false;
-                    }
-                }
-
-            }
-
-            return true;
-        }
+       
 
         private void RegistroAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {

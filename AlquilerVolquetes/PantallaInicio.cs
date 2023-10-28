@@ -17,7 +17,7 @@ namespace AlquilerVolquetes
         MisVolquetes misVolquetes;
         Home home;
         InicioSesion inicioSesion;
-        public Usuario usuarioAcutal;
+        public Cliente usuarioAcutal;
         private Pedido pedidoActual;
         private List<Pedido> clientes;
         private bool flagPantallaPrincipal = false;
@@ -26,7 +26,7 @@ namespace AlquilerVolquetes
         private List<Form> formsAbiertos = new List<Form>();
         private Form inicioS;
         Button dummyButton = new Button();
-        public PantallaInicio(Usuario usuario, Form inicioSesion)
+        public PantallaInicio(Cliente usuario, Form inicioSesion)
         {
             InitializeComponent();
             inicioS = inicioSesion;
@@ -37,7 +37,7 @@ namespace AlquilerVolquetes
             {
                 foreach (Pedido cliente in clientes)
                 {
-                    if (cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
+                    if (cliente.Cliente == usuarioAcutal.NombreUsuario)
                     {
                         pedidoActual = cliente;
                         break;
@@ -54,7 +54,7 @@ namespace AlquilerVolquetes
             }
         }
 
-        public PantallaInicio(Usuario usuario, Form inicioSesion, bool abrirMisVolquetes)
+        public PantallaInicio(Cliente usuario, Form inicioSesion, bool abrirMisVolquetes)
         {
             InitializeComponent();
             inicioS = inicioSesion;
@@ -65,7 +65,7 @@ namespace AlquilerVolquetes
             {
                 foreach (Pedido cliente in clientes)
                 {
-                    if (cliente.NombreUsuario == usuarioAcutal.NombreUsuario)
+                    if (cliente.Cliente == usuarioAcutal.NombreUsuario)
                     {
                         pedidoActual = cliente;
                         break;
