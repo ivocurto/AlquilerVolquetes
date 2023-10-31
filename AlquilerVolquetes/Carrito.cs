@@ -15,10 +15,10 @@ namespace AlquilerVolquetes
     public partial class Carrito : Form
     {
         private List<Volquete> volquetes;
-        public Usuario usuarioActual;
+        public Cliente usuarioActual;
         private Form formularioPrincipal;
 
-        public Carrito(List<Volquete> lista, Usuario usuario, Form formPrincipal)
+        public Carrito(List<Volquete> lista, Cliente usuario, Form formPrincipal)
         {
             InitializeComponent();
             usuarioActual = usuario;

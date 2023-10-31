@@ -108,6 +108,14 @@ namespace AlquilerVolquetes
 
                 cliente = new Pedido( volquetes, volquetesInstalar, usuarioActual.NombreUsuario);
 
+                if (listaClientes.Count > 1)
+                {
+                    cliente.IdCliente = listaClientes.Count() - 1;
+                }
+                else
+                {
+                    cliente.IdCliente = 0;
+                }
                 
 
                 listaClientes.Add(cliente);

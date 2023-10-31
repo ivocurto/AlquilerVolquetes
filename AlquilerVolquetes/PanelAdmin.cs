@@ -35,7 +35,7 @@ namespace AdminApp
                                 formato += volquete.ToString() + " - ";
                             }
                         }
-                        lstPedidosTotales.Items.Add($"USUARIO: {pedido.NombreUsuario.ToUpper()} VOLQUETES A INSTALAR: {formato}");
+                        lstPedidosTotales.Items.Add($"USUARIO: {pedido.Cliente.ToUpper()} VOLQUETES A INSTALAR: {formato}");
 
                     }
                 }
