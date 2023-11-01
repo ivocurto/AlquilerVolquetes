@@ -84,7 +84,7 @@
             btnIngresar.Margin = new Padding(0);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(188, 55);
-            btnIngresar.TabIndex = 1;
+            btnIngresar.TabIndex = 4;
             btnIngresar.Text = "INGRESAR";
             btnIngresar.UseVisualStyleBackColor = false;
             btnIngresar.Click += btnIngresar_Click;
@@ -97,7 +97,7 @@
             lblRegistrarse.Location = new Point(0, 256);
             lblRegistrarse.Name = "lblRegistrarse";
             lblRegistrarse.Size = new Size(412, 21);
-            lblRegistrarse.TabIndex = 4;
+            lblRegistrarse.TabIndex = 3;
             lblRegistrarse.TabStop = true;
             lblRegistrarse.Text = "¿No tienes una cuenta? Registrate";
             lblRegistrarse.TextAlign = ContentAlignment.MiddleCenter;
@@ -114,7 +114,7 @@
             txtClave.Margin = new Padding(0);
             txtClave.Name = "txtClave";
             txtClave.Size = new Size(214, 23);
-            txtClave.TabIndex = 84;
+            txtClave.TabIndex = 2;
             txtClave.UseSystemPasswordChar = true;
             txtClave.TextChanged += txtClave_TextChanged_1;
             // 
@@ -139,7 +139,7 @@
             lblLogin.Margin = new Padding(0);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(412, 49);
-            lblLogin.TabIndex = 13;
+            lblLogin.TabIndex = 0;
             lblLogin.Text = "INICIAR SESIÓN";
             lblLogin.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -168,7 +168,7 @@
             txtUsuario.Margin = new Padding(0);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(214, 23);
-            txtUsuario.TabIndex = 87;
+            txtUsuario.TabIndex = 1;
             txtUsuario.TextChanged += txtUsuario_TextChanged_1;
             // 
             // lblUsusario

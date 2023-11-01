@@ -31,13 +31,14 @@ namespace AlquilerVolquetes
         string rutaArchivoJsonAdmin = "admins.json";
         private DataContainer data;
         private Size previousSize;
+        private Point previousLocation;
 
         public InicioSesion()
         {
             InitializeComponent();
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
-            
+
             if (data != null && data.CheckboxValue == true)
             {
                 txtUsuario.Text = data.UserObject.NombreUsuario;
@@ -51,7 +52,7 @@ namespace AlquilerVolquetes
             InitializeComponent();
 
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-            if(usuarios is null)
+            if (usuarios is null)
             {
                 usuarios = new List<Cliente>();
             }
@@ -74,29 +75,32 @@ namespace AlquilerVolquetes
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             previousSize = this.Size;
-            if(usuarios is null)
+            previousLocation = this.Location;
+            if (usuarios is null)
             {
                 usuarios = new List<Cliente>();
             }
             RegistroUsuario registro = new RegistroUsuario(usuarios);
-            MantenerPantallaCompleta(this, registro, previousSize);
+            MantenerPantallaCompleta(this, registro, previousSize, previousLocation);
             registro.Show();
             this.Hide();
         }
 
-        public static void MantenerPantallaCompleta(Form form, Form nextForm, Size previousSize)
+        public static void MantenerPantallaCompleta(Form form, Form nextForm, Size previousSize, Point previousLocation)
         {
             if (form.WindowState == FormWindowState.Maximized)
             {
                 nextForm.WindowState = FormWindowState.Maximized;
+                
             }
             else
             {
+                nextForm.Location = previousLocation;
                 nextForm.Size = previousSize;
             }
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private void btnIngresar_Click(object sender, EventArgs e) 
         {
 
             string nombreUsuario = txtUsuario.Text;
@@ -117,16 +121,17 @@ namespace AlquilerVolquetes
                         usuarioAcutal = usuario;
                         PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
                         previousSize = this.Size;
-                        MantenerPantallaCompleta(this, pantallaInicio, previousSize);
+                        previousLocation = this.Location;
+                        MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
                         pantallaInicio.Show();
                         this.Hide();
                         return;
                     }
 
                 }
-                foreach( var admin in admins)
+                foreach (var admin in admins)
                 {
-                    if(admin.NombreUsuario == nombreUsuario && admin.ClaveUsuario== clave)
+                    if (admin.NombreUsuario == nombreUsuario && admin.ClaveUsuario == clave)
                     {
                         ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
 
@@ -146,7 +151,7 @@ namespace AlquilerVolquetes
 
 
                         }
-                        
+
                     }
                 }
             }

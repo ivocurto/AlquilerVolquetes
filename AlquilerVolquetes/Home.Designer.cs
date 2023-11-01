@@ -143,6 +143,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = Color.White;
+            BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1090, 678);
             Controls.Add(label4);
             Controls.Add(pictureBox4);

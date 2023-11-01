@@ -63,7 +63,8 @@ namespace AlquilerVolquetes
             if (form.WindowState == FormWindowState.Maximized)
             {
                 nextForm.WindowState = FormWindowState.Maximized;
-            } else
+            }
+            else
             {
                 nextForm.Size = previousSize;
             }

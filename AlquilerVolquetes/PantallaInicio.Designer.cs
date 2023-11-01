@@ -121,7 +121,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             Name = "PantallaInicio";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.Manual;
             Text = "Inicio";
             FormClosing += PantallaInicio_FormClosing;
             Load += PantallaInicio_Load;
