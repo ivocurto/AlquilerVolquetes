@@ -28,17 +28,17 @@ namespace AlquilerVolquetes
         {
             pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
             pedidoActual = new List<Pedido>();
-            if (pedidos is not null)
-            {
-                foreach (Pedido pedido in pedidos)
-                {
-                    if (pedido.MailUsuario == usuarioActual.MailUsuario)
-                    {
-                        pedidoActual.Add(pedido);
-                    }
-                }
+            //if (pedidos is not null)
+            //{
+            //    foreach (Pedido pedido in pedidos)
+            //    {
+            //        //if (pedido.MailUsuario == usuarioActual.MailUsuario)
+            //        //{
+            //        //    pedidoActual.Add(pedido);
+            //        //}
+            //    }
 
-            }
+            //}
 
             esCliente = false;
             if (pedidoActual is not null)

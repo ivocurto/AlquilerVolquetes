@@ -15,6 +15,7 @@ using AdminApp;
 using System.Drawing.Drawing2D;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Reflection.Emit;
+using Microsoft.Win32;
 
 namespace AlquilerVolquetes
 {
@@ -78,9 +79,21 @@ namespace AlquilerVolquetes
                 usuarios = new List<Cliente>();
             }
             RegistroUsuario registro = new RegistroUsuario(usuarios);
-            registro.Size = previousSize;
+            MantenerPantallaCompleta(this, registro, previousSize);
             registro.Show();
             this.Hide();
+        }
+
+        public static void MantenerPantallaCompleta(Form form, Form nextForm, Size previousSize)
+        {
+            if (form.WindowState == FormWindowState.Maximized)
+            {
+                nextForm.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                nextForm.Size = previousSize;
+            }
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -96,21 +109,18 @@ namespace AlquilerVolquetes
                     ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
 
                     DialogResult answer = exitoLogin.ShowDialog();
-                    if (answer == DialogResult.OK)
+                    if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                     {
                         data = new DataContainer(checkbox, usuario);
                         JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
                         usuarioAcutal = usuario;
-                        
-                        
-                            usuarioAcutal = usuario;
-                            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
-                            pantallaInicio.Show();
-                            this.Hide();
-                            return;
-
-                        
-                        
+                        usuarioAcutal = usuario;
+                        PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+                        previousSize = this.Size;
+                        MantenerPantallaCompleta(this, pantallaInicio, previousSize);
+                        pantallaInicio.Show();
+                        this.Hide();
+                        return;
                     }
 
                 }
