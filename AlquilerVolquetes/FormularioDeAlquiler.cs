@@ -7,10 +7,11 @@ namespace AlquilerVolquetes
     {
         private List<Volquete> volquetes;
         public Cliente usuarioActual;
-        private List<Pedido> listaClientes;
+        private List<Pedido> pedidos;
         private string path = "pedidos.json";
         public int precioTotal;
         private Form formPrincipal;
+        private List<Cliente> clientes;
 
         public FormularioDeAlquiler(List<Volquete> lista, Cliente usuario, Form formularioPrincipal)
         {
@@ -18,7 +19,9 @@ namespace AlquilerVolquetes
             volquetes = lista;
             usuarioActual = usuario;
             formPrincipal = formularioPrincipal;
-            listaClientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
+            pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
+
             MostrarProductosAComprar();
         }
 
@@ -99,28 +102,39 @@ namespace AlquilerVolquetes
             }
             else
             {
-                Pedido cliente;
-                if (listaClientes is null)
+                Pedido pedido;
+                if (pedidos is null)
                 {
-                    listaClientes = new List<Pedido>();
+                    pedidos = new List<Pedido>();
                 }
                 List<Volquete> volquetesInstalar = new List<Volquete>();
 
-                cliente = new Pedido( volquetes, volquetesInstalar, usuarioActual.NombreUsuario);
+                pedido = new Pedido( volquetes, volquetesInstalar, usuarioActual.NombreUsuario);
 
-                if (listaClientes.Count > 1)
+                if (pedidos.Count > 1)
                 {
-                    cliente.IdCliente = listaClientes.Count() - 1;
+                    pedido.IdCliente = pedidos.Count() - 1;
                 }
                 else
                 {
-                    cliente.IdCliente = 0;
+                    pedido.IdCliente = 0;
                 }
                 
 
-                listaClientes.Add(cliente);
-
-                JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, listaClientes);
+                pedidos.Add(pedido);
+                usuarioActual.Pedidos.Add(pedido);
+                if (clientes != null)
+                {
+                    for (int i = 0; i < clientes.Count; i++)
+                    {
+                        if (clientes[i].NombreUsuario == usuarioActual.NombreUsuario)
+                        {
+                            clientes[i] = usuarioActual; // Modificar el cliente en la lista
+                        }
+                    }
+                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes); // Guardar la lista actualizada
+                }
+                JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, pedidos);
                 ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
                 DialogResult result = compraExitosa.ShowDialog();
 

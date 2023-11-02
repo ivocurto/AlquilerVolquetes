@@ -14,10 +14,10 @@ namespace AlquilerVolquetes
     public partial class MisVolquetes : Form
     {
         private List<Pedido> pedidoActual;
-        public Usuario usuarioActual;
+        public Cliente usuarioActual;
         private bool esCliente;
         private List<Pedido> pedidos;
-        public MisVolquetes(Usuario usuario)
+        public MisVolquetes(Cliente usuario)
         {
             InitializeComponent();
 
@@ -26,19 +26,19 @@ namespace AlquilerVolquetes
         }
         private void MisVolquetes_Activated(object sender, EventArgs e)
         {
-            pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
-            pedidoActual = new List<Pedido>();
-            if (pedidos is not null)
-            {
-                foreach (Pedido pedido in pedidos)
-                {
-                    if (pedido.MailUsuario == usuarioActual.MailUsuario)
-                    {
-                        pedidoActual.Add(pedido);
-                    }
-                }
+            //pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
+            pedidoActual = usuarioActual.Pedidos;
+            //if (pedidos is not null)
+            //{
+            //    foreach (Pedido pedido in pedidos)
+            //    {
+            //        if (pedido.Cliente == usuarioActual.NombreUsuario)
+            //        {
+            //            pedidoActual.Add(pedido);
+            //        }
+            //    }
 
-            }
+            //}
 
             esCliente = false;
             if (pedidoActual is not null)

@@ -88,6 +88,10 @@ namespace AlquilerVolquetes
 
             string nombreUsuario = txtUsuario.Text;
             string clave = txtClave.Text;
+            if(usuarios is null)
+            {
+                usuarios = new List<Cliente>();
+            }
             foreach (var usuario in usuarios)
             {
                 if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
