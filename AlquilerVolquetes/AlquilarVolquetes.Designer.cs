@@ -1,6 +1,6 @@
 ﻿namespace AlquilerVolquetes
 {
-    partial class PantallaPrincipal : Form
+    partial class AlquilarVolquetes : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PantallaPrincipal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlquilarVolquetes));
             pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();

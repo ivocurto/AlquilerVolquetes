@@ -38,51 +38,66 @@
             // 
             // lblTituloMisVolquetes
             // 
+            lblTituloMisVolquetes.Anchor = AnchorStyles.Top;
             lblTituloMisVolquetes.AutoSize = true;
-            lblTituloMisVolquetes.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTituloMisVolquetes.ForeColor = SystemColors.ControlDarkDark;
-            lblTituloMisVolquetes.Location = new Point(306, 39);
+            lblTituloMisVolquetes.Font = new Font("Trebuchet MS", 30F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTituloMisVolquetes.ForeColor = Color.White;
+            lblTituloMisVolquetes.Location = new Point(106, 9);
             lblTituloMisVolquetes.Name = "lblTituloMisVolquetes";
-            lblTituloMisVolquetes.Size = new Size(483, 48);
+            lblTituloMisVolquetes.Padding = new Padding(0, 35, 0, 0);
+            lblTituloMisVolquetes.Size = new Size(463, 84);
             lblTituloMisVolquetes.TabIndex = 23;
             lblTituloMisVolquetes.Text = "VOLQUETES ALQUILADOS";
+            lblTituloMisVolquetes.TextAlign = ContentAlignment.TopCenter;
             // 
             // lstEnviando
             // 
+            lstEnviando.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lstEnviando.BackColor = Color.FromArgb(117, 213, 235);
+            lstEnviando.BorderStyle = BorderStyle.None;
             lstEnviando.FormattingEnabled = true;
             lstEnviando.ItemHeight = 15;
-            lstEnviando.Location = new Point(224, 156);
+            lstEnviando.Location = new Point(30, 170);
+            lstEnviando.Margin = new Padding(35, 10, 35, 10);
             lstEnviando.Name = "lstEnviando";
-            lstEnviando.Size = new Size(608, 184);
+            lstEnviando.Size = new Size(656, 195);
             lstEnviando.TabIndex = 24;
             lstEnviando.DrawItem += lstEnviando_DrawItem;
             // 
             // lstColocados
             // 
+            lstColocados.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lstColocados.BackColor = Color.FromArgb(117, 213, 235);
+            lstColocados.BorderStyle = BorderStyle.None;
             lstColocados.FormattingEnabled = true;
             lstColocados.ItemHeight = 15;
-            lstColocados.Location = new Point(224, 394);
+            lstColocados.Location = new Point(30, 427);
+            lstColocados.Margin = new Padding(35, 10, 35, 10);
             lstColocados.Name = "lstColocados";
-            lstColocados.Size = new Size(608, 184);
+            lstColocados.Size = new Size(656, 195);
             lstColocados.TabIndex = 25;
             // 
             // lblEnviando
             // 
+            lblEnviando.Anchor = AnchorStyles.Left;
             lblEnviando.AutoSize = true;
             lblEnviando.Font = new Font("Bahnschrift SemiBold SemiConden", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEnviando.Location = new Point(224, 126);
+            lblEnviando.Location = new Point(0, 131);
             lblEnviando.Name = "lblEnviando";
-            lblEnviando.Size = new Size(213, 27);
+            lblEnviando.Padding = new Padding(50, 0, 0, 0);
+            lblEnviando.Size = new Size(263, 27);
             lblEnviando.TabIndex = 26;
             lblEnviando.Text = "VOLQUETES A COLOCAR";
             // 
             // lblColocados
             // 
+            lblColocados.Anchor = AnchorStyles.Left;
             lblColocados.AutoSize = true;
             lblColocados.Font = new Font("Bahnschrift SemiBold SemiConden", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lblColocados.Location = new Point(224, 364);
+            lblColocados.Location = new Point(0, 390);
             lblColocados.Name = "lblColocados";
-            lblColocados.Size = new Size(220, 27);
+            lblColocados.Padding = new Padding(50, 0, 0, 0);
+            lblColocados.Size = new Size(270, 27);
             lblColocados.TabIndex = 27;
             lblColocados.Text = "VOLQUETES COLOCADOS";
             // 
@@ -97,17 +112,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1090, 678);
-            ControlBox = false;
+            BackColor = Color.FromArgb(61, 188, 219);
+            ClientSize = new Size(714, 681);
             Controls.Add(linkLabel1);
             Controls.Add(lblColocados);
             Controls.Add(lblEnviando);
             Controls.Add(lstColocados);
             Controls.Add(lstEnviando);
             Controls.Add(lblTituloMisVolquetes);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "MisVolquetes";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "MisVolquetes";
             ResumeLayout(false);
             PerformLayout();

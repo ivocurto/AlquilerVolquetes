@@ -14,7 +14,6 @@ namespace Clases
         private List<Volquete> volquetesInstalados;
         private int idCliente;
        
-        
 
         public Pedido(List<Volquete> volquetesPedidos, List<Volquete> volquetesInstalados, string cliente) 
         {

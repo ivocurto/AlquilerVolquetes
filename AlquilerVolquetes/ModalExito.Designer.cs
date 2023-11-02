@@ -58,7 +58,10 @@
             // 
             // btnAgregarAlCarrito
             // 
-            btnAgregarAlCarrito.BackColor = Color.DeepSkyBlue;
+            btnAgregarAlCarrito.BackColor = Color.FromArgb(26, 157, 192);
+            btnAgregarAlCarrito.FlatAppearance.BorderSize = 0;
+            btnAgregarAlCarrito.FlatAppearance.MouseDownBackColor = Color.FromArgb(27, 102, 131);
+            btnAgregarAlCarrito.FlatAppearance.MouseOverBackColor = Color.FromArgb(27, 102, 131);
             btnAgregarAlCarrito.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnAgregarAlCarrito.ForeColor = SystemColors.ButtonHighlight;
             btnAgregarAlCarrito.Location = new Point(150, 205);
@@ -78,8 +81,8 @@
             Controls.Add(pictureBox1);
             Controls.Add(lblTitulo);
             Name = "ModalExito";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "ModalExitoLogin";
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterParent;
             Load += ModalExitoLogin_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

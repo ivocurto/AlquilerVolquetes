@@ -143,7 +143,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1090, 678);
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            BackColor = Color.White;
+            BackgroundImageLayout = ImageLayout.None;
+            ClientSize = new Size(1189, 798);
             Controls.Add(label4);
             Controls.Add(pictureBox4);
             Controls.Add(label3);
@@ -154,8 +158,10 @@
             Controls.Add(pictureBox1);
             Controls.Add(lblLogin);
             FormBorderStyle = FormBorderStyle.None;
+            MdiChildrenMinimizedAnchorBottom = false;
+            MinimizeBox = false;
             Name = "Home";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Home";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();

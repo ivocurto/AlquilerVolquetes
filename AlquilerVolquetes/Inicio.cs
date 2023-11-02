@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace AlquilerVolquetes
 {
-    public partial class Home : Form
+    public partial class Inicio : Form
     {
-        public Home()
+        public Inicio()
         {
             InitializeComponent();
         }
-
     }
 }

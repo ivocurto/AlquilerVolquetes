@@ -53,9 +53,21 @@ namespace AlquilerVolquetes
         {
             previousSize = this.Size;
             InicioSesion inicio = new InicioSesion();
-            inicio.Size = previousSize;
+            MantenerPantallaCompleta(this, inicio, previousSize);
             inicio.Show();
             this.Hide();
+        }
+
+        public static void MantenerPantallaCompleta(Form form, Form nextForm, Size previousSize)
+        {
+            if (form.WindowState == FormWindowState.Maximized)
+            {
+                nextForm.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                nextForm.Size = previousSize;
+            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
