@@ -59,8 +59,8 @@
             // 
             btnCerrarSesion.Dock = DockStyle.Top;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCerrarSesion.FlatAppearance.MouseDownBackColor = Color.Black;
-            btnCerrarSesion.FlatAppearance.MouseOverBackColor = Color.Black;
+            btnCerrarSesion.FlatAppearance.MouseDownBackColor = Color.FromArgb(27, 102, 131);
+            btnCerrarSesion.FlatAppearance.MouseOverBackColor = Color.FromArgb(27, 102, 131);
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
             btnCerrarSesion.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnCerrarSesion.ForeColor = Color.Gainsboro;
@@ -79,8 +79,8 @@
             // 
             btnAlquilar.Dock = DockStyle.Top;
             btnAlquilar.FlatAppearance.BorderSize = 0;
-            btnAlquilar.FlatAppearance.MouseDownBackColor = Color.Black;
-            btnAlquilar.FlatAppearance.MouseOverBackColor = Color.Black;
+            btnAlquilar.FlatAppearance.MouseDownBackColor = Color.FromArgb(27, 102, 131);
+            btnAlquilar.FlatAppearance.MouseOverBackColor = Color.FromArgb(27, 102, 131);
             btnAlquilar.FlatStyle = FlatStyle.Flat;
             btnAlquilar.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnAlquilar.ForeColor = Color.Gainsboro;
@@ -99,8 +99,8 @@
             // 
             btnMisVolquetes.Dock = DockStyle.Top;
             btnMisVolquetes.FlatAppearance.BorderSize = 0;
-            btnMisVolquetes.FlatAppearance.MouseDownBackColor = Color.Black;
-            btnMisVolquetes.FlatAppearance.MouseOverBackColor = Color.Black;
+            btnMisVolquetes.FlatAppearance.MouseDownBackColor = Color.FromArgb(27, 102, 131);
+            btnMisVolquetes.FlatAppearance.MouseOverBackColor = Color.FromArgb(27, 102, 131);
             btnMisVolquetes.FlatStyle = FlatStyle.Flat;
             btnMisVolquetes.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnMisVolquetes.ForeColor = Color.Gainsboro;
@@ -119,8 +119,8 @@
             // 
             btnInicio.Dock = DockStyle.Top;
             btnInicio.FlatAppearance.BorderSize = 0;
-            btnInicio.FlatAppearance.MouseDownBackColor = Color.Black;
-            btnInicio.FlatAppearance.MouseOverBackColor = Color.Black;
+            btnInicio.FlatAppearance.MouseDownBackColor = Color.FromArgb(27, 102, 131);
+            btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(27, 102, 131);
             btnInicio.FlatStyle = FlatStyle.Flat;
             btnInicio.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnInicio.ForeColor = Color.Gainsboro;
@@ -149,6 +149,7 @@
             panelContenedor.BackColor = Color.FromArgb(61, 188, 219);
             panelContenedor.Dock = DockStyle.Fill;
             panelContenedor.Location = new Point(350, 0);
+            panelContenedor.MinimumSize = new Size(714, 681);
             panelContenedor.Name = "panelContenedor";
             panelContenedor.Size = new Size(714, 681);
             panelContenedor.TabIndex = 2;

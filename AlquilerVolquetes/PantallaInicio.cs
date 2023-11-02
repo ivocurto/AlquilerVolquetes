@@ -97,13 +97,19 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new PantallaPrincipal(usuarioAcutal, this));
+            abrirFormularioHijo(new AlquilarVolquetes(usuarioAcutal, this));
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
-            inicioS.Show();
-            this.Hide();
+            ModalExito exitoLogin = new ModalExito("¿Deseas cerrar sesión?");
+            exitoLogin.pictureBox1.Visible = false;
+            DialogResult answer = exitoLogin.ShowDialog();
+            if (answer == DialogResult.OK)
+            {
+                inicioS.Show();
+                this.Hide();
+            }
         }
 
 

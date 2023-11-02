@@ -93,7 +93,7 @@ namespace AlquilerVolquetes
             if (form.WindowState == FormWindowState.Maximized)
             {
                 nextForm.WindowState = FormWindowState.Maximized;
-                
+
             }
             else
             {
@@ -102,7 +102,7 @@ namespace AlquilerVolquetes
             }
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e) 
+        private void btnIngresar_Click(object sender, EventArgs e)
         {
 
             string nombreUsuario = txtUsuario.Text;
