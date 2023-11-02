@@ -13,22 +13,16 @@ namespace AlquilerVolquetes
 {
     public partial class PantallaInicio : Form
     {
-        PantallaPrincipal pantallaPrincipal;
-        MisVolquetes misVolquetes;
-        Home home;
-        InicioSesion inicioSesion;
         public Cliente usuarioAcutal;
         private Pedido pedidoActual;
         private List<Pedido> clientes;
-        private bool flagPantallaPrincipal = false;
-        private bool flagMisVolquetes = false;
         private bool flagHome = false;
         private List<Form> formsAbiertos = new List<Form>();
         private Form inicioS;
-        Button dummyButton = new Button();
         public PantallaInicio(Cliente usuario, Form inicioSesion)
         {
             InitializeComponent();
+            abrirFormularioHijo(new Inicio());
             inicioS = inicioSesion;
             usuarioAcutal = usuario;
 
@@ -47,88 +41,11 @@ namespace AlquilerVolquetes
 
             if (flagHome == false)
             {
-                home = new Home();
-                home.MdiParent = this;
-                flagHome = true;
-                home.Show();
+                //home = new Home();
+                //home.MdiParent = this;
+                //flagHome = true;
+                //home.Show();
             }
-        }
-
-        public PantallaInicio(Cliente usuario, Form inicioSesion, bool abrirMisVolquetes)
-        {
-            InitializeComponent();
-            inicioS = inicioSesion;
-            usuarioAcutal = usuario;
-
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("clientes.json");
-            if (clientes is not null)
-            {
-                foreach (Pedido cliente in clientes)
-                {
-                    if (cliente.Cliente == usuarioAcutal.NombreUsuario)
-                    {
-                        pedidoActual = cliente;
-                        break;
-                    }
-                }
-            }
-            if (abrirMisVolquetes == true)
-            {
-                mISVOLQUETESToolStripMenuItem_Click(dummyButton, EventArgs.Empty);
-            }
-        }
-
-        private void hOMEToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EsconderForms();
-
-            home.Show();
-        }
-
-        public void aLQUILARVOLQUETESToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (flagPantallaPrincipal == false)
-            {
-                if (flagMisVolquetes == true)
-                {
-                    misVolquetes.Hide(); ;
-                }
-
-                flagPantallaPrincipal = true;
-                pantallaPrincipal = new PantallaPrincipal(usuarioAcutal, this);
-                pantallaPrincipal.MdiParent = this;
-                formsAbiertos.Add(pantallaPrincipal);
-                pantallaPrincipal.Show();
-            }
-            else
-            {
-
-                EsconderForms();
-                pantallaPrincipal.Show();
-            }
-
-        }
-
-        private void mISVOLQUETESToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (flagMisVolquetes == false)
-            {
-                flagMisVolquetes = true;
-                misVolquetes = new MisVolquetes(usuarioAcutal);
-                formsAbiertos.Add(misVolquetes);
-                misVolquetes.MdiParent = this;
-                misVolquetes.Show();
-            }
-            else
-            {
-                EsconderForms();
-                misVolquetes.Show();
-            }
-        }
-        private void cERRARSESIÓNToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            inicioS.Show();
-            this.Hide();
         }
 
         private void PantallaInicio_FormClosing(object sender, FormClosingEventArgs e)
@@ -152,11 +69,14 @@ namespace AlquilerVolquetes
         }
 
 
-        private void EsconderForms()
+        private void CerrarFormsAbiertos()
         {
             foreach (Form formAbierto in formsAbiertos)
             {
-                formAbierto.Hide();
+                if (formAbierto != this)
+                {
+                    formAbierto.Close();
+                }
             }
         }
 
@@ -164,5 +84,40 @@ namespace AlquilerVolquetes
         {
 
         }
+
+        private void btnInicio_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new Inicio());
+        }
+
+        private void btnMisVolquetes_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new MisVolquetes(usuarioAcutal));
+        }
+
+        private void btnAlquilar_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new PantallaPrincipal(usuarioAcutal, this));
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            inicioS.Show();
+            this.Hide();
+        }
+
+
+        private void abrirFormularioHijo(Form formularioHijo)
+        {
+            formularioHijo.TopLevel = false;
+            formularioHijo.FormBorderStyle = FormBorderStyle.None;
+            formularioHijo.Dock = DockStyle.Fill;
+            panelContenedor.Controls.Add(formularioHijo);
+            panelContenedor.Tag = formularioHijo;
+            formularioHijo.BringToFront();
+            formularioHijo.Show();
+        }
+
+
     }
 }

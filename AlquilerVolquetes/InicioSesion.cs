@@ -36,6 +36,7 @@ namespace AlquilerVolquetes
         public InicioSesion()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
@@ -50,6 +51,7 @@ namespace AlquilerVolquetes
         public InicioSesion(Cliente usuario)
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
 
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
             if (usuarios is null)

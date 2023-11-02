@@ -38,10 +38,11 @@
             // 
             // lblTituloMisVolquetes
             // 
+            lblTituloMisVolquetes.Anchor = AnchorStyles.Top;
             lblTituloMisVolquetes.AutoSize = true;
             lblTituloMisVolquetes.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
             lblTituloMisVolquetes.ForeColor = SystemColors.ControlDarkDark;
-            lblTituloMisVolquetes.Location = new Point(306, 39);
+            lblTituloMisVolquetes.Location = new Point(121, 38);
             lblTituloMisVolquetes.Name = "lblTituloMisVolquetes";
             lblTituloMisVolquetes.Size = new Size(483, 48);
             lblTituloMisVolquetes.TabIndex = 23;
@@ -49,28 +50,31 @@
             // 
             // lstEnviando
             // 
+            lstEnviando.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lstEnviando.FormattingEnabled = true;
             lstEnviando.ItemHeight = 15;
-            lstEnviando.Location = new Point(224, 156);
+            lstEnviando.Location = new Point(232, 188);
             lstEnviando.Name = "lstEnviando";
-            lstEnviando.Size = new Size(608, 184);
+            lstEnviando.Size = new Size(133, 64);
             lstEnviando.TabIndex = 24;
             lstEnviando.DrawItem += lstEnviando_DrawItem;
             // 
             // lstColocados
             // 
+            lstColocados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lstColocados.FormattingEnabled = true;
             lstColocados.ItemHeight = 15;
-            lstColocados.Location = new Point(224, 394);
+            lstColocados.Location = new Point(232, 476);
             lstColocados.Name = "lstColocados";
-            lstColocados.Size = new Size(608, 184);
+            lstColocados.Size = new Size(133, 64);
             lstColocados.TabIndex = 25;
             // 
             // lblEnviando
             // 
+            lblEnviando.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblEnviando.AutoSize = true;
             lblEnviando.Font = new Font("Bahnschrift SemiBold SemiConden", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEnviando.Location = new Point(224, 126);
+            lblEnviando.Location = new Point(232, 158);
             lblEnviando.Name = "lblEnviando";
             lblEnviando.Size = new Size(213, 27);
             lblEnviando.TabIndex = 26;
@@ -78,9 +82,10 @@
             // 
             // lblColocados
             // 
+            lblColocados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblColocados.AutoSize = true;
             lblColocados.Font = new Font("Bahnschrift SemiBold SemiConden", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lblColocados.Location = new Point(224, 364);
+            lblColocados.Location = new Point(232, 446);
             lblColocados.Name = "lblColocados";
             lblColocados.Size = new Size(220, 27);
             lblColocados.TabIndex = 27;
@@ -97,17 +102,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1090, 678);
-            ControlBox = false;
+            ClientSize = new Size(714, 681);
             Controls.Add(linkLabel1);
             Controls.Add(lblColocados);
             Controls.Add(lblEnviando);
             Controls.Add(lstColocados);
             Controls.Add(lstEnviando);
             Controls.Add(lblTituloMisVolquetes);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "MisVolquetes";
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "MisVolquetes";
             ResumeLayout(false);
             PerformLayout();
