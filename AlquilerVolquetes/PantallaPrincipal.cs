@@ -17,7 +17,7 @@ using static System.Windows.Forms.DataFormats;
 
 namespace AlquilerVolquetes
 {
-    public partial class AlquilarVolquetes : Form
+    public partial class PantallaPrincipal : Form
     {
         //LISTA CARRITO
         //LISTA CARRITO
@@ -34,7 +34,7 @@ namespace AlquilerVolquetes
         private Form pantallaInicio;
 
 
-        public AlquilarVolquetes(Cliente usuario, Form padre)
+        public PantallaPrincipal(Cliente usuario, Form padre)
         {
             InitializeComponent();
             usuarioAcutal = usuario;

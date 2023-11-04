@@ -97,7 +97,7 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new AlquilarVolquetes(usuarioAcutal, this));
+            abrirFormularioHijo(new PantallaPrincipal(usuarioAcutal, this));
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
