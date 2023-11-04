@@ -236,6 +236,34 @@ namespace AlquilerVolquetes
             }
         }
 
+        private void lblPrecioChico_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCantidadVolqueteChico_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblCantidadVolqueteMediano_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblPrecioMediano_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblCantidadVolqueteGrande_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void lblPrecioGrande_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+        }
     }
 
 }
