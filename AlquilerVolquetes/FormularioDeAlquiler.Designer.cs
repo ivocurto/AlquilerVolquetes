@@ -41,15 +41,17 @@
             label2 = new Label();
             lblTotal = new Label();
             linkLabel1 = new LinkLabel();
+            dtpEntrega = new DateTimePicker();
+            lblFecha = new Label();
             SuspendLayout();
             // 
             // lblTituloFormularioDePago
             // 
             lblTituloFormularioDePago.AutoSize = true;
             lblTituloFormularioDePago.Font = new Font("Bahnschrift SemiBold SemiConden", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTituloFormularioDePago.Location = new Point(424, 53);
+            lblTituloFormularioDePago.Location = new Point(485, 71);
             lblTituloFormularioDePago.Name = "lblTituloFormularioDePago";
-            lblTituloFormularioDePago.Size = new Size(222, 29);
+            lblTituloFormularioDePago.Size = new Size(274, 36);
             lblTituloFormularioDePago.TabIndex = 22;
             lblTituloFormularioDePago.Text = "FORMULARIO DE PAGO";
             // 
@@ -57,10 +59,10 @@
             // 
             lblProductos.AutoSize = true;
             lblProductos.Font = new Font("Bahnschrift SemiLight", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblProductos.Location = new Point(93, 125);
-            lblProductos.MaximumSize = new Size(850, 75);
+            lblProductos.Location = new Point(106, 167);
+            lblProductos.MaximumSize = new Size(971, 100);
             lblProductos.Name = "lblProductos";
-            lblProductos.Size = new Size(54, 69);
+            lblProductos.Size = new Size(70, 87);
             lblProductos.TabIndex = 23;
             lblProductos.Text = "Texto\r\nTexto\r\nTexto\r\n";
             // 
@@ -69,9 +71,10 @@
             btnAlquilar.BackColor = Color.DeepSkyBlue;
             btnAlquilar.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnAlquilar.ForeColor = SystemColors.ButtonHighlight;
-            btnAlquilar.Location = new Point(404, 584);
+            btnAlquilar.Location = new Point(462, 779);
+            btnAlquilar.Margin = new Padding(3, 4, 3, 4);
             btnAlquilar.Name = "btnAlquilar";
-            btnAlquilar.Size = new Size(255, 55);
+            btnAlquilar.Size = new Size(291, 73);
             btnAlquilar.TabIndex = 24;
             btnAlquilar.Text = "PAGAR";
             btnAlquilar.UseVisualStyleBackColor = false;
@@ -80,57 +83,62 @@
             // txtNombre
             // 
             txtNombre.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombre.Location = new Point(93, 218);
+            txtNombre.Location = new Point(106, 291);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
             txtNombre.PlaceholderText = " Nombre";
-            txtNombre.Size = new Size(318, 36);
+            txtNombre.Size = new Size(363, 44);
             txtNombre.TabIndex = 25;
             // 
             // txtApellido
             // 
             txtApellido.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtApellido.Location = new Point(431, 218);
+            txtApellido.Location = new Point(493, 291);
+            txtApellido.Margin = new Padding(3, 4, 3, 4);
             txtApellido.Name = "txtApellido";
             txtApellido.PlaceholderText = " Apellido";
-            txtApellido.Size = new Size(318, 36);
+            txtApellido.Size = new Size(363, 44);
             txtApellido.TabIndex = 26;
             // 
             // txtDireccion
             // 
             txtDireccion.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDireccion.Location = new Point(93, 271);
+            txtDireccion.Location = new Point(106, 361);
+            txtDireccion.Margin = new Padding(3, 4, 3, 4);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.PlaceholderText = " Dirección a la que desea enviar";
-            txtDireccion.Size = new Size(656, 36);
+            txtDireccion.Size = new Size(749, 44);
             txtDireccion.TabIndex = 27;
             // 
             // txtTelefono
             // 
             txtTelefono.BackColor = Color.White;
             txtTelefono.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTelefono.Location = new Point(93, 322);
+            txtTelefono.Location = new Point(106, 429);
+            txtTelefono.Margin = new Padding(3, 4, 3, 4);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.PlaceholderText = " Teléfono/Celular";
-            txtTelefono.Size = new Size(318, 36);
+            txtTelefono.Size = new Size(363, 44);
             txtTelefono.TabIndex = 28;
             // 
             // txtMail
             // 
             txtMail.BackColor = Color.White;
             txtMail.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtMail.Location = new Point(93, 378);
+            txtMail.Location = new Point(106, 504);
+            txtMail.Margin = new Padding(3, 4, 3, 4);
             txtMail.Name = "txtMail";
             txtMail.PlaceholderText = " Correo electrónico";
-            txtMail.Size = new Size(656, 36);
+            txtMail.Size = new Size(749, 44);
             txtMail.TabIndex = 29;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Bahnschrift SemiLight", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(93, 436);
+            label1.Location = new Point(106, 581);
             label1.Name = "label1";
-            label1.Size = new Size(780, 46);
+            label1.Size = new Size(980, 58);
             label1.TabIndex = 30;
             label1.Text = "Recuerde que el/los volquetes se envia(n) y coloca(n) entre 24hs y 36hs despues del pago. \r\nUna semana despues se retiran con el contenido del volquete.";
             // 
@@ -138,18 +146,18 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Bahnschrift SemiLight", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(93, 470);
+            label2.Location = new Point(106, 627);
             label2.Name = "label2";
-            label2.Size = new Size(0, 23);
+            label2.Size = new Size(0, 29);
             label2.TabIndex = 31;
             // 
             // lblTotal
             // 
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Bahnschrift SemiBold SemiConden", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTotal.Location = new Point(424, 529);
+            lblTotal.Location = new Point(485, 705);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(179, 29);
+            lblTotal.Size = new Size(220, 36);
             lblTotal.TabIndex = 32;
             lblTotal.Text = "PRECIO TOTAL: $0";
             // 
@@ -157,14 +165,37 @@
             // 
             linkLabel1.Location = new Point(0, 0);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(88, 17);
+            linkLabel1.Size = new Size(101, 23);
             linkLabel1.TabIndex = 0;
+            // 
+            // dtpEntrega
+            // 
+            dtpEntrega.CustomFormat = "dd/MM/yy\r\n";
+            dtpEntrega.Format = DateTimePickerFormat.Custom;
+            dtpEntrega.Location = new Point(698, 446);
+            dtpEntrega.MinDate = new DateTime(2023, 11, 4, 0, 0, 0, 0);
+            dtpEntrega.Name = "dtpEntrega";
+            dtpEntrega.Size = new Size(93, 27);
+            dtpEntrega.TabIndex = 33;
+            dtpEntrega.Value = new DateTime(2023, 11, 4, 0, 0, 0, 0);
+            // 
+            // lblFecha
+            // 
+            lblFecha.AutoSize = true;
+            lblFecha.Location = new Point(537, 446);
+            lblFecha.Name = "lblFecha";
+            lblFecha.Size = new Size(126, 20);
+            lblFecha.TabIndex = 34;
+            lblFecha.Text = "Fecha de entrega:";
+            lblFecha.Click += label3_Click;
             // 
             // FormularioDeAlquiler
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 681);
+            ClientSize = new Size(1216, 908);
+            Controls.Add(lblFecha);
+            Controls.Add(dtpEntrega);
             Controls.Add(linkLabel1);
             Controls.Add(lblTotal);
             Controls.Add(label2);
@@ -178,6 +209,7 @@
             Controls.Add(lblProductos);
             Controls.Add(lblTituloFormularioDePago);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormularioDeAlquiler";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormularioDeAlquiler";
@@ -201,5 +233,7 @@
         private Label label2;
         private Label lblTotal;
         private LinkLabel linkLabel1;
+        private DateTimePicker dtpEntrega;
+        private Label lblFecha;
     }
 }

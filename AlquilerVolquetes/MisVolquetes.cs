@@ -16,57 +16,15 @@ namespace AlquilerVolquetes
         private List<Pedido> pedidoActual;
         public Cliente usuarioActual;
         private bool esCliente;
-        private List<Pedido> pedidos;
         public MisVolquetes(Cliente usuario)
         {
             InitializeComponent();
 
             usuarioActual = usuario;
-            this.Activated += new EventHandler(MisVolquetes_Activated); // Suscribir al evento Activated
+           this.Load += new EventHandler(MisVolquetes_Load);
         }
-        private void MisVolquetes_Activated(object sender, EventArgs e)
-        {
-            //pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
-            pedidoActual = usuarioActual.Pedidos;
-            //if (pedidos is not null)
-            //{
-            //    foreach (Pedido pedido in pedidos)
-            //    {
-            //        if (pedido.Cliente == usuarioActual.NombreUsuario)
-            //        {
-            //            pedidoActual.Add(pedido);
-            //        }
-            //    }
-
-            //}
-
-            esCliente = false;
-            if (pedidoActual is not null)
-            {
-                esCliente = true;
-            }
-            if (esCliente == true)
-            {
-                lstEnviando.Items.Clear();
-                foreach (Pedido pedido in pedidoActual)
-                {
-                    foreach (Volquete volquete in pedido.VolquetesPedidos)
-                    {
-                        if (volquete.Cantidad != 0)
-                        {
-                            lstEnviando.Items.Add(volquete);
-                        }
-                    }
-                    foreach (Volquete volquete in pedido.VolquetesInstalados)
-                    {
-                        if (volquete.Cantidad != 0)
-                        {
-                            lstColocados.Items.Add(volquete);
-                        }
-                    }
-                }
-            }
-        }
+       
+        
 
         private void lstEnviando_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -99,6 +57,34 @@ namespace AlquilerVolquetes
                 using (Brush brush = new SolidBrush(Color.Black))
                 {
                     e.Graphics.DrawString(itemText, lstEnviando.Font, brush, textBounds);
+                }
+            }
+        }
+
+        private void MisVolquetes_Load(object sender, EventArgs e)
+        {
+            pedidoActual = usuarioActual.Pedidos;
+
+            if (pedidoActual is not null)
+            {
+                lstEnviando.Items.Clear();
+                lstColocados.Items.Clear();
+                foreach (Pedido pedido in pedidoActual)
+                {
+                    foreach (Volquete volquete in pedido.VolquetesPedidos)
+                    {
+                        if (volquete.Cantidad != 0)
+                        {
+                            lstEnviando.Items.Add(volquete);
+                        }
+                    }
+                    foreach (Volquete volquete in pedido.VolquetesInstalados)
+                    {
+                        if (volquete.Cantidad != 0)
+                        {
+                            lstColocados.Items.Add(volquete);
+                        }
+                    }
                 }
             }
         }

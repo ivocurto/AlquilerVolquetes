@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using Clases;
 
 namespace AlquilerVolquetes
@@ -109,7 +110,9 @@ namespace AlquilerVolquetes
                 }
                 List<Volquete> volquetesInstalar = new List<Volquete>();
 
-                pedido = new Pedido( volquetes, volquetesInstalar, usuarioActual.NombreUsuario);
+                DateTime fechaEntrega = dtpEntrega.Value;
+                DateTime fechaActual = FechaActual.ObtenerFechaActual();
+                pedido = new Pedido(volquetes, volquetesInstalar, usuarioActual.NombreUsuario, fechaActual, fechaEntrega);
 
                 if (pedidos.Count > 1)
                 {
@@ -119,7 +122,7 @@ namespace AlquilerVolquetes
                 {
                     pedido.IdCliente = 0;
                 }
-                
+
 
                 pedidos.Add(pedido);
                 usuarioActual.Pedidos.Add(pedido);
@@ -150,6 +153,11 @@ namespace AlquilerVolquetes
         private void FormularioDeAlquiler_Load(object sender, EventArgs e)
         {
             txtMail.Text = usuarioActual.MailUsuario;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
