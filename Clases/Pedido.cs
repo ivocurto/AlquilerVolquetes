@@ -13,7 +13,7 @@ namespace Clases
         private string cliente;
         private List<Volquete> volquetesPedidos;
         private List<Volquete> volquetesInstalados;
-        private int idCliente;
+        private int idPedido;
         private DateTime fechaPedido;
         private DateTime fechaEntrega;
        
@@ -30,7 +30,7 @@ namespace Clases
         public List<Volquete> VolquetesPedidos { get => volquetesPedidos; set => volquetesPedidos = value; }
         public List<Volquete> VolquetesInstalados { get => volquetesInstalados; set => volquetesInstalados = value; }
         public string Cliente { get => cliente; set => cliente = value; }
-        public int IdCliente { get => idCliente; set => idCliente = value; }
+        public int IdPedido { get => idPedido; set => idPedido = value; }
         public DateTime FechaPedido { get => fechaPedido; set => fechaPedido = value; }
         public DateTime FechaEntrega { get => fechaEntrega; set => fechaEntrega = value; }
 
@@ -49,6 +49,20 @@ namespace Clases
             {
                 return -1; 
             }
+        }
+
+        public void GenerarIdPedido(List<int> ids)
+        {
+            int id;
+            Random random = new Random();
+
+            do
+            {
+                id = random.Next(0, 100000); 
+            } while (ids.Contains(id)); 
+
+            ids.Add(id);
+            idPedido = id;
         }
 
 

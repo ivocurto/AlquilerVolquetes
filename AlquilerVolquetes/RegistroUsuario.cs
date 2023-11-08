@@ -116,8 +116,10 @@ namespace AlquilerVolquetes
             string reClave = txtReClave.Text;
             string nombre = txtUsuario.Text;
             string mail = txtCorreo.Text;
+            string name = txtNombre.Text;
+            string apellido = txtApellido.Text;
 
-            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(clave, nombre, mail, reClave);
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(clave, nombre, mail, reClave, name, apellido);
 
             if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
             {
@@ -146,6 +148,8 @@ namespace AlquilerVolquetes
                     txtUsuario.Text = "";
                     txtClave.Text = "";
                     txtReClave.Text = "";
+                    txtApellido.Text = "";
+                    txtNombre.Text = "";
                 }
             }
             else if (!ManejoDeValidaciones.IsEmailFormat(mail))
@@ -164,7 +168,7 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)
                 {
-                    Cliente usuario = new Cliente(nombre, mail, clave);
+                    Cliente usuario = new Cliente(nombre, mail, clave, name, apellido);
                     listaUsuarios.Add(usuario);
                     InicioSesion inicio = new InicioSesion(usuario);
                     inicio.Show();

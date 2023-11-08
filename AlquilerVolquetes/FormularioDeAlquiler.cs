@@ -13,6 +13,8 @@ namespace AlquilerVolquetes
         public int precioTotal;
         private Form formPrincipal;
         private List<Cliente> clientes;
+        private FechaActual fechaActual = new FechaActual();
+        private List<int> idsPedidos;
 
         public FormularioDeAlquiler(List<Volquete> lista, Cliente usuario, Form formularioPrincipal)
         {
@@ -20,144 +22,162 @@ namespace AlquilerVolquetes
             volquetes = lista;
             usuarioActual = usuario;
             formPrincipal = formularioPrincipal;
+            dtpEntrega.Value = fechaActual.fechaActual;
+            dtpDevolucion.Value = fechaActual + 7;
+            dtpDevolucion.MinDate = dtpDevolucion.Value;
+            dtpEntrega.MinDate = dtpEntrega.Value;
             pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
             clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
+            idsPedidos = JsonFileManager.LoadFromJsonGeneric<List<int>>("idsPedidos.json");
+            if (idsPedidos is null)
+            {
+                idsPedidos = new List<int>();
 
-            MostrarProductosAComprar();
+                MostrarProductosAComprar();
+            }
         }
 
-        private void MostrarProductosAComprar()
-        {
-            string formatoTotal = "";
-            bool flag = false;
-            precioTotal = 0;
-            foreach (Volquete volquete in volquetes)
+            private void MostrarProductosAComprar()
             {
-                if (volquete.Cantidad > 0)
+                string formatoTotal = "";
+                bool flag = false;
+                precioTotal = 0;
+                foreach (Volquete volquete in volquetes)
                 {
-                    string producto = "";
-                    int precio = 0;
-                    producto = volquete.ToString().ToLower();
-                    precio = volquete.PrecioUnitario;
-                    if (flag == false)
+                    if (volquete.Cantidad > 0)
                     {
-                        formatoTotal = producto;
-                        flag = true;
+                        string producto = "";
+                        int precio = 0;
+                        producto = volquete.ToString().ToLower();
+                        precio = volquete.PrecioUnitario;
+                        if (flag == false)
+                        {
+                            formatoTotal = producto;
+                            flag = true;
+                        }
+                        else
+                        {
+                            formatoTotal = $"{formatoTotal}, {producto}";
+                        }
+                        precioTotal += precio * volquete.Cantidad;
                     }
-                    else
+                }
+
+                this.lblProductos.Text = $"Usted va a comprar {formatoTotal}.";
+                this.lblTotal.Text = $"PRECIO TOTAL: ${precioTotal}";
+            }
+
+            private void FormularioDeAlquiler_FormClosed(object sender, FormClosedEventArgs e)
+            {
+                List<Form> formulariosACerrar = new List<Form>();
+
+                foreach (Form formulario in Application.OpenForms)
+                {
+                    if (formulario != this)
                     {
-                        formatoTotal = $"{formatoTotal}, {producto}";
+                        formulariosACerrar.Add(formulario);
                     }
-                    precioTotal += precio * volquete.Cantidad;
+                }
+
+                foreach (Form formulario in formulariosACerrar)
+                {
+                    formulario.Close();
                 }
             }
 
-            this.lblProductos.Text = $"Usted va a comprar {formatoTotal}.";
-            this.lblTotal.Text = $"PRECIO TOTAL: ${precioTotal}";
-        }
-
-        private void FormularioDeAlquiler_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            List<Form> formulariosACerrar = new List<Form>();
-
-            foreach (Form formulario in Application.OpenForms)
+            private void btnAlquilar_Click(object sender, EventArgs e)
             {
-                if (formulario != this)
+                string apellido = txtApellido.Text;
+                string direccion = txtDireccion.Text;
+                string mail = txtMail.Text;
+                string nombre = txtNombre.Text;
+                string telefono = txtTelefono.Text;
+                List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtApellido.Text, txtNombre.Text, txtMail.Text, txtDireccion.Text, txtTelefono.Text);
+                if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
                 {
-                    formulariosACerrar.Add(formulario);
+                    ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
+                    DialogResult resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        //
+                    }
                 }
-            }
-
-            foreach (Form formulario in formulariosACerrar)
-            {
-                formulario.Close();
-            }
-        }
-
-        private void btnAlquilar_Click(object sender, EventArgs e)
-        {
-            string apellido = txtApellido.Text;
-            string direccion = txtDireccion.Text;
-            string mail = txtMail.Text;
-            string nombre = txtNombre.Text;
-            string telefono = txtTelefono.Text;
-            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtApellido.Text, txtNombre.Text, txtMail.Text, txtDireccion.Text, txtTelefono.Text);
-            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
-            {
-                ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
-                DialogResult resultado = modal.ShowDialog();
-                if (resultado == DialogResult.OK)
+                else if (!ManejoDeValidaciones.IsEmailFormat(mail))
                 {
-                    //
-                }
-            }
-            else if (!ManejoDeValidaciones.IsEmailFormat(mail))
-            {
-                ModalError clavesDiferentes = new ModalError("Formato de mail inválido", "ERROR AL REGISTRARSE");
-                DialogResult resultado = clavesDiferentes.ShowDialog();
+                    ModalError clavesDiferentes = new ModalError("Formato de mail inválido", "ERROR AL REGISTRARSE");
+                    DialogResult resultado = clavesDiferentes.ShowDialog();
 
-                if (resultado == DialogResult.OK)
-                {
-                    txtMail.Text = "";
-                }
-            }
-            else
-            {
-                Pedido pedido;
-                if (pedidos is null)
-                {
-                    pedidos = new List<Pedido>();
-                }
-                List<Volquete> volquetesInstalar = new List<Volquete>();
-
-                DateTime fechaEntrega = dtpEntrega.Value;
-                DateTime fechaActual = FechaActual.ObtenerFechaActual();
-                pedido = new Pedido(volquetes, volquetesInstalar, usuarioActual.NombreUsuario, fechaActual, fechaEntrega);
-
-                if (pedidos.Count > 1)
-                {
-                    pedido.IdCliente = pedidos.Count() - 1;
+                    if (resultado == DialogResult.OK)
+                    {
+                        txtMail.Text = "";
+                    }
                 }
                 else
                 {
-                    pedido.IdCliente = 0;
-                }
-
-
-                pedidos.Add(pedido);
-                usuarioActual.Pedidos.Add(pedido);
-                if (clientes != null)
-                {
-                    for (int i = 0; i < clientes.Count; i++)
+                    Pedido pedido;
+                    if (pedidos is null)
                     {
-                        if (clientes[i].NombreUsuario == usuarioActual.NombreUsuario)
-                        {
-                            clientes[i] = usuarioActual; // Modificar el cliente en la lista
-                        }
+                        pedidos = new List<Pedido>();
                     }
-                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes); // Guardar la lista actualizada
-                }
-                JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, pedidos);
-                ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
-                DialogResult result = compraExitosa.ShowDialog();
+                    List<Volquete> volquetesInstalar = new List<Volquete>();
 
-                if (result == DialogResult.OK)
-                {
-                    this.Hide();
-                    formPrincipal.Show();
-                    // llevar al formulario de pago
+                    DateTime fechaEntrega = dtpEntrega.Value;
+                    DateTime fechaDevolucion = dtpDevolucion.Value;
+                    pedido = new Pedido(volquetes, volquetesInstalar, usuarioActual.NombreUsuario, fechaDevolucion, fechaEntrega);
+                    pedido.GenerarIdPedido(idsPedidos);
+                    //if (pedidos.Count > 1)
+                    //{
+                    //    pedido.IdCliente = pedidos.Count() - 1;
+                    //}
+                    //else
+                    //{
+                    //    pedido.IdCliente = 0;
+                    //}
+
+
+                    pedidos.Add(pedido);
+                    usuarioActual.Pedidos.Add(pedido);
+                    if (clientes != null)
+                    {
+                        for (int i = 0; i < clientes.Count; i++)
+                        {
+                            if (clientes[i].NombreUsuario == usuarioActual.NombreUsuario)
+                            {
+                                clientes[i] = usuarioActual; // Modificar el cliente en la lista
+                            }
+                        }
+                        JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes); // Guardar la lista actualizada
+                    }
+                    JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, pedidos);
+                    ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
+                    DialogResult result = compraExitosa.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        this.Hide();
+                        formPrincipal.Show();
+                        // llevar al formulario de pago
+                    }
                 }
             }
-        }
 
-        private void FormularioDeAlquiler_Load(object sender, EventArgs e)
-        {
-            txtMail.Text = usuarioActual.MailUsuario;
-        }
+            private void FormularioDeAlquiler_Load(object sender, EventArgs e)
+            {
+                txtMail.Text = usuarioActual.MailUsuario;
+                txtNombre.Text = usuarioActual.Nombre;
+                txtApellido.Text = usuarioActual.Apellido;
+            }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
+            private void label3_Click(object sender, EventArgs e)
+            {
 
+            }
+
+            private void dtpEntrega_ValueChanged_1(object sender, EventArgs e)
+            {
+                dtpDevolucion.MinDate = dtpEntrega.Value;
+
+            }
         }
-    }
+    
 }

@@ -24,7 +24,7 @@ namespace AdminApp
             {
                 foreach (Pedido pedido in pedidos)
                 {
-                    indexPedido = pedido.IdCliente;
+                    indexPedido = pedido.IdPedido;
                     string formato = "";
                     if (pedido.VolquetesPedidos.Count() > 0)
                     {
@@ -86,7 +86,7 @@ namespace AdminApp
                         // Recorre la lista actualizada para actualizar los IDs de los pedidos
                         for (int i = 0; i < pedidos.Count; i++)
                         {
-                            pedidos[i].IdCliente = i;
+                            //pedidos[i].IdCliente = i;
                         }
 
                         // Guarda la lista actualizada en el archivo JSON

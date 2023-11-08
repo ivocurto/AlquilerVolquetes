@@ -169,6 +169,7 @@
             // 
             // btnAgregarAlCarrito
             // 
+            btnAgregarAlCarrito.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAgregarAlCarrito.BackColor = Color.DeepSkyBlue;
             btnAgregarAlCarrito.Font = new Font("Bahnschrift", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnAgregarAlCarrito.ForeColor = SystemColors.ButtonHighlight;

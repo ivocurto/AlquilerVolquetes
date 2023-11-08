@@ -45,6 +45,8 @@
             txtClave = new TextBox();
             btnIngresar = new Button();
             pictureBox2 = new PictureBox();
+            txtNombre = new TextBox();
+            txtApellido = new TextBox();
             pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -180,7 +182,7 @@
             lblUsusario.FlatStyle = FlatStyle.Flat;
             lblUsusario.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblUsusario.ForeColor = Color.White;
-            lblUsusario.Location = new Point(119, 160);
+            lblUsusario.Location = new Point(114, 160);
             lblUsusario.Name = "lblUsusario";
             lblUsusario.Size = new Size(85, 25);
             lblUsusario.TabIndex = 9;
@@ -284,6 +286,32 @@
             pictureBox2.TabIndex = 83;
             pictureBox2.TabStop = false;
             // 
+            // txtNombre
+            // 
+            txtNombre.Anchor = AnchorStyles.None;
+            txtNombre.BackColor = Color.FromArgb(51, 171, 215);
+            txtNombre.BorderStyle = BorderStyle.None;
+            txtNombre.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNombre.ForeColor = Color.White;
+            txtNombre.Location = new Point(112, 278);
+            txtNombre.Margin = new Padding(0);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(214, 23);
+            txtNombre.TabIndex = 93;
+            // 
+            // txtApellido
+            // 
+            txtApellido.Anchor = AnchorStyles.None;
+            txtApellido.BackColor = Color.FromArgb(51, 171, 215);
+            txtApellido.BorderStyle = BorderStyle.None;
+            txtApellido.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtApellido.ForeColor = Color.White;
+            txtApellido.Location = new Point(112, 333);
+            txtApellido.Margin = new Padding(0);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(214, 23);
+            txtApellido.TabIndex = 94;
+            // 
             // RegistroUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -291,7 +319,9 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1064, 681);
+            Controls.Add(txtApellido);
             Controls.Add(pnlLogin);
+            Controls.Add(txtNombre);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
@@ -307,6 +337,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -325,8 +356,9 @@
         public TextBox textBox3;
         private PictureBox pictureBox4;
         private Label lblReClave;
-        public TextBox textBox1;
+        public TextBox txtNombre;
         private PictureBox pictureBox3;
         public TextBox txtCorreo;
+        public TextBox txtApellido;
     }
 }

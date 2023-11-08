@@ -6,16 +6,28 @@ using System.Threading.Tasks;
 
 namespace Clases
 {
-    public static class FechaActual
+    public class FechaActual
     {
-        public static DateTime ObtenerFechaActual()
+        public DateTime fechaActual;
+
+        public FechaActual()
         {
-            return DateTime.Now;
+            fechaActual = DateTime.Now;
         }
 
-        public static string ObtenerFechaActualConFormato()
+        public string ObtenerFechaActualConFormato()
         {
-            return DateTime.Now.ToString("dd/MM/yy");
+            return fechaActual.ToString("dd/MM/yy");
+        }
+
+        public static FechaActual ObtenerInstancia()
+        {
+            return new FechaActual();
+        }
+
+        public static DateTime operator +(FechaActual fecha, int diasASumar)
+        {
+            return fecha.fechaActual.AddDays(diasASumar);
         }
     }
 }
