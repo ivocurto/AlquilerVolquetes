@@ -11,26 +11,7 @@ namespace Clases
 {
     public class JsonFileManager
     {
-        public static List<T> LoadFromJson<T>(string filePath)
-        {
-            List<T> items = new List<T>();
-
-            try
-            {
-                
-                
-                string json = File.ReadAllText(filePath);
-                items = JsonConvert.DeserializeObject<List<T>>(json);
-                
-            }
-            catch (Exception ex)
-            {
-                string json = JsonConvert.SerializeObject(items);
-                File.WriteAllText(filePath, json);
-            }
-
-            return items;
-        }
+        
 
         public static T LoadFromJsonGeneric<T>(string filePath)
         {
@@ -53,11 +34,11 @@ namespace Clases
             return item;
         }
 
-        public static void SaveToJson<T>(string filePath, List<T> items)
+        public static void SaveToJsonGeneric<T>(string filePath, T data)
         {
             try
             {
-                string json = JsonConvert.SerializeObject(items);
+                string json = JsonConvert.SerializeObject(data);
                 File.WriteAllText(filePath, json);
             }
             catch (Exception ex)
@@ -65,12 +46,18 @@ namespace Clases
                 // Manejar la excepción o registrarla según tus necesidades.
             }
         }
-        public static void SaveToJsonGeneric<T>(string filePath, T data)
+        public static void AddDataToJson<T>(string filePath, T newData)
         {
             try
             {
-                string json = JsonConvert.SerializeObject(data);
-                File.WriteAllText(filePath, json);
+                // Cargar datos existentes del archivo JSON en una lista
+                List<T> existingData = LoadFromJsonGeneric<List<T>>(filePath);
+
+                // Agregar el nuevo dato a la lista
+                existingData.Add(newData);
+
+                // Guardar la lista actualizada en el archivo JSON
+                SaveToJsonGeneric(filePath, existingData);
             }
             catch (Exception ex)
             {
