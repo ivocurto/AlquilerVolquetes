@@ -14,32 +14,19 @@ namespace AdminApp
     public partial class PanelAdmin : Form
     {
         private List<Cliente> clientes;
+        private List<Admin> admins;
         private int indexPedido;
-        public PanelAdmin()
+        private Admin adminActual;
+        private string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
+
+        public PanelAdmin(Admin admin)
         {
             InitializeComponent();
+            adminActual = admin;
             clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
+            admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
             // Enlaza la lista de pedidos al ListBox
-            if (clientes is not null)
-            {
-                foreach (Cliente cliente in clientes)
-                {
-                    
-                    string formato = "";
-                    
-                        foreach (Pedido pedido in cliente.Pedidos)
-                        {
-                            
-                                formato += pedido.ToString();
-                            
-                        }
-                        
-                    lstUsuarios.Items.Add($"USUARIO: {cliente.Nombre.ToUpper()} VOLQUETES A INSTALAR: {formato}");
 
-                    
-                }
-
-            }
 
         }
 
@@ -70,7 +57,7 @@ namespace AdminApp
             if (lstUsuarios.SelectedItem != null)
             {
                 // Muestra un cuadro de diálogo de confirmación
-                DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar este pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas hacer admin a {lstUsuarios.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
@@ -79,22 +66,18 @@ namespace AdminApp
 
                     if (selectedIndex >= 0)
                     {
-                        // Elimina el pedido seleccionado de la lista
-                        clientes.RemoveAt(selectedIndex);
 
-                        // Recorre la lista actualizada para actualizar los IDs de los pedidos
-                        for (int i = 0; i < clientes.Count; i++)
-                        {
-                            //pedidos[i].IdCliente = i;
-                        }
+                        admins = adminActual.AgregarAdmin(clientes, admins, lstUsuarios.SelectedItem.ToString());
+                        clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());
 
-                        // Guarda la lista actualizada en el archivo JSON
-                        JsonFileManager.SaveToJsonGeneric("pedidos.json", clientes);
 
-                        // Elimina el pedido seleccionado del ListBox
-                        lstUsuarios.Items.RemoveAt(selectedIndex);
                     }
+
                 }
+                JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
+                JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoAdmins, admins);
+
+                PanelAdmin_Load(sender, e);
             }
         }
 
@@ -121,6 +104,84 @@ namespace AdminApp
             //        }
             //    }
             //}
+        }
+
+        private void PanelAdmin_Load(object sender, EventArgs e)
+        {
+            if (clientes is not null)
+            {
+                lstUsuarios.Items.Clear();
+                foreach (Cliente cliente in clientes)
+                {
+
+                    string formato = "";
+
+                    foreach (Pedido pedido in cliente.Pedidos)
+                    {
+
+                        formato += pedido.ToString();
+
+                    }
+
+                    //lstUsuarios.Items.Add($"USUARIO: {cliente.Nombre.ToUpper()} VOLQUETES A INSTALAR: {formato}");
+                    lstUsuarios.Items.Add(cliente.NombreUsuario);
+
+
+                }
+
+            }
+            if (admins is not null)
+            {
+                lstAdmins.Items.Clear();
+                foreach (Admin adminn in admins)
+                {
+
+
+
+                    //lstUsuarios.Items.Add($"USUARIO: {cliente.Nombre.ToUpper()} VOLQUETES A INSTALAR: {formato}");
+                    lstAdmins.Items.Add(adminn.NombreUsuario);
+
+
+                }
+
+            }
+        }
+
+        private void btnBorrarCliente_Click(object sender, EventArgs e)
+        {
+            if (lstUsuarios.SelectedItem != null)
+            {
+                // Muestra un cuadro de diálogo de confirmación
+                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas ELIMINAR a {lstUsuarios.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Encuentra el índice del pedido seleccionado
+                    int selectedIndex = lstUsuarios.SelectedIndex;
+
+                    if (selectedIndex >= 0)
+                    {
+
+                        clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());
+
+
+                    }
+
+                }
+                JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
+
+                PanelAdmin_Load(sender, e);
+            }
+        }
+
+        private void lstUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstAdmins.ClearSelected();
+        }
+
+        private void lstAdmins_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstUsuarios.ClearSelected();
         }
     }
 }

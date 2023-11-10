@@ -15,23 +15,37 @@ namespace Clases
             : base(nombreUsuario, mailUsuario, claveUsuario)
         {
             historialAcciones = JsonFileManager.LoadFromJsonGeneric<List<Dictionary<string, string>>>("historialAdmin.json") ?? new List<Dictionary<string, string>>();
+
         }
         public override void ConsutarEstado()
         {
             throw new NotImplementedException();
         }
 
-        public void EliminarCliente(List<Cliente> clientes, Cliente cliente)
+        public void VerEstado(Admin admin)
         {
-            if (clientes.Remove(cliente))
+            continue
+        }
+
+        public List<Cliente> EliminarCliente(List<Cliente> clientes, string nombreCliente)
+        {
+            foreach(Cliente cliente in clientes)
             {
-                NotificarAccionExitosa("EliminarCliente", cliente.NombreUsuario);
-                GuardarHistorial();
+                
+                if (cliente.NombreUsuario == nombreCliente )
+                {
+                    clientes.Remove(cliente);
+                    NotificarAccionExitosa("EliminarCliente", cliente.NombreUsuario);
+                    GuardarHistorial();
+                    return clientes;
+                }
+                else
+                {
+                   // throw new InvalidOperationException("Error al eliminar el cliente.");
+                }
             }
-            else
-            {
-                throw new InvalidOperationException("Error al eliminar el cliente.");
-            }
+           
+            return clientes;
         }
 
         public void EliminarPedidoCliente(Cliente cliente, int indexPedido)
@@ -48,19 +62,26 @@ namespace Clases
             }
         }
 
-        public void HacerAdmin(List<Cliente> clientes, Cliente clienteUpgrade, List<Admin> admins)
+        public List<Admin> AgregarAdmin(List<Cliente> clientes, List<Admin> admins, string nombreCliente)
         {
-            if (clientes.Remove(clienteUpgrade))
+            Cliente clienteUpgrade;
+            foreach(Cliente cliente in clientes)
             {
-                Admin admin = new Admin(clienteUpgrade.NombreUsuario, clienteUpgrade.MailUsuario, clienteUpgrade.ClaveUsuario);
-                admins.Add(admin);
-                NotificarAccionExitosa("HacerAdmin", clienteUpgrade.NombreUsuario);
-                GuardarHistorial();
+                if(nombreCliente == cliente.NombreUsuario)
+                {
+                    clienteUpgrade = cliente;
+                    Admin admin = new Admin(clienteUpgrade.NombreUsuario, clienteUpgrade.MailUsuario, clienteUpgrade.ClaveUsuario);
+                    admins.Add(admin);
+                    NotificarAccionExitosa("HacerAdmin", clienteUpgrade.NombreUsuario);
+                    GuardarHistorial();
+                    return admins;
+                    
+                    
+                }
             }
-            else
-            {
-                throw new InvalidOperationException("Error al hacer admin al cliente.");
-            }
+            return admins;
+
+
         }
 
         private void NotificarAccionExitosa(string nombreAccion, string usuarioAfectado)
@@ -77,5 +98,7 @@ namespace Clases
         {
             JsonFileManager.SaveToJsonGeneric("historialAdmin.json", historialAcciones);
         }
+
+
     }
 }

@@ -27,7 +27,6 @@ namespace AlquilerVolquetes
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         string rutaArchivoJson = "usuarios.json";
-        string rutaArchivoJsonAdmin = "admins.json";
         string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
         private DataContainer data;
         private Size previousSize;
@@ -38,7 +37,7 @@ namespace AlquilerVolquetes
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-            admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoJsonAdmin);
+            admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
             if (data != null && data.CheckboxValue == true)
@@ -129,7 +128,7 @@ namespace AlquilerVolquetes
                             //usuarioAcutal = usuario;
 
 
-                              PanelAdmin panelAdmin = new PanelAdmin();
+                                PanelAdmin panelAdmin = new PanelAdmin(admin);
                                 panelAdmin.Show();
                                 this.Hide();
                                 return;

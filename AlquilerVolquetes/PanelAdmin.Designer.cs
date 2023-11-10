@@ -30,9 +30,12 @@
         {
             lblLogin = new Label();
             lstUsuarios = new ListBox();
-            btnEliminarPedido = new Button();
+            btnHacerAdmin = new Button();
             button1 = new Button();
             lstAdmins = new ListBox();
+            button2 = new Button();
+            button3 = new Button();
+            btnBorrarCliente = new Button();
             SuspendLayout();
             // 
             // lblLogin
@@ -55,30 +58,31 @@
             lstUsuarios.Name = "lstUsuarios";
             lstUsuarios.Size = new Size(313, 644);
             lstUsuarios.TabIndex = 2;
+            lstUsuarios.SelectedIndexChanged += lstUsuarios_SelectedIndexChanged;
             // 
-            // btnEliminarPedido
+            // btnHacerAdmin
             // 
-            btnEliminarPedido.BackColor = Color.DeepSkyBlue;
-            btnEliminarPedido.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnEliminarPedido.ForeColor = SystemColors.ButtonHighlight;
-            btnEliminarPedido.Location = new Point(168, 778);
-            btnEliminarPedido.Margin = new Padding(3, 4, 3, 4);
-            btnEliminarPedido.Name = "btnEliminarPedido";
-            btnEliminarPedido.Size = new Size(415, 92);
-            btnEliminarPedido.TabIndex = 25;
-            btnEliminarPedido.Text = "ELIMINAR PEDIDO SELECCIONADO";
-            btnEliminarPedido.UseVisualStyleBackColor = false;
-            btnEliminarPedido.Click += btnEliminarPedido_Click;
+            btnHacerAdmin.BackColor = Color.DeepSkyBlue;
+            btnHacerAdmin.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnHacerAdmin.ForeColor = SystemColors.ButtonHighlight;
+            btnHacerAdmin.Location = new Point(173, 778);
+            btnHacerAdmin.Margin = new Padding(3, 4, 3, 4);
+            btnHacerAdmin.Name = "btnHacerAdmin";
+            btnHacerAdmin.Size = new Size(165, 92);
+            btnHacerAdmin.TabIndex = 25;
+            btnHacerAdmin.Text = "HACER ADMIN";
+            btnHacerAdmin.UseVisualStyleBackColor = false;
+            btnHacerAdmin.Click += btnEliminarPedido_Click;
             // 
             // button1
             // 
             button1.BackColor = Color.DeepSkyBlue;
             button1.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(682, 778);
+            button1.Location = new Point(562, 549);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(415, 92);
+            button1.Size = new Size(107, 92);
             button1.TabIndex = 26;
             button1.Text = "ACEPTAR PEDIDO";
             button1.UseVisualStyleBackColor = false;
@@ -93,15 +97,59 @@
             lstAdmins.Name = "lstAdmins";
             lstAdmins.Size = new Size(313, 644);
             lstAdmins.TabIndex = 27;
+            lstAdmins.SelectedIndexChanged += lstAdmins_SelectedIndexChanged;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.DeepSkyBlue;
+            button2.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.ForeColor = SystemColors.ButtonHighlight;
+            button2.Location = new Point(965, 778);
+            button2.Margin = new Padding(3, 4, 3, 4);
+            button2.Name = "button2";
+            button2.Size = new Size(165, 92);
+            button2.TabIndex = 28;
+            button2.Text = "ELIMINAR PEDIDO SELECCIONADO";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.DeepSkyBlue;
+            button3.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            button3.ForeColor = SystemColors.ButtonHighlight;
+            button3.Location = new Point(691, 778);
+            button3.Margin = new Padding(3, 4, 3, 4);
+            button3.Name = "button3";
+            button3.Size = new Size(165, 92);
+            button3.TabIndex = 29;
+            button3.Text = "ELIMINAR PEDIDO SELECCIONADO";
+            button3.UseVisualStyleBackColor = false;
+            // 
+            // btnBorrarCliente
+            // 
+            btnBorrarCliente.BackColor = Color.DeepSkyBlue;
+            btnBorrarCliente.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnBorrarCliente.ForeColor = SystemColors.ButtonHighlight;
+            btnBorrarCliente.Location = new Point(413, 778);
+            btnBorrarCliente.Margin = new Padding(3, 4, 3, 4);
+            btnBorrarCliente.Name = "btnBorrarCliente";
+            btnBorrarCliente.Size = new Size(165, 92);
+            btnBorrarCliente.TabIndex = 30;
+            btnBorrarCliente.Text = " ELIMINAR CLIENTE";
+            btnBorrarCliente.UseVisualStyleBackColor = false;
+            btnBorrarCliente.Click += btnBorrarCliente_Click;
             // 
             // PanelAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1216, 908);
+            Controls.Add(btnBorrarCliente);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(lstAdmins);
             Controls.Add(button1);
-            Controls.Add(btnEliminarPedido);
+            Controls.Add(btnHacerAdmin);
             Controls.Add(lstUsuarios);
             Controls.Add(lblLogin);
             Margin = new Padding(3, 4, 3, 4);
@@ -109,6 +157,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PanelAdmin";
             FormClosing += PanelAdmin_FormClosing;
+            Load += PanelAdmin_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -117,8 +166,11 @@
 
         private Label lblLogin;
         private ListBox lstUsuarios;
-        private Button btnEliminarPedido;
+        private Button btnHacerAdmin;
         private Button button1;
         private ListBox lstAdmins;
+        private Button button2;
+        private Button button3;
+        private Button btnBorrarCliente;
     }
 }
