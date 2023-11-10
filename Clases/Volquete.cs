@@ -30,5 +30,5 @@ namespace Clases
             return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}";
         }
     }
-        
+
 }
