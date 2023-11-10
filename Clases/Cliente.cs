@@ -23,9 +23,14 @@ namespace Clases
             this.Nombre = nombre;
             this.Apellido = apellido;
         }
+        public override void ConsutarEstado()
+        {
+            throw new NotImplementedException();
+        }
 
         public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Apellido { get => apellido; set => apellido = value; }
     }
+
 }

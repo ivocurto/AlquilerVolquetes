@@ -67,6 +67,10 @@ namespace Clases
             idPedido = id;
         }
 
+        public int CalcularPrecioPedido()
+        {
+            return 0;
+        }
 
 
     }
