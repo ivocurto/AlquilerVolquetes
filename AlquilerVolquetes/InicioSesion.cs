@@ -55,6 +55,10 @@ namespace AlquilerVolquetes
             this.WindowState = FormWindowState.Maximized;
 
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
+            if(usuarios is null)
+            {
+                usuarios = new List<Cliente>();
+            }
   
             usuarios.Add(usuario);
             usuario.IndexUsuario = usuarios.Count() - 1;
@@ -68,6 +72,11 @@ namespace AlquilerVolquetes
             InitializeComponent();
 
             admins = JsonFileManager.LoadFromJson<Admin>(rutaArchivoJsonAdmin);
+            if (admins is null)
+            {
+                admins = new List<Admin>();
+            }
+
             adminActual = admin;
             if (admins is null)
             {
