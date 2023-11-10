@@ -14,6 +14,7 @@ namespace Clases
         private List<Volquete> volquetesPedidos;
         private List<Volquete> volquetesInstalados;
         private int idPedido;
+        private int index;
         private DateTime fechaPedido;
         private DateTime fechaEntrega;
        
@@ -33,6 +34,7 @@ namespace Clases
         public int IdPedido { get => idPedido; set => idPedido = value; }
         public DateTime FechaPedido { get => fechaPedido; set => fechaPedido = value; }
         public DateTime FechaEntrega { get => fechaEntrega; set => fechaEntrega = value; }
+        public int Index { get => index; set => index = value; }
 
         public static bool operator -(Pedido pedido, DateTime fecha)
         {

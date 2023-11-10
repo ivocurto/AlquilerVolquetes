@@ -13,6 +13,10 @@ namespace Clases
         private string apellido;
         private string numeroTelefono;
 
+        public Cliente(string nombreUsuario, string mailUsuario, string claveUsuario) : base(nombreUsuario, mailUsuario, claveUsuario)
+        {
+            
+        }
         public Cliente(string nombreUsuario, string mailUsuario, string claveUsuario, string nombre, string apellido) : base(nombreUsuario, mailUsuario, claveUsuario)
         {
             this.Pedidos = new List<Pedido>();
