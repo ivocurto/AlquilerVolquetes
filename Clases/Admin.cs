@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
 namespace Clases
 {
     public class Admin : Usuario
     {
-        private List<Dictionary<string, object>> historialAcciones;
+        private List<Dictionary<string, string>> historialAcciones;
 
         public Admin(string nombreUsuario, string mailUsuario, string claveUsuario)
             : base(nombreUsuario, mailUsuario, claveUsuario)
         {
-            historialAcciones = new List<Dictionary<string, object>>();
+            historialAcciones = JsonFileManager.LoadFromJsonGeneric<List<Dictionary<string, string>>>("historialAdmin.json") ?? new List<Dictionary<string, string>>();
         }
 
         public void EliminarCliente(List<Cliente> clientes, Cliente cliente)
@@ -20,6 +22,7 @@ namespace Clases
             if (clientes.Remove(cliente))
             {
                 NotificarAccionExitosa("EliminarCliente", cliente.NombreUsuario);
+                GuardarHistorial();
             }
             else
             {
@@ -33,6 +36,7 @@ namespace Clases
             {
                 cliente.Pedidos.RemoveAt(indexPedido);
                 NotificarAccionExitosa("EliminarPedidoCliente", cliente.NombreUsuario);
+                GuardarHistorial();
             }
             else
             {
@@ -47,6 +51,7 @@ namespace Clases
                 Admin admin = new Admin(clienteUpgrade.NombreUsuario, clienteUpgrade.MailUsuario, clienteUpgrade.ClaveUsuario);
                 admins.Add(admin);
                 NotificarAccionExitosa("HacerAdmin", clienteUpgrade.NombreUsuario);
+                GuardarHistorial();
             }
             else
             {
@@ -58,11 +63,16 @@ namespace Clases
         {
             Console.WriteLine($"Se completó la acción: {nombreAccion} - Usuario afectado: {usuarioAfectado}");
 
-            Dictionary<string, object> registro = new Dictionary<string, object>
+            Dictionary<string, string> registro = new Dictionary<string, string>
             {
-                { nombreAccion, new AccionAdmin(DateTime.Now, usuarioAfectado) }
+                { nombreAccion, $"Realizada por: {this.nombreUsuario} -- Usuario afectado: {usuarioAfectado} -- Fecha de realizacion de la acción {DateTime.Now}" }
             };
             historialAcciones.Add(registro);
+        }
+
+        private void GuardarHistorial()
+        {
+            JsonFileManager.SaveToJsonGeneric("historialAdmin.json", historialAcciones);
         }
     }
 }

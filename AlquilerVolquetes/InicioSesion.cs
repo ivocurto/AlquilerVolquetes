@@ -61,7 +61,7 @@ namespace AlquilerVolquetes
             usuarios.Add(usuario);
             usuario.IndexUsuario = usuarios.Count() - 1;
 
-            JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
+            JsonFileManager.SaveToJsonGeneric<List<Cliente>>(rutaArchivoJson, usuarios);
         }
 
         public InicioSesion(Admin admin)
@@ -72,7 +72,7 @@ namespace AlquilerVolquetes
             admins.Add(admin);
             admin.IndexUsuario = admins.Count() - 1;
 
-            JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
+            JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoJson, admins);
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
