@@ -1,4 +1,5 @@
 ﻿using Clases;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,10 +18,13 @@ namespace AlquilerVolquetes
         private Size previousSize;
         public List<Cliente> listaUsuarios;
 
-        public RegistroUsuario(List<Cliente> lista)
+        public RegistroUsuario()
         {
             InitializeComponent();
-            listaUsuarios = lista;
+
+            listaUsuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
+
+            
         }
 
         private void RegistroUsuario_Load(object sender, EventArgs e)
@@ -131,7 +135,7 @@ namespace AlquilerVolquetes
             string name = txtNombre.Text;
             string apellido = txtApellido.Text;
 
-            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(clave, nombre, mail, reClave, name, apellido);
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(nombre, clave, mail, reClave, name, apellido);
 
             if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
             {
@@ -182,7 +186,8 @@ namespace AlquilerVolquetes
                 {
                     Cliente usuario = new Cliente(nombre, mail, clave, name, apellido);
                     listaUsuarios.Add(usuario);
-                    InicioSesion inicio = new InicioSesion(usuario);
+                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", listaUsuarios);
+                    InicioSesion inicio = new InicioSesion();
                     inicio.Show();
                     this.Hide();
                 }

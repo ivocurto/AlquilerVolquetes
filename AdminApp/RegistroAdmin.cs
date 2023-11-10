@@ -18,25 +18,16 @@ namespace AdminApp
 
 
 
-            listaAdmins = new List<Admin>();
-            try
+            listaAdmins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoJson);
+            if(listaAdmins is null )
             {
-
-
-
-
-                string json = File.ReadAllText(rutaArchivoJson);
-
-                listaAdmins = JsonConvert.DeserializeObject<List<Admin>>(json);
-
-            }
-            catch (Exception ex)
-            {
-
-                string json = JsonConvert.SerializeObject(listaAdmins);
-                File.WriteAllText(rutaArchivoJson, json);
+                listaAdmins = new List<Admin>();
             }
             clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
+            if( clientes is null)
+            {
+                clientes = new List<Cliente>();
+            }
         }
 
 
@@ -68,12 +59,15 @@ namespace AdminApp
             }
             else
             {
-                Admin usuario = new Admin(nombre, mail, clave);
+                
                 ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)
                 {
-                    InicioSesion inicio = new InicioSesion(usuario);
+                    Admin usuario = new Admin(nombre, mail, clave);
+                    listaAdmins.Add(usuario);
+                    JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoJson, listaAdmins);
+                    InicioSesion inicio = new InicioSesion(listaAdmins);
                     inicio.Show();
                     this.Hide();
                 }
@@ -107,7 +101,7 @@ namespace AdminApp
 
         private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            InicioSesion inicio = new InicioSesion();
+            InicioSesion inicio = new InicioSesion(listaAdmins);
             inicio.Show();
             this.Hide();
         }

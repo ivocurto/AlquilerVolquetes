@@ -49,54 +49,20 @@ namespace AlquilerVolquetes
             }
         }
 
-        public InicioSesion(Cliente usuario)
+
+        public InicioSesion(List<Admin> adminlist)
         {
             InitializeComponent();
-            this.WindowState = FormWindowState.Maximized;
 
+            admins = adminlist;
             usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-            if(usuarios is null)
-            {
-                usuarios = new List<Cliente>();
-            }
-  
-            usuarios.Add(usuario);
-            usuario.IndexUsuario = usuarios.Count() - 1;
 
-
-            JsonFileManager.SaveToJson(rutaArchivoJson, usuarios);
-        }
-
-        public InicioSesion(Admin admin)
-        {
-            InitializeComponent();
-
-            admins = JsonFileManager.LoadFromJson<Admin>(rutaArchivoJsonAdmin);
-            if (admins is null)
-            {
-                admins = new List<Admin>();
-            }
-
-            adminActual = admin;
-            if (admins is null)
-            {
-                admins = new List<Admin>();
-            }
-            admins.Add(admin);
-
-
-
-            JsonFileManager.SaveToJson(rutaArchivoAdmins, admins);
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             previousSize = this.Size;
             previousLocation = this.Location;
-            if (usuarios is null)
-            {
-                usuarios = new List<Cliente>();
-            }
-            RegistroUsuario registro = new RegistroUsuario(usuarios);
+            RegistroUsuario registro = new RegistroUsuario();
             MantenerPantallaCompleta(this, registro, previousSize, previousLocation);
             registro.Show();
             this.Hide();

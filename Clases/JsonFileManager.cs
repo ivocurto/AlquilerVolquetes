@@ -12,40 +12,6 @@ namespace Clases
     public class JsonFileManager
     {
 
-        public static List<T> LoadFromJson<T>(string filePath)
-        {
-            List<T> items = new List<T>();
-
-            try
-            {
-
-
-                string json = File.ReadAllText(filePath);
-                items = JsonConvert.DeserializeObject<List<T>>(json);
-
-            }
-            catch (Exception ex)
-            {
-                string json = JsonConvert.SerializeObject(items);
-                File.WriteAllText(filePath, json);
-            }
-
-            return items;
-        }
-
-
-        public static void SaveToJson<T>(string filePath, List<T> items)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(items);
-                File.WriteAllText(filePath, json);
-            }
-            catch (Exception ex)
-            {
-                // Manejar la excepción o registrarla según tus necesidades.
-            }
-        }
         public static T LoadFromJsonGeneric<T>(string filePath)
         {
             T item = default(T);  // Inicializa el objeto como valor predeterminado
@@ -60,8 +26,8 @@ namespace Clases
             }
             catch (Exception ex)
             {
-                string json = JsonConvert.SerializeObject(default(T));
-                File.WriteAllText(filePath, json);
+                //string json = JsonConvert.SerializeObject(default(T));
+                //File.WriteAllText(filePath, json);
             }
 
             return item;
@@ -82,24 +48,7 @@ namespace Clases
                 throw;
             }
         }
-        public static void AddDataToJson<T>(string filePath, T newData)
-        {
-            try
-            {
-                // Cargar datos existentes del archivo JSON en una lista
-                List<T> existingData = LoadFromJsonGeneric<List<T>>(filePath);
-
-                // Agregar el nuevo dato a la lista
-                existingData.Add(newData);
-
-                // Guardar la lista actualizada en el archivo JSON
-                SaveToJsonGeneric(filePath, existingData);
-            }
-            catch (Exception ex)
-            {
-                // Manejar la excepción o registrarla según tus necesidades.
-            }
-        }
+       
     }
        
     
