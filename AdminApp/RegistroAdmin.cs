@@ -47,7 +47,7 @@ namespace AdminApp
             string nombre = txtUsuario.Text;
             string mail = txtMail.Text;
 
-            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(clave, nombre, mail, reClave);
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(nombre,clave , mail, reClave);
 
             if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
             {
@@ -55,7 +55,7 @@ namespace AdminApp
             }
             else if (!ManejoDeValidaciones.ValidarContraseña(datosUsuario))
             {
-                MessageBox.Show("Las contraseñas no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               MessageBox.Show("Las contraseñas no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (!ManejoDeValidaciones.ComprobarExistenciaUsuario(datosUsuario, clientes))
             {
@@ -63,22 +63,12 @@ namespace AdminApp
             }
             else if(!ManejoDeValidaciones.ComprobarExistenciaAdmin(datosUsuario, listaAdmins))
             {
+                MessageBox.Show("El nombre de usuario o el correo ya existen.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             else
             {
                 Admin usuario = new Admin(nombre, mail, clave);
-
-                if (listaAdmins == null)
-                {
-                    listaAdmins = new List<Admin>();
-                }
-
-                listaAdmins.Add(usuario);
-                usuario.IndexUsuario = listaAdmins.Count() - 1;
-
-                string jsonUsuarios = JsonConvert.SerializeObject(listaAdmins);
-                File.WriteAllText(rutaArchivoJson, jsonUsuarios);
                 ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)

@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             lblLogin = new Label();
-            lstPedidosTotales = new ListBox();
+            lstUsuarios = new ListBox();
             btnEliminarPedido = new Button();
             button1 = new Button();
+            lstAdmins = new ListBox();
             SuspendLayout();
             // 
             // lblLogin
@@ -45,22 +46,22 @@
             lblLogin.TabIndex = 1;
             lblLogin.Text = "PANEL ADMIN";
             // 
-            // lstPedidosTotales
+            // lstUsuarios
             // 
-            lstPedidosTotales.FormattingEnabled = true;
-            lstPedidosTotales.ItemHeight = 20;
-            lstPedidosTotales.Location = new Point(210, 133);
-            lstPedidosTotales.Margin = new Padding(3, 4, 3, 4);
-            lstPedidosTotales.Name = "lstPedidosTotales";
-            lstPedidosTotales.Size = new Size(795, 604);
-            lstPedidosTotales.TabIndex = 2;
+            lstUsuarios.FormattingEnabled = true;
+            lstUsuarios.ItemHeight = 20;
+            lstUsuarios.Location = new Point(207, 111);
+            lstUsuarios.Margin = new Padding(3, 4, 3, 4);
+            lstUsuarios.Name = "lstUsuarios";
+            lstUsuarios.Size = new Size(313, 644);
+            lstUsuarios.TabIndex = 2;
             // 
             // btnEliminarPedido
             // 
             btnEliminarPedido.BackColor = Color.DeepSkyBlue;
             btnEliminarPedido.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnEliminarPedido.ForeColor = SystemColors.ButtonHighlight;
-            btnEliminarPedido.Location = new Point(172, 763);
+            btnEliminarPedido.Location = new Point(168, 778);
             btnEliminarPedido.Margin = new Padding(3, 4, 3, 4);
             btnEliminarPedido.Name = "btnEliminarPedido";
             btnEliminarPedido.Size = new Size(415, 92);
@@ -74,7 +75,7 @@
             button1.BackColor = Color.DeepSkyBlue;
             button1.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(648, 763);
+            button1.Location = new Point(682, 778);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(415, 92);
@@ -83,14 +84,25 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // lstAdmins
+            // 
+            lstAdmins.FormattingEnabled = true;
+            lstAdmins.ItemHeight = 20;
+            lstAdmins.Location = new Point(721, 111);
+            lstAdmins.Margin = new Padding(3, 4, 3, 4);
+            lstAdmins.Name = "lstAdmins";
+            lstAdmins.Size = new Size(313, 644);
+            lstAdmins.TabIndex = 27;
+            // 
             // PanelAdmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1216, 908);
+            Controls.Add(lstAdmins);
             Controls.Add(button1);
             Controls.Add(btnEliminarPedido);
-            Controls.Add(lstPedidosTotales);
+            Controls.Add(lstUsuarios);
             Controls.Add(lblLogin);
             Margin = new Padding(3, 4, 3, 4);
             Name = "PanelAdmin";
@@ -104,8 +116,9 @@
         #endregion
 
         private Label lblLogin;
-        private ListBox lstPedidosTotales;
+        private ListBox lstUsuarios;
         private Button btnEliminarPedido;
         private Button button1;
+        private ListBox lstAdmins;
     }
 }

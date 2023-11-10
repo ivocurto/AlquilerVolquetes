@@ -13,31 +13,30 @@ namespace AdminApp
 {
     public partial class PanelAdmin : Form
     {
-        private List<Pedido> pedidos;
+        private List<Cliente> clientes;
         private int indexPedido;
         public PanelAdmin()
         {
             InitializeComponent();
-            pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("pedidos.json");
+            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
             // Enlaza la lista de pedidos al ListBox
-            if(pedidos is not null)
+            if (clientes is not null)
             {
-                foreach (Pedido pedido in pedidos)
+                foreach (Cliente cliente in clientes)
                 {
-                    indexPedido = pedido.IdPedido;
+                    
                     string formato = "";
-                    if (pedido.VolquetesPedidos.Count() > 0)
-                    {
-                        foreach (Volquete volquete in pedido.VolquetesPedidos)
+                    
+                        foreach (Pedido pedido in cliente.Pedidos)
                         {
-                            if (volquete.Cantidad != 0)
-                            {
-                                formato += volquete.ToString() + " - ";
-                            }
+                            
+                                formato += pedido.ToString();
+                            
                         }
-                        lstPedidosTotales.Items.Add($"USUARIO: {pedido.Cliente.ToUpper()} VOLQUETES A INSTALAR: {formato}");
+                        
+                    lstUsuarios.Items.Add($"USUARIO: {cliente.Nombre.ToUpper()} VOLQUETES A INSTALAR: {formato}");
 
-                    }
+                    
                 }
 
             }
@@ -68,7 +67,7 @@ namespace AdminApp
         private void btnEliminarPedido_Click(object sender, EventArgs e)
         {
             // Verifica si se seleccionó un pedido en el ListBox
-            if (lstPedidosTotales.SelectedItem != null)
+            if (lstUsuarios.SelectedItem != null)
             {
                 // Muestra un cuadro de diálogo de confirmación
                 DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar este pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -76,24 +75,24 @@ namespace AdminApp
                 if (result == DialogResult.Yes)
                 {
                     // Encuentra el índice del pedido seleccionado
-                    int selectedIndex = lstPedidosTotales.SelectedIndex;
+                    int selectedIndex = lstUsuarios.SelectedIndex;
 
                     if (selectedIndex >= 0)
                     {
                         // Elimina el pedido seleccionado de la lista
-                        pedidos.RemoveAt(selectedIndex);
+                        clientes.RemoveAt(selectedIndex);
 
                         // Recorre la lista actualizada para actualizar los IDs de los pedidos
-                        for (int i = 0; i < pedidos.Count; i++)
+                        for (int i = 0; i < clientes.Count; i++)
                         {
                             //pedidos[i].IdCliente = i;
                         }
 
                         // Guarda la lista actualizada en el archivo JSON
-                        JsonFileManager.SaveToJsonGeneric("pedidos.json", pedidos);
+                        JsonFileManager.SaveToJsonGeneric("pedidos.json", clientes);
 
                         // Elimina el pedido seleccionado del ListBox
-                        lstPedidosTotales.Items.RemoveAt(selectedIndex);
+                        lstUsuarios.Items.RemoveAt(selectedIndex);
                     }
                 }
             }
@@ -101,27 +100,27 @@ namespace AdminApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (lstPedidosTotales.SelectedItem != null)
-            {
-                DialogResult result = MessageBox.Show("¿Desea aceptar el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (lstUsuarios.SelectedItem != null)
+            //{
+            //    DialogResult result = MessageBox.Show("¿Desea aceptar el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (result == DialogResult.Yes)
-                {
-                    int selectedIndex = lstPedidosTotales.SelectedIndex;
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        int selectedIndex = lstUsuarios.SelectedIndex;
 
-                    if (selectedIndex >= 0)
-                    {
-                        pedidos[selectedIndex].VolquetesInstalados = pedidos[selectedIndex].VolquetesPedidos;
+            //        if (selectedIndex >= 0)
+            //        {
+            //            clientes[selectedIndex].VolquetesInstalados = clientes[selectedIndex].VolquetesPedidos;
 
-                        pedidos[selectedIndex].VolquetesPedidos = new List<Volquete>();
+            //            clientes[selectedIndex].VolquetesPedidos = new List<Volquete>();
 
 
-                        JsonFileManager.SaveToJsonGeneric("pedidos.json", pedidos);
+            //            JsonFileManager.SaveToJsonGeneric("pedidos.json", clientes);
 
-                        lstPedidosTotales.Items.RemoveAt(selectedIndex);
-                    }
-                }
-            }
+            //            lstUsuarios.Items.RemoveAt(selectedIndex);
+            //        }
+            //    }
+            //}
         }
     }
 }

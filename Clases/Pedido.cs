@@ -72,6 +72,25 @@ namespace Clases
             return 0;
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Volquete volquete in VolquetesInstalados)
+            {
+                sb.Append(volquete.ToString());
+                sb.Append(" - ");
+            }
+
+            // Elimina la última coma y espacio si la cadena no está vacía
+            if (sb.Length > 2)
+            {
+                sb.Length -= 2;
+            }
+
+            return sb.ToString();
+        }
+
 
     }
 }

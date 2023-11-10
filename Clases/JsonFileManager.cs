@@ -11,8 +11,41 @@ namespace Clases
 {
     public class JsonFileManager
     {
-        
 
+        public static List<T> LoadFromJson<T>(string filePath)
+        {
+            List<T> items = new List<T>();
+
+            try
+            {
+
+
+                string json = File.ReadAllText(filePath);
+                items = JsonConvert.DeserializeObject<List<T>>(json);
+
+            }
+            catch (Exception ex)
+            {
+                string json = JsonConvert.SerializeObject(items);
+                File.WriteAllText(filePath, json);
+            }
+
+            return items;
+        }
+
+
+        public static void SaveToJson<T>(string filePath, List<T> items)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(items);
+                File.WriteAllText(filePath, json);
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción o registrarla según tus necesidades.
+            }
+        }
         public static T LoadFromJsonGeneric<T>(string filePath)
         {
             T item = default(T);  // Inicializa el objeto como valor predeterminado
@@ -40,10 +73,13 @@ namespace Clases
             {
                 string json = JsonConvert.SerializeObject(data);
                 File.WriteAllText(filePath, json);
+                Console.WriteLine($"Datos guardados en el archivo JSON: {filePath}");
             }
             catch (Exception ex)
             {
-                // Manejar la excepción o registrarla según tus necesidades.
+                Console.WriteLine($"Error al guardar datos en el archivo JSON: {ex.Message}");
+                // También puedes lanzar la excepción para que sea manejada en niveles superiores si es necesario
+                throw;
             }
         }
         public static void AddDataToJson<T>(string filePath, T newData)
@@ -65,5 +101,7 @@ namespace Clases
             }
         }
     }
+       
+    
 
 }
