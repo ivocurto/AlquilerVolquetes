@@ -16,6 +16,10 @@ namespace Clases
         {
             historialAcciones = JsonFileManager.LoadFromJsonGeneric<List<Dictionary<string, string>>>("historialAdmin.json") ?? new List<Dictionary<string, string>>();
         }
+        public override void ConsutarEstado()
+        {
+            throw new NotImplementedException();
+        }
 
         public void EliminarCliente(List<Cliente> clientes, Cliente cliente)
         {
@@ -61,13 +65,12 @@ namespace Clases
 
         private void NotificarAccionExitosa(string nombreAccion, string usuarioAfectado)
         {
-            Console.WriteLine($"Se completó la acción: {nombreAccion} - Usuario afectado: {usuarioAfectado}");
-
             Dictionary<string, string> registro = new Dictionary<string, string>
             {
                 { nombreAccion, $"Realizada por: {this.nombreUsuario} -- Usuario afectado: {usuarioAfectado} -- Fecha de realizacion de la acción {DateTime.Now}" }
             };
             historialAcciones.Add(registro);
+            GuardarHistorial();
         }
 
         private void GuardarHistorial()

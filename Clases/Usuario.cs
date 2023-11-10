@@ -19,6 +19,10 @@
         public string MailUsuario { get => mailUsuario; set => mailUsuario = value; }
         public string ClaveUsuario { get => claveUsuario; set => claveUsuario = value; }
         public int IndexUsuario { get => indexUsuario; set => indexUsuario = value; }
+
+
+        public abstract void ConsutarEstado();
     }
 
+    
 }
