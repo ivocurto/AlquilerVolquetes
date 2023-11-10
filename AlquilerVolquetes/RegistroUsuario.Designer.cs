@@ -31,6 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroUsuario));
             lblRegistrarse = new LinkLabel();
             pnlLogin = new Panel();
+            lblApellido = new Label();
+            lblNombre = new Label();
+            txtNombre = new TextBox();
+            txtApellido = new TextBox();
+            pictureBox6 = new PictureBox();
+            pictureBox5 = new PictureBox();
             lblCorreo = new Label();
             txtCorreo = new TextBox();
             pictureBox4 = new PictureBox();
@@ -45,9 +51,9 @@
             txtClave = new TextBox();
             btnIngresar = new Button();
             pictureBox2 = new PictureBox();
-            txtNombre = new TextBox();
-            txtApellido = new TextBox();
             pnlLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -59,7 +65,7 @@
             lblRegistrarse.AutoSize = true;
             lblRegistrarse.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblRegistrarse.LinkColor = Color.FromArgb(22, 173, 225);
-            lblRegistrarse.Location = new Point(72, 301);
+            lblRegistrarse.Location = new Point(82, 364);
             lblRegistrarse.Name = "lblRegistrarse";
             lblRegistrarse.Size = new Size(259, 21);
             lblRegistrarse.TabIndex = 5;
@@ -72,6 +78,12 @@
             pnlLogin.Anchor = AnchorStyles.None;
             pnlLogin.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             pnlLogin.BackColor = Color.White;
+            pnlLogin.Controls.Add(lblApellido);
+            pnlLogin.Controls.Add(lblNombre);
+            pnlLogin.Controls.Add(txtNombre);
+            pnlLogin.Controls.Add(txtApellido);
+            pnlLogin.Controls.Add(pictureBox6);
+            pnlLogin.Controls.Add(pictureBox5);
             pnlLogin.Controls.Add(lblCorreo);
             pnlLogin.Controls.Add(txtCorreo);
             pnlLogin.Controls.Add(pictureBox4);
@@ -87,10 +99,92 @@
             pnlLogin.Controls.Add(txtClave);
             pnlLogin.Controls.Add(btnIngresar);
             pnlLogin.Controls.Add(pictureBox2);
-            pnlLogin.Location = new Point(326, 133);
+            pnlLogin.Location = new Point(325, 76);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(412, 414);
+            pnlLogin.Size = new Size(412, 506);
             pnlLogin.TabIndex = 7;
+            // 
+            // lblApellido
+            // 
+            lblApellido.AutoSize = true;
+            lblApellido.BackColor = Color.FromArgb(51, 171, 215);
+            lblApellido.Enabled = false;
+            lblApellido.FlatStyle = FlatStyle.Flat;
+            lblApellido.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblApellido.ForeColor = Color.White;
+            lblApellido.Location = new Point(116, 128);
+            lblApellido.Margin = new Padding(0);
+            lblApellido.Name = "lblApellido";
+            lblApellido.Size = new Size(87, 25);
+            lblApellido.TabIndex = 97;
+            lblApellido.Text = "Apellido";
+            // 
+            // lblNombre
+            // 
+            lblNombre.AutoSize = true;
+            lblNombre.BackColor = Color.FromArgb(51, 171, 215);
+            lblNombre.Enabled = false;
+            lblNombre.FlatStyle = FlatStyle.Flat;
+            lblNombre.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombre.ForeColor = Color.White;
+            lblNombre.Location = new Point(116, 82);
+            lblNombre.Margin = new Padding(0);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(87, 25);
+            lblNombre.TabIndex = 96;
+            lblNombre.Text = "Nombre";
+            // 
+            // txtNombre
+            // 
+            txtNombre.Anchor = AnchorStyles.None;
+            txtNombre.BackColor = Color.FromArgb(51, 171, 215);
+            txtNombre.BorderStyle = BorderStyle.None;
+            txtNombre.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNombre.ForeColor = Color.White;
+            txtNombre.Location = new Point(110, 84);
+            txtNombre.Margin = new Padding(0);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(214, 23);
+            txtNombre.TabIndex = 95;
+            txtNombre.TextChanged += txtNombre_TextChanged;
+            // 
+            // txtApellido
+            // 
+            txtApellido.Anchor = AnchorStyles.None;
+            txtApellido.BackColor = Color.FromArgb(51, 171, 215);
+            txtApellido.BorderStyle = BorderStyle.None;
+            txtApellido.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtApellido.ForeColor = Color.White;
+            txtApellido.Location = new Point(110, 130);
+            txtApellido.Margin = new Padding(0);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(214, 23);
+            txtApellido.TabIndex = 94;
+            txtApellido.TextChanged += txtApellido_TextChanged;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.Anchor = AnchorStyles.None;
+            pictureBox6.BackgroundImageLayout = ImageLayout.None;
+            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
+            pictureBox6.Location = new Point(0, 74);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(412, 40);
+            pictureBox6.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox6.TabIndex = 94;
+            pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Anchor = AnchorStyles.None;
+            pictureBox5.BackgroundImageLayout = ImageLayout.None;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(0, 120);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(412, 40);
+            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox5.TabIndex = 93;
+            pictureBox5.TabStop = false;
             // 
             // lblCorreo
             // 
@@ -100,7 +194,7 @@
             lblCorreo.FlatStyle = FlatStyle.Flat;
             lblCorreo.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblCorreo.ForeColor = Color.White;
-            lblCorreo.Location = new Point(119, 110);
+            lblCorreo.Location = new Point(116, 175);
             lblCorreo.Margin = new Padding(0);
             lblCorreo.Name = "lblCorreo";
             lblCorreo.Size = new Size(185, 25);
@@ -114,7 +208,7 @@
             txtCorreo.BorderStyle = BorderStyle.None;
             txtCorreo.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
             txtCorreo.ForeColor = Color.White;
-            txtCorreo.Location = new Point(114, 111);
+            txtCorreo.Location = new Point(111, 175);
             txtCorreo.Margin = new Padding(0);
             txtCorreo.Name = "txtCorreo";
             txtCorreo.Size = new Size(214, 23);
@@ -126,7 +220,7 @@
             pictureBox4.Anchor = AnchorStyles.None;
             pictureBox4.BackgroundImageLayout = ImageLayout.None;
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(3, 102);
+            pictureBox4.Location = new Point(0, 166);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(412, 40);
             pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -141,7 +235,7 @@
             lblReClave.FlatStyle = FlatStyle.Flat;
             lblReClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblReClave.ForeColor = Color.White;
-            lblReClave.Location = new Point(119, 256);
+            lblReClave.Location = new Point(116, 320);
             lblReClave.Name = "lblReClave";
             lblReClave.Size = new Size(135, 25);
             lblReClave.TabIndex = 11;
@@ -154,7 +248,7 @@
             txtReClave.BorderStyle = BorderStyle.None;
             txtReClave.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
             txtReClave.ForeColor = Color.White;
-            txtReClave.Location = new Point(116, 258);
+            txtReClave.Location = new Point(113, 322);
             txtReClave.Margin = new Padding(0);
             txtReClave.Name = "txtReClave";
             txtReClave.Size = new Size(214, 23);
@@ -167,7 +261,7 @@
             pictureBox3.Anchor = AnchorStyles.None;
             pictureBox3.BackgroundImageLayout = ImageLayout.None;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(3, 248);
+            pictureBox3.Location = new Point(0, 312);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(412, 40);
             pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -182,7 +276,7 @@
             lblUsusario.FlatStyle = FlatStyle.Flat;
             lblUsusario.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblUsusario.ForeColor = Color.White;
-            lblUsusario.Location = new Point(114, 160);
+            lblUsusario.Location = new Point(116, 224);
             lblUsusario.Name = "lblUsusario";
             lblUsusario.Size = new Size(85, 25);
             lblUsusario.TabIndex = 9;
@@ -195,7 +289,7 @@
             txtUsuario.BorderStyle = BorderStyle.None;
             txtUsuario.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
             txtUsuario.ForeColor = Color.White;
-            txtUsuario.Location = new Point(114, 160);
+            txtUsuario.Location = new Point(111, 224);
             txtUsuario.Margin = new Padding(0);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(214, 23);
@@ -210,7 +304,7 @@
             lblClave.FlatStyle = FlatStyle.Flat;
             lblClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblClave.ForeColor = Color.White;
-            lblClave.Location = new Point(119, 208);
+            lblClave.Location = new Point(116, 274);
             lblClave.Name = "lblClave";
             lblClave.Size = new Size(64, 25);
             lblClave.TabIndex = 10;
@@ -221,7 +315,7 @@
             lblRegister.BackColor = Color.Transparent;
             lblRegister.Font = new Font("Trebuchet MS", 30F, FontStyle.Bold, GraphicsUnit.Point);
             lblRegister.ForeColor = Color.FromArgb(22, 173, 225);
-            lblRegister.Location = new Point(0, 28);
+            lblRegister.Location = new Point(0, 16);
             lblRegister.Margin = new Padding(0);
             lblRegister.Name = "lblRegister";
             lblRegister.Size = new Size(412, 49);
@@ -234,7 +328,7 @@
             pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.BackgroundImageLayout = ImageLayout.None;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(3, 151);
+            pictureBox1.Location = new Point(0, 215);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(412, 40);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -248,7 +342,7 @@
             txtClave.BorderStyle = BorderStyle.None;
             txtClave.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
             txtClave.ForeColor = Color.White;
-            txtClave.Location = new Point(116, 210);
+            txtClave.Location = new Point(113, 274);
             txtClave.Margin = new Padding(0);
             txtClave.Name = "txtClave";
             txtClave.Size = new Size(214, 23);
@@ -265,7 +359,7 @@
             btnIngresar.FlatStyle = FlatStyle.Flat;
             btnIngresar.Font = new Font("Bahnschrift", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnIngresar.ForeColor = SystemColors.ButtonHighlight;
-            btnIngresar.Location = new Point(110, 337);
+            btnIngresar.Location = new Point(110, 394);
             btnIngresar.Margin = new Padding(0);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(188, 55);
@@ -279,38 +373,12 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackgroundImageLayout = ImageLayout.None;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(3, 200);
+            pictureBox2.Location = new Point(0, 264);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(412, 40);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 83;
             pictureBox2.TabStop = false;
-            // 
-            // txtNombre
-            // 
-            txtNombre.Anchor = AnchorStyles.None;
-            txtNombre.BackColor = Color.FromArgb(51, 171, 215);
-            txtNombre.BorderStyle = BorderStyle.None;
-            txtNombre.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombre.ForeColor = Color.White;
-            txtNombre.Location = new Point(112, 278);
-            txtNombre.Margin = new Padding(0);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(214, 23);
-            txtNombre.TabIndex = 93;
-            // 
-            // txtApellido
-            // 
-            txtApellido.Anchor = AnchorStyles.None;
-            txtApellido.BackColor = Color.FromArgb(51, 171, 215);
-            txtApellido.BorderStyle = BorderStyle.None;
-            txtApellido.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            txtApellido.ForeColor = Color.White;
-            txtApellido.Location = new Point(112, 333);
-            txtApellido.Margin = new Padding(0);
-            txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(214, 23);
-            txtApellido.TabIndex = 94;
             // 
             // RegistroUsuario
             // 
@@ -319,9 +387,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1064, 681);
-            Controls.Add(txtApellido);
             Controls.Add(pnlLogin);
-            Controls.Add(txtNombre);
             DoubleBuffered = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
@@ -332,12 +398,13 @@
             Load += RegistroUsuario_Load;
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -356,9 +423,13 @@
         public TextBox textBox3;
         private PictureBox pictureBox4;
         private Label lblReClave;
-        public TextBox txtNombre;
         private PictureBox pictureBox3;
         public TextBox txtCorreo;
         public TextBox txtApellido;
+        private PictureBox pictureBox5;
+        private PictureBox pictureBox6;
+        private Label lblApellido;
+        private Label lblNombre;
+        public TextBox txtNombre;
     }
 }

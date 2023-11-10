@@ -29,6 +29,8 @@ namespace AlquilerVolquetes
             MostrarLabel(txtClave, lblClave);
             MostrarLabel(txtCorreo, lblCorreo);
             MostrarLabel(txtReClave, lblReClave);
+            MostrarLabel(txtNombre, lblNombre);
+            MostrarLabel(txtApellido, lblApellido);
         }
 
         private void MostrarLabel(TextBox textBox, Label label)
@@ -88,6 +90,16 @@ namespace AlquilerVolquetes
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             MostrarLabel(txtReClave, lblReClave);
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtNombre, lblNombre);
+        }
+
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtApellido, lblApellido);
         }
 
         private void RegistroUsuario_FormClosing(object sender, FormClosingEventArgs e)
