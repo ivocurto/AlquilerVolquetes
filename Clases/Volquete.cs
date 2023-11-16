@@ -29,6 +29,12 @@ namespace Clases
         {
             return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}";
         }
+
+        public  string ToStringPa()
+        {
+            return $" {Cantidad}# {MedidaVolquete} - Precio Unitario: ${PrecioUnitario} - Precio Total: ${PrecioUnitario * Cantidad}";
+
+        }
     }
 
 }

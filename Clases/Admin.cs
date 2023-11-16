@@ -24,7 +24,8 @@ namespace Clases
 
         public void VerEstado(Admin admin)
         {
-            continue
+            return;
+       
         }
 
         public List<Cliente> EliminarCliente(List<Cliente> clientes, string nombreCliente)

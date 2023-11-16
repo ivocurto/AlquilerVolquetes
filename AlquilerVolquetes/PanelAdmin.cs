@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AlquilerVolquetes;
 using Clases;
 
 namespace AdminApp
@@ -17,6 +18,7 @@ namespace AdminApp
         private List<Admin> admins;
         private int indexPedido;
         private Admin adminActual;
+        private Cliente clienteActual;
         private string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
 
         public PanelAdmin(Admin admin)
@@ -182,6 +184,39 @@ namespace AdminApp
         private void lstAdmins_SelectedIndexChanged(object sender, EventArgs e)
         {
             lstUsuarios.ClearSelected();
+        }
+
+        private void btnDetalles_Click(object sender, EventArgs e)
+        {
+            if (lstAdmins.SelectedItem != null)
+            {
+                foreach (Admin admin in admins)
+                {
+                    if (admin.NombreUsuario == lstAdmins.SelectedItem)
+                    {
+                        DatosUsuario datosUsuario = new DatosUsuario(admin);
+                        datosUsuario.Show();
+
+                    }
+                }
+            }
+
+
+            if (lstUsuarios.SelectedItem != null)
+            {
+                foreach (Cliente cliente in clientes)
+                {
+                    if (cliente.NombreUsuario == lstUsuarios.SelectedItem)
+                    {
+                        DatosUsuario datosUsuario = new DatosUsuario(cliente, clientes);
+                        datosUsuario.Show();
+                    }
+                }
+
+            }
+
+
+
         }
     }
 }
