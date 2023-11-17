@@ -125,6 +125,8 @@ namespace AlquilerVolquetes
                     DateTime fechaDevolucion = dtpDevolucion.Value;
                     pedido = new Pedido(volquetes, volquetesInstalar, usuarioActual.NombreUsuario, fechaDevolucion, fechaEntrega);
                     pedido.GenerarIdPedido(idsPedidos);
+
+
                     if (pedidos.Count > 1)
                     {
                         pedido.Index = pedidos.Count() - 1;
@@ -134,7 +136,10 @@ namespace AlquilerVolquetes
                         pedido.Index = 0;
                     }
 
-
+                    foreach(Volquete volquete in pedido.VolquetesPedidos)
+                {
+                    volquete.Identificador = pedido.IdPedido;
+                }
                     pedidos.Add(pedido);
                     usuarioActual.Pedidos.Add(pedido);
                     if (clientes != null)

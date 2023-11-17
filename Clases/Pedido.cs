@@ -90,17 +90,7 @@ namespace Clases
 
             return sb.ToString();
         }
-        public Dictionary<string, object> ToDict()
-        {
-            Dictionary<string, object> pedidoDict = new Dictionary<string, object>
-        {
-            { "id", IdPedido },
-            { "volquetes", VolquetesInstalados.Select(volquete => volquete.ToStringPa()).ToList() }
-            // Puedes agregar más información del pedido según sea necesario
-        };
-
-            return pedidoDict;
-        }
+        
 
     }
 }

@@ -17,6 +17,7 @@ namespace AlquilerVolquetes
         private Cliente clienteAcual;
         private Admin adminActual;
         private List<Cliente> clientes = new List<Cliente>();
+
         public DatosUsuario(Cliente cliente, List<Cliente> listaClientes)
         {
             InitializeComponent();
@@ -28,7 +29,6 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
             adminActual = admin;
-
         }
 
         private void DatosUsuario_Load(object sender, EventArgs e)
@@ -47,17 +47,19 @@ namespace AlquilerVolquetes
 
                     foreach (Pedido pedido in clienteAcual.Pedidos)
                     {
+                        // Agrega el ID con formato a la lista
                         lstDatos.Items.Add($"ID del pedido: {pedido.IdPedido}");
 
+                        // Agrega cada volquete a la lista con formato
                         foreach (Volquete volquete in pedido.VolquetesPedidos)
                         {
                             if (volquete.Cantidad > 0)
                             {
                                 lstDatos.Items.Add($"    {volquete.ToString()}");
                             }
-
                         }
 
+                        // Agrega un elemento en blanco para separar pedidos
                         lstDatos.Items.Add("");
                     }
                 }
@@ -72,34 +74,84 @@ namespace AlquilerVolquetes
             {
                 string selectedText = lstDatos.Items[selectedIndex].ToString();
 
-                Match match = Regex.Match(selectedText, @"ID del pedido: (\d+)");
+                Match pedidoMatch = Regex.Match(selectedText, @"ID del pedido: (\d+)");
 
-                if (match.Success)
+                Action<string> processTextDelegate = null;
+
+                if (pedidoMatch.Success)
                 {
-                    string idPedido = match.Groups[1].Value;
-
-                    if (int.TryParse(idPedido, out int idPedidoNumerico))
-                    {
-                        int indexCliente = clientes.FindIndex(c => c == clienteAcual);
-
-                        if (indexCliente >= 0)
-                        {
-                            clienteAcual.Pedidos.RemoveAll(p => p.IdPedido == idPedidoNumerico);
-
-                            clientes[indexCliente] = clienteAcual;
-
-                            JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
-                            DatosUsuario_Load(sender, e);
-                        }
-                    }
+                    processTextDelegate = ProcesarPedido;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Por favor, selecciona un ID de pedido para borrar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    processTextDelegate = ProcesarVolquete;
+                }
+
+                processTextDelegate?.Invoke(selectedText);
             }
         }
 
+        private void ProcesarPedido(string selectedText)
+        {
+            // Lógica para procesar un pedido
+            string idPedido = Regex.Match(selectedText, @"ID del pedido: (\d+)").Groups[1].Value;
 
+            if (int.TryParse(idPedido, out int idPedidoNumerico))
+            {
+                int indexCliente = clientes.FindIndex(c => c == clienteAcual);
+
+                if (indexCliente >= 0)
+                {
+                    // Remueve el pedido del cliente actual
+                    clienteAcual.Pedidos.RemoveAll(p => p.IdPedido == idPedidoNumerico);
+
+                    // Actualiza el cliente en la lista de clientes
+                    clientes[indexCliente] = clienteAcual;
+
+                    // Guarda la lista actualizada en el archivo JSON
+                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
+
+                    // Recarga los datos en el formulario
+                    DatosUsuario_Load(null, null);
+                }
+            }
+        }
+
+        private void ProcesarVolquete(string selectedText)
+        {
+            // Lógica para procesar un volquete
+            string pattern = @"(\d+)\s+(.+?)\s+POR\s+\$(\d+)\s+(\d+)";
+            Match match = Regex.Match(selectedText, pattern);
+
+            if (match.Success)
+            {
+                string medidaVolquete = match.Groups[2].Value.ToUpper();
+                int identificador = int.Parse(match.Groups[4].Value);
+
+                foreach (Pedido pedido in clienteAcual.Pedidos)
+                {
+                    if (pedido.IdPedido == identificador)
+                    {
+                        foreach (Volquete volquete in pedido.VolquetesPedidos)
+                        {
+                            if (volquete.MedidaVolquete == medidaVolquete)
+                            {
+                                volquete.Cantidad--;
+                            }
+                        }
+                    }
+                }
+
+                int indexCliente = clientes.FindIndex(c => c == clienteAcual);
+
+                if (indexCliente >= 0)
+                {
+                    clientes[indexCliente] = clienteAcual;
+
+                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
+                    DatosUsuario_Load(null, null);
+                }
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Clases
         private int cantidad;
         private string medidaVolquete;
         private int precioUnitario;
+        private int identificador;
 
         public Volquete(int id, string medidaVolquete, int precioUnitario)
         {
@@ -25,16 +26,14 @@ namespace Clases
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public string MedidaVolquete { get => medidaVolquete; set => medidaVolquete = value; }
         public int PrecioUnitario { get => precioUnitario; set => precioUnitario = value; }
+        public int Identificador { get => identificador; set => identificador = value; }
+
         public override string ToString()
         {
-            return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}";
+            return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}                    {Identificador}";
         }
 
-        public  string ToStringPa()
-        {
-            return $" {Cantidad}# {MedidaVolquete} - Precio Unitario: ${PrecioUnitario} - Precio Total: ${PrecioUnitario * Cantidad}";
-
-        }
+        
     }
 
 }
