@@ -33,7 +33,13 @@ namespace Clases
             return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}                    {Identificador}";
         }
 
-        
+
+        public string MostrarString()
+        {
+            return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}";
+        }
+
+
     }
 
 }

@@ -75,14 +75,14 @@ namespace AlquilerVolquetes
                     {
                         if (volquete.Cantidad != 0)
                         {
-                            lstEnviando.Items.Add(volquete);
+                            lstEnviando.Items.Add(volquete.MostrarString());
                         }
                     }
                     foreach (Volquete volquete in pedido.VolquetesInstalados)
                     {
                         if (volquete.Cantidad != 0)
                         {
-                            lstColocados.Items.Add(volquete);
+                            lstColocados.Items.Add(volquete.MostrarString());
                         }
                     }
                 }
