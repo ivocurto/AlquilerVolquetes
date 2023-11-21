@@ -7,31 +7,43 @@ using MySql.Data.MySqlClient;
 
 namespace ManejoDataBase
 {
-    internal class Usuario : SQLCrud<Usuario>, ICRUDOperations<Usuario>
+    public class Usuario : SQLCrud<Usuario>, ICRUDOperations<Usuario>
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public int Id_Ciudad { get; set; }
-        public Usuario(string nombre, string apellido, int id_ciudad) : base("usuario", ["nombre", "apellido", "id"])
+        public string Mail { get; set; }
+        public int Telefono { get; set; }
+        public string Nombre_usuario { get; set; }
+        public string Clave { get; set; }
+
+        public Usuario(string nombre, string apellido, string mail, int? telefono, string nombre_usuario, string clave ) : base("usuario", ["id", "nombre", "apellido", "mail", "telefono", "nombre_usuario", "clave"])
         {
             Nombre = nombre;
             Apellido = apellido;
-            Id_Ciudad = id_ciudad;
+            Mail = mail;
             Id = 0;
+            if (telefono.HasValue)
+            {
+                Telefono = telefono.Value;
+            }
+            Nombre_usuario = nombre_usuario;
+            Clave = clave;
+
         }
-        public Usuario(Usuario alumno) : this(alumno.Nombre, alumno.Apellido, alumno.Id_Ciudad)
+        public Usuario(Usuario usuario) : this(usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Telefono, usuario.Nombre_usuario, usuario.Clave)
         {
-            Id = alumno.Id;
+            Id = usuario.Id;
         }
         public bool Add()
         {
-            DB.Insert($"{this.Nombre}", $"{this.Apellido}", this.Id_Ciudad);
+            DB.Insert($"{ this.Nombre }", $"{ this.Apellido }", $"{ this.Mail }", this.Telefono, $"{this.Nombre_usuario}", $"{this.Clave}");
             return true;
         }
 
         public bool Delete()
         {
+            DB.Drop(this.Mail);
             return true;
         }
 
@@ -51,8 +63,8 @@ namespace ManejoDataBase
         {
             var nombre = reader["nombre"].ToString() ?? "";
             var apellido = reader["apellido"].ToString() ?? "";
-            var id = Convert.ToInt32(reader["id"]);
-            return new Usuario("Maria", "Albaytero", 1);
+            var mail = reader["mail"];
+            return new Usuario("Maria", "Albaytero", "mariaalbaytero@gmail.com", 1154879687, "mariaalbaytero", "1234");
         }
     }
 

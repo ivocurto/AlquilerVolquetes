@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManejoDataBase
 {
-    internal class SQLCrud<T> where T : Usuario
+    public class SQLCrud<T> where T : Usuario
     {
         private string _tableName;
         private string[] _columnas;
