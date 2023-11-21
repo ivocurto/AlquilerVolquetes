@@ -26,7 +26,8 @@ namespace ManejoDataBase
             try
             {
                 bool existencia_mail = VerificarAtributoEnBD("mail", mail);
-                if (!existencia_mail) {
+                if (!existencia_mail)
+                {
                     connection.Open();
 
                     command.Parameters.Clear();
@@ -50,7 +51,7 @@ namespace ManejoDataBase
                 {
                     Console.WriteLine("Ya existe una cuenta con ese mail");
                 }
-                
+
             }
             catch (Exception)
             {
@@ -63,14 +64,13 @@ namespace ManejoDataBase
             }
         }
 
-        public static void Insert(int hash_code, int id_usuario, int volquetes_chicos, int volquetes_medianos, int volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso)
+        public static void Insert(int hash_code, int id_usuario, int? volquetes_chicos, int? volquetes_medianos, int? volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso)
         {
             try
             {
                 connection.Open();
 
                 command.Parameters.Clear();
-
                 var query = "INSERT INTO pedidos_cliente (hash_code, id_usuario, volquetes_chicos, volquetes_medianos, volquetes_grandes, fecha_ingreso, fecha_regreso) VALUES (@hash_code, @id_usuario, @volquetes_chicos, @volquetes_medianos, @volquetes_grandes, @fecha_ingreso, @fecha_regreso)";
 
                 command.CommandText = query;
@@ -118,10 +118,16 @@ namespace ManejoDataBase
                     {
                         while (reader.Read())
                         {
-                            Mostrar_usuario(reader);
+                            MostrarUsuario(reader);
+                        }
+                    } else if (tabla == "pedidos_cliente")
+                    {
+                        while (reader.Read())
+                        {
+                            MostrarPedido(reader);
                         }
                     }
-                    
+
                 }
             }
             catch (Exception)
@@ -134,14 +140,12 @@ namespace ManejoDataBase
             }
         }
 
-        public static List<T> Select<T>(string query) where T : Usuario
+        public static List<T> Select<T>(string query) where T : class
         {
             var lista = new List<T>();
             try
             {
                 connection.Open();
-
-                //var query = "SELECT * FROM alumnos";
 
                 command.CommandText = query;
 
@@ -149,18 +153,10 @@ namespace ManejoDataBase
                 {
                     while (reader.Read())
                     {
-                        T objeto = (T)reader;
+                        T objeto = Activator.CreateInstance<T>();
+                        MostrarUsuario(reader);
 
                         lista.Add(objeto);
-                        var id = Convert.ToInt32(reader["id"]);
-                        var nombre = reader["nombre"].ToString() ?? "";
-                        var apellido = reader["apellido"].ToString() ?? "";
-                        var mail = reader["mail"].ToString() ?? "";
-                        var telefono = Convert.ToInt32(reader["telefono"]);
-                        var nombre_usuario = reader["nombre_usuario"].ToString() ?? "";
-                        var clave = reader["clave"].ToString() ?? "";
-                        //mostrar los datos
-                        Console.WriteLine($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
                     }
                 }
 
@@ -168,7 +164,6 @@ namespace ManejoDataBase
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -177,23 +172,52 @@ namespace ManejoDataBase
             }
         }
 
-        public static void Drop(string mail)
+        public static void Drop(string atributo, string atributoIngresado)
         {
             try
             {
                 connection.Open();
 
-                string query = "DELETE FROM usuarios WHERE mail = @mail";
+                string query = $"DELETE FROM usuarios WHERE {atributo.ToLower()} = @{atributo.ToUpper()}";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
                     // Agrega el parámetro para evitar la inyección de SQL
-                    cmd.Parameters.AddWithValue("@Mail", mail);
+                    cmd.Parameters.AddWithValue($"{atributo.ToUpper()}", $"{atributoIngresado.ToLower()}");
 
                     cmd.ExecuteNonQuery();
                 }
 
-                Console.WriteLine($"Usuario con el mail {mail} eliminado correctamente");
+                Console.WriteLine($"Eliminado correctamente");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static void Drop(string atributo, int atributoIngresado)
+        {
+            try
+            {
+                connection.Open();
+
+                string query = $"DELETE FROM pedidos_cliente WHERE {atributo.ToLower()} = @{atributo.ToUpper()}";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    // Agrega el parámetro para evitar la inyección de SQL
+                    cmd.Parameters.AddWithValue($"{atributo.ToUpper()}", atributoIngresado);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                Console.WriteLine($"Eliminado correctamente");
             }
             catch (Exception ex)
             {
@@ -286,48 +310,7 @@ namespace ManejoDataBase
             return usuario;
         }
 
-        public static List<T> Select<T>(string tabla, string query) where T : Usuario
-        {
-            var lista = new List<T>();
-            try
-            {
-                connection.Open();
-
-                command.CommandText = query;
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        T objeto = (T)reader;
-
-                        lista.Add(objeto);
-                        var id = Convert.ToInt32(reader["id"]);
-                        var nombre = reader["nombre"].ToString() ?? "";
-                        var apellido = reader["apellido"].ToString() ?? "";
-                        var mail = reader["mail"].ToString() ?? "";
-                        var telefono = Convert.ToInt32(reader["telefono"]);
-                        var nombre_usuario = reader["nombre_usuario"].ToString() ?? "";
-                        var clave = reader["clave"].ToString() ?? "";
-                        //mostrar los datos
-                        Console.WriteLine($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
-                    }
-                }
-
-                return lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-
-        private static void Mostrar_usuario(MySqlDataReader reader)
+        private static void MostrarUsuario(MySqlDataReader reader)
         {
             var id = Convert.ToInt32(reader["id"]);
             var nombre = reader["nombre"].ToString() ?? "";
@@ -338,6 +321,19 @@ namespace ManejoDataBase
             var clave = reader["clave"].ToString() ?? "";
             //muestro los datos
             Console.WriteLine($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
+        }
+
+        private static void MostrarPedido(MySqlDataReader reader)
+        {
+            var hash_code = Convert.ToInt32(reader["hash_code"]);
+            var id_usuario = reader["id_usuario"].ToString() ?? "";
+            var volquetes_chicos = reader["volquetes_chicos"].ToString() ?? "";
+            var volquetes_medianos = reader["volquetes_medianos"].ToString() ?? "";
+            var volquetes_grandes = Convert.ToInt32(reader["volquetes_grandes"]);
+            var fecha_ingreso = reader["fecha_ingreso"].ToString() ?? "";
+            var fecha_regreso = reader["fecha_regreso"].ToString() ?? "";
+            //muestro los datos
+            Console.WriteLine($"hash_code: {hash_code} - id_usuario: {id_usuario} - volquetes_chicos: {volquetes_chicos} - volquetes_medianos: {volquetes_medianos} - volquetes_grandes {volquetes_grandes} - fecha_ingreso: {fecha_ingreso} - fecha_regreso: {fecha_regreso}");
         }
     }
 }

@@ -15,7 +15,5 @@ namespace ManejoDataBase
         bool Delete();
 
         List<T> Select();
-
-
     }
 }

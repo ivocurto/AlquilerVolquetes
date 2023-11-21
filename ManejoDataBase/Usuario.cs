@@ -43,7 +43,7 @@ namespace ManejoDataBase
 
         public bool Delete()
         {
-            DB.Drop(this.Mail);
+            DB.Drop("mail", this.Mail);
             return true;
         }
 
