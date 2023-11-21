@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Crypto.Macs;
 
 namespace ManejoDataBase
 {
@@ -59,13 +60,13 @@ namespace ManejoDataBase
             return true;
         }
 
-        public static explicit operator Usuario(MySqlDataReader reader)
-        {
-            var nombre = reader["nombre"].ToString() ?? "";
-            var apellido = reader["apellido"].ToString() ?? "";
-            var mail = reader["mail"];
-            return new Usuario("Maria", "Albaytero", "mariaalbaytero@gmail.com", 1154879687, "mariaalbaytero", "1234");
-        }
+        //public static explicit operator Usuario(MySqlDataReader reader)
+        //{
+        //    var nombre = reader["nombre"].ToString() ?? "";
+        //    var apellido = reader["apellido"].ToString() ?? "";
+        //    var mail = reader["mail"];
+        //    return new Usuario("Maria", "Albaytero", "mariaalbaytero@gmail.com", 1154879687, "mariaalbaytero", "1234");
+        //}
     }
 
 }

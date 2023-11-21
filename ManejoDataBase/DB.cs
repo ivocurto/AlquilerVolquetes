@@ -1,4 +1,5 @@
 ﻿
+using System.Data;
 using MySql.Data.MySqlClient;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -109,7 +110,6 @@ namespace ManejoDataBase
 
                 command.CommandText = query;
 
-
                 //El execute reader devuelve un data reader(un string)
                 using (var reader = command.ExecuteReader())
                 {
@@ -127,7 +127,6 @@ namespace ManejoDataBase
                             MostrarPedido(reader);
                         }
                     }
-
                 }
             }
             catch (Exception)
@@ -233,10 +232,15 @@ namespace ManejoDataBase
         public static bool VerificarAtributoEnBD(string atributo, string atributoIngresado)
         {
             bool atributoExistente = false;
-
+            bool connectionOpen = false;
             try
             {
-                connection.Open();
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                    connectionOpen = true;
+                }
+
 
                 string query = $"SELECT COUNT(*) FROM usuarios WHERE {atributo.ToLower()} = @{atributo.ToUpper()}";
 
@@ -256,8 +260,12 @@ namespace ManejoDataBase
                 throw;
             }
             finally
-            {
-                connection.Close();
+            { 
+                if (connectionOpen)
+                {
+                    connection.Close();
+                }
+                
             }
 
             return atributoExistente;
@@ -335,5 +343,49 @@ namespace ManejoDataBase
             //muestro los datos
             Console.WriteLine($"hash_code: {hash_code} - id_usuario: {id_usuario} - volquetes_chicos: {volquetes_chicos} - volquetes_medianos: {volquetes_medianos} - volquetes_grandes {volquetes_grandes} - fecha_ingreso: {fecha_ingreso} - fecha_regreso: {fecha_regreso}");
         }
+
+        public static void ActualizarAtributoUsuario(string mail, string atributoACambiar, string nuevoAtributo)
+        {
+            try
+            {
+                connection.Open();
+
+                if (VerificarAtributoEnBD("mail", mail))
+                {
+                    string query = $"UPDATE usuarios SET {atributoACambiar} = @nuevoAtributo WHERE mail = @Mail";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@nuevoAtributo", nuevoAtributo);
+                        cmd.Parameters.AddWithValue("@Mail", mail);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine($"Atributo actualizado correctamente para el correo electrónico {mail}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró un registro con el correo electrónico {mail}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"No hay un registro con el correo electrónico {mail}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
     }
 }
