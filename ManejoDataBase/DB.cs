@@ -100,6 +100,67 @@ namespace ManejoDataBase
             }
         }
 
+        public static void Insert(string producto, int cantidad_disponible, int cantidad_alquilados)
+        {
+            try
+            {
+                connection.Open();
+
+                command.Parameters.Clear();
+
+                var query = "INSERT INTO stock (producto, cantidad_disponible, cantidad_alquilados) VALUES (@producto, @cantidad_disponible, @cantidad_alquilados)";
+
+                command.CommandText = query;
+
+                command.Parameters.AddWithValue("@producto", producto);
+                command.Parameters.AddWithValue("@cantidad_disponible", cantidad_disponible);
+                command.Parameters.AddWithValue("@cantidad_alquilados", cantidad_alquilados);
+
+                var filasAfectadas = command.ExecuteNonQuery();
+
+                Console.WriteLine($"Filas afectadas: {filasAfectadas}");
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static void Insert(string mail, string nombre_admin, string clave)
+        {
+            try
+            {
+                connection.Open();
+
+                command.Parameters.Clear();
+                DB.Drop("mail", mail);
+                var query = "INSERT INTO admins (mail, nombre_admin, clave) VALUES (@mail, @nombre_admin, @clave)";
+
+                command.CommandText = query;
+
+                command.Parameters.AddWithValue("@mail", mail);
+                command.Parameters.AddWithValue("@nombre_admin", nombre_admin);
+                command.Parameters.AddWithValue("@clave", clave);
+
+                var filasAfectadas = command.ExecuteNonQuery();
+
+                Console.WriteLine($"Filas afectadas: {filasAfectadas}");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public static void Select(string tabla)
         {
             try
@@ -120,11 +181,19 @@ namespace ManejoDataBase
                         {
                             MostrarUsuario(reader);
                         }
-                    } else if (tabla == "pedidos_cliente")
+                    }
+                    else if (tabla == "pedidos_cliente")
                     {
                         while (reader.Read())
                         {
                             MostrarPedido(reader);
+                        }
+                    }
+                    else if (tabla == "stock")
+                    {
+                        while (reader.Read())
+                        {
+                            MostrarStock(reader);
                         }
                     }
                 }
@@ -210,7 +279,7 @@ namespace ManejoDataBase
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
-                    // Agrega el parámetro para evitar la inyección de SQL
+
                     cmd.Parameters.AddWithValue($"{atributo.ToUpper()}", atributoIngresado);
 
                     cmd.ExecuteNonQuery();
@@ -260,12 +329,54 @@ namespace ManejoDataBase
                 throw;
             }
             finally
-            { 
+            {
                 if (connectionOpen)
                 {
                     connection.Close();
                 }
-                
+
+            }
+
+            return atributoExistente;
+        }
+
+        public static bool VerificarAtributoEnBD(string tabla, string atributo, int atributoIngresado)
+        {
+            bool atributoExistente = false;
+            bool connectionOpen = false;
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                    connectionOpen = true;
+                }
+
+
+                string query = $"SELECT COUNT(*) FROM {tabla} WHERE {atributo.ToLower()} = @{atributo.ToUpper()}";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue($"@{atributo.ToUpper()}", $"{atributoIngresado}");
+
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                    // Si count es mayor que cero, significa que el atributo ya existe
+                    atributoExistente = (count > 0);
+                }
+            }
+            catch (Exception)
+            {
+                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+                throw;
+            }
+            finally
+            {
+                if (connectionOpen)
+                {
+                    connection.Close();
+                }
+
             }
 
             return atributoExistente;
@@ -334,14 +445,24 @@ namespace ManejoDataBase
         private static void MostrarPedido(MySqlDataReader reader)
         {
             var hash_code = Convert.ToInt32(reader["hash_code"]);
-            var id_usuario = reader["id_usuario"].ToString() ?? "";
-            var volquetes_chicos = reader["volquetes_chicos"].ToString() ?? "";
-            var volquetes_medianos = reader["volquetes_medianos"].ToString() ?? "";
+            var id_usuario = Convert.ToInt32(reader["id_usuario"]);
+            var volquetes_chicos = Convert.ToInt32(reader["volquetes_chicos"]);
+            var volquetes_medianos = Convert.ToInt32(reader["volquetes_medianos"]);
             var volquetes_grandes = Convert.ToInt32(reader["volquetes_grandes"]);
             var fecha_ingreso = reader["fecha_ingreso"].ToString() ?? "";
             var fecha_regreso = reader["fecha_regreso"].ToString() ?? "";
             //muestro los datos
             Console.WriteLine($"hash_code: {hash_code} - id_usuario: {id_usuario} - volquetes_chicos: {volquetes_chicos} - volquetes_medianos: {volquetes_medianos} - volquetes_grandes {volquetes_grandes} - fecha_ingreso: {fecha_ingreso} - fecha_regreso: {fecha_regreso}");
+        }
+
+        private static void MostrarStock(MySqlDataReader reader)
+        {
+            var id = Convert.ToInt32(reader["id"]);
+            var producto = reader["producto"].ToString() ?? "";
+            var cantidad_disponible = Convert.ToInt32(reader["cantidad_disponible"]);
+            var cantidad_alquilados = Convert.ToInt32(reader["cantidad_alquilados"]);
+            //muestro los datos
+            Console.WriteLine($"id: {id} - producto: {producto} - cantidad_disponible: {cantidad_disponible} - cantidad_alquilados: {cantidad_alquilados}");
         }
 
         public static void ActualizarAtributoUsuario(string mail, string atributoACambiar, string nuevoAtributo)
@@ -387,5 +508,178 @@ namespace ManejoDataBase
             }
         }
 
+        public static void ActualizarFechaPedido(int hash_code, string atributoACambiar, DateTime nuevoAtributo)
+        {
+            try
+            {
+                connection.Open();
+
+                if (VerificarAtributoEnBD("pedidos_cliente", "hash_code", hash_code))
+                {
+                    string query = $"UPDATE pedidos_cliente SET {atributoACambiar} = @nuevoAtributo WHERE hash_code = @Hash_code";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@nuevoAtributo", nuevoAtributo);
+                        cmd.Parameters.AddWithValue("@Hash_code", hash_code);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine($"Atributo actualizado correctamente para el pedido {hash_code}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró un registro con el pedido {hash_code}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"No hay un registro con el pedido {hash_code}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static void CambiarCantidadDisponible(int id, int cantidad_a_restar, bool sumar)
+        {
+            try
+            {
+                connection.Open();
+
+                if (VerificarAtributoEnBD("stock", "id", id))
+                {
+                    int cantidad_disponible = TraerCantidadVolqueteDisponible(id);
+                    int cantidad_alquilados = TraerCantidadVolquetesAlquilados(id);
+                    int nueva_cantidad_disponible;
+                    int nueva_cantidad_alquilados;
+                    if (sumar)
+                    {
+                        nueva_cantidad_disponible = cantidad_disponible - (-cantidad_a_restar);
+                        nueva_cantidad_alquilados = cantidad_alquilados - cantidad_a_restar;
+                    } else
+                    {
+                        nueva_cantidad_disponible = cantidad_disponible - cantidad_a_restar;
+                        nueva_cantidad_alquilados = cantidad_alquilados - (-cantidad_a_restar);
+                    }
+
+                    string query = $"UPDATE stock SET cantidad_disponible = @nuevaCantidadDisponible WHERE id = @Id";
+                    string query2 = $"UPDATE stock SET cantidad_alquilados = @nuevaCantidadAlquilados WHERE id = @Id";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@nuevaCantidadDisponible", nueva_cantidad_disponible);
+                        cmd.Parameters.AddWithValue("@Id", id);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine($"Atributo actualizado correctamente para el producto de id {id}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró un registro con el producto de id {id}");
+                        }
+                    }
+                    using (MySqlCommand cmd = new MySqlCommand(query2, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@nuevaCantidadAlquilados", nueva_cantidad_alquilados);
+                        cmd.Parameters.AddWithValue("@Id", id);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine($"Atributo actualizado correctamente para el producto de id {id}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró un registro con el producto de id {id}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"No hay un registro con el producto de id {id}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        public static int TraerCantidadVolqueteDisponible(int id)
+        {
+            int cantidad_disponible = -1;
+            try
+            {
+                string query = "SELECT * FROM stock WHERE id = @Id";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cantidad_disponible = Convert.ToInt32(reader["cantidad_disponible"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+                throw;
+            }
+            return cantidad_disponible;
+        }
+
+        public static int TraerCantidadVolquetesAlquilados(int id)
+        {
+            int cantidad_alquilados = -1;
+            try
+            { 
+                string query = "SELECT * FROM stock WHERE id = @Id";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            cantidad_alquilados = Convert.ToInt32(reader["cantidad_alquilados"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+                throw;
+            }
+            return cantidad_alquilados;
+        }
     }
 }

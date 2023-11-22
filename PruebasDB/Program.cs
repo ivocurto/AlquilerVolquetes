@@ -16,14 +16,16 @@ namespace PruebasDB
 
             //var alumnos = alumno.Select();
 
-            DB.Select("usuarios");
-            Console.WriteLine("*****************************************");
-            //DB.ActualizarAtributoUsuario("juampi.demaio@gmail.com", "nombre_usuario", "pepinodemaio");
-            DB.ActualizarAtributoUsuario("juampi.demaio@gmail.com", "clave", "pepinodemaio");
-            //DB.Select<Usuario>("SELECT `id`, `nombre`, `apellido`, `mail`, `telefono`, `nombre_usuario`, `clave` FROM `usuarios` WHERE id= 2;");
-            Console.WriteLine("*****************************************");
+            //DB.Select("usuarios");
+            //Console.WriteLine("*****************************************");
+            ////DB.ActualizarAtributoUsuario("juampi.demaio@gmail.com", "nombre_usuario", "pepinodemaio");
+            //DB.ActualizarAtributoUsuario("juampi.demaio@gmail.com", "clave", "pepinodemaio");
+            ////DB.Select<Usuario>("SELECT `id`, `nombre`, `apellido`, `mail`, `telefono`, `nombre_usuario`, `clave` FROM `usuarios` WHERE id= 2;");
+            //Console.WriteLine("*****************************************");
             //DB.Drop(usuario.Mail);
-            DB.Select("pedidos_cliente");
+            //DB.ActualizarFechaPedido(987986, "fecha_regreso", DateTime.Today.AddDays(20));
+            DB.CambiarCantidadDisponible(1, 3, false);
+            DB.Select("stock");
         }
     }
 }
