@@ -26,8 +26,8 @@ namespace PruebasDB
             //DB.ActualizarFechaPedido(987986, "fecha_regreso", DateTime.Today.AddDays(20));
 
             //DB.Insert("ivo.curto7@gmail.com", "ivo", "ivo");
-            DB.Drop("admins", "mail", "ivo.curto7@gmail.com");
-            DB.Select("admins");
+            //DB.Drop("admins", "mail", "ivo.curto7@gmail.com");
+            //DB.Select("admins");
 
         }
     }

@@ -48,7 +48,6 @@ namespace AlquilerVolquetes
             }
         }
 
-
         public InicioSesion(List<Admin> adminlist)
         {
             InitializeComponent();
@@ -72,7 +71,6 @@ namespace AlquilerVolquetes
             if (form.WindowState == FormWindowState.Maximized)
             {
                 nextForm.WindowState = FormWindowState.Maximized;
-
             }
             else
             {
@@ -111,7 +109,6 @@ namespace AlquilerVolquetes
                         this.Hide();
                         return;
                     }
-
                 }
             }
             foreach (var admin in admins)
@@ -127,14 +124,10 @@ namespace AlquilerVolquetes
                             //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
                             //usuarioAcutal = usuario;
 
-
                                 PanelAdmin panelAdmin = new PanelAdmin(admin);
                                 panelAdmin.Show();
                                 this.Hide();
                                 return;
-
-
-
                             }
 
                     }

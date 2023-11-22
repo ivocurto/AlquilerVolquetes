@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClasesManejoBaseDatos;
 
 namespace AlquilerVolquetes
 {
@@ -23,8 +24,6 @@ namespace AlquilerVolquetes
             InitializeComponent();
 
             listaUsuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
-
-            
         }
 
         private void RegistroUsuario_Load(object sender, EventArgs e)
@@ -130,12 +129,12 @@ namespace AlquilerVolquetes
         {
             string clave = txtClave.Text;
             string reClave = txtReClave.Text;
-            string nombre = txtUsuario.Text;
+            string username = txtUsuario.Text;
             string mail = txtCorreo.Text;
-            string name = txtNombre.Text;
+            string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
 
-            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(nombre, clave, mail, reClave, name, apellido);
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(username, clave, mail, reClave, nombre, apellido);
 
             if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
             {
@@ -184,9 +183,11 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)
                 {
-                    Cliente usuario = new Cliente(nombre, mail, clave, name, apellido);
-                    listaUsuarios.Add(usuario);
-                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", listaUsuarios);
+                    var usuario = new UsuarioADO(nombre, apellido, mail, null, username, clave);
+                    usuario.Add();
+                    //Cliente usuario = new Cliente(nombre, mail, clave, name, apellido);
+                    //listaUsuarios.Add(usuario);
+                    //JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", listaUsuarios);
                     InicioSesion inicio = new InicioSesion();
                     inicio.Show();
                     this.Hide();

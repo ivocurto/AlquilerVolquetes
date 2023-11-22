@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClasesManejoBaseDatos\ClasesManejoBaseDatos.csproj" />
     <ProjectReference Include="..\Clases\Clases.csproj" />
   </ItemGroup>
 
