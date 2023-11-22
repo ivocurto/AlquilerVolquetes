@@ -1,6 +1,7 @@
 ﻿
 using System.Data;
 using MySql.Data.MySqlClient;
+using Clases;
 //using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClasesManejoBaseDatos
@@ -390,26 +391,28 @@ namespace ClasesManejoBaseDatos
             return atributoExistente;
         }
 
-        public static UsuarioADO TraerUsuarioLogueado(string nombreUsuario)
+        public static Cliente TraerUsuarioLogueado(string nombreUsuario, string clave)
         {
-            UsuarioADO usuario = null;
+            Cliente cliente = null;
 
             try
             {
                 connection.Open();
 
-                string query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario";
+                string query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario AND clave = @Clave";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
+                    command.Parameters.AddWithValue("@Clave", clave);
 
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             // Crea un nuevo usuario con los datos de la base de datos
-                            usuario = new UsuarioADO(
+                            cliente = new Cliente(
+                                Convert.ToInt32(reader["id"]),
                                 reader["nombre"].ToString(),
                                 reader["apellido"].ToString(),
                                 reader["mail"].ToString(),
@@ -417,9 +420,6 @@ namespace ClasesManejoBaseDatos
                                 reader["nombre_usuario"].ToString(),
                                 reader["clave"].ToString()
                             );
-
-                            // Asigna el ID
-                            usuario.Id = Convert.ToInt32(reader["id"]);
                         }
                     }
                 }
@@ -434,7 +434,50 @@ namespace ClasesManejoBaseDatos
                 connection.Close();
             }
 
-            return usuario;
+            return cliente;
+        }
+
+        public static Admin TraerAdminLogueado(string nombreUsuario, string clave)
+        {
+            Admin admin = null;
+
+            try
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM admins WHERE nombre_admin = @NombreUsuario AND clave = @Clave";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
+                    command.Parameters.AddWithValue("@Clave", clave);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Crea un nuevo usuario con los datos de la base de datos
+                            admin = new Admin(
+                                Convert.ToInt32(reader["id"]),
+                                reader["nombre_usuario"].ToString(),
+                                reader["mail"].ToString(),
+                                reader["clave"].ToString()
+                            );
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return admin;
         }
 
         private static void MostrarUsuario(MySqlDataReader reader)
@@ -448,6 +491,21 @@ namespace ClasesManejoBaseDatos
             var clave = reader["clave"].ToString() ?? "";
             //muestro los datos
             Console.WriteLine($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
+        }
+
+        private static Cliente CrearCliente(MySqlDataReader reader)
+        {
+            var id = Convert.ToInt32(reader["id"]);
+            var nombre = reader["nombre"].ToString() ?? "";
+            var apellido = reader["apellido"].ToString() ?? "";
+            var mail = reader["mail"].ToString() ?? "";
+            var telefono = Convert.ToInt32(reader["telefono"]);
+            var nombre_usuario = reader["nombre_usuario"].ToString() ?? "";
+            var clave = reader["clave"].ToString() ?? "";
+            //muestro los datos
+            var usuario = new Cliente(id, nombre, apellido, mail, telefono, nombre_usuario, clave);
+            return usuario;
+            //usuario.Add();($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
         }
 
         private static void MostrarPedido(MySqlDataReader reader)

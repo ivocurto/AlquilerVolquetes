@@ -69,7 +69,7 @@ namespace AdminApp
                     if (selectedIndex >= 0)
                     {
 
-                        admins = adminActual.AgregarAdmin(clientes, admins, lstUsuarios.SelectedItem.ToString());
+                        //admins = adminActual.AgregarAdmin(clientes, admins, lstUsuarios.SelectedItem.ToString());
                         clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());
 
 

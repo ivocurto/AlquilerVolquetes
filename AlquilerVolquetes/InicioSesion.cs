@@ -15,19 +15,21 @@ using AdminApp;
 using System.Drawing.Drawing2D;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Reflection.Emit;
+using ClasesManejoBaseDatos;
+
 namespace AlquilerVolquetes
 {
     public partial class InicioSesion : Form
     {
 
-        protected static List<Cliente> usuarios = new List<Cliente>();
-        protected static List<Admin> admins = new List<Admin>();
+        //protected static List<Cliente> usuarios = new List<Cliente>();
+        //protected static List<Admin> admins = new List<Admin>();
         public Cliente usuarioAcutal;
         public Admin adminActual;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
-        string rutaArchivoJson = "usuarios.json";
-        string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
+        //string rutaArchivoJson = "usuarios.json";
+        //string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
         private DataContainer data;
         private Size previousSize;
         private Point previousLocation;
@@ -36,8 +38,8 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-            usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-            admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
+            //usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
+            //admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
             if (data != null && data.CheckboxValue == true)
@@ -52,8 +54,8 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
 
-            admins = adminlist;
-            usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
+            //admins = adminlist;
+            //usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
 
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -84,64 +86,113 @@ namespace AlquilerVolquetes
 
             string nombreUsuario = txtUsuario.Text;
             string clave = txtClave.Text;
-            if(usuarios is null)
+            var cliente = DB.TraerUsuarioLogueado(nombreUsuario, clave);
+            var admin = DB.TraerAdminLogueado(nombreUsuario, clave);
+            if (cliente != null)
             {
-                usuarios = new List<Cliente>();
-            }
-            foreach (var usuario in usuarios)
-            {
-                if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
-                {
-                    //aca va el logueado correctamente
-                    ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
+                ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
 
-                    DialogResult answer = exitoLogin.ShowDialog();
-                    if (answer == DialogResult.OK || answer == DialogResult.Cancel)
-                    {
-                        data = new DataContainer(checkbox, usuario);
-                        JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-                        usuarioAcutal = usuario;
-                        PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
-                        previousSize = this.Size;
-                        previousLocation = this.Location;
-                        MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
-                        pantallaInicio.Show();
-                        this.Hide();
-                        return;
-                    }
+                DialogResult answer = exitoLogin.ShowDialog();
+                if (answer == DialogResult.OK || answer == DialogResult.Cancel)
+                {
+                    data = new DataContainer(checkbox, cliente);
+                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
+                    usuarioAcutal = cliente;
+                    PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+                    previousSize = this.Size;
+                    previousLocation = this.Location;
+                    MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
+                    pantallaInicio.Show();
+                    this.Hide();
+                    return;
+                }
+            } else if (admin != null)
+            {
+                ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
+
+                DialogResult answer = exitoLogin.ShowDialog();
+                if (answer == DialogResult.OK || answer == DialogResult.Cancel)
+                {
+                    //data = new DataContainer(checkbox, admin);
+                    //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
+                    //usuarioAcutal = admin;
+
+                    PanelAdmin panelAdmin = new PanelAdmin(admin);
+                    panelAdmin.Show();
+                    this.Hide();
+                    return;
+                }
+            } else
+            {
+                ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
+                DialogResult result = ususarioIncorrecto.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtClave.Text = "";
+                    txtUsuario.Text = "";
                 }
             }
-            foreach (var admin in admins)
-                {
-                    if (admin.NombreUsuario == nombreUsuario && admin.ClaveUsuario == clave )
-                    {
-                        ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
-
-                        DialogResult answer = exitoLogin.ShowDialog();
-                        if (answer == DialogResult.OK || answer == DialogResult.Cancel)
-                        {
-                            //data = new DataContainer(checkbox, usuario);
-                            //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-                            //usuarioAcutal = usuario;
-
-                                PanelAdmin panelAdmin = new PanelAdmin(admin);
-                                panelAdmin.Show();
-                                this.Hide();
-                                return;
-                            }
-
-                    }
-                
-            }
-            ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
-            DialogResult result = ususarioIncorrecto.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                txtClave.Text = "";
-                txtUsuario.Text = "";
-            }
         }
+            
+            //if(usuarios is null)
+            //{
+            //    usuarios = new List<Cliente>();
+            //}
+            //foreach (var usuario in usuarios)
+            //{
+            //    if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
+            //    {
+            //        //aca va el logueado correctamente
+            //        ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
+
+            //        DialogResult answer = exitoLogin.ShowDialog();
+            //        if (answer == DialogResult.OK || answer == DialogResult.Cancel)
+            //        {
+            //            data = new DataContainer(checkbox, usuario);
+            //            JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
+            //            usuarioAcutal = usuario;
+            //            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+            //            previousSize = this.Size;
+            //            previousLocation = this.Location;
+            //            MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
+            //            pantallaInicio.Show();
+            //            this.Hide();
+            //            return;
+            //        }
+            //    }
+            //}
+            //foreach (var admin in admins)
+            //    {
+            //        if (admin.NombreUsuario == nombreUsuario && admin.ClaveUsuario == clave )
+            //        {
+            //            ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
+
+            //            DialogResult answer = exitoLogin.ShowDialog();
+            //            if (answer == DialogResult.OK || answer == DialogResult.Cancel)
+            //            {
+            //                //data = new DataContainer(checkbox, usuario);
+            //                //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
+            //                //usuarioAcutal = usuario;
+
+            //                    PanelAdmin panelAdmin = new PanelAdmin(admin);
+            //                    panelAdmin.Show();
+            //                    this.Hide();
+            //                    return;
+            //                }
+
+            //        }
+                
+            //}
+        //    ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
+        //    DialogResult result = ususarioIncorrecto.ShowDialog();
+
+        //    if (result == DialogResult.OK)
+        //    {
+        //        txtClave.Text = "";
+        //        txtUsuario.Text = "";
+        //    }
+        //}
 
         private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
         {
@@ -209,5 +260,6 @@ namespace AlquilerVolquetes
                 formulario.Close();
             }
         }
+
     }
 }

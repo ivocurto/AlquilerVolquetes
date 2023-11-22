@@ -11,13 +11,24 @@ namespace Clases
         private List<Pedido> pedidos;
         private string nombre;
         private string apellido;
-        private string numeroTelefono;
+        private int? NumeroTelefono;
 
-        public Cliente(string nombreUsuario, string mailUsuario, string claveUsuario, string nombre, string apellido) : base(nombreUsuario, mailUsuario, claveUsuario)
+        //public Cliente(string nombreUsuario, string mailUsuario, string claveUsuario, string nombre, string apellido) : base(id, nombreUsuario, mailUsuario, claveUsuario)
+        //{
+        //    this.Pedidos = new List<Pedido>();
+        //    this.Nombre = nombre;
+        //    this.Apellido = apellido;
+        //}
+
+        public Cliente(int id, string nombre, string apellido, string mail, int? telefono, string nombre_usuario, string clave) : base(id, nombre_usuario, mail, clave)
         {
-            this.Pedidos = new List<Pedido>();
             this.Nombre = nombre;
             this.Apellido = apellido;
+            if (telefono.HasValue)
+            {
+                this.NumeroTelefono = telefono.Value;
+            }
+            
         }
         public override void ConsutarEstado()
         {

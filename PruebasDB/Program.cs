@@ -1,4 +1,4 @@
-﻿using ManejoDataBase;
+﻿
 namespace PruebasDB
 {
     internal class Program

@@ -11,8 +11,8 @@ namespace Clases
     {
         private List<Dictionary<string, string>> historialAcciones;
 
-        public Admin(string nombreUsuario, string mailUsuario, string claveUsuario)
-            : base(nombreUsuario, mailUsuario, claveUsuario)
+        public Admin(int id, string nombreUsuario, string mailUsuario, string claveUsuario)
+            : base(id, nombreUsuario, mailUsuario, claveUsuario)
         {
             historialAcciones = JsonFileManager.LoadFromJsonGeneric<List<Dictionary<string, string>>>("historialAdmin.json") ?? new List<Dictionary<string, string>>();
 
@@ -63,27 +63,27 @@ namespace Clases
             }
         }
 
-        public List<Admin> AgregarAdmin(List<Cliente> clientes, List<Admin> admins, string nombreCliente)
-        {
-            Cliente clienteUpgrade;
-            foreach(Cliente cliente in clientes)
-            {
-                if(nombreCliente == cliente.NombreUsuario)
-                {
-                    clienteUpgrade = cliente;
-                    Admin admin = new Admin(clienteUpgrade.NombreUsuario, clienteUpgrade.MailUsuario, clienteUpgrade.ClaveUsuario);
-                    admins.Add(admin);
-                    NotificarAccionExitosa("HacerAdmin", clienteUpgrade.NombreUsuario);
-                    GuardarHistorial();
-                    return admins;
+        //public List<Admin> AgregarAdmin(List<Cliente> clientes, List<Admin> admins, string nombreCliente)
+        //{
+        //    Cliente clienteUpgrade;
+        //    foreach(Cliente cliente in clientes)
+        //    {
+        //        if(nombreCliente == cliente.NombreUsuario)
+        //        {
+        //            clienteUpgrade = cliente;
+        //            Admin admin = new Admin(clienteUpgrade.NombreUsuario, clienteUpgrade.MailUsuario, clienteUpgrade.ClaveUsuario);
+        //            admins.Add(admin);
+        //            NotificarAccionExitosa("HacerAdmin", clienteUpgrade.NombreUsuario);
+        //            GuardarHistorial();
+        //            return admins;
                     
                     
-                }
-            }
-            return admins;
+        //        }
+        //    }
+        //    return admins;
 
 
-        }
+        //}
 
         private void NotificarAccionExitosa(string nombreAccion, string usuarioAfectado)
         {
