@@ -2,7 +2,7 @@
 {
     public abstract class Usuario
     {
-        protected int Id;
+        private int id;
         protected string nombreUsuario;
         protected string mailUsuario;
         protected string claveUsuario;
@@ -19,7 +19,7 @@
         public string NombreUsuario { get => nombreUsuario; set => nombreUsuario = value; }
         public string MailUsuario { get => mailUsuario; set => mailUsuario = value; }
         public string ClaveUsuario { get => claveUsuario; set => claveUsuario = value; }
-
+        public int Id { get => id; set => id = value; }
 
         public abstract void ConsutarEstado();
     }

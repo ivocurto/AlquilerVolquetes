@@ -1,4 +1,5 @@
 ﻿using Clases;
+using ClasesManejoBaseDatos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,12 +20,13 @@ namespace AlquilerVolquetes
         public MisVolquetes(Cliente usuario)
         {
             InitializeComponent();
-
             usuarioActual = usuario;
-           this.Load += new EventHandler(MisVolquetes_Load);
+            pedidoActual = DB.Select<Pedido>($"SELECT * FROM pedidos_cliente WHERE id_usuario = {usuarioActual.Id}");
+            usuarioActual.Pedidos = pedidoActual;
+            this.Load += new EventHandler(MisVolquetes_Load);
         }
-       
-        
+
+
 
         private void lstEnviando_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -68,7 +70,6 @@ namespace AlquilerVolquetes
             if (pedidoActual is not null)
             {
                 lstEnviando.Items.Clear();
-                lstColocados.Items.Clear();
                 foreach (Pedido pedido in pedidoActual)
                 {
                     foreach (Volquete volquete in pedido.VolquetesPedidos)
@@ -78,15 +79,13 @@ namespace AlquilerVolquetes
                             lstEnviando.Items.Add(volquete.MostrarString());
                         }
                     }
-                    foreach (Volquete volquete in pedido.VolquetesInstalados)
-                    {
-                        if (volquete.Cantidad != 0)
-                        {
-                            lstColocados.Items.Add(volquete.MostrarString());
-                        }
-                    }
                 }
             }
+        }
+
+        private void lblEnviando_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

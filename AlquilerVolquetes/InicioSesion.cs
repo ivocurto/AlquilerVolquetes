@@ -24,8 +24,6 @@ namespace AlquilerVolquetes
 
         //protected static List<Cliente> usuarios = new List<Cliente>();
         //protected static List<Admin> admins = new List<Admin>();
-        public Cliente usuarioAcutal;
-        public Admin adminActual;
         private bool checkbox;
         string filePath = "ultimaSesion.json";
         //string rutaArchivoJson = "usuarios.json";
@@ -97,8 +95,7 @@ namespace AlquilerVolquetes
                 {
                     data = new DataContainer(checkbox, cliente);
                     JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-                    usuarioAcutal = cliente;
-                    PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
+                    PantallaInicio pantallaInicio = new PantallaInicio(cliente, this);
                     previousSize = this.Size;
                     previousLocation = this.Location;
                     MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
@@ -115,7 +112,6 @@ namespace AlquilerVolquetes
                 {
                     //data = new DataContainer(checkbox, admin);
                     //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-                    //usuarioAcutal = admin;
 
                     PanelAdmin panelAdmin = new PanelAdmin(admin);
                     panelAdmin.Show();
@@ -260,6 +256,5 @@ namespace AlquilerVolquetes
                 formulario.Close();
             }
         }
-
     }
 }

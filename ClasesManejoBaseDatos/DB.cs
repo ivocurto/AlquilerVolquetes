@@ -493,6 +493,51 @@ namespace ClasesManejoBaseDatos
             Console.WriteLine($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
         }
 
+        //public static List<Pedido> TraerPedidosDesdeBD(int idUsuario)
+        //{
+        //    List<Pedido> listaPedidos = null;
+
+        //    try
+        //    {
+        //        connection.Open();
+
+        //        string query = "SELECT * FROM pedidos_cliente WHERE idUsuario = @IdUsuario";
+
+        //        using (var command = new MySqlCommand(query, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+
+        //            using (var reader = command.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    // Crea un nuevo usuario con los datos de la base de datos
+        //                    cliente = new Cliente(
+        //                        Convert.ToInt32(reader["id"]),
+        //                        reader["nombre"].ToString(),
+        //                        reader["apellido"].ToString(),
+        //                        reader["mail"].ToString(),
+        //                        reader["telefono"] is DBNull ? (int?)null : Convert.ToInt32(reader["telefono"]),
+        //                        reader["nombre_usuario"].ToString(),
+        //                        reader["clave"].ToString()
+        //                    );
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+
+        //    return cliente;
+        //}
+
         private static Cliente CrearCliente(MySqlDataReader reader)
         {
             var id = Convert.ToInt32(reader["id"]);
