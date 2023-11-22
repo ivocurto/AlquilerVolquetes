@@ -24,8 +24,11 @@ namespace PruebasDB
             //Console.WriteLine("*****************************************");
             //DB.Drop(usuario.Mail);
             //DB.ActualizarFechaPedido(987986, "fecha_regreso", DateTime.Today.AddDays(20));
-            DB.CambiarCantidadDisponible(1, 3, false);
-            DB.Select("stock");
+
+            //DB.Insert("ivo.curto7@gmail.com", "ivo", "ivo");
+            DB.Drop("admins", "mail", "ivo.curto7@gmail.com");
+            DB.Select("admins");
+
         }
     }
 }

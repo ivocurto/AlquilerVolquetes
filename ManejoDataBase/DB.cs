@@ -138,7 +138,7 @@ namespace ManejoDataBase
                 connection.Open();
 
                 command.Parameters.Clear();
-                DB.Drop("mail", mail);
+                DB.Drop("usuarios", "mail", mail);
                 var query = "INSERT INTO admins (mail, nombre_admin, clave) VALUES (@mail, @nombre_admin, @clave)";
 
                 command.CommandText = query;
@@ -240,13 +240,18 @@ namespace ManejoDataBase
             }
         }
 
-        public static void Drop(string atributo, string atributoIngresado)
+        public static void Drop(string tabla, string atributo, string atributoIngresado)
         {
+            bool connectionOpen = false;
             try
             {
-                connection.Open();
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                    connectionOpen = true;
+                }
 
-                string query = $"DELETE FROM usuarios WHERE {atributo.ToLower()} = @{atributo.ToUpper()}";
+                string query = $"DELETE FROM {tabla} WHERE {atributo.ToLower()} = @{atributo.ToUpper()}";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -265,7 +270,10 @@ namespace ManejoDataBase
             }
             finally
             {
-                connection.Close();
+                if (connectionOpen)
+                {
+                    connection.Close();
+                }
             }
         }
 
@@ -382,9 +390,9 @@ namespace ManejoDataBase
             return atributoExistente;
         }
 
-        public static Usuario TraerUsuarioLogueado(string nombreUsuario)
+        public static UsuarioADO TraerUsuarioLogueado(string nombreUsuario)
         {
-            Usuario usuario = null;
+            UsuarioADO usuario = null;
 
             try
             {
@@ -401,7 +409,7 @@ namespace ManejoDataBase
                         if (reader.Read())
                         {
                             // Crea un nuevo usuario con los datos de la base de datos
-                            usuario = new Usuario(
+                            usuario = new UsuarioADO(
                                 reader["nombre"].ToString(),
                                 reader["apellido"].ToString(),
                                 reader["mail"].ToString(),

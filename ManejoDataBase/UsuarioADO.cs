@@ -8,7 +8,7 @@ using Org.BouncyCastle.Crypto.Macs;
 
 namespace ManejoDataBase
 {
-    public class Usuario : SQLCrud<Usuario>, ICRUDOperations<Usuario>
+    public class UsuarioADO : SQLCrud<UsuarioADO>, ICRUDOperations<UsuarioADO>
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -18,7 +18,7 @@ namespace ManejoDataBase
         public string Nombre_usuario { get; set; }
         public string Clave { get; set; }
 
-        public Usuario(string nombre, string apellido, string mail, int? telefono, string nombre_usuario, string clave ) : base("usuario", ["id", "nombre", "apellido", "mail", "telefono", "nombre_usuario", "clave"])
+        public UsuarioADO(string nombre, string apellido, string mail, int? telefono, string nombre_usuario, string clave ) : base("usuario", ["id", "nombre", "apellido", "mail", "telefono", "nombre_usuario", "clave"])
         {
             Nombre = nombre;
             Apellido = apellido;
@@ -32,7 +32,7 @@ namespace ManejoDataBase
             Clave = clave;
 
         }
-        public Usuario(Usuario usuario) : this(usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Telefono, usuario.Nombre_usuario, usuario.Clave)
+        public UsuarioADO(UsuarioADO usuario) : this(usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Telefono, usuario.Nombre_usuario, usuario.Clave)
         {
             Id = usuario.Id;
         }
@@ -44,11 +44,11 @@ namespace ManejoDataBase
 
         public bool Delete()
         {
-            DB.Drop("mail", this.Mail);
+            DB.Drop("usuarios", "mail", this.Mail);
             return true;
         }
 
-        public List<Usuario> Select()
+        public List<UsuarioADO> Select()
         {
             //var alumnos = DB.Select<Alumno>("SELECT * FROM alumnos");
             var alumnos = GetAll();

@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace ManejoDataBase
 {
-    public class Pedido : SQLCrud<Pedido>, ICRUDOperations<Pedido>
+    public class PedidoADO : SQLCrud<PedidoADO>, ICRUDOperations<PedidoADO>
     {
         public int Hash_code { get; set; }
         public int Id_usuario { get; set; }
@@ -17,7 +17,7 @@ namespace ManejoDataBase
         public DateTime Fecha_ingreso { get; set; }
         public DateTime Fecha_regreso { get; set; }
 
-        public Pedido(int hash_code, int id_usuario, int? volquetes_chicos, int? volquetes_medianos, int? volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso) : base("pedidos_cliente", ["hash_code", "id_usuario", "volquetes_chicos", "volquetes_medianos", "volquetes_grandes", "fecha_ingreso", "fecha_regreso"])
+        public PedidoADO(int hash_code, int id_usuario, int? volquetes_chicos, int? volquetes_medianos, int? volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso) : base("pedidos_cliente", ["hash_code", "id_usuario", "volquetes_chicos", "volquetes_medianos", "volquetes_grandes", "fecha_ingreso", "fecha_regreso"])
         {
             Hash_code = hash_code;
             Id_usuario = id_usuario;
@@ -40,7 +40,7 @@ namespace ManejoDataBase
             return true;
         }
 
-        public List<Pedido> Select()
+        public List<PedidoADO> Select()
         {
             //var alumnos = DB.Select<Alumno>("SELECT * FROM alumnos");
             var pedidos = GetAll();
