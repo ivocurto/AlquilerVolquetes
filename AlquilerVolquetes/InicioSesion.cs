@@ -113,10 +113,8 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                 {
-                    //data = new DataContainer(checkbox, admin);
-                    //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-                    //usuarioAcutal = admin;
-
+                    data = new DataContainer(admin ,checkbox );
+                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
                     PanelAdmin panelAdmin = new PanelAdmin(admin);
                     panelAdmin.Show();
                     this.Hide();
