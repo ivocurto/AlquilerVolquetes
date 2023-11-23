@@ -28,8 +28,6 @@ namespace AdminApp
             clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
             admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
             // Enlaza la lista de pedidos al ListBox
-
-
         }
 
         private void PanelAdmin_FormClosing(object sender, FormClosingEventArgs e)
@@ -68,13 +66,9 @@ namespace AdminApp
 
                     if (selectedIndex >= 0)
                     {
-
                         //admins = adminActual.AgregarAdmin(clientes, admins, lstUsuarios.SelectedItem.ToString());
                         clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());
-
-
                     }
-
                 }
                 JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
                 JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoAdmins, admins);

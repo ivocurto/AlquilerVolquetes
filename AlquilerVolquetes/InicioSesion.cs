@@ -130,65 +130,6 @@ namespace AlquilerVolquetes
                 }
             }
         }
-            
-            //if(usuarios is null)
-            //{
-            //    usuarios = new List<Cliente>();
-            //}
-            //foreach (var usuario in usuarios)
-            //{
-            //    if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
-            //    {
-            //        //aca va el logueado correctamente
-            //        ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
-
-            //        DialogResult answer = exitoLogin.ShowDialog();
-            //        if (answer == DialogResult.OK || answer == DialogResult.Cancel)
-            //        {
-            //            data = new DataContainer(checkbox, usuario);
-            //            JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-            //            usuarioAcutal = usuario;
-            //            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
-            //            previousSize = this.Size;
-            //            previousLocation = this.Location;
-            //            MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
-            //            pantallaInicio.Show();
-            //            this.Hide();
-            //            return;
-            //        }
-            //    }
-            //}
-            //foreach (var admin in admins)
-            //    {
-            //        if (admin.NombreUsuario == nombreUsuario && admin.ClaveUsuario == clave )
-            //        {
-            //            ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
-
-            //            DialogResult answer = exitoLogin.ShowDialog();
-            //            if (answer == DialogResult.OK || answer == DialogResult.Cancel)
-            //            {
-            //                //data = new DataContainer(checkbox, usuario);
-            //                //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-            //                //usuarioAcutal = usuario;
-
-            //                    PanelAdmin panelAdmin = new PanelAdmin(admin);
-            //                    panelAdmin.Show();
-            //                    this.Hide();
-            //                    return;
-            //                }
-
-            //        }
-                
-            //}
-        //    ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
-        //    DialogResult result = ususarioIncorrecto.ShowDialog();
-
-        //    if (result == DialogResult.OK)
-        //    {
-        //        txtClave.Text = "";
-        //        txtUsuario.Text = "";
-        //    }
-        //}
 
         private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
         {

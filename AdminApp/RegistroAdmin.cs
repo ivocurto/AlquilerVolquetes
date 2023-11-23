@@ -3,6 +3,7 @@ using Clases;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using ClasesManejoBaseDatos;
 
 namespace AdminApp
 {
@@ -64,9 +65,11 @@ namespace AdminApp
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK)
                 {
-                    Admin usuario = new Admin(nombre, mail, clave);
-                    listaAdmins.Add(usuario);
-                    JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoJson, listaAdmins);
+                    var admin = new AdminADO(mail, nombre, clave);
+                    admin.Add();
+                    //Admin usuario = new Admin(nombre, mail, clave);
+                    //listaAdmins.Add(admin);
+                    //JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoJson, listaAdmins);
                     InicioSesion inicio = new InicioSesion(listaAdmins);
                     inicio.Show();
                     this.Hide();

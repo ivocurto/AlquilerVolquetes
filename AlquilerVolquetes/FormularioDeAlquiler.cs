@@ -24,8 +24,9 @@ namespace AlquilerVolquetes
             usuarioActual = usuario;
             formPrincipal = formularioPrincipal;
             dtpEntrega.Value = fechaActual.fechaActual;
-            dtpDevolucion.Value = fechaActual + 7;
+            dtpDevolucion.Value = fechaActual + 3;
             dtpDevolucion.MinDate = dtpDevolucion.Value;
+            dtpDevolucion.MaxDate = dtpEntrega.Value.AddDays(14);
             dtpEntrega.MinDate = dtpEntrega.Value;
             pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
             clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
@@ -124,6 +125,9 @@ namespace AlquilerVolquetes
                 volquete.Identificador = pedido.IdPedido;
             }
             var pedidoADO = new PedidoADO(pedido.IdPedido, usuarioActual.Id, volquetes[0].Cantidad, volquetes[1].Cantidad, volquetes[2].Cantidad, fechaEntrega, fechaDevolucion, direccion);
+            DB.CambiarCantidadDisponible(volquetes[0].Id+1, volquetes[0].Cantidad, false);
+            DB.CambiarCantidadDisponible(volquetes[1].Id+1, volquetes[1].Cantidad, false);
+            DB.CambiarCantidadDisponible(volquetes[2].Id+1, volquetes[2].Cantidad, false);
             DB.ActualizarAtributoUsuario(usuarioActual.MailUsuario, "telefono", telefono);
             pedidoADO.Add();
             //pedidos.Add(pedido);
@@ -159,7 +163,9 @@ namespace AlquilerVolquetes
 
         private void dtpEntrega_ValueChanged_1(object sender, EventArgs e)
         {
-            dtpDevolucion.MinDate = dtpEntrega.Value;
+
+            dtpDevolucion.MinDate = dtpEntrega.Value.AddDays(3);
+            dtpDevolucion.MaxDate = dtpEntrega.Value.AddDays(14);
 
         }
     }

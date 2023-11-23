@@ -507,7 +507,7 @@ namespace ClasesManejoBaseDatos
                             // Crea un nuevo usuario con los datos de la base de datos
                             admin = new Admin(
                                 Convert.ToInt32(reader["id"]),
-                                reader["nombre_usuario"].ToString(),
+                                reader["nombre_admin"].ToString(),
                                 reader["mail"].ToString(),
                                 reader["clave"].ToString()
                             );
@@ -540,6 +540,46 @@ namespace ClasesManejoBaseDatos
             //muestro los datos
             Console.WriteLine($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
         }
+
+        public static int ObtenerCantidadDisponible(int idIngresado)
+        {
+            int cantidadDisponible = 0;
+
+            try
+            {
+                connection.Open();
+
+                // Consulta SQL con parámetro
+                string query = "SELECT cantidad_disponible FROM stock WHERE id = @id";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    // Agregar parámetro
+                    command.Parameters.AddWithValue("@id", idIngresado);
+
+                    // Ejecutar consulta y obtener resultado
+                    var result = command.ExecuteScalar();
+
+                    // Verificar si el resultado no es nulo antes de convertirlo a entero
+                    if (result != null && result != DBNull.Value)
+                    {
+                        cantidadDisponible = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción, por ejemplo, imprimir o registrar el error
+                Console.WriteLine("Error al obtener cantidad disponible: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return cantidadDisponible;
+        }
+
+
 
         //public static List<Pedido> TraerPedidosDesdeBD(int idUsuario)
         //{

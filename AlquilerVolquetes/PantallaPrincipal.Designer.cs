@@ -52,6 +52,9 @@
             lblVolqueteM = new Label();
             lblVolqueteC = new Label();
             lblVolqueteG = new Label();
+            lblStockVC = new Label();
+            lblStockVM = new Label();
+            lblStockVG = new Label();
             ((System.ComponentModel.ISupportInitialize)btnCarrito).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -335,6 +338,45 @@
             lblVolqueteG.TextAlign = ContentAlignment.TopRight;
             lblVolqueteG.UseCompatibleTextRendering = true;
             // 
+            // lblStockVC
+            // 
+            lblStockVC.Anchor = AnchorStyles.None;
+            lblStockVC.AutoSize = true;
+            lblStockVC.Font = new Font("Bahnschrift SemiCondensed", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblStockVC.Location = new Point(234, 430);
+            lblStockVC.Name = "lblStockVC";
+            lblStockVC.Size = new Size(47, 18);
+            lblStockVC.TabIndex = 49;
+            lblStockVC.Text = "Stock: 0";
+            lblStockVC.TextAlign = ContentAlignment.TopRight;
+            lblStockVC.UseCompatibleTextRendering = true;
+            // 
+            // lblStockVM
+            // 
+            lblStockVM.Anchor = AnchorStyles.None;
+            lblStockVM.AutoSize = true;
+            lblStockVM.Font = new Font("Bahnschrift SemiCondensed", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblStockVM.Location = new Point(625, 430);
+            lblStockVM.Name = "lblStockVM";
+            lblStockVM.Size = new Size(47, 18);
+            lblStockVM.TabIndex = 50;
+            lblStockVM.Text = "Stock: 0";
+            lblStockVM.TextAlign = ContentAlignment.TopRight;
+            lblStockVM.UseCompatibleTextRendering = true;
+            // 
+            // lblStockVG
+            // 
+            lblStockVG.Anchor = AnchorStyles.None;
+            lblStockVG.AutoSize = true;
+            lblStockVG.Font = new Font("Bahnschrift SemiCondensed", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblStockVG.Location = new Point(1026, 430);
+            lblStockVG.Name = "lblStockVG";
+            lblStockVG.Size = new Size(47, 18);
+            lblStockVG.TabIndex = 51;
+            lblStockVG.Text = "Stock: 0";
+            lblStockVG.TextAlign = ContentAlignment.TopRight;
+            lblStockVG.UseCompatibleTextRendering = true;
+            // 
             // PantallaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -342,6 +384,9 @@
             BackColor = Color.FromArgb(214, 241, 247);
             ClientSize = new Size(1321, 720);
             ControlBox = false;
+            Controls.Add(lblStockVG);
+            Controls.Add(lblStockVM);
+            Controls.Add(lblStockVC);
             Controls.Add(lblVolqueteG);
             Controls.Add(lblVolqueteC);
             Controls.Add(lblVolqueteM);
@@ -406,5 +451,8 @@
         private Label lblVolqueteM;
         private Label lblVolqueteC;
         private Label lblVolqueteG;
+        private Label lblStockVC;
+        private Label lblStockVM;
+        private Label lblStockVG;
     }
 }
