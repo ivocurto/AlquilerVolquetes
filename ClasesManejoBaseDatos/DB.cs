@@ -66,14 +66,14 @@ namespace ClasesManejoBaseDatos
             }
         }
 
-        public static void Insert(int hash_code, int id_usuario, int? volquetes_chicos, int? volquetes_medianos, int? volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso)
+        public static void Insert(int hash_code, int id_usuario, int? volquetes_chicos, int? volquetes_medianos, int? volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso, string direccion)
         {
             try
             {
                 connection.Open();
 
                 command.Parameters.Clear();
-                var query = "INSERT INTO pedidos_cliente (hash_code, id_usuario, volquetes_chicos, volquetes_medianos, volquetes_grandes, fecha_ingreso, fecha_regreso) VALUES (@hash_code, @id_usuario, @volquetes_chicos, @volquetes_medianos, @volquetes_grandes, @fecha_ingreso, @fecha_regreso)";
+                var query = "INSERT INTO pedidos_cliente (hash_code, id_usuario, volquetes_chicos, volquetes_medianos, volquetes_grandes, fecha_ingreso, fecha_regreso, direccion) VALUES (@hash_code, @id_usuario, @volquetes_chicos, @volquetes_medianos, @volquetes_grandes, @fecha_ingreso, @fecha_regreso, @direccion)";
 
                 command.CommandText = query;
 
@@ -84,6 +84,7 @@ namespace ClasesManejoBaseDatos
                 command.Parameters.AddWithValue("@volquetes_grandes", volquetes_grandes);
                 command.Parameters.AddWithValue("@fecha_ingreso", fecha_ingreso);
                 command.Parameters.AddWithValue("@fecha_regreso", fecha_regreso);
+                command.Parameters.AddWithValue("@direccion", direccion);
 
                 var filasAfectadas = command.ExecuteNonQuery();
 
@@ -223,7 +224,7 @@ namespace ClasesManejoBaseDatos
                     while (reader.Read())
                     {
                         T objeto = Activator.CreateInstance<T>();
-                        MostrarUsuario(reader);
+                        //MostrarUsuario(reader);
 
                         lista.Add(objeto);
                     }
@@ -239,6 +240,53 @@ namespace ClasesManejoBaseDatos
             {
                 connection.Close();
             }
+        }
+
+        public static List<PedidoADO> GetPedidosByIdUsuario(int idUsuario)
+        {
+            string query = $"SELECT * FROM pedidos_cliente WHERE id_usuario = {idUsuario}";
+
+            var pedidos = new List<PedidoADO>();
+
+            try
+            {
+                connection.Open();
+
+                command.CommandText = query;
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        PedidoADO pedido = new PedidoADO();
+                        AsignarValoresDesdeReader(pedido, reader);
+                        pedidos.Add(pedido);
+                    }
+                }
+
+                return pedidos;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        public static void AsignarValoresDesdeReader(PedidoADO pedido, MySqlDataReader reader)
+        {
+            pedido.Hash_code = Convert.ToInt32(reader["hash_code"]);
+            pedido.Id_usuario = Convert.ToInt32(reader["id_usuario"]);
+            pedido.Volquetes_chicos = reader["volquetes_chicos"] is DBNull ? (int?)null : Convert.ToInt32(reader["volquetes_chicos"]);
+            pedido.Volquetes_medianos = reader["volquetes_medianos"] is DBNull ? (int?)null : Convert.ToInt32(reader["volquetes_medianos"]);
+            pedido.Volquetes_grandes = reader["volquetes_grandes"] is DBNull ? (int?)null : Convert.ToInt32(reader["volquetes_grandes"]);
+            pedido.Fecha_ingreso = Convert.ToDateTime(reader["fecha_ingreso"]);
+            pedido.Fecha_regreso = Convert.ToDateTime(reader["fecha_regreso"]);
+            pedido.Direccion = reader["direccion"].ToString() ?? "";
         }
 
         public static void Drop(string tabla, string atributo, string atributoIngresado)
@@ -492,6 +540,51 @@ namespace ClasesManejoBaseDatos
             //muestro los datos
             Console.WriteLine($"ID: {id} - Nombre: {nombre} - Apellido: {apellido} - Mail: {mail} - Telefono {telefono} - Username: {nombre_usuario} - Clave: {clave}");
         }
+
+        //public static List<Pedido> TraerPedidosDesdeBD(int idUsuario)
+        //{
+        //    List<Pedido> listaPedidos = null;
+
+        //    try
+        //    {
+        //        connection.Open();
+
+        //        string query = "SELECT * FROM pedidos_cliente WHERE idUsuario = @IdUsuario";
+
+        //        using (var command = new MySqlCommand(query, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+
+        //            using (var reader = command.ExecuteReader())
+        //            {
+        //                if (reader.Read())
+        //                {
+        //                    // Crea un nuevo usuario con los datos de la base de datos
+        //                    cliente = new Cliente(
+        //                        Convert.ToInt32(reader["id"]),
+        //                        reader["nombre"].ToString(),
+        //                        reader["apellido"].ToString(),
+        //                        reader["mail"].ToString(),
+        //                        reader["telefono"] is DBNull ? (int?)null : Convert.ToInt32(reader["telefono"]),
+        //                        reader["nombre_usuario"].ToString(),
+        //                        reader["clave"].ToString()
+        //                    );
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+
+        //    return cliente;
+        //}
 
         private static Cliente CrearCliente(MySqlDataReader reader)
         {

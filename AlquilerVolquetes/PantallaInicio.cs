@@ -113,7 +113,7 @@ namespace AlquilerVolquetes
         }
 
 
-        private void abrirFormularioHijo(Form formularioHijo)
+        public void abrirFormularioHijo(Form formularioHijo)
         {
             formularioHijo.TopLevel = false;
             formularioHijo.FormBorderStyle = FormBorderStyle.None;

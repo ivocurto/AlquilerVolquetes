@@ -24,16 +24,11 @@ namespace Clases
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
-            if (telefono.HasValue)
-            {
-                this.NumeroTelefono = telefono.Value;
-            }
-            
         }
         public override void ConsutarEstado()
         {
             throw new NotImplementedException();
-        }
+        }       
 
         public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
         public string Nombre { get => nombre; set => nombre = value; }

@@ -1,4 +1,5 @@
 ﻿using Clases;
+using ClasesManejoBaseDatos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,18 +14,20 @@ namespace AlquilerVolquetes
 {
     public partial class MisVolquetes : Form
     {
-        private List<Pedido> pedidoActual;
+        private List<PedidoADO> pedidoActual;
         public Cliente usuarioActual;
         private bool esCliente;
         public MisVolquetes(Cliente usuario)
         {
             InitializeComponent();
-
             usuarioActual = usuario;
-           this.Load += new EventHandler(MisVolquetes_Load);
+            pedidoActual = DB.GetPedidosByIdUsuario(usuario.Id);
+            //DB.Select<Pedido>($"SELECT * FROM pedidos_cliente WHERE id_usuario = {usuarioActual.Id}");
+            //usuarioActual.Pedidos = pedidoActual;
+            this.Load += new EventHandler(MisVolquetes_Load);
         }
-       
-        
+
+
 
         private void lstEnviando_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -63,30 +66,32 @@ namespace AlquilerVolquetes
 
         private void MisVolquetes_Load(object sender, EventArgs e)
         {
-            pedidoActual = usuarioActual.Pedidos;
 
-            if (pedidoActual is not null)
-            {
                 lstEnviando.Items.Clear();
-                lstColocados.Items.Clear();
-                foreach (Pedido pedido in pedidoActual)
+                foreach (PedidoADO pedido in pedidoActual)
                 {
-                    foreach (Volquete volquete in pedido.VolquetesPedidos)
+                    string text = $"ID: {pedido.Hash_code}";
+                    if (pedido.Volquetes_chicos != 0)
                     {
-                        if (volquete.Cantidad != 0)
-                        {
-                            lstEnviando.Items.Add(volquete.MostrarString());
-                        }
+                        text += $" - Volquetes chicos: {pedido.Volquetes_chicos}";
                     }
-                    foreach (Volquete volquete in pedido.VolquetesInstalados)
+                    if (pedido.Volquetes_medianos != 0)
                     {
-                        if (volquete.Cantidad != 0)
-                        {
-                            lstColocados.Items.Add(volquete.MostrarString());
-                        }
+                        text += $" - Volquetes medianos: {pedido.Volquetes_medianos}";
                     }
+                    if (pedido.Volquetes_grandes != 0)
+                    {
+                        text += $" - Volquetes grandes: {pedido.Volquetes_grandes}";
+                    }
+                    text += $" - Fecha entrega: {pedido.Fecha_ingreso.ToShortDateString()} - Fecha retiro: {pedido.Fecha_regreso.ToShortDateString()} - Dirección: {pedido.Direccion}";
+
+                    lstEnviando.Items.Add(text);
                 }
-            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            //this.Load += new EventHandler(MisVolquetes_Load);
         }
     }
 }

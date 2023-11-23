@@ -86,33 +86,21 @@ namespace AlquilerVolquetes
             lblCantidadVolqueteChico.Text = "0";
             lblCantidadVolqueteMediano.Text = "0";
             lblCantidadVolqueteGrande.Text = "0";
-            lblPrecioTotal.Text = "   TOTAL: $0";
-
 
         }
         private void ActualizarListaCarrito()
         {
             lstProductos.Items.Clear();
-            int precioTotal = 0;
             foreach (Volquete volquete in volquetes)
             {
                 if (volquete.Cantidad != 0)
                 {
                     string formato;
                     formato = volquete.ToString();
-                    precioTotal += volquete.PrecioUnitario * volquete.Cantidad;
                     lstProductos.Items.Add(formato);
                 }
 
 
-            }
-            if (precioTotal == 0)
-            {
-                this.lblPrecioTotal.Text = "  TOTAL:  0";
-            }
-            else
-            {
-                this.lblPrecioTotal.Text = $"TOTAL: ${precioTotal}";
             }
         }
 
@@ -169,37 +157,6 @@ namespace AlquilerVolquetes
             }
         }
 
-        private void btnSumarVC_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteChico.Text = Incrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
-        }
-
-        private void btnSumarVM_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteMediano.Text = Incrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
-        }
-
-        private void btnSumarVG_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteGrande.Text = Incrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
-        }
-
-        private void btnRestarVC_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteChico.Text = Decrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
-        }
-
-        private void btnRestarVM_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteMediano.Text = Decrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
-
-        }
-
-        private void btnRestarVG_Click(object sender, EventArgs e)
-        {
-            this.lblCantidadVolqueteGrande.Text = Decrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
-
-        }
 
         private void lstProductos_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -263,6 +220,51 @@ namespace AlquilerVolquetes
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSumarVG_Click_1(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteGrande.Text = Incrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
+        }
+
+        private void btnRestarVG_Click_1(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteGrande.Text = Decrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
+        }
+
+        private void btnSumarVM_Click_1(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteMediano.Text = Incrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
+        }
+
+        private void btnRestarVM_Click_1(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteMediano.Text = Decrementar_Label(sender, e, 1, this.lblCantidadVolqueteMediano.Text);
+        }
+
+        private void btnSumarVC_Click(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteChico.Text = Incrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
+        }
+
+        private void btnRestarVC_Click_1(object sender, EventArgs e)
+        {
+            this.lblCantidadVolqueteChico.Text = Decrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
+        }
+
+        private void PantallaPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

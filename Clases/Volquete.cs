@@ -30,13 +30,13 @@ namespace Clases
 
         public override string ToString()
         {
-            return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}                    {Identificador}";
+            return $"{Cantidad} {MedidaVolquete}";
         }
 
 
         public string MostrarString()
         {
-            return $"{Cantidad} {MedidaVolquete} POR ${PrecioUnitario * Cantidad}";
+            return $"{Cantidad} {MedidaVolquete}                 {Identificador}";
         }
 
 
