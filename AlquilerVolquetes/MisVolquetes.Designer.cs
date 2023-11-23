@@ -53,14 +53,14 @@
             lstEnviando.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             lstEnviando.BackColor = Color.FromArgb(117, 213, 235);
             lstEnviando.BorderStyle = BorderStyle.None;
+            lstEnviando.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             lstEnviando.FormattingEnabled = true;
-            lstEnviando.ItemHeight = 15;
+            lstEnviando.ItemHeight = 23;
             lstEnviando.Location = new Point(30, 170);
             lstEnviando.Margin = new Padding(35, 10, 35, 10);
             lstEnviando.Name = "lstEnviando";
-            lstEnviando.Size = new Size(656, 465);
+            lstEnviando.Size = new Size(656, 460);
             lstEnviando.TabIndex = 24;
-            lstEnviando.DrawItem += lstEnviando_DrawItem;
             // 
             // lblEnviando
             // 
@@ -73,11 +73,10 @@
             lblEnviando.Size = new Size(199, 27);
             lblEnviando.TabIndex = 26;
             lblEnviando.Text = "MIS VOLQUETES";
-            lblEnviando.Click += lblEnviando_Click;
             // 
             // linkLabel1
             // 
-            linkLabel1.Location = new Point(0, 0);
+            linkLabel1.Location = new Point(0, 9);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(100, 23);
             linkLabel1.TabIndex = 0;

@@ -20,7 +20,7 @@ namespace PruebasDB
             //Console.WriteLine("*****************************************");
             ////DB.ActualizarAtributoUsuario("juampi.demaio@gmail.com", "nombre_usuario", "pepinodemaio");
             //DB.ActualizarAtributoUsuario("juampi.demaio@gmail.com", "clave", "pepinodemaio");
-            ////DB.Select<Usuario>("SELECT `id`, `nombre`, `apellido`, `mail`, `telefono`, `nombre_usuario`, `clave` FROM `usuarios` WHERE id= 2;");
+            //DB.Select<PedidoADO>("SELECT `hash_code`, `id_usuario`, `volquetes_chicos`, `volquetes_medianos`, `volquetes_grandes`, `fecha_ingreso`, `fecha_regreso` FROM `pedidos_cliente` WHERE id_usuario= 16;");
             //Console.WriteLine("*****************************************");
             //DB.Drop(usuario.Mail);
             //DB.ActualizarFechaPedido(987986, "fecha_regreso", DateTime.Today.AddDays(20));

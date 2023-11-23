@@ -32,12 +32,8 @@
             lblTituloFormularioDePago = new Label();
             lblProductos = new Label();
             btnAlquilar = new Button();
-            txtNombre = new TextBox();
-            txtApellido = new TextBox();
             txtDireccion = new TextBox();
             txtTelefono = new TextBox();
-            txtMail = new TextBox();
-            label1 = new Label();
             label2 = new Label();
             lblTotal = new Label();
             linkLabel1 = new LinkLabel();
@@ -73,31 +69,13 @@
             btnAlquilar.BackColor = Color.DeepSkyBlue;
             btnAlquilar.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnAlquilar.ForeColor = SystemColors.ButtonHighlight;
-            btnAlquilar.Location = new Point(404, 584);
+            btnAlquilar.Location = new Point(402, 480);
             btnAlquilar.Name = "btnAlquilar";
             btnAlquilar.Size = new Size(255, 55);
             btnAlquilar.TabIndex = 24;
             btnAlquilar.Text = "PAGAR";
             btnAlquilar.UseVisualStyleBackColor = false;
             btnAlquilar.Click += btnAlquilar_Click;
-            // 
-            // txtNombre
-            // 
-            txtNombre.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNombre.Location = new Point(93, 218);
-            txtNombre.Name = "txtNombre";
-            txtNombre.PlaceholderText = " Nombre";
-            txtNombre.Size = new Size(318, 36);
-            txtNombre.TabIndex = 25;
-            // 
-            // txtApellido
-            // 
-            txtApellido.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtApellido.Location = new Point(431, 218);
-            txtApellido.Name = "txtApellido";
-            txtApellido.PlaceholderText = " Apellido";
-            txtApellido.Size = new Size(318, 36);
-            txtApellido.TabIndex = 26;
             // 
             // txtDireccion
             // 
@@ -118,26 +96,6 @@
             txtTelefono.Size = new Size(318, 36);
             txtTelefono.TabIndex = 28;
             // 
-            // txtMail
-            // 
-            txtMail.BackColor = Color.White;
-            txtMail.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtMail.Location = new Point(93, 378);
-            txtMail.Name = "txtMail";
-            txtMail.PlaceholderText = " Correo electrónico";
-            txtMail.Size = new Size(656, 36);
-            txtMail.TabIndex = 29;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Bahnschrift SemiLight", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(93, 436);
-            label1.Name = "label1";
-            label1.Size = new Size(780, 46);
-            label1.TabIndex = 30;
-            label1.Text = "Recuerde que el/los volquetes se envia(n) y coloca(n) entre 24hs y 36hs despues del pago. \r\nUna semana despues se retiran con el contenido del volquete.";
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -151,7 +109,7 @@
             // 
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Bahnschrift SemiBold SemiConden", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTotal.Location = new Point(424, 529);
+            lblTotal.Location = new Point(433, 429);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(179, 29);
             lblTotal.TabIndex = 32;
@@ -212,7 +170,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1064, 562);
+            ClientSize = new Size(1064, 743);
             Controls.Add(label3);
             Controls.Add(dtpDevolucion);
             Controls.Add(lblFecha);
@@ -220,12 +178,8 @@
             Controls.Add(linkLabel1);
             Controls.Add(lblTotal);
             Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(txtMail);
             Controls.Add(txtTelefono);
             Controls.Add(txtDireccion);
-            Controls.Add(txtApellido);
-            Controls.Add(txtNombre);
             Controls.Add(btnAlquilar);
             Controls.Add(lblProductos);
             Controls.Add(lblTituloFormularioDePago);
@@ -234,7 +188,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormularioDeAlquiler";
             FormClosed += FormularioDeAlquiler_FormClosed;
-            Load += FormularioDeAlquiler_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -244,12 +197,8 @@
         private Label lblTituloFormularioDePago;
         private Label lblProductos;
         private Button btnAlquilar;
-        private TextBox txtNombre;
-        private TextBox txtApellido;
         private TextBox txtDireccion;
         private TextBox txtTelefono;
-        private TextBox txtMail;
-        private Label label1;
         private Label label2;
         private Label lblTotal;
         private LinkLabel linkLabel1;

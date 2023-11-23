@@ -16,8 +16,13 @@ namespace ClasesManejoBaseDatos
         public int? Volquetes_grandes { get; set; }
         public DateTime Fecha_ingreso { get; set; }
         public DateTime Fecha_regreso { get; set; }
+        public string Direccion { get; set; }
 
-        public PedidoADO(int hash_code, int id_usuario, int? volquetes_chicos, int? volquetes_medianos, int? volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso) : base("pedidos_cliente", ["hash_code", "id_usuario", "volquetes_chicos", "volquetes_medianos", "volquetes_grandes", "fecha_ingreso", "fecha_regreso"])
+        public PedidoADO() : base("pedidos_cliente", new[] { "hash_code", "id_usuario", "volquetes_chicos", "volquetes_medianos", "volquetes_grandes", "fecha_ingreso", "fecha_regreso", "direccion" })
+        {
+        }
+
+        public PedidoADO(int hash_code, int id_usuario, int? volquetes_chicos, int? volquetes_medianos, int? volquetes_grandes, DateTime fecha_ingreso, DateTime fecha_regreso, string direccion) : base("pedidos_cliente", ["hash_code", "id_usuario", "volquetes_chicos", "volquetes_medianos", "volquetes_grandes", "fecha_ingreso", "fecha_regreso", "direccion"])
         {
             Hash_code = hash_code;
             Id_usuario = id_usuario;
@@ -26,11 +31,12 @@ namespace ClasesManejoBaseDatos
             Volquetes_grandes = volquetes_grandes ?? 0;
             Fecha_ingreso = fecha_ingreso;
             Fecha_regreso = fecha_regreso;
+            Direccion = direccion;
 
         }
         public bool Add()
         {
-            DB.Insert(this.Hash_code, this.Id_usuario, this.Volquetes_chicos, Volquetes_medianos, Volquetes_grandes, Fecha_ingreso, Fecha_regreso);
+            DB.Insert(this.Hash_code, this.Id_usuario, this.Volquetes_chicos, Volquetes_medianos, Volquetes_grandes, Fecha_ingreso, Fecha_regreso, this.Direccion);
             return true;
         }
 
