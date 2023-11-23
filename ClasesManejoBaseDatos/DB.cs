@@ -276,6 +276,76 @@ namespace ClasesManejoBaseDatos
             }
         }
 
+       
+
+        public static List<AdminADO> GetAdmins()
+        {
+            string query = $"SELECT * FROM admins";
+
+            var admins = new List<AdminADO>();
+
+            try
+            {
+                connection.Open();
+
+                command.CommandText = query;
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        AdminADO admin = new AdminADO();
+                        AsignarValoresDesdeReader(admin, reader);
+                        admins.Add(admin);
+                    }
+                }
+
+                return admins;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static List<UsuarioADO> GetUsuarios()
+        {
+            string query = $"SELECT * FROM usuarios";
+
+            var usuarios = new List<UsuarioADO>();
+
+            try
+            {
+                connection.Open();
+
+                command.CommandText = query;
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        UsuarioADO usuario = new UsuarioADO();
+                        AsignarValoresDesdeReader(usuario, reader);
+                        usuarios.Add(usuario);
+                    }
+                }
+
+                return usuarios;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
 
         public static void AsignarValoresDesdeReader(PedidoADO pedido, MySqlDataReader reader)
         {
@@ -287,6 +357,24 @@ namespace ClasesManejoBaseDatos
             pedido.Fecha_ingreso = Convert.ToDateTime(reader["fecha_ingreso"]);
             pedido.Fecha_regreso = Convert.ToDateTime(reader["fecha_regreso"]);
             pedido.Direccion = reader["direccion"].ToString() ?? "";
+        }
+        public static void AsignarValoresDesdeReader(AdminADO admin, MySqlDataReader reader)
+        {
+            admin.Id = Convert.ToInt32(reader["id"]);
+            admin.Mail = reader["mail"].ToString() ?? "";
+            admin.Nombre_admin = reader["nombre_admin"].ToString() ?? "";
+            admin.Clave = reader["clave"].ToString() ?? "";
+        }
+
+        public static void AsignarValoresDesdeReader(UsuarioADO usuario, MySqlDataReader reader)
+        {
+            usuario.Id = Convert.ToInt32(reader["id"]);
+            usuario.Nombre = reader["nombre"].ToString() ?? "";
+            usuario.Apellido = reader["apellido"].ToString() ?? "";
+            usuario.Mail = reader["mail"].ToString() ?? "";
+            usuario.Telefono = Convert.ToInt32(reader["telefono"]);
+            usuario.Nombre_usuario = reader["nombre_usuario"].ToString() ?? "";
+            usuario.Clave = reader["clave"].ToString() ?? "";
         }
 
         public static void Drop(string tabla, string atributo, string atributoIngresado)
@@ -694,6 +782,36 @@ namespace ClasesManejoBaseDatos
                 else
                 {
                     Console.WriteLine($"No hay un registro con el correo electrónico {mail}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public static void ActualizarCantidadVolquetes(int hash_code, string atributoACambiar, int nuevoAtributo)
+        {
+            try
+            {
+                connection.Open();
+
+                if (VerificarAtributoEnBD("pedidos_cliente", "hash_code", hash_code))
+                {
+                    string query = $"UPDATE pedidos_cliente SET {atributoACambiar} = @nuevoAtributo WHERE hash_code = @Hash_code";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@nuevoAtributo", nuevoAtributo);
+                        cmd.Parameters.AddWithValue("@Hash_code", hash_code);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)

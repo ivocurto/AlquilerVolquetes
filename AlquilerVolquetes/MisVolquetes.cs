@@ -27,8 +27,6 @@ namespace AlquilerVolquetes
             this.Load += new EventHandler(MisVolquetes_Load);
         }
 
-
-
         private void lstEnviando_DrawItem(object sender, DrawItemEventArgs e)
         {
             lstEnviando.ItemHeight = 30;

@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AlquilerVolquetes;
 using Clases;
+using ClasesManejoBaseDatos;
 
 namespace AdminApp
 {
     public partial class PanelAdmin : Form
     {
-        private List<Cliente> clientes;
-        private List<Admin> admins;
+        private List<ClasesManejoBaseDatos.UsuarioADO> clientes;
+        private List<AdminADO> admins;
         private int indexPedido;
         private Admin adminActual;
-        private Cliente clienteActual;
+        private ClasesManejoBaseDatos.UsuarioADO clienteActual;
         private string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
 
         public PanelAdmin(Admin admin)
         {
             InitializeComponent();
             adminActual = admin;
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
-            admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
-            // Enlaza la lista de pedidos al ListBox
+            admins = DB.GetAdmins();
+            clientes = DB.GetUsuarios();
         }
 
         private void PanelAdmin_FormClosing(object sender, FormClosingEventArgs e)
@@ -67,39 +67,12 @@ namespace AdminApp
                     if (selectedIndex >= 0)
                     {
                         //admins = adminActual.AgregarAdmin(clientes, admins, lstUsuarios.SelectedItem.ToString());
-                        clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());
+                        //clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());********************************************
                     }
                 }
-                JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
-                JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoAdmins, admins);
 
                 PanelAdmin_Load(sender, e);
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //if (lstUsuarios.SelectedItem != null)
-            //{
-            //    DialogResult result = MessageBox.Show("¿Desea aceptar el pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        int selectedIndex = lstUsuarios.SelectedIndex;
-
-            //        if (selectedIndex >= 0)
-            //        {
-            //            clientes[selectedIndex].VolquetesInstalados = clientes[selectedIndex].VolquetesPedidos;
-
-            //            clientes[selectedIndex].VolquetesPedidos = new List<Volquete>();
-
-
-            //            JsonFileManager.SaveToJsonGeneric("pedidos.json", clientes);
-
-            //            lstUsuarios.Items.RemoveAt(selectedIndex);
-            //        }
-            //    }
-            //}
         }
 
         private void PanelAdmin_Load(object sender, EventArgs e)
@@ -107,39 +80,18 @@ namespace AdminApp
             if (clientes is not null)
             {
                 lstUsuarios.Items.Clear();
-                foreach (Cliente cliente in clientes)
+                foreach (ClasesManejoBaseDatos.UsuarioADO cliente in clientes)
                 {
-
-                    string formato = "";
-
-                    foreach (Pedido pedido in cliente.Pedidos)
-                    {
-
-                        formato += pedido.ToString();
-
-                    }
-
-                    //lstUsuarios.Items.Add($"USUARIO: {cliente.Nombre.ToUpper()} VOLQUETES A INSTALAR: {formato}");
-                    lstUsuarios.Items.Add(cliente.NombreUsuario);
-
-
+                    lstUsuarios.Items.Add(cliente.Nombre_usuario);
                 }
-
             }
             if (admins is not null)
             {
                 lstAdmins.Items.Clear();
-                foreach (Admin adminn in admins)
+                foreach (AdminADO admin in admins)
                 {
-
-
-
-                    //lstUsuarios.Items.Add($"USUARIO: {cliente.Nombre.ToUpper()} VOLQUETES A INSTALAR: {formato}");
-                    lstAdmins.Items.Add(adminn.NombreUsuario);
-
-
+                    lstAdmins.Items.Add(admin.Nombre_admin);
                 }
-
             }
         }
 
@@ -158,13 +110,12 @@ namespace AdminApp
                     if (selectedIndex >= 0)
                     {
 
-                        clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());
+                        //clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString()); ********************************************
 
 
                     }
 
                 }
-                JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
 
                 PanelAdmin_Load(sender, e);
             }
@@ -184,9 +135,9 @@ namespace AdminApp
         {
             if (lstAdmins.SelectedItem != null)
             {
-                foreach (Admin admin in admins)
+                foreach (AdminADO admin in admins)
                 {
-                    if (admin.NombreUsuario == lstAdmins.SelectedItem)
+                    if (admin.Nombre_admin == lstAdmins.SelectedItem)
                     {
                         DatosUsuario datosUsuario = new DatosUsuario(admin);
                         datosUsuario.Show();
@@ -198,11 +149,11 @@ namespace AdminApp
 
             if (lstUsuarios.SelectedItem != null)
             {
-                foreach (Cliente cliente in clientes)
+                foreach (ClasesManejoBaseDatos.UsuarioADO cliente in clientes)
                 {
-                    if (cliente.NombreUsuario == lstUsuarios.SelectedItem)
+                    if (cliente.Nombre_usuario == lstUsuarios.SelectedItem)
                     {
-                        DatosUsuario datosUsuario = new DatosUsuario(cliente, clientes);
+                        DatosUsuario datosUsuario = new DatosUsuario(cliente);
                         datosUsuario.Show();
                     }
                 }

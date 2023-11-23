@@ -11,7 +11,11 @@ namespace ClasesManejoBaseDatos
         public string Mail { get; set; }
         public string Nombre_admin { get; set; }
         public string Clave { get; set; }
+        public int Id { get; set; }
 
+        public AdminADO() : base("admins", new[] { "id", "mail", "nombre_admin", "clave" })
+        {
+        }
         public AdminADO(string mail, string nombre_admin, string clave) : base("admins", ["mail", "nombre_admin", "clave"])
         {
             Mail = mail;

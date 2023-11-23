@@ -9,23 +9,26 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClasesManejoBaseDatos;
+using Org.BouncyCastle.Asn1.Cms;
+using MySqlX.XDevAPI;
 
 namespace AlquilerVolquetes
 {
     public partial class DatosUsuario : Form
     {
-        private Cliente clienteAcual;
-        private Admin adminActual;
-        private List<Cliente> clientes = new List<Cliente>();
+        private ClasesManejoBaseDatos.UsuarioADO clienteAcual;
+        private AdminADO adminActual;
+        private List<PedidoADO> pedidos;
 
-        public DatosUsuario(Cliente cliente, List<Cliente> listaClientes)
+        public DatosUsuario(ClasesManejoBaseDatos.UsuarioADO cliente)
         {
             InitializeComponent();
             clienteAcual = cliente;
-            clientes = listaClientes;
+            pedidos = DB.GetPedidosByIdUsuario(clienteAcual.Id);
         }
 
-        public DatosUsuario(Admin admin)
+        public DatosUsuario(AdminADO admin)
         {
             InitializeComponent();
             adminActual = admin;
@@ -35,34 +38,13 @@ namespace AlquilerVolquetes
         {
             if (clienteAcual == null)
             {
-                lblNombreCliente.Text = adminActual.NombreUsuario;
+                lblNombreCliente.Text = adminActual.Nombre_admin;
             }
             else
             {
-                lblNombreCliente.Text = clienteAcual.NombreUsuario;
+                lblNombreCliente.Text = clienteAcual.Nombre_usuario;
 
-                if (clienteAcual.Pedidos is not null)
-                {
-                    lstDatos.Items.Clear();
-
-                    foreach (Pedido pedido in clienteAcual.Pedidos)
-                    {
-                        // Agrega el ID con formato a la lista
-                        lstDatos.Items.Add($"ID del pedido: {pedido.IdPedido}");
-
-                        // Agrega cada volquete a la lista con formato
-                        foreach (Volquete volquete in pedido.VolquetesPedidos)
-                        {
-                            if (volquete.Cantidad > 0)
-                            {
-                                lstDatos.Items.Add($"    {volquete.ToString()}");
-                            }
-                        }
-
-                        // Agrega un elemento en blanco para separar pedidos
-                        lstDatos.Items.Add("");
-                    }
-                }
+                actualizarPantalla();
             }
         }
 
@@ -96,23 +78,45 @@ namespace AlquilerVolquetes
             // Lógica para procesar un pedido
             string idPedido = Regex.Match(selectedText, @"ID del pedido: (\d+)").Groups[1].Value;
 
-            if (int.TryParse(idPedido, out int idPedidoNumerico))
+            if (int.TryParse(idPedido, out int pedido_hash_code))
             {
-                int indexCliente = clientes.FindIndex(c => c == clienteAcual);
+                // Remueve el pedido del cliente actual
+                DB.Drop("hash_code", pedido_hash_code);
 
-                if (indexCliente >= 0)
+                // Recarga los datos en el formulario
+                actualizarPantalla();
+            }
+        }
+
+        private void actualizarPantalla()
+        {
+            pedidos = DB.GetPedidosByIdUsuario(clienteAcual.Id);
+            if (pedidos is not null)
+            {
+                lstDatos.Items.Clear();
+
+                foreach (PedidoADO pedido in pedidos)
                 {
-                    // Remueve el pedido del cliente actual
-                    clienteAcual.Pedidos.RemoveAll(p => p.IdPedido == idPedidoNumerico);
+                    // Agrega el ID con formato a la lista
+                    lstDatos.Items.Add($"ID del pedido: {pedido.Hash_code}");
 
-                    // Actualiza el cliente en la lista de clientes
-                    clientes[indexCliente] = clienteAcual;
+                    // Agrega cada volquete a la lista con formato
+                    if (pedido.Volquetes_chicos != 0)
+                    {
+                        lstDatos.Items.Add($"    Volquetes chicos: {pedido.Volquetes_chicos}                                                                                                      {pedido.Hash_code}");
+                    }
+                    if (pedido.Volquetes_medianos != 0)
+                    {
+                        lstDatos.Items.Add($"    Volquetes medianos: {pedido.Volquetes_medianos}                                                                                                      {pedido.Hash_code}");
+                    }
+                    if (pedido.Volquetes_grandes != 0)
+                    {
+                        lstDatos.Items.Add($"    Volquetes grandes: {pedido.Volquetes_grandes}                                                                                                      {pedido.Hash_code}");
+                    }
 
-                    // Guarda la lista actualizada en el archivo JSON
-                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
 
-                    // Recarga los datos en el formulario
-                    DatosUsuario_Load(null, null);
+                    // Agrega un elemento en blanco para separar pedidos
+                    lstDatos.Items.Add("");
                 }
             }
         }
@@ -120,38 +124,30 @@ namespace AlquilerVolquetes
         private void ProcesarVolquete(string selectedText)
         {
             // Lógica para procesar un volquete
-            string pattern = @"(\d+)\s+(.+?)\s+POR\s+\$(\d+)\s+(\d+)";
-            Match match = Regex.Match(selectedText, pattern);
+            string pattern = @"Volquetes (chicos|medianos|grandes):\s+(\d+)\s+(\d+)";
+            MatchCollection matches = Regex.Matches(selectedText, pattern);
 
-            if (match.Success)
+            foreach (Match match in matches)
             {
-                string medidaVolquete = match.Groups[2].Value.ToUpper();
-                int identificador = int.Parse(match.Groups[4].Value);
+                string tipoVolquete = match.Groups[1].Value.ToLower();
+                int cantidad = int.Parse(match.Groups[2].Value);
+                int pedido_hash_code = int.Parse(match.Groups[3].Value);
 
-                foreach (Pedido pedido in clienteAcual.Pedidos)
+                // Actualiza la existencia del tipo de volquete en el pedido
+                switch (tipoVolquete)
                 {
-                    if (pedido.IdPedido == identificador)
-                    {
-                        foreach (Volquete volquete in pedido.VolquetesPedidos)
-                        {
-                            if (volquete.MedidaVolquete == medidaVolquete)
-                            {
-                                volquete.Cantidad--;
-                            }
-                        }
-                    }
-                }
-
-                int indexCliente = clientes.FindIndex(c => c == clienteAcual);
-
-                if (indexCliente >= 0)
-                {
-                    clientes[indexCliente] = clienteAcual;
-
-                    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes);
-                    DatosUsuario_Load(null, null);
+                    case "chicos":
+                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_chicos", cantidad - 1);
+                        break;
+                    case "medianos":
+                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_medianos", cantidad - 1);
+                        break;
+                    case "grandes":
+                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_grandes", cantidad-1);
+                        break;
                 }
             }
+            actualizarPantalla();
         }
     }
 }

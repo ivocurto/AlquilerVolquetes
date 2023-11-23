@@ -96,7 +96,7 @@
             btnDetalles.Text = "VER DETALLES USUARIO";
             btnDetalles.UseVisualStyleBackColor = false;
             btnDetalles.Click += btnDetalles_Click;
-            // 
+            //// 
             // btnBorrarCliente
             // 
             btnBorrarCliente.BackColor = Color.DeepSkyBlue;
