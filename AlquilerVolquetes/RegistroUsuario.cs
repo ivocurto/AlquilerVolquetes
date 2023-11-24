@@ -38,7 +38,7 @@ namespace AlquilerVolquetes
 
         private void MostrarLabel(TextBox textBox, Label label)
         {
-            if (VerificarEstadoTxtBox(textBox.Text)) // Cambio aquí
+            if (VerificarEstadoTxtBox(textBox.Text)) 
             {
                 label.Visible = true;
             }
@@ -48,7 +48,7 @@ namespace AlquilerVolquetes
             }
         }
 
-        private bool VerificarEstadoTxtBox(string texto) // Cambio aquí
+        private bool VerificarEstadoTxtBox(string texto) 
         {
             return string.IsNullOrWhiteSpace(texto);
         }

@@ -41,6 +41,7 @@
             // 
             // lblLogin
             // 
+            lblLogin.Anchor = AnchorStyles.None;
             lblLogin.AutoSize = true;
             lblLogin.BackColor = Color.Transparent;
             lblLogin.Font = new Font("Trebuchet MS", 30F, FontStyle.Bold, GraphicsUnit.Point);
@@ -53,6 +54,7 @@
             // 
             // lstUsuarios
             // 
+            lstUsuarios.Anchor = AnchorStyles.None;
             lstUsuarios.BackColor = Color.FromArgb(189, 232, 250);
             lstUsuarios.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
             lstUsuarios.ForeColor = Color.FromArgb(9, 111, 155);
@@ -66,6 +68,7 @@
             // 
             // btnHacerAdmin
             // 
+            btnHacerAdmin.Anchor = AnchorStyles.None;
             btnHacerAdmin.BackColor = Color.DeepSkyBlue;
             btnHacerAdmin.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnHacerAdmin.ForeColor = SystemColors.ButtonHighlight;
@@ -75,10 +78,11 @@
             btnHacerAdmin.TabIndex = 25;
             btnHacerAdmin.Text = "HACER ADMIN";
             btnHacerAdmin.UseVisualStyleBackColor = false;
-            btnHacerAdmin.Click += btnEliminarPedido_Click;
+            btnHacerAdmin.Click += btnHacerAdmin_Click;
             // 
             // lstAdmins
             // 
+            lstAdmins.Anchor = AnchorStyles.None;
             lstAdmins.BackColor = Color.FromArgb(189, 232, 250);
             lstAdmins.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
             lstAdmins.ForeColor = Color.FromArgb(9, 111, 155);
@@ -92,6 +96,7 @@
             // 
             // btnDetalles
             // 
+            btnDetalles.Anchor = AnchorStyles.None;
             btnDetalles.BackColor = Color.DeepSkyBlue;
             btnDetalles.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnDetalles.ForeColor = SystemColors.ButtonHighlight;
@@ -105,6 +110,7 @@
             // 
             // btnBorrarCliente
             // 
+            btnBorrarCliente.Anchor = AnchorStyles.None;
             btnBorrarCliente.BackColor = Color.DeepSkyBlue;
             btnBorrarCliente.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnBorrarCliente.ForeColor = SystemColors.ButtonHighlight;
@@ -112,7 +118,7 @@
             btnBorrarCliente.Name = "btnBorrarCliente";
             btnBorrarCliente.Size = new Size(214, 69);
             btnBorrarCliente.TabIndex = 30;
-            btnBorrarCliente.Text = " ELIMINAR CLIENTE";
+            btnBorrarCliente.Text = " ELIMINAR CUENTA";
             btnBorrarCliente.UseVisualStyleBackColor = false;
             btnBorrarCliente.Click += btnBorrarCliente_Click;
             // 
@@ -149,7 +155,6 @@
             Text = "PanelAdmin";
             WindowState = FormWindowState.Maximized;
             FormClosing += PanelAdmin_FormClosing;
-            Load += PanelAdmin_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

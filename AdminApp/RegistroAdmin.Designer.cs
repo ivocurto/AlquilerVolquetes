@@ -231,6 +231,7 @@
             lblRegistrarse.TabIndex = 5;
             lblRegistrarse.TabStop = true;
             lblRegistrarse.Text = "¿Ya tienes una cuenta? Iniciar sesión";
+            lblRegistrarse.LinkClicked += lblRegistrarse_LinkClicked;
             // 
             // txtClave
             // 

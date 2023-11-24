@@ -276,8 +276,6 @@ namespace ClasesManejoBaseDatos
             }
         }
 
-       
-
         public static List<AdminADO> GetAdmins()
         {
             string query = $"SELECT * FROM admins";
@@ -583,6 +581,51 @@ namespace ClasesManejoBaseDatos
                 {
                     command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
                     command.Parameters.AddWithValue("@Clave", clave);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Crea un nuevo usuario con los datos de la base de datos
+                            cliente = new Cliente(
+                                Convert.ToInt32(reader["id"]),
+                                reader["nombre"].ToString(),
+                                reader["apellido"].ToString(),
+                                reader["mail"].ToString(),
+                                reader["telefono"] is DBNull ? (int?)null : Convert.ToInt32(reader["telefono"]),
+                                reader["nombre_usuario"].ToString(),
+                                reader["clave"].ToString()
+                            );
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return cliente;
+        }
+
+        public static Cliente TraerUsuarioLogueado(string nombreUsuario)
+        {
+            Cliente cliente = null;
+
+            try
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
 
                     using (var reader = command.ExecuteReader())
                     {

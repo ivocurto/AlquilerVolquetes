@@ -123,7 +123,7 @@ namespace AdminApp
             }
             else if (DB.VerificarAtributoEnBD("usuarios", "nombre_usuario", nombre) || DB.VerificarAtributoEnBD("admins", "nombre_admin", nombre))
             {
-                MessageBox.Show("El nombre de usuario o el correo ya existen.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El nombre de usuario ya existe.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             else
@@ -140,6 +140,13 @@ namespace AdminApp
                     this.Hide();
                 }
             }
+        }
+
+        private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            InicioSesion inicio = new InicioSesion();
+            inicio.Show();
+            this.Hide();
         }
     }
 }

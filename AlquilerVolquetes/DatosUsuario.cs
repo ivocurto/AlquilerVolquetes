@@ -48,31 +48,6 @@ namespace AlquilerVolquetes
             }
         }
 
-        private void btnBorrarPedido_Click(object sender, EventArgs e)
-        {
-            int selectedIndex = lstDatos.SelectedIndex;
-
-            if (selectedIndex >= 0)
-            {
-                string selectedText = lstDatos.Items[selectedIndex].ToString();
-
-                Match pedidoMatch = Regex.Match(selectedText, @"ID del pedido: (\d+)");
-
-                Action<string> processTextDelegate = null;
-
-                if (pedidoMatch.Success)
-                {
-                    processTextDelegate = ProcesarPedido;
-                }
-                else
-                {
-                    processTextDelegate = ProcesarVolquete;
-                }
-
-                processTextDelegate?.Invoke(selectedText);
-            }
-        }
-
         private void ProcesarPedido(string selectedText)
         {
             // Lógica para procesar un pedido
@@ -163,6 +138,31 @@ namespace AlquilerVolquetes
                 }
             }
             actualizarPantalla();
+        }
+
+        private void btnBorrarPedido_Click_1(object sender, EventArgs e)
+        {
+            int selectedIndex = lstDatos.SelectedIndex;
+
+            if (selectedIndex >= 0)
+            {
+                string selectedText = lstDatos.Items[selectedIndex].ToString();
+
+                Match pedidoMatch = Regex.Match(selectedText, @"ID del pedido: (\d+)");
+
+                Action<string> processTextDelegate = null;
+
+                if (pedidoMatch.Success)
+                {
+                    processTextDelegate = ProcesarPedido;
+                }
+                else
+                {
+                    processTextDelegate = ProcesarVolquete;
+                }
+
+                processTextDelegate?.Invoke(selectedText);
+            }
         }
     }
 }

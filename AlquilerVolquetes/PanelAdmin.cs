@@ -26,8 +26,7 @@ namespace AdminApp
         {
             InitializeComponent();
             adminActual = admin;
-            admins = DB.GetAdmins();
-            clientes = DB.GetUsuarios();
+            actualizarPantalla();
         }
 
         private void PanelAdmin_FormClosing(object sender, FormClosingEventArgs e)
@@ -51,32 +50,39 @@ namespace AdminApp
             }
         }
 
-        private void btnEliminarPedido_Click(object sender, EventArgs e)
+
+        private void btnBorrarCliente_Click(object sender, EventArgs e)
         {
-            // Verifica si se seleccionó un pedido en el ListBox
             if (lstUsuarios.SelectedItem != null)
             {
                 // Muestra un cuadro de diálogo de confirmación
-                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas hacer admin a {lstUsuarios.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas ELIMINAR a {lstUsuarios.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    // Encuentra el índice del pedido seleccionado
-                    int selectedIndex = lstUsuarios.SelectedIndex;
-
-                    if (selectedIndex >= 0)
-                    {
-                        //admins = adminActual.AgregarAdmin(clientes, admins, lstUsuarios.SelectedItem.ToString());
-                        //clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString());********************************************
-                    }
+                    DB.Drop("usuarios", "nombre_usuario", lstUsuarios.SelectedItem.ToString());
                 }
 
-                PanelAdmin_Load(sender, e);
+                actualizarPantalla();
+            }
+            else if (lstAdmins.SelectedItem != null)
+            {
+                // Muestra un cuadro de diálogo de confirmación
+                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas ELIMINAR a {lstAdmins.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    DB.Drop("admins", "nombre_admin", lstAdmins.SelectedItem.ToString());
+                }
+
+                actualizarPantalla();
             }
         }
 
-        private void PanelAdmin_Load(object sender, EventArgs e)
+        private void actualizarPantalla()
         {
+            admins = DB.GetAdmins();
+            clientes = DB.GetUsuarios();
             if (clientes is not null)
             {
                 lstUsuarios.Items.Clear();
@@ -92,32 +98,6 @@ namespace AdminApp
                 {
                     lstAdmins.Items.Add(admin.Nombre_admin);
                 }
-            }
-        }
-
-        private void btnBorrarCliente_Click(object sender, EventArgs e)
-        {
-            if (lstUsuarios.SelectedItem != null)
-            {
-                // Muestra un cuadro de diálogo de confirmación
-                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas ELIMINAR a {lstUsuarios.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    // Encuentra el índice del pedido seleccionado
-                    int selectedIndex = lstUsuarios.SelectedIndex;
-
-                    if (selectedIndex >= 0)
-                    {
-
-                        //clientes = adminActual.EliminarCliente(clientes, lstUsuarios.SelectedItem.ToString()); ********************************************
-
-
-                    }
-
-                }
-
-                PanelAdmin_Load(sender, e);
             }
         }
 
@@ -165,10 +145,26 @@ namespace AdminApp
             DialogResult answer = exitoLogin.ShowDialog();
             if (answer == DialogResult.OK)
             {
-                
+
                 InicioSesion inicioS = new InicioSesion();
                 inicioS.Show();
                 this.Hide();
+            }
+        }
+
+        private void btnHacerAdmin_Click(object sender, EventArgs e)
+        {
+            if (lstUsuarios.SelectedItem != null)
+            {
+                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas hacer admin a {lstUsuarios.SelectedItem}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    int selectedIndex = lstUsuarios.SelectedIndex;
+                    Cliente cliente = DB.TraerUsuarioLogueado(lstUsuarios.SelectedItem.ToString());
+                    DB.Insert(cliente.MailUsuario, cliente.NombreUsuario, cliente.ClaveUsuario);
+                }
+                actualizarPantalla();
             }
         }
     }
