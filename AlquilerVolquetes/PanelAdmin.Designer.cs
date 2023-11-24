@@ -42,21 +42,25 @@
             // lblLogin
             // 
             lblLogin.AutoSize = true;
-            lblLogin.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLogin.ForeColor = SystemColors.ControlDarkDark;
-            lblLogin.Location = new Point(383, 29);
+            lblLogin.BackColor = Color.Transparent;
+            lblLogin.Font = new Font("Trebuchet MS", 30F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLogin.ForeColor = Color.FromArgb(9, 111, 155);
+            lblLogin.Location = new Point(396, 19);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(277, 48);
+            lblLogin.Size = new Size(267, 49);
             lblLogin.TabIndex = 1;
             lblLogin.Text = "PANEL ADMIN";
             // 
             // lstUsuarios
             // 
+            lstUsuarios.BackColor = Color.FromArgb(189, 232, 250);
+            lstUsuarios.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lstUsuarios.ForeColor = Color.FromArgb(9, 111, 155);
             lstUsuarios.FormattingEnabled = true;
-            lstUsuarios.ItemHeight = 15;
+            lstUsuarios.ItemHeight = 29;
             lstUsuarios.Location = new Point(114, 77);
             lstUsuarios.Name = "lstUsuarios";
-            lstUsuarios.Size = new Size(276, 484);
+            lstUsuarios.Size = new Size(408, 468);
             lstUsuarios.TabIndex = 2;
             lstUsuarios.SelectedIndexChanged += lstUsuarios_SelectedIndexChanged;
             // 
@@ -75,11 +79,14 @@
             // 
             // lstAdmins
             // 
+            lstAdmins.BackColor = Color.FromArgb(189, 232, 250);
+            lstAdmins.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lstAdmins.ForeColor = Color.FromArgb(9, 111, 155);
             lstAdmins.FormattingEnabled = true;
-            lstAdmins.ItemHeight = 15;
-            lstAdmins.Location = new Point(669, 77);
+            lstAdmins.ItemHeight = 29;
+            lstAdmins.Location = new Point(552, 77);
             lstAdmins.Name = "lstAdmins";
-            lstAdmins.Size = new Size(274, 484);
+            lstAdmins.Size = new Size(408, 468);
             lstAdmins.TabIndex = 27;
             lstAdmins.SelectedIndexChanged += lstAdmins_SelectedIndexChanged;
             // 
@@ -92,7 +99,7 @@
             btnDetalles.Name = "btnDetalles";
             btnDetalles.Size = new Size(198, 69);
             btnDetalles.TabIndex = 29;
-            btnDetalles.Text = "VER DETALLES USUARIO";
+            btnDetalles.Text = "VER DETALLES";
             btnDetalles.UseVisualStyleBackColor = false;
             btnDetalles.Click += btnDetalles_Click;
             // 
@@ -111,6 +118,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(12, 11);
             pictureBox1.Name = "pictureBox1";
@@ -124,7 +132,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaption;
+            BackColor = SystemColors.ActiveBorder;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1064, 681);
             Controls.Add(pictureBox1);
             Controls.Add(btnBorrarCliente);
@@ -133,6 +143,7 @@
             Controls.Add(btnHacerAdmin);
             Controls.Add(lstUsuarios);
             Controls.Add(lblLogin);
+            DoubleBuffered = true;
             Name = "PanelAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PanelAdmin";

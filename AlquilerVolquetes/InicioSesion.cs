@@ -21,13 +21,8 @@ namespace AlquilerVolquetes
 {
     public partial class InicioSesion : Form
     {
-
-        //protected static List<Cliente> usuarios = new List<Cliente>();
-        //protected static List<Admin> admins = new List<Admin>();
         private bool checkbox;
         string filePath = "ultimaSesion.json";
-        //string rutaArchivoJson = "usuarios.json";
-        //string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
         private DataContainer data;
         private Size previousSize;
         private Point previousLocation;
@@ -36,26 +31,26 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-            //usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-            //admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
 
             if (data != null && data.CheckboxValue == true)
             {
-                txtUsuario.Text = data.UserObject.NombreUsuario;
-                txtClave.Text = data.UserObject.ClaveUsuario;
+                MessageBox.Show("at1a");
+                if (data.UserObject != null)
+                {
+                    txtUsuario.Text = data.UserObject.NombreUsuario;
+                    txtClave.Text = data.UserObject.ClaveUsuario;
+
+                } else if (data.AdminObject != null)
+                {
+                    MessageBox.Show("ata");
+                    txtUsuario.Text = data.AdminObject.NombreUsuario;
+                    txtClave.Text = data.AdminObject.ClaveUsuario;
+                }
                 cbAutoLogin.Checked = true;
             }
         }
 
-        public InicioSesion(List<Admin> adminlist)
-        {
-            InitializeComponent();
-
-            //admins = adminlist;
-            //usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-
-        }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             previousSize = this.Size;
@@ -110,9 +105,8 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                 {
-                    //data = new DataContainer(checkbox, admin);
-                    //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-
+                    data = new DataContainer(admin, checkbox);
+                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
                     PanelAdmin panelAdmin = new PanelAdmin(admin);
                     panelAdmin.Show();
                     this.Hide();

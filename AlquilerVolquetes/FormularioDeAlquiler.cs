@@ -29,7 +29,6 @@ namespace AlquilerVolquetes
             dtpDevolucion.MaxDate = dtpEntrega.Value.AddDays(14);
             dtpEntrega.MinDate = dtpEntrega.Value;
             pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
-            clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
             idsPedidos = JsonFileManager.LoadFromJsonGeneric<List<int>>("idsPedidos.json");
             if (idsPedidos is null)
             {
@@ -44,6 +43,8 @@ namespace AlquilerVolquetes
             string formatoTotal = "";
             bool flag = false;
             precioTotal = 0;
+            int diasDeAlquiler = (dtpDevolucion.Value.Date - dtpEntrega.Value.Date).Days;
+
             foreach (Volquete volquete in volquetes)
             {
                 if (volquete.Cantidad > 0)
@@ -61,10 +62,9 @@ namespace AlquilerVolquetes
                     {
                         formatoTotal = $"{formatoTotal}, {producto}";
                     }
-                    precioTotal += precio * volquete.Cantidad;
+                    precioTotal += precio * volquete.Cantidad * diasDeAlquiler;
                 }
             }
-
             this.lblTotal.Text = $"PRECIO TOTAL: ${precioTotal}";
         }
 
@@ -165,12 +165,20 @@ namespace AlquilerVolquetes
 
             dtpDevolucion.MinDate = dtpEntrega.Value.AddDays(3);
             dtpDevolucion.MaxDate = dtpEntrega.Value.AddDays(14);
+            MostrarProductosAComprar();
 
         }
+
+
 
         private void lblTotal_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dtpDevolucion_ValueChanged(object sender, EventArgs e)
+        {
+            MostrarProductosAComprar();
         }
     }
 

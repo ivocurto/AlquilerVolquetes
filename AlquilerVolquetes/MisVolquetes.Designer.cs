@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MisVolquetes));
             lblTituloMisVolquetes = new Label();
             lstEnviando = new ListBox();
             lblEnviando = new Label();
@@ -38,12 +39,13 @@
             // 
             lblTituloMisVolquetes.Anchor = AnchorStyles.Top;
             lblTituloMisVolquetes.AutoSize = true;
-            lblTituloMisVolquetes.Font = new Font("Trebuchet MS", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTituloMisVolquetes.ForeColor = Color.White;
+            lblTituloMisVolquetes.BackColor = Color.Transparent;
+            lblTituloMisVolquetes.Font = new Font("Trebuchet MS", 30F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTituloMisVolquetes.ForeColor = Color.FromArgb(9, 111, 155);
             lblTituloMisVolquetes.Location = new Point(106, 9);
             lblTituloMisVolquetes.Name = "lblTituloMisVolquetes";
             lblTituloMisVolquetes.Padding = new Padding(0, 35, 0, 0);
-            lblTituloMisVolquetes.Size = new Size(463, 84);
+            lblTituloMisVolquetes.Size = new Size(486, 84);
             lblTituloMisVolquetes.TabIndex = 23;
             lblTituloMisVolquetes.Text = "VOLQUETES ALQUILADOS";
             lblTituloMisVolquetes.TextAlign = ContentAlignment.TopCenter;
@@ -51,31 +53,35 @@
             // lstEnviando
             // 
             lstEnviando.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            lstEnviando.BackColor = Color.FromArgb(117, 213, 235);
+            lstEnviando.BackColor = Color.FromArgb(189, 232, 250);
             lstEnviando.BorderStyle = BorderStyle.None;
-            lstEnviando.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lstEnviando.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lstEnviando.ForeColor = Color.FromArgb(9, 111, 155);
             lstEnviando.FormattingEnabled = true;
-            lstEnviando.ItemHeight = 23;
+            lstEnviando.ItemHeight = 29;
             lstEnviando.Location = new Point(30, 170);
             lstEnviando.Margin = new Padding(35, 10, 35, 10);
             lstEnviando.Name = "lstEnviando";
-            lstEnviando.Size = new Size(656, 460);
+            lstEnviando.Size = new Size(656, 435);
             lstEnviando.TabIndex = 24;
             // 
             // lblEnviando
             // 
             lblEnviando.Anchor = AnchorStyles.Left;
             lblEnviando.AutoSize = true;
-            lblEnviando.Font = new Font("Bahnschrift SemiBold SemiConden", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lblEnviando.Location = new Point(0, 131);
+            lblEnviando.BackColor = Color.Transparent;
+            lblEnviando.Font = new Font("Trebuchet MS", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            lblEnviando.ForeColor = Color.FromArgb(97, 205, 245);
+            lblEnviando.Location = new Point(-20, 130);
             lblEnviando.Name = "lblEnviando";
             lblEnviando.Padding = new Padding(50, 0, 0, 0);
-            lblEnviando.Size = new Size(199, 27);
+            lblEnviando.Size = new Size(304, 40);
             lblEnviando.TabIndex = 26;
             lblEnviando.Text = "MIS VOLQUETES";
             // 
             // linkLabel1
             // 
+            linkLabel1.BackColor = Color.Transparent;
             linkLabel1.Location = new Point(0, 9);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(100, 23);
@@ -86,11 +92,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(61, 188, 219);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(714, 681);
             Controls.Add(linkLabel1);
             Controls.Add(lblEnviando);
             Controls.Add(lstEnviando);
             Controls.Add(lblTituloMisVolquetes);
+            DoubleBuffered = true;
             Name = "MisVolquetes";
             Text = "MisVolquetes";
             Load += MisVolquetes_Load;

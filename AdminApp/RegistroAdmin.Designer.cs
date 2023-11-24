@@ -24,102 +24,320 @@
 
         private void InitializeComponent()
         {
-            lblRegister = new Label();
-            txtMail = new TextBox();
-            txtUsuario = new TextBox();
-            txtClave = new TextBox();
-            txtReClave = new TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroAdmin));
+            pnlLogin = new Panel();
             btnIngresar = new Button();
+            lblMail = new Label();
+            txtMail = new TextBox();
+            pictureBox5 = new PictureBox();
+            lblUsuario = new Label();
+            txtUsuario = new TextBox();
+            pictureBox4 = new PictureBox();
+            textBox1 = new TextBox();
+            pictureBox3 = new PictureBox();
+            lblClave = new Label();
             lblRegistrarse = new LinkLabel();
+            txtClave = new TextBox();
+            lblReClave = new Label();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
+            txtReClave = new TextBox();
+            button1 = new Button();
+            pictureBox2 = new PictureBox();
+            pnlLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
-            // lblRegister
+            // pnlLogin
             // 
-            lblRegister.AutoSize = true;
-            lblRegister.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            lblRegister.ForeColor = SystemColors.ControlDarkDark;
-            lblRegister.Location = new Point(376, 116);
-            lblRegister.Name = "lblRegister";
-            lblRegister.Size = new Size(332, 48);
-            lblRegister.TabIndex = 16;
-            lblRegister.Text = "GENERAR ADMIN";
-            // 
-            // txtMail
-            // 
-            txtMail.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtMail.Location = new Point(386, 189);
-            txtMail.Name = "txtMail";
-            txtMail.PlaceholderText = " Correo electrónico";
-            txtMail.Size = new Size(318, 36);
-            txtMail.TabIndex = 2;
-            // 
-            // txtUsuario
-            // 
-            txtUsuario.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUsuario.Location = new Point(386, 259);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.PlaceholderText = " Ususario";
-            txtUsuario.Size = new Size(318, 36);
-            txtUsuario.TabIndex = 3;
-            // 
-            // txtClave
-            // 
-            txtClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtClave.Location = new Point(386, 329);
-            txtClave.Name = "txtClave";
-            txtClave.PasswordChar = '*';
-            txtClave.PlaceholderText = " Contraseña";
-            txtClave.Size = new Size(318, 36);
-            txtClave.TabIndex = 4;
-            // 
-            // txtReClave
-            // 
-            txtReClave.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtReClave.Location = new Point(386, 399);
-            txtReClave.Name = "txtReClave";
-            txtReClave.PasswordChar = '*';
-            txtReClave.PlaceholderText = " Repetir contraseña";
-            txtReClave.Size = new Size(318, 36);
-            txtReClave.TabIndex = 5;
+            pnlLogin.Anchor = AnchorStyles.None;
+            pnlLogin.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            pnlLogin.BackColor = Color.White;
+            pnlLogin.Controls.Add(btnIngresar);
+            pnlLogin.Controls.Add(lblMail);
+            pnlLogin.Controls.Add(txtMail);
+            pnlLogin.Controls.Add(pictureBox5);
+            pnlLogin.Controls.Add(lblUsuario);
+            pnlLogin.Controls.Add(txtUsuario);
+            pnlLogin.Controls.Add(pictureBox4);
+            pnlLogin.Controls.Add(textBox1);
+            pnlLogin.Controls.Add(pictureBox3);
+            pnlLogin.Controls.Add(lblClave);
+            pnlLogin.Controls.Add(lblRegistrarse);
+            pnlLogin.Controls.Add(txtClave);
+            pnlLogin.Controls.Add(lblReClave);
+            pnlLogin.Controls.Add(label1);
+            pnlLogin.Controls.Add(pictureBox1);
+            pnlLogin.Controls.Add(txtReClave);
+            pnlLogin.Controls.Add(button1);
+            pnlLogin.Controls.Add(pictureBox2);
+            pnlLogin.Location = new Point(341, 85);
+            pnlLogin.Name = "pnlLogin";
+            pnlLogin.Size = new Size(412, 506);
+            pnlLogin.TabIndex = 17;
             // 
             // btnIngresar
             // 
-            btnIngresar.BackColor = Color.DeepSkyBlue;
-            btnIngresar.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            btnIngresar.Anchor = AnchorStyles.None;
+            btnIngresar.BackColor = Color.Transparent;
+            btnIngresar.BackgroundImage = (Image)resources.GetObject("btnIngresar.BackgroundImage");
+            btnIngresar.BackgroundImageLayout = ImageLayout.None;
+            btnIngresar.FlatStyle = FlatStyle.Flat;
+            btnIngresar.Font = new Font("Bahnschrift", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             btnIngresar.ForeColor = SystemColors.ButtonHighlight;
-            btnIngresar.Location = new Point(386, 501);
+            btnIngresar.Location = new Point(116, 402);
+            btnIngresar.Margin = new Padding(0);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(318, 55);
-            btnIngresar.TabIndex = 1;
-            btnIngresar.Text = "GENERAR";
+            btnIngresar.Size = new Size(188, 55);
+            btnIngresar.TabIndex = 98;
+            btnIngresar.Text = "REGISTRARSE";
             btnIngresar.UseVisualStyleBackColor = false;
-            btnIngresar.Click += btnIngresar_Click;
+            btnIngresar.Click += btnIngresar_Click_1;
+            // 
+            // lblMail
+            // 
+            lblMail.AutoSize = true;
+            lblMail.BackColor = Color.FromArgb(51, 171, 215);
+            lblMail.Enabled = false;
+            lblMail.FlatStyle = FlatStyle.Flat;
+            lblMail.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMail.ForeColor = Color.White;
+            lblMail.Location = new Point(116, 128);
+            lblMail.Margin = new Padding(0);
+            lblMail.Name = "lblMail";
+            lblMail.Size = new Size(185, 25);
+            lblMail.TabIndex = 97;
+            lblMail.Text = "Correo electrónico";
+            // 
+            // txtMail
+            // 
+            txtMail.Anchor = AnchorStyles.None;
+            txtMail.BackColor = Color.FromArgb(51, 171, 215);
+            txtMail.BorderStyle = BorderStyle.None;
+            txtMail.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtMail.ForeColor = Color.White;
+            txtMail.Location = new Point(110, 132);
+            txtMail.Margin = new Padding(0);
+            txtMail.Name = "txtMail";
+            txtMail.Size = new Size(214, 23);
+            txtMail.TabIndex = 94;
+            txtMail.TextChanged += txtMail_TextChanged;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Anchor = AnchorStyles.None;
+            pictureBox5.BackgroundImageLayout = ImageLayout.None;
+            pictureBox5.Image = (Image)resources.GetObject("pictureBox5.Image");
+            pictureBox5.Location = new Point(0, 122);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(412, 40);
+            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox5.TabIndex = 93;
+            pictureBox5.TabStop = false;
+            // 
+            // lblUsuario
+            // 
+            lblUsuario.AutoSize = true;
+            lblUsuario.BackColor = Color.FromArgb(51, 171, 215);
+            lblUsuario.Enabled = false;
+            lblUsuario.FlatStyle = FlatStyle.Flat;
+            lblUsuario.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblUsuario.ForeColor = Color.White;
+            lblUsuario.Location = new Point(116, 175);
+            lblUsuario.Margin = new Padding(0);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(85, 25);
+            lblUsuario.TabIndex = 8;
+            lblUsuario.Text = "Usuario";
+            // 
+            // txtUsuario
+            // 
+            txtUsuario.Anchor = AnchorStyles.None;
+            txtUsuario.BackColor = Color.FromArgb(51, 171, 215);
+            txtUsuario.BorderStyle = BorderStyle.None;
+            txtUsuario.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtUsuario.ForeColor = Color.White;
+            txtUsuario.Location = new Point(111, 177);
+            txtUsuario.Margin = new Padding(0);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(214, 23);
+            txtUsuario.TabIndex = 1;
+            txtUsuario.TextChanged += txtUsuario_TextChanged;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Anchor = AnchorStyles.None;
+            pictureBox4.BackgroundImageLayout = ImageLayout.None;
+            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
+            pictureBox4.Location = new Point(0, 168);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(412, 40);
+            pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox4.TabIndex = 92;
+            pictureBox4.TabStop = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Anchor = AnchorStyles.None;
+            textBox1.BackColor = Color.FromArgb(51, 171, 215);
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            textBox1.ForeColor = Color.White;
+            textBox1.Location = new Point(219, 525);
+            textBox1.Margin = new Padding(0);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(214, 23);
+            textBox1.TabIndex = 4;
+            textBox1.UseSystemPasswordChar = true;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.None;
+            pictureBox3.BackgroundImageLayout = ImageLayout.None;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(106, 515);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(412, 40);
+            pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox3.TabIndex = 89;
+            pictureBox3.TabStop = false;
+            // 
+            // lblClave
+            // 
+            lblClave.AutoSize = true;
+            lblClave.BackColor = Color.FromArgb(51, 171, 215);
+            lblClave.Enabled = false;
+            lblClave.FlatStyle = FlatStyle.Flat;
+            lblClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblClave.ForeColor = Color.White;
+            lblClave.Location = new Point(116, 224);
+            lblClave.Name = "lblClave";
+            lblClave.Size = new Size(64, 25);
+            lblClave.TabIndex = 9;
+            lblClave.Text = "Clave";
             // 
             // lblRegistrarse
             // 
             lblRegistrarse.AutoSize = true;
             lblRegistrarse.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblRegistrarse.LinkColor = Color.DimGray;
-            lblRegistrarse.Location = new Point(604, 461);
+            lblRegistrarse.LinkColor = Color.FromArgb(22, 173, 225);
+            lblRegistrarse.Location = new Point(82, 338);
             lblRegistrarse.Name = "lblRegistrarse";
-            lblRegistrarse.Size = new Size(100, 21);
-            lblRegistrarse.TabIndex = 6;
+            lblRegistrarse.Size = new Size(259, 21);
+            lblRegistrarse.TabIndex = 5;
             lblRegistrarse.TabStop = true;
-            lblRegistrarse.Text = "Iniciar sesión";
-            lblRegistrarse.LinkClicked += lblRegistrarse_LinkClicked;
+            lblRegistrarse.Text = "¿Ya tienes una cuenta? Iniciar sesión";
+            // 
+            // txtClave
+            // 
+            txtClave.Anchor = AnchorStyles.None;
+            txtClave.BackColor = Color.FromArgb(51, 171, 215);
+            txtClave.BorderStyle = BorderStyle.None;
+            txtClave.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtClave.ForeColor = Color.White;
+            txtClave.Location = new Point(111, 226);
+            txtClave.Margin = new Padding(0);
+            txtClave.Name = "txtClave";
+            txtClave.Size = new Size(214, 23);
+            txtClave.TabIndex = 2;
+            txtClave.TextChanged += txtClave_TextChanged;
+            // 
+            // lblReClave
+            // 
+            lblReClave.AutoSize = true;
+            lblReClave.BackColor = Color.FromArgb(51, 171, 215);
+            lblReClave.Enabled = false;
+            lblReClave.FlatStyle = FlatStyle.Flat;
+            lblReClave.Font = new Font("Bahnschrift SemiLight", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblReClave.ForeColor = Color.White;
+            lblReClave.Location = new Point(116, 274);
+            lblReClave.Name = "lblReClave";
+            lblReClave.Size = new Size(138, 25);
+            lblReClave.TabIndex = 10;
+            lblReClave.Text = "Repetir Clave";
+            // 
+            // label1
+            // 
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Trebuchet MS", 30F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.FromArgb(22, 173, 225);
+            label1.Location = new Point(0, 36);
+            label1.Margin = new Padding(0);
+            label1.Name = "label1";
+            label1.Size = new Size(412, 49);
+            label1.TabIndex = 0;
+            label1.Text = "GENERAR ADMIN";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.BackgroundImageLayout = ImageLayout.None;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 217);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(412, 40);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // txtReClave
+            // 
+            txtReClave.Anchor = AnchorStyles.None;
+            txtReClave.BackColor = Color.FromArgb(51, 171, 215);
+            txtReClave.BorderStyle = BorderStyle.None;
+            txtReClave.Font = new Font("Bahnschrift Light", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtReClave.ForeColor = Color.White;
+            txtReClave.Location = new Point(113, 276);
+            txtReClave.Margin = new Padding(0);
+            txtReClave.Name = "txtReClave";
+            txtReClave.Size = new Size(214, 23);
+            txtReClave.TabIndex = 3;
+            txtReClave.UseSystemPasswordChar = true;
+            txtReClave.TextChanged += txtReClave_TextChanged;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.None;
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.None;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Bahnschrift", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.ForeColor = SystemColors.ButtonHighlight;
+            button1.Location = new Point(216, 597);
+            button1.Margin = new Padding(0);
+            button1.Name = "button1";
+            button1.Size = new Size(188, 55);
+            button1.TabIndex = 6;
+            button1.Text = "REGISTRARSE";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Anchor = AnchorStyles.None;
+            pictureBox2.BackgroundImageLayout = ImageLayout.None;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(0, 266);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(412, 40);
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.TabIndex = 83;
+            pictureBox2.TabStop = false;
             // 
             // RegistroAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1064, 681);
-            Controls.Add(lblRegistrarse);
-            Controls.Add(btnIngresar);
-            Controls.Add(txtReClave);
-            Controls.Add(txtClave);
-            Controls.Add(txtUsuario);
-            Controls.Add(txtMail);
-            Controls.Add(lblRegister);
+            Controls.Add(pnlLogin);
+            DoubleBuffered = true;
             Margin = new Padding(3, 2, 3, 2);
             Name = "RegistroAdmin";
             StartPosition = FormStartPosition.CenterScreen;
@@ -127,18 +345,36 @@
             WindowState = FormWindowState.Maximized;
             FormClosed += RegistroAdmin_FormClosed;
             Load += RegistroAdmin_Load;
+            pnlLogin.ResumeLayout(false);
+            pnlLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Label lblRegister;
-        private TextBox txtMail;
-        private TextBox txtUsuario;
-        private TextBox txtClave;
-        private TextBox txtReClave;
-        private Button btnIngresar;
+        private Panel pnlLogin;
+        private Label lblMail;
+        public TextBox txtMail;
+        private PictureBox pictureBox5;
+        private Label lblUsuario;
+        public TextBox txtUsuario;
+        private PictureBox pictureBox4;
+        private TextBox textBox1;
+        private PictureBox pictureBox3;
+        private Label lblClave;
         private LinkLabel lblRegistrarse;
+        public TextBox txtClave;
+        private Label lblReClave;
+        private Label label1;
+        private PictureBox pictureBox1;
+        public TextBox txtReClave;
+        private Button button1;
+        private PictureBox pictureBox2;
+        private Button btnIngresar;
     }
 
 

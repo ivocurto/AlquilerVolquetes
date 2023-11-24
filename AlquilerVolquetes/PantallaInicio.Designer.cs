@@ -35,8 +35,12 @@
             btnMisVolquetes = new Button();
             btnInicio = new Button();
             panelLogo = new Panel();
+            lblNombreUsuario = new Label();
+            pictureBox1 = new PictureBox();
             panelContenedor = new Panel();
             panelSideMenu.SuspendLayout();
+            panelLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panelSideMenu
@@ -137,12 +141,38 @@
             // 
             // panelLogo
             // 
+            panelLogo.Controls.Add(lblNombreUsuario);
+            panelLogo.Controls.Add(pictureBox1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
             panelLogo.Margin = new Padding(4, 3, 4, 3);
             panelLogo.Name = "panelLogo";
             panelLogo.Size = new Size(350, 112);
             panelLogo.TabIndex = 0;
+            // 
+            // lblNombreUsuario
+            // 
+            lblNombreUsuario.BackColor = Color.Transparent;
+            lblNombreUsuario.Font = new Font("Trebuchet MS", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNombreUsuario.ForeColor = Color.White;
+            lblNombreUsuario.Location = new Point(62, 30);
+            lblNombreUsuario.Margin = new Padding(0);
+            lblNombreUsuario.Name = "lblNombreUsuario";
+            lblNombreUsuario.Size = new Size(267, 49);
+            lblNombreUsuario.TabIndex = 51;
+            lblNombreUsuario.Text = "Nombre_usuario";
+            lblNombreUsuario.TextAlign = ContentAlignment.MiddleLeft;
+            lblNombreUsuario.TextChanged += lblLogin_TextChanged;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, 30);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(47, 49);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // panelContenedor
             // 
@@ -170,6 +200,8 @@
             FormClosing += PantallaInicio_FormClosing;
             Load += PantallaInicio_Load;
             panelSideMenu.ResumeLayout(false);
+            panelLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -182,5 +214,7 @@
         private Button btnAlquilar;
         private Button btnMisVolquetes;
         private Panel panelContenedor;
+        private PictureBox pictureBox1;
+        private Label lblNombreUsuario;
     }
 }

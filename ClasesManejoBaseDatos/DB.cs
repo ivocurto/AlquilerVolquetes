@@ -527,6 +527,48 @@ namespace ClasesManejoBaseDatos
             return atributoExistente;
         }
 
+        public static bool VerificarAtributoEnBD(string tabla, string atributo, string atributoIngresado)
+        {
+            bool atributoExistente = false;
+            bool connectionOpen = false;
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                    connectionOpen = true;
+                }
+
+
+                string query = $"SELECT COUNT(*) FROM {tabla} WHERE {atributo.ToLower()} = @{atributo.ToUpper()}";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue($"@{atributo.ToUpper()}", $"{atributoIngresado}");
+
+                    int count = Convert.ToInt32(command.ExecuteScalar());
+
+                    // Si count es mayor que cero, significa que el atributo ya existe
+                    atributoExistente = (count > 0);
+                }
+            }
+            catch (Exception)
+            {
+                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+                throw;
+            }
+            finally
+            {
+                if (connectionOpen)
+                {
+                    connection.Close();
+                }
+
+            }
+
+            return atributoExistente;
+        }
+
         public static Cliente TraerUsuarioLogueado(string nombreUsuario, string clave)
         {
             Cliente cliente = null;
@@ -667,52 +709,6 @@ namespace ClasesManejoBaseDatos
             return cantidadDisponible;
         }
 
-
-
-        //public static List<Pedido> TraerPedidosDesdeBD(int idUsuario)
-        //{
-        //    List<Pedido> listaPedidos = null;
-
-        //    try
-        //    {
-        //        connection.Open();
-
-        //        string query = "SELECT * FROM pedidos_cliente WHERE idUsuario = @IdUsuario";
-
-        //        using (var command = new MySqlCommand(query, connection))
-        //        {
-        //            command.Parameters.AddWithValue("@IdUsuario", idUsuario);
-
-        //            using (var reader = command.ExecuteReader())
-        //            {
-        //                if (reader.Read())
-        //                {
-        //                    // Crea un nuevo usuario con los datos de la base de datos
-        //                    cliente = new Cliente(
-        //                        Convert.ToInt32(reader["id"]),
-        //                        reader["nombre"].ToString(),
-        //                        reader["apellido"].ToString(),
-        //                        reader["mail"].ToString(),
-        //                        reader["telefono"] is DBNull ? (int?)null : Convert.ToInt32(reader["telefono"]),
-        //                        reader["nombre_usuario"].ToString(),
-        //                        reader["clave"].ToString()
-        //                    );
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        // Maneja la excepción de manera apropiada (registra, notifica, etc.)
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-
-        //    return cliente;
-        //}
 
         private static Cliente CrearCliente(MySqlDataReader reader)
         {

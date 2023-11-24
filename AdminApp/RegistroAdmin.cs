@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 using ClasesManejoBaseDatos;
+using Org.BouncyCastle.Asn1.Cms;
 
 namespace AdminApp
 {
@@ -15,74 +16,33 @@ namespace AdminApp
         public RegistroAdmin()
         {
             InitializeComponent();
-
-
-
+            MostrarLabel(txtUsuario, lblUsuario);
+            MostrarLabel(txtMail, lblMail);
+            MostrarLabel(txtClave, lblClave);
+            MostrarLabel(txtReClave, lblReClave);
 
             listaAdmins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoJson);
-            if(listaAdmins is null )
+            if (listaAdmins is null)
             {
                 listaAdmins = new List<Admin>();
             }
             clientes = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
-            if( clientes is null)
+            if (clientes is null)
             {
                 clientes = new List<Cliente>();
             }
         }
 
 
-        private void btnIngresar_Click(object sender, EventArgs e)
-        {
-            string clave = txtClave.Text;
-            string reClave = txtReClave.Text;
-            string nombre = txtUsuario.Text;
-            string mail = txtMail.Text;
-
-            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(nombre,clave , mail, reClave);
-
-            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
-            {
-                MessageBox.Show("Por favor, completa todos los campos.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (!ManejoDeValidaciones.ValidarContraseña(datosUsuario))
-            {
-               MessageBox.Show("Las contraseñas no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (!ManejoDeValidaciones.ComprobarExistenciaUsuario(datosUsuario, clientes))
-            {
-                MessageBox.Show("El nombre de usuario o el correo ya existen.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if(!ManejoDeValidaciones.ComprobarExistenciaAdmin(datosUsuario, listaAdmins))
-            {
-                MessageBox.Show("El nombre de usuario o el correo ya existen.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-            else
-            {
-                
-                ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
-                DialogResult answer = exitoLogin.ShowDialog();
-                if (answer == DialogResult.OK)
-                {
-                    var admin = new AdminADO(mail, nombre, clave);
-                    admin.Add();
-                    //Admin usuario = new Admin(nombre, mail, clave);
-                    //listaAdmins.Add(admin);
-                    //JsonFileManager.SaveToJsonGeneric<List<Admin>>(rutaArchivoJson, listaAdmins);
-                    InicioSesion inicio = new InicioSesion(listaAdmins);
-                    inicio.Show();
-                    this.Hide();
-                }
-            }
-        }
-
-
         private void RegistroAdmin_Load(object sender, EventArgs e)
         {
+            MostrarLabel(txtUsuario, lblUsuario);
+            MostrarLabel(txtMail, lblMail);
+            MostrarLabel(txtClave, lblClave);
+            MostrarLabel(txtReClave, lblReClave);
         }
 
-       
+
 
         private void RegistroAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -102,11 +62,84 @@ namespace AdminApp
             }
         }
 
-        private void lblRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+
+        private void MostrarLabel(TextBox textBox, Label label)
         {
-            InicioSesion inicio = new InicioSesion(listaAdmins);
-            inicio.Show();
-            this.Hide();
+            if (VerificarEstadoTxtBox(textBox.Text)) // Cambio aquí
+            {
+                label.Visible = true;
+            }
+            else
+            {
+                label.Visible = false;
+            }
+        }
+
+        private bool VerificarEstadoTxtBox(string texto) // Cambio aquí
+        {
+            return string.IsNullOrWhiteSpace(texto);
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtUsuario, lblUsuario);
+        }
+
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtClave, lblClave);
+        }
+
+        private void txtReClave_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtReClave, lblReClave);
+        }
+
+        private void txtMail_TextChanged(object sender, EventArgs e)
+        {
+            MostrarLabel(txtMail, lblMail);
+        }
+
+        private void btnIngresar_Click_1(object sender, EventArgs e)
+        {
+            string clave = txtClave.Text;
+            string reClave = txtReClave.Text;
+            string nombre = txtUsuario.Text;
+            string mail = txtMail.Text;
+
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(nombre, clave, mail, reClave);
+
+            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
+            {
+                MessageBox.Show("Por favor, completa todos los campos.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (!ManejoDeValidaciones.ValidarContraseña(datosUsuario))
+            {
+                MessageBox.Show("Las contraseñas no coinciden.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (DB.VerificarAtributoEnBD("usuarios", "mail", mail) || DB.VerificarAtributoEnBD("admins", "mail", mail))
+            {
+                MessageBox.Show("El correo ya está registrado.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (DB.VerificarAtributoEnBD("usuarios", "nombre_usuario", nombre) || DB.VerificarAtributoEnBD("admins", "nombre_admin", nombre))
+            {
+                MessageBox.Show("El nombre de usuario o el correo ya existen.", "Error de registro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+
+                ModalExito exitoLogin = new ModalExito("REGISTRO EXITOSO");
+                DialogResult answer = exitoLogin.ShowDialog();
+                if (answer == DialogResult.OK)
+                {
+                    var admin = new AdminADO(mail, nombre, clave);
+                    admin.Add();
+                    InicioSesion inicio = new InicioSesion();
+                    inicio.Show();
+                    this.Hide();
+                }
+            }
         }
     }
 }

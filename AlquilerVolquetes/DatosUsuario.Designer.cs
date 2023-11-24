@@ -28,35 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnVolver = new Button();
             lblNombreCliente = new Label();
             btnBorrarPedido = new Button();
             lstDatos = new ListBox();
             SuspendLayout();
             // 
-            // btnVolver
-            // 
-            btnVolver.Location = new Point(45, 451);
-            btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(142, 82);
-            btnVolver.TabIndex = 0;
-            btnVolver.Text = "VOLVER";
-            btnVolver.UseVisualStyleBackColor = true;
-            // 
             // lblNombreCliente
             // 
             lblNombreCliente.AutoSize = true;
-            lblNombreCliente.Location = new Point(75, 52);
+            lblNombreCliente.Location = new Point(66, 39);
             lblNombreCliente.Name = "lblNombreCliente";
-            lblNombreCliente.Size = new Size(50, 20);
+            lblNombreCliente.Size = new Size(38, 15);
             lblNombreCliente.TabIndex = 2;
             lblNombreCliente.Text = "label1";
             // 
             // btnBorrarPedido
             // 
-            btnBorrarPedido.Location = new Point(280, 451);
+            btnBorrarPedido.Location = new Point(154, 338);
+            btnBorrarPedido.Margin = new Padding(3, 2, 3, 2);
             btnBorrarPedido.Name = "btnBorrarPedido";
-            btnBorrarPedido.Size = new Size(142, 82);
+            btnBorrarPedido.Size = new Size(124, 62);
             btnBorrarPedido.TabIndex = 3;
             btnBorrarPedido.Text = "BORRAR PEDIDO";
             btnBorrarPedido.UseVisualStyleBackColor = true;
@@ -65,21 +56,22 @@
             // lstDatos
             // 
             lstDatos.FormattingEnabled = true;
-            lstDatos.ItemHeight = 20;
-            lstDatos.Location = new Point(90, 75);
+            lstDatos.ItemHeight = 15;
+            lstDatos.Location = new Point(79, 56);
+            lstDatos.Margin = new Padding(3, 2, 3, 2);
             lstDatos.Name = "lstDatos";
-            lstDatos.Size = new Size(293, 344);
+            lstDatos.Size = new Size(257, 259);
             lstDatos.TabIndex = 4;
             // 
             // DatosUsuario
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(538, 564);
+            ClientSize = new Size(471, 423);
             Controls.Add(lstDatos);
             Controls.Add(btnBorrarPedido);
             Controls.Add(lblNombreCliente);
-            Controls.Add(btnVolver);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "DatosUsuario";
             Text = "DatosUsuario";
             Load += DatosUsuario_Load;
@@ -88,8 +80,6 @@
         }
 
         #endregion
-
-        private Button btnVolver;
         private Label lblNombreCliente;
         private Button btnBorrarPedido;
         private ListBox lstDatos;

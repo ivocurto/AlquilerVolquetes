@@ -120,7 +120,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Carrito";
             ShowIcon = false;
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Carrito";
             ResumeLayout(false);
             PerformLayout();

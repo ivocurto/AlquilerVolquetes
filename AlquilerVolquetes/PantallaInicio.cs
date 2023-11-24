@@ -22,9 +22,10 @@ namespace AlquilerVolquetes
         public PantallaInicio(Cliente usuario, Form inicioSesion)
         {
             InitializeComponent();
-            abrirFormularioHijo(new Inicio());
+            abrirFormularioHijo(new Inicio(usuario));
             inicioS = inicioSesion;
             usuarioAcutal = usuario;
+            lblNombreUsuario.Text = $"{usuarioAcutal.NombreUsuario}";
 
             clientes = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>("clientes.json");
             if (clientes is not null)
@@ -87,7 +88,7 @@ namespace AlquilerVolquetes
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new Inicio());
+            abrirFormularioHijo(new Inicio(usuarioAcutal));
         }
 
         private void btnMisVolquetes_Click(object sender, EventArgs e)
@@ -124,6 +125,9 @@ namespace AlquilerVolquetes
             formularioHijo.Show();
         }
 
+        private void lblLogin_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

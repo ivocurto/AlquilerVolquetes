@@ -154,11 +154,11 @@ namespace AlquilerVolquetes
                         break;
                     case "medianos":
                         DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_medianos", cantidad - 1);
-                        DB.CambiarCantidadDisponible(1, 2, true);
+                        DB.CambiarCantidadDisponible(2, 1, true);
                         break;
                     case "grandes":
                         DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_grandes", cantidad - 1);
-                        DB.CambiarCantidadDisponible(1, 3, true);
+                        DB.CambiarCantidadDisponible(3, 1, true);
                         break;
                 }
             }

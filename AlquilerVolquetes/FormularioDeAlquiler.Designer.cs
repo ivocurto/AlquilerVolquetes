@@ -40,6 +40,8 @@
             lblFecha = new Label();
             label3 = new Label();
             dtpDevolucion = new DateTimePicker();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // lblTituloFormularioDePago
@@ -71,8 +73,10 @@
             // txtDireccion
             // 
             txtDireccion.Anchor = AnchorStyles.None;
+            txtDireccion.BackColor = Color.FromArgb(58, 79, 104);
             txtDireccion.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDireccion.Location = new Point(93, 256);
+            txtDireccion.ForeColor = SystemColors.ButtonHighlight;
+            txtDireccion.Location = new Point(93, 338);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.PlaceholderText = " Dirección a la que desea enviar";
             txtDireccion.Size = new Size(862, 36);
@@ -81,9 +85,9 @@
             // txtTelefono
             // 
             txtTelefono.Anchor = AnchorStyles.None;
-            txtTelefono.BackColor = Color.White;
+            txtTelefono.BackColor = Color.FromArgb(58, 79, 104);
             txtTelefono.Font = new Font("Bahnschrift Light", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTelefono.Location = new Point(93, 322);
+            txtTelefono.Location = new Point(93, 390);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.PlaceholderText = " Teléfono/Celular";
             txtTelefono.Size = new Size(318, 36);
@@ -126,7 +130,7 @@
             dtpEntrega.CalendarTrailingForeColor = Color.Red;
             dtpEntrega.CustomFormat = "dd/MM/yy\r\n";
             dtpEntrega.Format = DateTimePickerFormat.Custom;
-            dtpEntrega.Location = new Point(242, 393);
+            dtpEntrega.Location = new Point(242, 461);
             dtpEntrega.Margin = new Padding(8, 2, 3, 2);
             dtpEntrega.MinDate = new DateTime(2023, 11, 4, 0, 0, 0, 0);
             dtpEntrega.Name = "dtpEntrega";
@@ -141,7 +145,7 @@
             lblFecha.AutoSize = true;
             lblFecha.Font = new Font("Bahnschrift SemiCondensed", 14F, FontStyle.Regular, GraphicsUnit.Point);
             lblFecha.ForeColor = Color.White;
-            lblFecha.Location = new Point(94, 392);
+            lblFecha.Location = new Point(94, 460);
             lblFecha.Name = "lblFecha";
             lblFecha.Size = new Size(142, 23);
             lblFecha.TabIndex = 34;
@@ -154,7 +158,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Bahnschrift SemiCondensed", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(358, 393);
+            label3.Location = new Point(358, 461);
             label3.Name = "label3";
             label3.Size = new Size(163, 23);
             label3.TabIndex = 36;
@@ -168,20 +172,32 @@
             dtpDevolucion.CalendarTrailingForeColor = Color.Red;
             dtpDevolucion.CustomFormat = "dd/MM/yy\r\n";
             dtpDevolucion.Format = DateTimePickerFormat.Custom;
-            dtpDevolucion.Location = new Point(527, 393);
+            dtpDevolucion.Location = new Point(527, 461);
             dtpDevolucion.Margin = new Padding(3, 2, 3, 2);
             dtpDevolucion.MinDate = new DateTime(2023, 11, 7, 0, 0, 0, 0);
             dtpDevolucion.Name = "dtpDevolucion";
             dtpDevolucion.Size = new Size(82, 23);
             dtpDevolucion.TabIndex = 35;
             dtpDevolucion.Value = new DateTime(2023, 11, 7, 0, 0, 0, 0);
+            dtpDevolucion.ValueChanged += dtpDevolucion_ValueChanged;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.BackgroundColor = Color.FromArgb(45, 66, 91);
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(93, 158);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(862, 150);
+            dataGridView1.TabIndex = 37;
             // 
             // FormularioDeAlquiler
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(61, 188, 219);
+            BackColor = Color.FromArgb(37, 54, 74);
             ClientSize = new Size(1064, 743);
+            Controls.Add(dataGridView1);
             Controls.Add(label3);
             Controls.Add(dtpDevolucion);
             Controls.Add(lblFecha);
@@ -193,12 +209,14 @@
             Controls.Add(txtDireccion);
             Controls.Add(btnAlquilar);
             Controls.Add(lblTituloFormularioDePago);
+            ForeColor = Color.FromArgb(28, 126, 150);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormularioDeAlquiler";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormularioDeAlquiler";
             WindowState = FormWindowState.Maximized;
             FormClosed += FormularioDeAlquiler_FormClosed;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -216,5 +234,6 @@
         private Label lblFecha;
         private Label label3;
         private DateTimePicker dtpDevolucion;
+        private DataGridView dataGridView1;
     }
 }
