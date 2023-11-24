@@ -157,5 +157,19 @@ namespace AdminApp
                 }
             }
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ModalExito exitoLogin = new ModalExito("¿Deseas cerrar sesión?");
+            exitoLogin.pictureBox1.Visible = false;
+            DialogResult answer = exitoLogin.ShowDialog();
+            if (answer == DialogResult.OK)
+            {
+                
+                InicioSesion inicioS = new InicioSesion();
+                inicioS.Show();
+                this.Hide();
+            }
+        }
     }
 }

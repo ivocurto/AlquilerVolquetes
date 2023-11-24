@@ -124,6 +124,7 @@
             Name = "RegistroAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrar";
+            WindowState = FormWindowState.Maximized;
             FormClosed += RegistroAdmin_FormClosed;
             Load += RegistroAdmin_Load;
             ResumeLayout(false);
