@@ -141,11 +141,9 @@ namespace AdminApp
                     {
                         DatosUsuario datosUsuario = new DatosUsuario(admin);
                         datosUsuario.Show();
-
                     }
                 }
             }
-
 
             if (lstUsuarios.SelectedItem != null)
             {
@@ -157,11 +155,7 @@ namespace AdminApp
                         datosUsuario.Show();
                     }
                 }
-
             }
-
-
-
         }
     }
 }

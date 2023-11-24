@@ -11,9 +11,9 @@ namespace ClasesManejoBaseDatos
     {
         public int Hash_code { get; set; }
         public int Id_usuario { get; set; }
-        public int? Volquetes_chicos { get; set; }
-        public int? Volquetes_medianos { get; set; }
-        public int? Volquetes_grandes { get; set; }
+        public int Volquetes_chicos { get; set; }
+        public int Volquetes_medianos { get; set; }
+        public int Volquetes_grandes { get; set; }
         public DateTime Fecha_ingreso { get; set; }
         public DateTime Fecha_regreso { get; set; }
         public string Direccion { get; set; }

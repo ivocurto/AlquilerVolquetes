@@ -65,7 +65,6 @@ namespace AlquilerVolquetes
                 }
             }
 
-            this.lblProductos.Text = $"Usted va a comprar {formatoTotal}.";
             this.lblTotal.Text = $"PRECIO TOTAL: ${precioTotal}";
         }
 
@@ -89,71 +88,71 @@ namespace AlquilerVolquetes
 
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
-        string telefono = txtTelefono.Text;
-        string direccion = txtDireccion.Text;
-        List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtDireccion.Text, txtTelefono.Text);                //List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtApellido.Text, txtNombre.Text, txtMail.Text, txtDireccion.Text, txtTelefono.Text);
-        if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
-        {
-            ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
-            modal.ShowDialog();
-        }
-        else
-        {
-            Pedido pedido;
-            if (pedidos is null)
+            string telefono = txtTelefono.Text;
+            string direccion = txtDireccion.Text;
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtDireccion.Text, txtTelefono.Text);                //List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtApellido.Text, txtNombre.Text, txtMail.Text, txtDireccion.Text, txtTelefono.Text);
+            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
             {
-                pedidos = new List<Pedido>();
-            }
-            List<Volquete> volquetesInstalar = new List<Volquete>();
-
-            DateTime fechaEntrega = dtpEntrega.Value;
-            DateTime fechaDevolucion = dtpDevolucion.Value;
-            pedido = new Pedido(volquetes, volquetesInstalar, usuarioActual.NombreUsuario, fechaDevolucion, fechaEntrega);
-            pedido.GenerarIdPedido(idsPedidos);
-
-            if (pedidos.Count > 1)
-            {
-                pedido.Index = pedidos.Count() - 1;
+                ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
+                modal.ShowDialog();
             }
             else
             {
-                pedido.Index = 0;
-            }
+                Pedido pedido;
+                if (pedidos is null)
+                {
+                    pedidos = new List<Pedido>();
+                }
+                List<Volquete> volquetesInstalar = new List<Volquete>();
 
-            foreach(Volquete volquete in pedido.VolquetesPedidos)
-            {
-                volquete.Identificador = pedido.IdPedido;
-            }
-            var pedidoADO = new PedidoADO(pedido.IdPedido, usuarioActual.Id, volquetes[0].Cantidad, volquetes[1].Cantidad, volquetes[2].Cantidad, fechaEntrega, fechaDevolucion, direccion);
-            DB.CambiarCantidadDisponible(volquetes[0].Id+1, volquetes[0].Cantidad, false);
-            DB.CambiarCantidadDisponible(volquetes[1].Id+1, volquetes[1].Cantidad, false);
-            DB.CambiarCantidadDisponible(volquetes[2].Id+1, volquetes[2].Cantidad, false);
-            DB.ActualizarAtributoUsuario(usuarioActual.MailUsuario, "telefono", telefono);
-            pedidoADO.Add();
-            //pedidos.Add(pedido);
-            //usuarioActual.Pedidos.Add(pedido);
-            //if (clientes != null)
-            //{
-            //    for (int i = 0; i < clientes.Count; i++)
-            //    {
-            //        if (clientes[i].NombreUsuario == usuarioActual.NombreUsuario)
-            //        {
-            //            clientes[i] = usuarioActual; // Modificar el cliente en la lista
-            //        }
-            //    }
-            //    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes); // Guardar la lista actualizada
-            //}
-            //JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, pedidos);
-            ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
-            DialogResult result = compraExitosa.ShowDialog();
+                DateTime fechaEntrega = dtpEntrega.Value;
+                DateTime fechaDevolucion = dtpDevolucion.Value;
+                pedido = new Pedido(volquetes, volquetesInstalar, usuarioActual.NombreUsuario, fechaDevolucion, fechaEntrega);
+                pedido.GenerarIdPedido(idsPedidos);
 
-            if (result == DialogResult.OK)
-            {
-                this.Hide();
-                formPrincipal.Show();
+                if (pedidos.Count > 1)
+                {
+                    pedido.Index = pedidos.Count() - 1;
+                }
+                else
+                {
+                    pedido.Index = 0;
+                }
+
+                foreach (Volquete volquete in pedido.VolquetesPedidos)
+                {
+                    volquete.Identificador = pedido.IdPedido;
+                }
+                var pedidoADO = new PedidoADO(pedido.IdPedido, usuarioActual.Id, volquetes[0].Cantidad, volquetes[1].Cantidad, volquetes[2].Cantidad, fechaEntrega, fechaDevolucion, direccion);
+                DB.CambiarCantidadDisponible(volquetes[0].Id + 1, volquetes[0].Cantidad, false);
+                DB.CambiarCantidadDisponible(volquetes[1].Id + 1, volquetes[1].Cantidad, false);
+                DB.CambiarCantidadDisponible(volquetes[2].Id + 1, volquetes[2].Cantidad, false);
+                DB.ActualizarAtributoUsuario(usuarioActual.MailUsuario, "telefono", telefono);
+                pedidoADO.Add();
+                //pedidos.Add(pedido);
+                //usuarioActual.Pedidos.Add(pedido);
+                //if (clientes != null)
+                //{
+                //    for (int i = 0; i < clientes.Count; i++)
+                //    {
+                //        if (clientes[i].NombreUsuario == usuarioActual.NombreUsuario)
+                //        {
+                //            clientes[i] = usuarioActual; // Modificar el cliente en la lista
+                //        }
+                //    }
+                //    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes); // Guardar la lista actualizada
+                //}
+                //JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, pedidos);
+                ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
+                DialogResult result = compraExitosa.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    this.Hide();
+                    formPrincipal.Show();
                     // llevar al formulario de pago
                 }
-        }
+            }
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -168,6 +167,11 @@ namespace AlquilerVolquetes
             dtpDevolucion.MaxDate = dtpEntrega.Value.AddDays(14);
 
         }
+
+        private void lblTotal_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-    
+
 }

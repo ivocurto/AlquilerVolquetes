@@ -17,11 +17,11 @@ namespace AlquilerVolquetes
 {
     public partial class DatosUsuario : Form
     {
-        private ClasesManejoBaseDatos.UsuarioADO clienteAcual;
+        private UsuarioADO clienteAcual;
         private AdminADO adminActual;
         private List<PedidoADO> pedidos;
 
-        public DatosUsuario(ClasesManejoBaseDatos.UsuarioADO cliente)
+        public DatosUsuario(UsuarioADO cliente)
         {
             InitializeComponent();
             clienteAcual = cliente;
@@ -81,6 +81,18 @@ namespace AlquilerVolquetes
             if (int.TryParse(idPedido, out int pedido_hash_code))
             {
                 // Remueve el pedido del cliente actual
+                foreach (PedidoADO pedido in pedidos)
+                {
+                    if (pedido.Hash_code == pedido_hash_code)
+                    {
+                        int cantidadVC = pedido.Volquetes_chicos;
+                        DB.CambiarCantidadDisponible(1, cantidadVC, true);
+                        int cantidadVM = pedido.Volquetes_medianos;
+                        DB.CambiarCantidadDisponible(2, cantidadVM, true);
+                        int cantidadVG = pedido.Volquetes_grandes;
+                        DB.CambiarCantidadDisponible(3, cantidadVG, true);
+                    }
+                }
                 DB.Drop("hash_code", pedido_hash_code);
 
                 // Recarga los datos en el formulario
@@ -138,12 +150,15 @@ namespace AlquilerVolquetes
                 {
                     case "chicos":
                         DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_chicos", cantidad - 1);
+                        DB.CambiarCantidadDisponible(1, 1, true);
                         break;
                     case "medianos":
                         DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_medianos", cantidad - 1);
+                        DB.CambiarCantidadDisponible(1, 2, true);
                         break;
                     case "grandes":
-                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_grandes", cantidad-1);
+                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_grandes", cantidad - 1);
+                        DB.CambiarCantidadDisponible(1, 3, true);
                         break;
                 }
             }

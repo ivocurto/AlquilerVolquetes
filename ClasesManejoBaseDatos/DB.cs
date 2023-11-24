@@ -351,9 +351,9 @@ namespace ClasesManejoBaseDatos
         {
             pedido.Hash_code = Convert.ToInt32(reader["hash_code"]);
             pedido.Id_usuario = Convert.ToInt32(reader["id_usuario"]);
-            pedido.Volquetes_chicos = reader["volquetes_chicos"] is DBNull ? (int?)null : Convert.ToInt32(reader["volquetes_chicos"]);
-            pedido.Volquetes_medianos = reader["volquetes_medianos"] is DBNull ? (int?)null : Convert.ToInt32(reader["volquetes_medianos"]);
-            pedido.Volquetes_grandes = reader["volquetes_grandes"] is DBNull ? (int?)null : Convert.ToInt32(reader["volquetes_grandes"]);
+            pedido.Volquetes_chicos = Convert.ToInt32(reader["volquetes_chicos"]);
+            pedido.Volquetes_medianos = Convert.ToInt32(reader["volquetes_medianos"]);
+            pedido.Volquetes_grandes = Convert.ToInt32(reader["volquetes_grandes"]);
             pedido.Fecha_ingreso = Convert.ToDateTime(reader["fecha_ingreso"]);
             pedido.Fecha_regreso = Convert.ToDateTime(reader["fecha_regreso"]);
             pedido.Direccion = reader["direccion"].ToString() ?? "";

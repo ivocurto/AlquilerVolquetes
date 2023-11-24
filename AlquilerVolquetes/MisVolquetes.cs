@@ -22,8 +22,6 @@ namespace AlquilerVolquetes
             InitializeComponent();
             usuarioActual = usuario;
             pedidoActual = DB.GetPedidosByIdUsuario(usuario.Id);
-            //DB.Select<Pedido>($"SELECT * FROM pedidos_cliente WHERE id_usuario = {usuarioActual.Id}");
-            //usuarioActual.Pedidos = pedidoActual;
             this.Load += new EventHandler(MisVolquetes_Load);
         }
 
