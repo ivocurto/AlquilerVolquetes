@@ -1,5 +1,6 @@
 ﻿using Clases;
 using ClasesManejoBaseDatos;
+using MySqlX.XDevAPI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,31 +64,40 @@ namespace AlquilerVolquetes
         private void MisVolquetes_Load(object sender, EventArgs e)
         {
 
-                lstEnviando.Items.Clear();
-                foreach (PedidoADO pedido in pedidoActual)
+            lstEnviando.Items.Clear();
+            foreach (PedidoADO pedido in pedidoActual)
+            {
+                string text = $"Entrega: {pedido.Fecha_ingreso.ToShortDateString()} - Retiro: {pedido.Fecha_regreso.ToShortDateString()}";
+                if (pedido.Volquetes_chicos != 0)
                 {
-                    string text = $"ID: {pedido.Hash_code}";
-                    if (pedido.Volquetes_chicos != 0)
-                    {
-                        text += $" - Volquetes chicos: {pedido.Volquetes_chicos}";
-                    }
-                    if (pedido.Volquetes_medianos != 0)
-                    {
-                        text += $" - Volquetes medianos: {pedido.Volquetes_medianos}";
-                    }
-                    if (pedido.Volquetes_grandes != 0)
-                    {
-                        text += $" - Volquetes grandes: {pedido.Volquetes_grandes}";
-                    }
-                    text += $" - Fecha entrega: {pedido.Fecha_ingreso.ToShortDateString()} - Fecha retiro: {pedido.Fecha_regreso.ToShortDateString()} - Dirección: {pedido.Direccion}";
-
-                    lstEnviando.Items.Add(text);
+                    text += $" - Volquetes chicos: {pedido.Volquetes_chicos}";
                 }
+                if (pedido.Volquetes_medianos != 0)
+                {
+                    text += $" - Volquetes medianos: {pedido.Volquetes_medianos}";
+                }
+                if (pedido.Volquetes_grandes != 0)
+                {
+                    text += $" - Volquetes grandes: {pedido.Volquetes_grandes}";
+                }
+                text += $" - Dirección: {pedido.Direccion}";
+
+                lstEnviando.Items.Add(text);
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             //this.Load += new EventHandler(MisVolquetes_Load);
+        }
+
+        private void btnDetalles_Click(object sender, EventArgs e)
+        {
+            UsuarioADO user = new UsuarioADO();
+            user = DB.TraerClienteLogueado(usuarioActual.NombreUsuario);
+            
+            DatosUsuario datosUsuario = new DatosUsuario(user);
+            datosUsuario.Show();
         }
     }
 }

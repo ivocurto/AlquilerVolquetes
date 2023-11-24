@@ -106,7 +106,7 @@
             Controls.Add(lstProductosEnCarrito);
             Controls.Add(btnCerrarCarrito);
             FormBorderStyle = FormBorderStyle.None;
-            Location = new Point(1000, 319);
+            Location = new Point(980, 319);
             Name = "Carrito";
             ShowIcon = false;
             StartPosition = FormStartPosition.Manual;

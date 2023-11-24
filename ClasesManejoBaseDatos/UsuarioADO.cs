@@ -36,6 +36,21 @@ namespace ClasesManejoBaseDatos
             Clave = clave;
 
         }
+
+        public UsuarioADO(int id, string nombre, string apellido, string mail, int? telefono, string nombre_usuario, string clave) : base("usuario", ["id", "nombre", "apellido", "mail", "telefono", "nombre_usuario", "clave"])
+        {
+            Nombre = nombre;
+            Apellido = apellido;
+            Mail = mail;
+            Id = id;
+            if (telefono.HasValue)
+            {
+                Telefono = telefono.Value;
+            }
+            Nombre_usuario = nombre_usuario;
+            Clave = clave;
+
+        }
         public UsuarioADO(UsuarioADO usuario) : this(usuario.Nombre, usuario.Apellido, usuario.Mail, usuario.Telefono, usuario.Nombre_usuario, usuario.Clave)
         {
             Id = usuario.Id;

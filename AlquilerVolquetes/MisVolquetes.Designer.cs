@@ -33,6 +33,7 @@
             lstEnviando = new ListBox();
             lblEnviando = new Label();
             linkLabel1 = new LinkLabel();
+            btnDetalles = new Button();
             SuspendLayout();
             // 
             // lblTituloMisVolquetes
@@ -55,14 +56,14 @@
             lstEnviando.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             lstEnviando.BackColor = Color.FromArgb(189, 232, 250);
             lstEnviando.BorderStyle = BorderStyle.None;
-            lstEnviando.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lstEnviando.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
             lstEnviando.ForeColor = Color.FromArgb(9, 111, 155);
             lstEnviando.FormattingEnabled = true;
-            lstEnviando.ItemHeight = 29;
+            lstEnviando.ItemHeight = 23;
             lstEnviando.Location = new Point(30, 170);
             lstEnviando.Margin = new Padding(35, 10, 35, 10);
             lstEnviando.Name = "lstEnviando";
-            lstEnviando.Size = new Size(656, 435);
+            lstEnviando.Size = new Size(656, 414);
             lstEnviando.TabIndex = 24;
             // 
             // lblEnviando
@@ -87,6 +88,21 @@
             linkLabel1.Size = new Size(100, 23);
             linkLabel1.TabIndex = 0;
             // 
+            // btnDetalles
+            // 
+            btnDetalles.Anchor = AnchorStyles.None;
+            btnDetalles.BackColor = Color.DeepSkyBlue;
+            btnDetalles.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDetalles.ForeColor = SystemColors.ButtonHighlight;
+            btnDetalles.Location = new Point(259, 600);
+            btnDetalles.Name = "btnDetalles";
+            btnDetalles.Size = new Size(198, 69);
+            btnDetalles.TabIndex = 30;
+            btnDetalles.Text = "VER DETALLES";
+            btnDetalles.UseVisualStyleBackColor = false;
+            btnDetalles.Visible = false;
+            btnDetalles.Click += btnDetalles_Click;
+            // 
             // MisVolquetes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -95,6 +111,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(714, 681);
+            Controls.Add(btnDetalles);
             Controls.Add(linkLabel1);
             Controls.Add(lblEnviando);
             Controls.Add(lstEnviando);
@@ -113,5 +130,6 @@
         private ListBox lstEnviando;
         private Label lblEnviando;
         private LinkLabel linkLabel1;
+        private Button btnDetalles;
     }
 }
