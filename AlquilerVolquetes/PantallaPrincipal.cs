@@ -175,7 +175,7 @@ namespace AlquilerVolquetes
                 string itemText = lstProductos.Items[e.Index].ToString();
 
                 // Establece un color de fondo alternativo para cada elemento.
-                Color backColor = e.Index % 2 == 0 ? Color.LightGray : Color.White;
+                Color backColor = e.Index % 2 == 0 ? Color.DeepSkyBlue : Color.LightSkyBlue;
                 using (Brush brush = new SolidBrush(backColor))
                 {
                     e.Graphics.FillRectangle(brush, e.Bounds);
@@ -190,7 +190,7 @@ namespace AlquilerVolquetes
                 );
 
                 // Establece el color de texto.
-                using (Brush brush = new SolidBrush(Color.Black))
+                using (Brush brush = new SolidBrush(Color.White))
                 {
                     e.Graphics.DrawString(itemText, lstProductos.Font, brush, textBounds);
                 }
