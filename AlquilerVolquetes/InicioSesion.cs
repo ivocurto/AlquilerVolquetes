@@ -21,41 +21,51 @@ namespace AlquilerVolquetes
 {
     public partial class InicioSesion : Form
     {
-
-        //protected static List<Cliente> usuarios = new List<Cliente>();
-        //protected static List<Admin> admins = new List<Admin>();
         private bool checkbox;
         string filePath = "ultimaSesion.json";
-        //string rutaArchivoJson = "usuarios.json";
-        //string rutaArchivoAdmins = @"..\..\..\..\AlquilerVolquetes\bin\Debug\net6.0-windows\admins.json";
+        string filePath2 = "ultimaSesion2.json";
         private DataContainer data;
+        private DataContainer data2;
         private Size previousSize;
         private Point previousLocation;
-
+        private List<PedidoADO> pedidos;
         public InicioSesion()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-            //usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-            //admins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoAdmins);
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
-
+            data2 = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath2);
+            pedidos = DB.GetPedidos();
+            foreach (PedidoADO pedido in pedidos)
+            {
+                if (pedido.FechaDeRegresoAlcanzada())
+                {
+                    DB.Drop("hash_code", pedido.Hash_code);
+                    int cantidadVC = pedido.Volquetes_chicos;
+                    DB.CambiarCantidadDisponible(1, cantidadVC, true);
+                    int cantidadVM = pedido.Volquetes_medianos;
+                    DB.CambiarCantidadDisponible(2, cantidadVM, true);
+                    int cantidadVG = pedido.Volquetes_grandes;
+                    DB.CambiarCantidadDisponible(3, cantidadVG, true);
+                }
+            }
             if (data != null && data.CheckboxValue == true)
             {
+                MessageBox.Show("Test");
                 txtUsuario.Text = data.UserObject.NombreUsuario;
                 txtClave.Text = data.UserObject.ClaveUsuario;
                 cbAutoLogin.Checked = true;
             }
+            else if (data2 != null && data2.CheckboxValue == true)
+            {
+                MessageBox.Show("Test");
+                txtUsuario.Text = data2.AdminObject.NombreUsuario;
+                txtClave.Text = data2.AdminObject.ClaveUsuario;
+                cbAutoLogin.Checked = true;
+            }
+                
         }
 
-        public InicioSesion(List<Admin> adminlist)
-        {
-            InitializeComponent();
-
-            //admins = adminlist;
-            //usuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>(rutaArchivoJson);
-
-        }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             previousSize = this.Size;
@@ -110,12 +120,8 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                 {
-                    data = new DataContainer(admin ,checkbox );
-                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-
-
-
-
+                    data2 = new DataContainer(admin, checkbox);
+                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath2, data2);
                     PanelAdmin panelAdmin = new PanelAdmin(admin);
                     panelAdmin.Show();
                     this.Hide();
@@ -133,65 +139,6 @@ namespace AlquilerVolquetes
                 }
             }
         }
-            
-            //if(usuarios is null)
-            //{
-            //    usuarios = new List<Cliente>();
-            //}
-            //foreach (var usuario in usuarios)
-            //{
-            //    if (usuario.NombreUsuario == nombreUsuario && usuario.ClaveUsuario == clave)
-            //    {
-            //        //aca va el logueado correctamente
-            //        ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
-
-            //        DialogResult answer = exitoLogin.ShowDialog();
-            //        if (answer == DialogResult.OK || answer == DialogResult.Cancel)
-            //        {
-            //            data = new DataContainer(checkbox, usuario);
-            //            JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-            //            usuarioAcutal = usuario;
-            //            PantallaInicio pantallaInicio = new PantallaInicio(usuarioAcutal, this);
-            //            previousSize = this.Size;
-            //            previousLocation = this.Location;
-            //            MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
-            //            pantallaInicio.Show();
-            //            this.Hide();
-            //            return;
-            //        }
-            //    }
-            //}
-            //foreach (var admin in admins)
-            //    {
-            //        if (admin.NombreUsuario == nombreUsuario && admin.ClaveUsuario == clave )
-            //        {
-            //            ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
-
-            //            DialogResult answer = exitoLogin.ShowDialog();
-            //            if (answer == DialogResult.OK || answer == DialogResult.Cancel)
-            //            {
-            //                //data = new DataContainer(checkbox, usuario);
-            //                //JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-            //                //usuarioAcutal = usuario;
-
-            //                    PanelAdmin panelAdmin = new PanelAdmin(admin);
-            //                    panelAdmin.Show();
-            //                    this.Hide();
-            //                    return;
-            //                }
-
-            //        }
-                
-            //}
-        //    ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
-        //    DialogResult result = ususarioIncorrecto.ShowDialog();
-
-        //    if (result == DialogResult.OK)
-        //    {
-        //        txtClave.Text = "";
-        //        txtUsuario.Text = "";
-        //    }
-        //}
 
         private void cbAutoLogin_CheckedChanged(object sender, EventArgs e)
         {

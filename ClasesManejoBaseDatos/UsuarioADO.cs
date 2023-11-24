@@ -18,6 +18,10 @@ namespace ClasesManejoBaseDatos
         public string Nombre_usuario { get; set; }
         public string Clave { get; set; }
 
+        public UsuarioADO() : base("usuarios", new[] { "id", "nombre", "apellido", "mail", "telefono", "nombre_usuario", "clave" })
+        {
+        }
+
         public UsuarioADO(string nombre, string apellido, string mail, int? telefono, string nombre_usuario, string clave) : base("usuario", ["id", "nombre", "apellido", "mail", "telefono", "nombre_usuario", "clave"])
         {
             Nombre = nombre;

@@ -12,6 +12,7 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Clases;
+using ClasesManejoBaseDatos;
 
 using static System.Windows.Forms.DataFormats;
 
@@ -49,6 +50,9 @@ namespace AlquilerVolquetes
             this.lblPrecioChico.Text = ($"${volqueteChico.PrecioUnitario}");
             this.lblPrecioMediano.Text = ($"${volqueteMediano.PrecioUnitario}");
             this.lblPrecioGrande.Text = ($"${volqueteGrande.PrecioUnitario}");
+            this.lblStockVC.Text = $"Stock: {DB.ObtenerCantidadDisponible(1)}";
+            this.lblStockVM.Text = $"Stock: {DB.ObtenerCantidadDisponible(2)}";
+            this.lblStockVG.Text = $"Stock: {DB.ObtenerCantidadDisponible(3)}";
 
         }
 
@@ -124,7 +128,7 @@ namespace AlquilerVolquetes
         private string Incrementar_Label(object sender, EventArgs e, int id, string label)
         {
             int valor = int.Parse(label);
-            if (valor < 8)
+            if (valor < DB.ObtenerCantidadDisponible(id+1))
             {
                 valor++;
                 Sumar_Al_Carrito(sender, e, id);
@@ -171,7 +175,7 @@ namespace AlquilerVolquetes
                 string itemText = lstProductos.Items[e.Index].ToString();
 
                 // Establece un color de fondo alternativo para cada elemento.
-                Color backColor = e.Index % 2 == 0 ? Color.LightGray : Color.White;
+                Color backColor = e.Index % 2 == 0 ? Color.DeepSkyBlue : Color.LightSkyBlue;
                 using (Brush brush = new SolidBrush(backColor))
                 {
                     e.Graphics.FillRectangle(brush, e.Bounds);
@@ -186,7 +190,7 @@ namespace AlquilerVolquetes
                 );
 
                 // Establece el color de texto.
-                using (Brush brush = new SolidBrush(Color.Black))
+                using (Brush brush = new SolidBrush(Color.White))
                 {
                     e.Graphics.DrawString(itemText, lstProductos.Font, brush, textBounds);
                 }

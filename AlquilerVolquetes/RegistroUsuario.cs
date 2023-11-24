@@ -38,7 +38,7 @@ namespace AlquilerVolquetes
 
         private void MostrarLabel(TextBox textBox, Label label)
         {
-            if (VerificarEstadoTxtBox(textBox.Text)) // Cambio aquí
+            if (VerificarEstadoTxtBox(textBox.Text)) 
             {
                 label.Visible = true;
             }
@@ -48,7 +48,7 @@ namespace AlquilerVolquetes
             }
         }
 
-        private bool VerificarEstadoTxtBox(string texto) // Cambio aquí
+        private bool VerificarEstadoTxtBox(string texto) 
         {
             return string.IsNullOrWhiteSpace(texto);
         }
@@ -152,9 +152,24 @@ namespace AlquilerVolquetes
                     txtReClave.Text = "";
                 }
             }
-            else if (!ManejoDeValidaciones.ComprobarExistenciaUsuario(datosUsuario, listaUsuarios))
+            else if (DB.VerificarAtributoEnBD("usuarios", "mail", mail) || DB.VerificarAtributoEnBD("admins", "mail", mail))
             {
-                ModalError modal = new ModalError("El nombre de usuario o el correo ya existen", "ERROR AL REGISTRARSE");
+                ModalError modal = new ModalError("El correo ya fue registrado", "ERROR AL REGISTRARSE");
+                DialogResult result = modal.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtCorreo.Text = "";
+                    txtUsuario.Text = "";
+                    txtClave.Text = "";
+                    txtReClave.Text = "";
+                    txtApellido.Text = "";
+                    txtNombre.Text = "";
+                }
+            }
+            else if (DB.VerificarAtributoEnBD("usuarios", "nombre_usuario", nombre) || DB.VerificarAtributoEnBD("admins", "nombre_admin", nombre))
+            {
+                ModalError modal = new ModalError("El nombre ya fue registrado", "ERROR AL REGISTRARSE");
                 DialogResult result = modal.ShowDialog();
 
                 if (result == DialogResult.OK)

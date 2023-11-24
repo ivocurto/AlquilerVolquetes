@@ -82,7 +82,7 @@
             Controls.Add(lblTitulo);
             Name = "ModalExito";
             ShowIcon = false;
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             Load += ModalExitoLogin_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

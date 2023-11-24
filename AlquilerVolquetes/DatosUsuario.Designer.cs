@@ -28,59 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnVolver = new Button();
             lblNombreCliente = new Label();
-            btnBorrarPedido = new Button();
             lstDatos = new ListBox();
+            btnBorrarPedido = new Button();
             SuspendLayout();
-            // 
-            // btnVolver
-            // 
-            btnVolver.Location = new Point(45, 451);
-            btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(142, 82);
-            btnVolver.TabIndex = 0;
-            btnVolver.Text = "VOLVER";
-            btnVolver.UseVisualStyleBackColor = true;
             // 
             // lblNombreCliente
             // 
             lblNombreCliente.AutoSize = true;
-            lblNombreCliente.Location = new Point(75, 52);
+            lblNombreCliente.Font = new Font("Trebuchet MS", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNombreCliente.ForeColor = Color.White;
+            lblNombreCliente.Location = new Point(38, 23);
             lblNombreCliente.Name = "lblNombreCliente";
-            lblNombreCliente.Size = new Size(50, 20);
+            lblNombreCliente.Size = new Size(108, 40);
             lblNombreCliente.TabIndex = 2;
             lblNombreCliente.Text = "label1";
             // 
-            // btnBorrarPedido
-            // 
-            btnBorrarPedido.Location = new Point(280, 451);
-            btnBorrarPedido.Name = "btnBorrarPedido";
-            btnBorrarPedido.Size = new Size(142, 82);
-            btnBorrarPedido.TabIndex = 3;
-            btnBorrarPedido.Text = "BORRAR PEDIDO";
-            btnBorrarPedido.UseVisualStyleBackColor = true;
-            btnBorrarPedido.Click += btnBorrarPedido_Click;
-            // 
             // lstDatos
             // 
+            lstDatos.Font = new Font("Bahnschrift", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lstDatos.ForeColor = Color.FromArgb(9, 111, 155);
             lstDatos.FormattingEnabled = true;
-            lstDatos.ItemHeight = 20;
-            lstDatos.Location = new Point(90, 75);
+            lstDatos.ItemHeight = 29;
+            lstDatos.Location = new Point(38, 75);
+            lstDatos.Margin = new Padding(3, 2, 3, 2);
             lstDatos.Name = "lstDatos";
-            lstDatos.Size = new Size(293, 344);
+            lstDatos.Size = new Size(395, 323);
             lstDatos.TabIndex = 4;
+            // 
+            // btnBorrarPedido
+            // 
+            btnBorrarPedido.Anchor = AnchorStyles.None;
+            btnBorrarPedido.BackColor = Color.DeepSkyBlue;
+            btnBorrarPedido.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnBorrarPedido.ForeColor = SystemColors.ButtonHighlight;
+            btnBorrarPedido.Location = new Point(106, 438);
+            btnBorrarPedido.Name = "btnBorrarPedido";
+            btnBorrarPedido.Size = new Size(255, 55);
+            btnBorrarPedido.TabIndex = 25;
+            btnBorrarPedido.Text = "BORRAR";
+            btnBorrarPedido.UseVisualStyleBackColor = false;
+            btnBorrarPedido.Click += btnBorrarPedido_Click_1;
             // 
             // DatosUsuario
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(538, 564);
-            Controls.Add(lstDatos);
+            BackColor = Color.FromArgb(26, 157, 192);
+            ClientSize = new Size(471, 517);
             Controls.Add(btnBorrarPedido);
+            Controls.Add(lstDatos);
             Controls.Add(lblNombreCliente);
-            Controls.Add(btnVolver);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "DatosUsuario";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "DatosUsuario";
             Load += DatosUsuario_Load;
             ResumeLayout(false);
@@ -88,10 +89,8 @@
         }
 
         #endregion
-
-        private Button btnVolver;
         private Label lblNombreCliente;
-        private Button btnBorrarPedido;
         private ListBox lstDatos;
+        private Button btnBorrarPedido;
     }
 }
