@@ -67,15 +67,21 @@ namespace AdminApp
             }
             else if (lstAdmins.SelectedItem != null)
             {
-                // Muestra un cuadro de diálogo de confirmación
-                DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas ELIMINAR a {lstAdmins.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
+                if (adminActual.NombreUsuario != lstAdmins.SelectedItem.ToString())
                 {
-                    DB.Drop("admins", "nombre_admin", lstAdmins.SelectedItem.ToString());
-                }
+                    // Muestra un cuadro de diálogo de confirmación
+                    DialogResult result = MessageBox.Show($"¿Estás seguro de que deseas ELIMINAR a {lstAdmins.SelectedItem} ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                actualizarPantalla();
+                    if (result == DialogResult.Yes)
+                    {
+                        DB.Drop("admins", "nombre_admin", lstAdmins.SelectedItem.ToString());
+                    }
+
+                    actualizarPantalla();
+                } else {
+                    ModalError error = new ModalError("No podes eliminarte a vos mismo", "Error de eliminación");
+                    error.Show();
+                }
             }
         }
 
@@ -86,7 +92,7 @@ namespace AdminApp
             if (clientes is not null)
             {
                 lstUsuarios.Items.Clear();
-                foreach (ClasesManejoBaseDatos.UsuarioADO cliente in clientes)
+                foreach (UsuarioADO cliente in clientes)
                 {
                     lstUsuarios.Items.Add(cliente.Nombre_usuario);
                 }
@@ -113,23 +119,12 @@ namespace AdminApp
 
         private void btnDetalles_Click(object sender, EventArgs e)
         {
-            if (lstAdmins.SelectedItem != null)
-            {
-                foreach (AdminADO admin in admins)
-                {
-                    if (admin.Nombre_admin == lstAdmins.SelectedItem)
-                    {
-                        DatosUsuario datosUsuario = new DatosUsuario(admin);
-                        datosUsuario.Show();
-                    }
-                }
-            }
 
             if (lstUsuarios.SelectedItem != null)
             {
-                foreach (ClasesManejoBaseDatos.UsuarioADO cliente in clientes)
+                foreach (UsuarioADO cliente in clientes)
                 {
-                    if (cliente.Nombre_usuario == lstUsuarios.SelectedItem)
+                    if (cliente.Nombre_usuario == lstUsuarios.SelectedItem.ToString())
                     {
                         DatosUsuario datosUsuario = new DatosUsuario(cliente);
                         datosUsuario.Show();

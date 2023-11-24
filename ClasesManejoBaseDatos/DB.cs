@@ -275,6 +275,39 @@ namespace ClasesManejoBaseDatos
                 connection.Close();
             }
         }
+        public static List<PedidoADO> GetPedidos()
+        {
+            string query = $"SELECT * FROM pedidos_cliente";
+
+            var pedidos = new List<PedidoADO>();
+
+            try
+            {
+                connection.Open();
+
+                command.CommandText = query;
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        PedidoADO pedido = new PedidoADO();
+                        AsignarValoresDesdeReader(pedido, reader);
+                        pedidos.Add(pedido);
+                    }
+                }
+
+                return pedidos;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
         public static List<AdminADO> GetAdmins()
         {

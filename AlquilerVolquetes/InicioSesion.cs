@@ -26,13 +26,26 @@ namespace AlquilerVolquetes
         private DataContainer data;
         private Size previousSize;
         private Point previousLocation;
-
+        private List<PedidoADO> pedidos;
         public InicioSesion()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
-
+            pedidos = DB.GetPedidos();
+            foreach (PedidoADO pedido in pedidos)
+            {
+                if (pedido.FechaDeRegresoAlcanzada())
+                {
+                    DB.Drop("hash_code", pedido.Hash_code);
+                    int cantidadVC = pedido.Volquetes_chicos;
+                    DB.CambiarCantidadDisponible(1, cantidadVC, true);
+                    int cantidadVM = pedido.Volquetes_medianos;
+                    DB.CambiarCantidadDisponible(2, cantidadVM, true);
+                    int cantidadVG = pedido.Volquetes_grandes;
+                    DB.CambiarCantidadDisponible(3, cantidadVG, true);
+                }
+            }
             if (data != null && data.CheckboxValue == true)
             {
                 MessageBox.Show("at1a");

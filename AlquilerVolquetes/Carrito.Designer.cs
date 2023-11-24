@@ -30,7 +30,6 @@
         {
             btnCerrarCarrito = new Button();
             lstProductosEnCarrito = new ListBox();
-            lblPrecioTotalEnCarrito = new Label();
             linkLabel1 = new LinkLabel();
             btnAlquilar = new Button();
             lblTituloCarrito = new Label();
@@ -58,18 +57,8 @@
             lstProductosEnCarrito.ItemHeight = 23;
             lstProductosEnCarrito.Location = new Point(12, 73);
             lstProductosEnCarrito.Name = "lstProductosEnCarrito";
-            lstProductosEnCarrito.Size = new Size(284, 230);
+            lstProductosEnCarrito.Size = new Size(284, 253);
             lstProductosEnCarrito.TabIndex = 1;
-            // 
-            // lblPrecioTotalEnCarrito
-            // 
-            lblPrecioTotalEnCarrito.AutoSize = true;
-            lblPrecioTotalEnCarrito.Font = new Font("Bahnschrift SemiBold SemiConden", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblPrecioTotalEnCarrito.Location = new Point(96, 318);
-            lblPrecioTotalEnCarrito.Name = "lblPrecioTotalEnCarrito";
-            lblPrecioTotalEnCarrito.Size = new Size(107, 25);
-            lblPrecioTotalEnCarrito.TabIndex = 2;
-            lblPrecioTotalEnCarrito.Text = "   TOTAL: $0";
             // 
             // linkLabel1
             // 
@@ -114,13 +103,13 @@
             Controls.Add(lblTituloCarrito);
             Controls.Add(btnAlquilar);
             Controls.Add(linkLabel1);
-            Controls.Add(lblPrecioTotalEnCarrito);
             Controls.Add(lstProductosEnCarrito);
             Controls.Add(btnCerrarCarrito);
             FormBorderStyle = FormBorderStyle.None;
+            Location = new Point(1000, 319);
             Name = "Carrito";
             ShowIcon = false;
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.Manual;
             Text = "Carrito";
             ResumeLayout(false);
             PerformLayout();
@@ -130,7 +119,6 @@
 
         private Button btnCerrarCarrito;
         private ListBox lstProductosEnCarrito;
-        private Label lblPrecioTotalEnCarrito;
         private LinkLabel linkLabel1;
         private Button btnAlquilar;
         private Label lblTituloCarrito;

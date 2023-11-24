@@ -36,6 +36,12 @@ namespace AlquilerVolquetes
 
                 MostrarProductosAComprar();
             }
+            foreach (Volquete volquete in volquetes)
+            {
+                dataGridView1.Rows.Add(volquete.MedidaVolquete, volquete.Cantidad, $"${volquete.PrecioUnitario}");
+            }
+
+
         }
 
         private void MostrarProductosAComprar()
@@ -179,6 +185,16 @@ namespace AlquilerVolquetes
         private void dtpDevolucion_ValueChanged(object sender, EventArgs e)
         {
             MostrarProductosAComprar();
+        }
+
+        private void lblTituloFormularioDePago_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 

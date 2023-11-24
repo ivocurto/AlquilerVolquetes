@@ -48,14 +48,6 @@ namespace AlquilerVolquetes
                     lstProductosEnCarrito.Items.Add(formato);
                 }
             }
-            if (precioTotal == 0)
-            {
-                this.lblPrecioTotalEnCarrito.Text = "  TOTAL:  $0";
-            }
-            else
-            {
-                this.lblPrecioTotalEnCarrito.Text = $"TOTAL: ${precioTotal}";
-            }
         }
 
 
@@ -70,7 +62,7 @@ namespace AlquilerVolquetes
             {
                 volquete.Cantidad = 0;
             }
-                MostrarListaCarrito();
+            MostrarListaCarrito();
         }
 
         private void btnAlquilar_Click(object sender, EventArgs e)
@@ -105,6 +97,10 @@ namespace AlquilerVolquetes
             }
         }
 
+        private void lblPrecioTotalEnCarrito_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

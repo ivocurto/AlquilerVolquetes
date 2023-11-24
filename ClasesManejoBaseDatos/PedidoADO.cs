@@ -58,6 +58,15 @@ namespace ClasesManejoBaseDatos
             return true;
         }
 
+        public bool FechaDeRegresoAlcanzada()
+        {
+            // Obtén la fecha actual
+            DateTime fechaActual = DateTime.Now;
+
+            // Verifica si la fecha de regreso ha sido alcanzada o es anterior a la fecha actual
+            return Fecha_regreso <= fechaActual;
+        }
+
         //public static explicit operator Usuario(MySqlDataReader reader)
         //{
         //    var nombre = reader["nombre"].ToString() ?? "";
