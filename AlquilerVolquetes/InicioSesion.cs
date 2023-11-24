@@ -23,7 +23,9 @@ namespace AlquilerVolquetes
     {
         private bool checkbox;
         string filePath = "ultimaSesion.json";
+        string filePath2 = "ultimaSesion2.json";
         private DataContainer data;
+        private DataContainer data2;
         private Size previousSize;
         private Point previousLocation;
         private List<PedidoADO> pedidos;
@@ -32,6 +34,7 @@ namespace AlquilerVolquetes
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
+            data2 = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath2);
             pedidos = DB.GetPedidos();
             foreach (PedidoADO pedido in pedidos)
             {
@@ -48,20 +51,19 @@ namespace AlquilerVolquetes
             }
             if (data != null && data.CheckboxValue == true)
             {
-                MessageBox.Show("at1a");
-                if (data.UserObject != null)
-                {
-                    txtUsuario.Text = data.UserObject.NombreUsuario;
-                    txtClave.Text = data.UserObject.ClaveUsuario;
-
-                } else if (data.AdminObject != null)
-                {
-                    MessageBox.Show("ata");
-                    txtUsuario.Text = data.AdminObject.NombreUsuario;
-                    txtClave.Text = data.AdminObject.ClaveUsuario;
-                }
+                MessageBox.Show("Test");
+                txtUsuario.Text = data.UserObject.NombreUsuario;
+                txtClave.Text = data.UserObject.ClaveUsuario;
                 cbAutoLogin.Checked = true;
             }
+            else if (data2 != null && data2.CheckboxValue == true)
+            {
+                MessageBox.Show("Test");
+                txtUsuario.Text = data2.AdminObject.NombreUsuario;
+                txtClave.Text = data2.AdminObject.ClaveUsuario;
+                cbAutoLogin.Checked = true;
+            }
+                
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -118,8 +120,8 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                 {
-                    data = new DataContainer(admin, checkbox);
-                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
+                    data2 = new DataContainer(admin, checkbox);
+                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath2, data2);
                     PanelAdmin panelAdmin = new PanelAdmin(admin);
                     panelAdmin.Show();
                     this.Hide();
