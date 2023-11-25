@@ -67,22 +67,22 @@ namespace AlquilerVolquetes
             lstEnviando.Items.Clear();
             foreach (PedidoADO pedido in pedidoActual)
             {
-                string text = $"Entrega: {pedido.Fecha_ingreso.ToShortDateString()} - Retiro: {pedido.Fecha_regreso.ToShortDateString()}";
+                lstEnviando.Items.Add($" Dirección: {pedido.Direccion} - Fecha entrega: {pedido.Fecha_ingreso.ToShortDateString()} - Fecha Retiro: {pedido.Fecha_regreso.ToShortDateString()}                                                                                                                                                   ID del pedido: {pedido.Hash_code}");
+
                 if (pedido.Volquetes_chicos != 0)
                 {
-                    text += $" - Volquetes chicos: {pedido.Volquetes_chicos}";
+                    lstEnviando.Items.Add($"       Volquetes chicos: {pedido.Volquetes_chicos}                                                                                                                                                                                                                                                    {pedido.Hash_code}");
                 }
                 if (pedido.Volquetes_medianos != 0)
                 {
-                    text += $" - Volquetes medianos: {pedido.Volquetes_medianos}";
+                    lstEnviando.Items.Add($"       Volquetes medianos: {pedido.Volquetes_medianos}                                                                                                                                                                                                                                                 {pedido.Hash_code}");
                 }
                 if (pedido.Volquetes_grandes != 0)
                 {
-                    text += $" - Volquetes grandes: {pedido.Volquetes_grandes}";
+                    lstEnviando.Items.Add($"       Volquetes grandes: {pedido.Volquetes_grandes}                                                                                                                                                                                                                                                       {pedido.Hash_code}");
                 }
-                text += $" - Dirección: {pedido.Direccion}";
 
-                lstEnviando.Items.Add(text);
+                lstEnviando.Items.Add("");
             }
         }
 
