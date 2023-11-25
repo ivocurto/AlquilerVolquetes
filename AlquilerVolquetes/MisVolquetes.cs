@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,53 +18,104 @@ namespace AlquilerVolquetes
     {
         private List<PedidoADO> pedidoActual;
         public Cliente usuarioActual;
-        private bool esCliente;
         public MisVolquetes(Cliente usuario)
         {
             InitializeComponent();
             usuarioActual = usuario;
-            pedidoActual = DB.GetPedidosByIdUsuario(usuario.Id);
             this.Load += new EventHandler(MisVolquetes_Load);
-        }
-
-        private void lstEnviando_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            lstEnviando.ItemHeight = 30;
-            int paddingVertical = 6; // Ajusta la cantidad de espaciado vertical deseado
-
-            if (e.Index >= 0)
-            {
-                e.DrawBackground();
-
-                // Obtén el texto del elemento.
-                string itemText = lstEnviando.Items[e.Index].ToString();
-
-                // Establece un color de fondo alternativo para cada elemento.
-                Color backColor = e.Index % 2 == 0 ? Color.LightGray : Color.White;
-                using (Brush brush = new SolidBrush(backColor))
-                {
-                    e.Graphics.FillRectangle(brush, e.Bounds);
-                }
-
-                // Ajusta el rectángulo de dibujo para incluir el espaciado vertical.
-                Rectangle textBounds = new Rectangle(
-                    e.Bounds.Left,
-                    e.Bounds.Top + paddingVertical,
-                    e.Bounds.Width,
-                    e.Bounds.Height - paddingVertical
-                );
-
-                // Establece el color de texto.
-                using (Brush brush = new SolidBrush(Color.Black))
-                {
-                    e.Graphics.DrawString(itemText, lstEnviando.Font, brush, textBounds);
-                }
-            }
+            actualizarPantalla();
         }
 
         private void MisVolquetes_Load(object sender, EventArgs e)
         {
+            actualizarPantalla();
+        }
 
+
+        private void btnDevolverVolquete_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = lstEnviando.SelectedIndex;
+
+            if (selectedIndex >= 0)
+            {
+                string selectedText = lstEnviando.Items[selectedIndex].ToString();
+
+                Match pedidoMatch = Regex.Match(selectedText, @"ID del pedido: (\d+)");
+
+                Action<string> processTextDelegate = null;
+
+                if (pedidoMatch.Success)
+                {
+                    processTextDelegate = ProcesarPedido;
+                }
+                else
+                {
+                    processTextDelegate = ProcesarVolquete;
+                }
+
+                processTextDelegate?.Invoke(selectedText);
+            }
+        }
+
+        private void ProcesarPedido(string selectedText)
+        {
+            string idPedido = Regex.Match(selectedText, @"ID del pedido: (\d+)").Groups[1].Value;
+
+            if (int.TryParse(idPedido, out int pedido_hash_code))
+            {
+                foreach (PedidoADO pedido in pedidoActual)
+                {
+                    if (pedido.Hash_code == pedido_hash_code)
+                    {
+                        int cantidadVC = pedido.Volquetes_chicos;
+                        DB.CambiarCantidadDisponible(1, cantidadVC, true);
+                        int cantidadVM = pedido.Volquetes_medianos;
+                        DB.CambiarCantidadDisponible(2, cantidadVM, true);
+                        int cantidadVG = pedido.Volquetes_grandes;
+                        DB.CambiarCantidadDisponible(3, cantidadVG, true);
+                    }
+                }
+                DB.Drop("hash_code", pedido_hash_code);
+
+                actualizarPantalla();
+            }
+        }
+
+        private void ProcesarVolquete(string selectedText)
+        {
+            // Lógica para procesar un volquete
+            string pattern = @"Volquetes (chicos|medianos|grandes):\s+(\d+)\s+(\d+)";
+            MatchCollection matches = Regex.Matches(selectedText, pattern);
+
+            foreach (Match match in matches)
+            {
+                string tipoVolquete = match.Groups[1].Value.ToLower();
+                int cantidad = int.Parse(match.Groups[2].Value);
+                int pedido_hash_code = int.Parse(match.Groups[3].Value);
+
+                // Actualiza la existencia del tipo de volquete en el pedido
+                switch (tipoVolquete)
+                {
+                    case "chicos":
+                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_chicos", cantidad - 1);
+                        DB.CambiarCantidadDisponible(1, 1, true);
+                        break;
+                    case "medianos":
+                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_medianos", cantidad - 1);
+                        DB.CambiarCantidadDisponible(2, 1, true);
+                        break;
+                    case "grandes":
+                        DB.ActualizarCantidadVolquetes(pedido_hash_code, "volquetes_grandes", cantidad - 1);
+                        DB.CambiarCantidadDisponible(3, 1, true);
+                        break;
+                }
+            }
+            actualizarPantalla();
+        }
+
+        public void actualizarPantalla()
+        {
+            pedidoActual = DB.GetPedidosByIdUsuario(usuarioActual.Id);
             lstEnviando.Items.Clear();
             foreach (PedidoADO pedido in pedidoActual)
             {
@@ -84,20 +136,6 @@ namespace AlquilerVolquetes
 
                 lstEnviando.Items.Add("");
             }
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            //this.Load += new EventHandler(MisVolquetes_Load);
-        }
-
-        private void btnDetalles_Click(object sender, EventArgs e)
-        {
-            UsuarioADO user = new UsuarioADO();
-            user = DB.TraerClienteLogueado(usuarioActual.NombreUsuario);
-            
-            DatosUsuario datosUsuario = new DatosUsuario(user);
-            datosUsuario.Show();
         }
     }
 }

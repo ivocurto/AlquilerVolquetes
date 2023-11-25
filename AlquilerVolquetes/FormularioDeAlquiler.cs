@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Clases;
 using ClasesManejoBaseDatos;
+using MySqlX.XDevAPI;
 
 namespace AlquilerVolquetes
 {
@@ -13,7 +14,6 @@ namespace AlquilerVolquetes
         private string path = "pedidos.json";
         public int precioTotal;
         private Form formPrincipal;
-        private List<Cliente> clientes;
         private FechaActual fechaActual = new FechaActual();
         private List<int> idsPedidos;
 
@@ -40,8 +40,6 @@ namespace AlquilerVolquetes
             {
                 dataGridView1.Rows.Add(volquete.MedidaVolquete, volquete.Cantidad, $"${volquete.PrecioUnitario}");
             }
-
-
         }
 
         private void MostrarProductosAComprar()
@@ -135,27 +133,15 @@ namespace AlquilerVolquetes
                 DB.CambiarCantidadDisponible(volquetes[2].Id + 1, volquetes[2].Cantidad, false);
                 DB.ActualizarAtributoUsuario(usuarioActual.MailUsuario, "telefono", telefono);
                 pedidoADO.Add();
-                //pedidos.Add(pedido);
-                //usuarioActual.Pedidos.Add(pedido);
-                //if (clientes != null)
-                //{
-                //    for (int i = 0; i < clientes.Count; i++)
-                //    {
-                //        if (clientes[i].NombreUsuario == usuarioActual.NombreUsuario)
-                //        {
-                //            clientes[i] = usuarioActual; // Modificar el cliente en la lista
-                //        }
-                //    }
-                //    JsonFileManager.SaveToJsonGeneric<List<Cliente>>("usuarios.json", clientes); // Guardar la lista actualizada
-                //}
-                //JsonFileManager.SaveToJsonGeneric<List<Pedido>>(path, pedidos);
+               
                 ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
                 DialogResult result = compraExitosa.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
+                    PantallaInicio pantallaInicio = new PantallaInicio(usuarioActual, this);
+                    pantallaInicio.Show();
                     this.Hide();
-                    formPrincipal.Show();
                     // llevar al formulario de pago
                 }
             }

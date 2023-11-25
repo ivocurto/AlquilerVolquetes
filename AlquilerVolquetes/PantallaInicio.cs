@@ -77,6 +77,8 @@ namespace AlquilerVolquetes
                 if (formAbierto != this)
                 {
                     formAbierto.Close();
+                    formsAbiertos.Remove(formAbierto);
+                    break; // Salir del bucle después de cerrar el primer formulario, si hay más.
                 }
             }
         }
@@ -99,6 +101,7 @@ namespace AlquilerVolquetes
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
             abrirFormularioHijo(new PantallaPrincipal(usuarioAcutal, this));
+
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -116,6 +119,9 @@ namespace AlquilerVolquetes
 
         public void abrirFormularioHijo(Form formularioHijo)
         {
+            // Cerrar el formulario actual si hay alguno abierto
+            CerrarFormsAbiertos();
+
             formularioHijo.TopLevel = false;
             formularioHijo.FormBorderStyle = FormBorderStyle.None;
             formularioHijo.Dock = DockStyle.Fill;
@@ -123,7 +129,11 @@ namespace AlquilerVolquetes
             panelContenedor.Tag = formularioHijo;
             formularioHijo.BringToFront();
             formularioHijo.Show();
+
+            // Agregar el formulario actual a la lista de formularios abiertos
+            formsAbiertos.Add(formularioHijo);
         }
+
 
         private void lblLogin_TextChanged(object sender, EventArgs e)
         {

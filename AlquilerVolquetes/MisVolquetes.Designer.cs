@@ -99,9 +99,9 @@
             btnDevolverVolquete.Name = "btnDevolverVolquete";
             btnDevolverVolquete.Size = new Size(254, 69);
             btnDevolverVolquete.TabIndex = 30;
-            btnDevolverVolquete.Text = "DEVOLVER VOLQUETE";
+            btnDevolverVolquete.Text = "DEVOLVER";
             btnDevolverVolquete.UseVisualStyleBackColor = false;
-            btnDevolverVolquete.Click += btnDetalles_Click;
+            btnDevolverVolquete.Click += btnDevolverVolquete_Click;
             // 
             // btnCambiarFecha
             // 
