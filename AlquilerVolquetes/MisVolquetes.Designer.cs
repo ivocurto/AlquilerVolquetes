@@ -115,6 +115,7 @@
             btnCambiarFecha.TabIndex = 31;
             btnCambiarFecha.Text = "CAMBIAR FECHAS";
             btnCambiarFecha.UseVisualStyleBackColor = false;
+            btnCambiarFecha.Click += btnCambiarFecha_Click;
             // 
             // MisVolquetes
             // 

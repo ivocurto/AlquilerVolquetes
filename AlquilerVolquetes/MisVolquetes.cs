@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -135,6 +136,29 @@ namespace AlquilerVolquetes
                 }
 
                 lstEnviando.Items.Add("");
+            }
+        }
+
+        private void btnCambiarFecha_Click(object sender, EventArgs e)
+        {
+            if (lstEnviando.SelectedItem != null)
+            {
+                string idPedido = Regex.Match(lstEnviando.SelectedItem.ToString(), @"ID del pedido: (\d+)").Groups[1].Value;
+                if (int.TryParse(idPedido, out int pedido_hash_code))
+                {
+                    foreach (PedidoADO pedido in pedidoActual)
+                    {
+                        if (pedido.Hash_code == pedido_hash_code)
+                        {
+                            CambiadorFecha cambiadorFecha = new CambiadorFecha(pedido, this);
+                            cambiadorFecha.Show();
+
+                        }
+                    }
+
+                    actualizarPantalla();
+                }
+
             }
         }
     }
