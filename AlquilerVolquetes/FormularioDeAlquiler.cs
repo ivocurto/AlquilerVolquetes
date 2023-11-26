@@ -140,8 +140,8 @@ namespace AlquilerVolquetes
                 if (result == DialogResult.OK)
                 {
                     PantallaInicio pantallaInicio = new PantallaInicio(usuarioActual, this);
-                    pantallaInicio.Show();
                     this.Hide();
+                    pantallaInicio.Show();
                     // llevar al formulario de pago
                 }
             }

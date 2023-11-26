@@ -111,7 +111,8 @@ namespace AlquilerVolquetes
             DialogResult answer = exitoLogin.ShowDialog();
             if (answer == DialogResult.OK)
             {
-                inicioS.Show();
+                InicioSesion inicioSesion = new InicioSesion();
+                inicioSesion.Show();
                 this.Hide();
             }
         }
