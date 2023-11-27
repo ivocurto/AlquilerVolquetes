@@ -85,16 +85,16 @@ namespace AlquilerVolquetes
 
                     if (pedido.Volquetes_chicos != 0)
                     {
-                        lstDatos.Items.Add($"    Volquetes chicos: {pedido.Volquetes_chicos}                                                                                                                                                     {pedido.Hash_code}");
+                        lstDatos.Items.Add($"    Volquetes chicos: {pedido.Volquetes_chicos}                                                                                                                                                                                                {pedido.Hash_code}");
                     }
                     if (pedido.Volquetes_medianos != 0)
                     {
-                        lstDatos.Items.Add($"    Volquetes medianos: {pedido.Volquetes_medianos}                                                                                                                                   {pedido.Hash_code}");
+                        lstDatos.Items.Add($"    Volquetes medianos: {pedido.Volquetes_medianos}                                                                                                                                                                              {pedido.Hash_code}");
                     }
                     if (pedido.Volquetes_grandes != 0)
                     {
-                        lstDatos.Items.Add($"    Volquetes grandes: {pedido.Volquetes_grandes}                                                                                                                                 {pedido.Hash_code}");
-                    }
+                        lstDatos.Items.Add($"    Volquetes grandes: {pedido.Volquetes_grandes}                                                                                                                                                                            {pedido.Hash_code}");
+                    }                                           
 
                     lstDatos.Items.Add("");
                 }
@@ -156,6 +156,11 @@ namespace AlquilerVolquetes
 
                 processTextDelegate?.Invoke(selectedText);
             }
+        }
+
+        private void lstDatos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

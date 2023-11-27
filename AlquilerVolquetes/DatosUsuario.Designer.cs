@@ -55,6 +55,7 @@
             lstDatos.Name = "lstDatos";
             lstDatos.Size = new Size(1043, 323);
             lstDatos.TabIndex = 4;
+            lstDatos.SelectedIndexChanged += lstDatos_SelectedIndexChanged;
             // 
             // btnBorrarPedido
             // 
