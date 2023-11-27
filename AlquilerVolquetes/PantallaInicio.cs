@@ -18,12 +18,10 @@ namespace AlquilerVolquetes
         private List<Pedido> clientes;
         private bool flagHome = false;
         private List<Form> formsAbiertos = new List<Form>();
-        private Form inicioS;
-        public PantallaInicio(Cliente usuario, Form inicioSesion)
+        public PantallaInicio(Cliente usuario)
         {
             InitializeComponent();
             abrirFormularioHijo(new Inicio(usuario));
-            inicioS = inicioSesion;
             usuarioAcutal = usuario;
             lblNombreUsuario.Text = $"{usuarioAcutal.NombreUsuario}";
 
@@ -38,14 +36,6 @@ namespace AlquilerVolquetes
                         break;
                     }
                 }
-            }
-
-            if (flagHome == false)
-            {
-                //home = new Home();
-                //home.MdiParent = this;
-                //flagHome = true;
-                //home.Show();
             }
         }
 

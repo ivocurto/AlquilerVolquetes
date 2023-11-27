@@ -104,7 +104,7 @@ namespace AlquilerVolquetes
                     data = new DataContainer(checkbox, cliente);
                     JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
                     JsonFileManager.SaveToJsonGeneric<AdminContainer>(filePath2, null);
-                    PantallaInicio pantallaInicio = new PantallaInicio(cliente, this);
+                    PantallaInicio pantallaInicio = new PantallaInicio(cliente);
                     previousSize = this.Size;
                     previousLocation = this.Location;
                     MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);

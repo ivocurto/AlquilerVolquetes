@@ -60,10 +60,14 @@ namespace AdminApp
 
                 if (result == DialogResult.Yes)
                 {
-                    //Cliente cliente = DB.TraerUsuarioLogueado(lstUsuarios.SelectedItem.ToString());
-                    //List<PedidoADO> pedidos = DB.Select<PedidoADO>($"SELECT * FROM pedidos_cliente");
-                    //devolverAlStockTodosLosPedidosDeUnUsuario(pedidos, cliente.);
-                    //DB.Drop("id_usuario", cliente.Id);
+
+                    Cliente cliente = DB.TraerUsuarioLogueado(lstUsuarios.SelectedItem.ToString());
+                    List<PedidoADO> lista = DB.GetPedidosByIdUsuario(cliente.Id);
+                    if (lista != null)
+                    {
+                        devolverAlStockTodosLosPedidosDeUnUsuario(lista);
+                    }
+                    DB.Drop("id_usuario", cliente.Id);
                     DB.Drop("usuarios", "nombre_usuario", lstUsuarios.SelectedItem.ToString());
                 }
 
@@ -89,19 +93,16 @@ namespace AdminApp
             }
         }
 
-        private void devolverAlStockTodosLosPedidosDeUnUsuario(List<PedidoADO> pedidos, int pedido_hash_code)
+        private void devolverAlStockTodosLosPedidosDeUnUsuario(List<PedidoADO> pedidos)
         {
             foreach (PedidoADO pedido in pedidos)
             {
-                if (pedido.Hash_code == pedido_hash_code)
-                {
                     int cantidadVC = pedido.Volquetes_chicos;
                     DB.CambiarCantidadDisponible(1, cantidadVC, true);
                     int cantidadVM = pedido.Volquetes_medianos;
                     DB.CambiarCantidadDisponible(2, cantidadVM, true);
                     int cantidadVG = pedido.Volquetes_grandes;
                     DB.CambiarCantidadDisponible(3, cantidadVG, true);
-                }
                
             }
         }

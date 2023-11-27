@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PanelAdmin));
             lblLogin = new Label();
             lstUsuarios = new ListBox();
-            btnHacerAdmin = new Button();
             lstAdmins = new ListBox();
             btnDetalles = new Button();
             btnBorrarCliente = new Button();
@@ -66,20 +65,6 @@
             lstUsuarios.TabIndex = 2;
             lstUsuarios.SelectedIndexChanged += lstUsuarios_SelectedIndexChanged;
             // 
-            // btnHacerAdmin
-            // 
-            btnHacerAdmin.Anchor = AnchorStyles.None;
-            btnHacerAdmin.BackColor = Color.DeepSkyBlue;
-            btnHacerAdmin.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnHacerAdmin.ForeColor = SystemColors.ButtonHighlight;
-            btnHacerAdmin.Location = new Point(153, 584);
-            btnHacerAdmin.Name = "btnHacerAdmin";
-            btnHacerAdmin.Size = new Size(210, 69);
-            btnHacerAdmin.TabIndex = 25;
-            btnHacerAdmin.Text = "HACER ADMIN";
-            btnHacerAdmin.UseVisualStyleBackColor = false;
-            btnHacerAdmin.Click += btnHacerAdmin_Click;
-            // 
             // lstAdmins
             // 
             lstAdmins.Anchor = AnchorStyles.None;
@@ -100,7 +85,7 @@
             btnDetalles.BackColor = Color.DeepSkyBlue;
             btnDetalles.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnDetalles.ForeColor = SystemColors.ButtonHighlight;
-            btnDetalles.Location = new Point(433, 584);
+            btnDetalles.Location = new Point(218, 584);
             btnDetalles.Name = "btnDetalles";
             btnDetalles.Size = new Size(198, 69);
             btnDetalles.TabIndex = 29;
@@ -114,7 +99,7 @@
             btnBorrarCliente.BackColor = Color.DeepSkyBlue;
             btnBorrarCliente.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnBorrarCliente.ForeColor = SystemColors.ButtonHighlight;
-            btnBorrarCliente.Location = new Point(708, 584);
+            btnBorrarCliente.Location = new Point(657, 584);
             btnBorrarCliente.Name = "btnBorrarCliente";
             btnBorrarCliente.Size = new Size(214, 69);
             btnBorrarCliente.TabIndex = 30;
@@ -146,7 +131,6 @@
             Controls.Add(btnBorrarCliente);
             Controls.Add(btnDetalles);
             Controls.Add(lstAdmins);
-            Controls.Add(btnHacerAdmin);
             Controls.Add(lstUsuarios);
             Controls.Add(lblLogin);
             DoubleBuffered = true;
@@ -164,7 +148,6 @@
 
         private Label lblLogin;
         private ListBox lstUsuarios;
-        private Button btnHacerAdmin;
         private ListBox lstAdmins;
         private Button btnDetalles;
         private Button btnBorrarCliente;
