@@ -61,7 +61,7 @@ namespace AlquilerVolquetes
                 txtClave.Text = data2.AdminObject.ClaveUsuario;
                 cbAutoLogin.Checked = true;
             }
-                
+
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -112,7 +112,8 @@ namespace AlquilerVolquetes
                     this.Hide();
                     return;
                 }
-            } else if (admin != null)
+            }
+            else if (admin != null)
             {
                 ModalExito exitoLogin = new ModalExito("INICIO DE SESIÓN EXITOSO");
 
@@ -127,7 +128,8 @@ namespace AlquilerVolquetes
                     this.Hide();
                     return;
                 }
-            } else
+            }
+            else
             {
                 ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
                 DialogResult result = ususarioIncorrecto.ShowDialog();
@@ -206,5 +208,31 @@ namespace AlquilerVolquetes
                 formulario.Close();
             }
         }
+
+        
+
+        private void OcultarTextoClave(object sender, EventArgs e)
+        {
+            txtClave.UseSystemPasswordChar = true;
+            this.pbCerrado.Visible = true;
+            this.button2.Click -= OcultarTextoClave;
+            this.button2.Click += button2_Click;
+        }
+
+        private void MostrarTextoClave()
+        {
+            this.pbCerrado.Visible = false;
+
+            txtClave.UseSystemPasswordChar = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MostrarTextoClave();
+            this.button2.Click -= button2_Click;
+            this.button2.Click += OcultarTextoClave;
+        }
+
+       
     }
 }

@@ -30,13 +30,12 @@ namespace ClasesManejoBaseDatos
 
         public bool Delete()
         {
-            //DB.Drop("hash_code", this.Hash_code);
+            DB.Drop("id", this.Id);
             return true;
         }
 
         public List<AdminADO> Select()
         {
-            //var alumnos = DB.Select<Alumno>("SELECT * FROM alumnos");
             var stock = GetAll();
             return stock;
         }

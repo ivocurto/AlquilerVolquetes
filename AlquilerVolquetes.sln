@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebasDB", "PruebasDB\Prue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClasesManejoBaseDatos", "ClasesManejoBaseDatos\ClasesManejoBaseDatos.csproj", "{B9EB60A6-CBC1-40DE-B6C1-8484213171D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAlquilerVolquetes", "TestAlquilerVolquetes\TestAlquilerVolquetes.csproj", "{C26C8297-A236-4F3F-94C9-EC523084BF7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B9EB60A6-CBC1-40DE-B6C1-8484213171D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9EB60A6-CBC1-40DE-B6C1-8484213171D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9EB60A6-CBC1-40DE-B6C1-8484213171D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C26C8297-A236-4F3F-94C9-EC523084BF7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C26C8297-A236-4F3F-94C9-EC523084BF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C26C8297-A236-4F3F-94C9-EC523084BF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C26C8297-A236-4F3F-94C9-EC523084BF7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

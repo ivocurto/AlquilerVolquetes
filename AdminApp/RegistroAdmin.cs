@@ -148,5 +148,30 @@ namespace AdminApp
             inicio.Show();
             this.Hide();
         }
+
+
+
+        private void OcultarTextoClave(object sender, EventArgs e)
+        {
+            txtClave.UseSystemPasswordChar = true;
+            txtReClave.UseSystemPasswordChar = true;
+            this.pbCerrado.Visible = true;
+            this.button3.Click -= OcultarTextoClave;
+            this.button3.Click += button3_Click;
+        }
+
+        private void MostrarTextoClave()
+        {
+            this.pbCerrado.Visible = false;
+            txtReClave.UseSystemPasswordChar = false;
+            txtClave.UseSystemPasswordChar = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MostrarTextoClave();
+            this.button3.Click -= button3_Click;
+            this.button3.Click += OcultarTextoClave;
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace AlquilerVolquetes
 
         private void MostrarLabel(TextBox textBox, Label label)
         {
-            if (VerificarEstadoTxtBox(textBox.Text)) 
+            if (VerificarEstadoTxtBox(textBox.Text))
             {
                 label.Visible = true;
             }
@@ -48,7 +48,7 @@ namespace AlquilerVolquetes
             }
         }
 
-        private bool VerificarEstadoTxtBox(string texto) 
+        private bool VerificarEstadoTxtBox(string texto)
         {
             return string.IsNullOrWhiteSpace(texto);
         }
@@ -208,6 +208,34 @@ namespace AlquilerVolquetes
                     this.Hide();
                 }
             }
+        }
+
+        private void OcultarTextoClave(object sender, EventArgs e)
+        {
+            txtClave.UseSystemPasswordChar = true;
+            txtReClave.UseSystemPasswordChar = true;
+            this.pbCerrado.Visible = true;
+            this.button2.Click -= OcultarTextoClave;
+            this.button2.Click += button2_Click;
+        }
+
+        private void MostrarTextoClave()
+        {
+            this.pbCerrado.Visible = false;
+            txtReClave.UseSystemPasswordChar = false;
+            txtClave.UseSystemPasswordChar = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MostrarTextoClave();
+            this.button2.Click -= button2_Click;
+            this.button2.Click += OcultarTextoClave;
+        }
+
+        private void pnlLogin_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

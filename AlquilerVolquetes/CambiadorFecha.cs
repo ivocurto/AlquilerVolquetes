@@ -28,7 +28,15 @@ namespace AlquilerVolquetes
             dtpDevolucion.Value = pedidoSeleccionado.Fecha_regreso.AddDays(1);
             fechaVieja = pedidoSeleccionado.Fecha_regreso;
             dtpDevolucion.MinDate = pedidoSeleccionado.Fecha_regreso.AddDays(1);
-            dtpDevolucion.MaxDate = DateTime.Today.AddDays(14);
+            try
+            {
+                dtpDevolucion.MaxDate = DateTime.Today.AddDays(14);
+            }
+            catch (Exception ex)
+            {
+                dtpDevolucion.MaxDate = pedidoSeleccionado.Fecha_regreso.AddDays(14);   
+            }
+            
             MisVolquetes = misVolquetes;
             MostrarPrecio();
         }

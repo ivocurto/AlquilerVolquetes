@@ -12,10 +12,9 @@ namespace ClasesManejoBaseDatos
 
         public static MySqlCommand command;
 
-
         static DB()
         {
-            var mySqlStringConnection = @"Server=localhost;Database=alquiler_volquetes;Uid=root;Pwd=;";
+            var mySqlStringConnection = @"Server=localhost;Database=alquiler_volquete;Uid=root;Pwd=;";
             connection = new MySqlConnection(mySqlStringConnection);
 
             command = new MySqlCommand();
