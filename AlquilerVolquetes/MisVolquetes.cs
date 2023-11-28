@@ -35,26 +35,17 @@ namespace AlquilerVolquetes
 
         private void btnDevolverVolquete_Click(object sender, EventArgs e)
         {
-            int selectedIndex = lstEnviando.SelectedIndex;
-
-            if (selectedIndex >= 0)
+            if (lstEnviando.SelectedIndex >= 0)
             {
-                string selectedText = lstEnviando.Items[selectedIndex].ToString();
-
-                Match pedidoMatch = Regex.Match(selectedText, @"ID del pedido: (\d+)");
-
-                Action<string> processTextDelegate = null;
-
-                if (pedidoMatch.Success)
+                ModalExito borrar = new ModalExito("¿Deseas ELIMINAR el elemento seleccionado?");
+                borrar.pictureBox1.Visible = false;
+                DialogResult answer = borrar.ShowDialog();
+                if (answer == DialogResult.OK)
                 {
-                    processTextDelegate = ProcesarPedido;
+                    DevolverSinPreguntar(null, null);
+                    btnDevolverVolquete.Click -= btnDevolverVolquete_Click;
+                    btnDevolverVolquete.Click += DevolverSinPreguntar;
                 }
-                else
-                {
-                    processTextDelegate = ProcesarVolquete;
-                }
-
-                processTextDelegate?.Invoke(selectedText);
             }
         }
 
@@ -112,6 +103,31 @@ namespace AlquilerVolquetes
                 }
             }
             actualizarPantalla();
+        }
+
+        private void DevolverSinPreguntar(object sender, EventArgs e)
+        {
+            int selectedIndex = lstEnviando.SelectedIndex;
+
+            if (selectedIndex >= 0)
+            {
+                string selectedText = lstEnviando.Items[selectedIndex].ToString();
+
+                Match pedidoMatch = Regex.Match(selectedText, @"ID del pedido: (\d+)");
+
+                Action<string> processTextDelegate = null;
+
+                if (pedidoMatch.Success)
+                {
+                    processTextDelegate = ProcesarPedido;
+                }
+                else
+                {
+                    processTextDelegate = ProcesarVolquete;
+                }
+
+                processTextDelegate?.Invoke(selectedText);
+            }
         }
 
         public void actualizarPantalla()

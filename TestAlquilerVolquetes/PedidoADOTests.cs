@@ -11,8 +11,8 @@ namespace TestAlquilerVolquetes
     public class PedidoADOTests
     {
         [TestMethod]
-        [DataRow(123, 1, 2, 1, 0, "2023-11-10", "2023-11-17", "123 Main St")]
-        [DataRow(456, 2, 3, 2, 1, "2023-11-15", "2023-11-22", "456 Oak St")]
+        [DataRow(123, 1, 2, 1, 0, "2023-11-10", "2023-11-17", "Mitre 2134")]
+        [DataRow(456, 2, 3, 2, 1, "2023-11-15", "2023-11-22", "Av Santa Fe 993")]
         public void TestAdd(int hashCode, int idUsuario, int volquetesChicos, int volquetesMedianos, int volquetesGrandes, string fechaIngreso, string fechaRegreso, string direccion)
         {
             // Arrange
@@ -36,8 +36,8 @@ namespace TestAlquilerVolquetes
         }
 
         [TestMethod]
-        [DataRow(123)]
-        [DataRow(456)]
+        [DataRow(1)]
+        [DataRow(2)]
         public void TestDelete(int hashCode)
         {
             // Arrange
@@ -54,8 +54,8 @@ namespace TestAlquilerVolquetes
         }
 
         [TestMethod]
-        [DataRow("2023-11-09", true)] // prueba con una fecha en el pasado
-        [DataRow("2023-11-20", false)] // prueba con una fecha en el futuro
+        [DataRow("2023-11-09", true)]
+        [DataRow("2023-11-20", false)]
         public void TestFechaDeRegresoAlcanzada(string fechaRegreso, bool expectedResult)
         {
             // Arrange
@@ -72,4 +72,4 @@ namespace TestAlquilerVolquetes
         }
     }
 }
-}
+

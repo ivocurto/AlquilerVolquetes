@@ -17,7 +17,7 @@ namespace TestAlquilerVolquetes
         [DataRow("stock")]
         public void SelectTest(string tabla)
         {
-            // Arrange - No se necesita en este caso
+           
 
             // Act
             Action action = () => DB.Select(tabla);
@@ -32,7 +32,6 @@ namespace TestAlquilerVolquetes
         [DataRow("SELECT * FROM stock")]
         public void SelectGenericTest(string query)
         {
-            // Arrange - No se necesita en este caso
 
             // Act
             var result = DB.Select<object>(query);
@@ -40,15 +39,12 @@ namespace TestAlquilerVolquetes
             // Assert
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(List<object>));
-            // Asegúrate de ajustar el tipo de objeto según lo que esperas que devuelva el método
         }
 
         [TestMethod]
         [DataRow(1)]
         public void GetPedidosByIdUsuarioTest(int idUsuario)
         {
-            // Arrange - No se necesita en este caso
-
             // Act
             var result = DB.GetPedidosByIdUsuario(idUsuario);
 
@@ -60,7 +56,6 @@ namespace TestAlquilerVolquetes
         [TestMethod]
         public void GetPedidosTest()
         {
-            // Arrange - No se necesita en este caso
 
             // Act
             var result = DB.GetPedidos();
@@ -74,8 +69,7 @@ namespace TestAlquilerVolquetes
         [TestMethod]
         public void TestGetAdmins()
         {
-            // Arrange
-            // Puedes insertar algunos datos de prueba en la base de datos antes de ejecutar esta prueba
+            
 
             // Act
             var admins = DB.GetAdmins();
@@ -83,14 +77,11 @@ namespace TestAlquilerVolquetes
             // Assert
             Assert.IsNotNull(admins);
             Assert.IsTrue(admins.Count > 0);
-            // Puedes agregar más aserciones según la estructura esperada de tus datos
         }
 
         [TestMethod]
         public void TestGetUsuarios()
         {
-            // Arrange
-            // Puedes insertar algunos datos de prueba en la base de datos antes de ejecutar esta prueba
 
             // Act
             var usuarios = DB.GetUsuarios();
@@ -98,7 +89,6 @@ namespace TestAlquilerVolquetes
             // Assert
             Assert.IsNotNull(usuarios);
             Assert.IsTrue(usuarios.Count > 0);
-            // Puedes agregar más aserciones según la estructura esperada de tus datos
         }
 
         [TestMethod]
@@ -110,15 +100,14 @@ namespace TestAlquilerVolquetes
             // Act
             DB.Drop(atributo, atributoIngresado);
 
-            // Assert
-            // Agrega aserciones según tus necesidades
-            // Verifica que los datos se hayan eliminado correctamente
+            
+            
         }
 
         [TestMethod]
-        [DataRow("pedidos_cliente", "mail", "test@mail.com")]
-        [DataRow("admins", "nombre_admin", "admin123")]
-        [DataRow("usuarios", "nombre", "John")]
+        [DataRow("pedidos_cliente", "mail", "ivo@gmail.com")]
+        [DataRow("admins", "nombre_admin", "pepinodemaio123")]
+        [DataRow("usuarios", "nombre", "GERMAN")]
         public void TestDropWithAtributoAndStringValue(string tabla, string atributo, string atributoIngresado)
         {
             
