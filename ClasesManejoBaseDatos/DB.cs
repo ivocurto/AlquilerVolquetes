@@ -275,6 +275,7 @@ namespace ClasesManejoBaseDatos
                 connection.Close();
             }
         }
+
         public static List<PedidoADO> GetPedidos()
         {
             string query = $"SELECT * FROM pedidos_cliente";
@@ -376,6 +377,44 @@ namespace ClasesManejoBaseDatos
                 connection.Close();
             }
         }
+
+        //public static List<UsuarioADO> GetUsuarios(string nombre_usuario)
+        //{
+        //    string query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario";
+
+        //    var usuarios = new List<UsuarioADO>();
+
+        //    try
+        //    {
+        //        connection.Open();
+
+        //        using (var command = new MySqlCommand(query, connection))
+        //        {
+        //            command.Parameters.AddWithValue("@NombreUsuario", nombre_usuario);
+
+        //            using (var reader = command.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    UsuarioADO usuario = new UsuarioADO();
+        //                    AsignarValoresDesdeReader(usuario, reader);
+        //                    usuarios.Add(usuario);
+        //                }
+        //            }
+        //        }
+
+        //        return usuarios;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //}
+
 
 
         public static void AsignarValoresDesdeReader(PedidoADO pedido, MySqlDataReader reader)
@@ -666,6 +705,51 @@ namespace ClasesManejoBaseDatos
                         {
                             // Crea un nuevo usuario con los datos de la base de datos
                             cliente = new Cliente(
+                                Convert.ToInt32(reader["id"]),
+                                reader["nombre"].ToString(),
+                                reader["apellido"].ToString(),
+                                reader["mail"].ToString(),
+                                reader["telefono"] is DBNull ? (int?)null : Convert.ToInt32(reader["telefono"]),
+                                reader["nombre_usuario"].ToString(),
+                                reader["clave"].ToString()
+                            );
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return cliente;
+        }
+
+        public static UsuarioADO TraerClienteLogueado(string nombreUsuario)
+        {
+            UsuarioADO cliente = null;
+
+            try
+            {
+                connection.Open();
+
+                string query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Crea un nuevo usuario con los datos de la base de datos
+                            cliente = new UsuarioADO(
                                 Convert.ToInt32(reader["id"]),
                                 reader["nombre"].ToString(),
                                 reader["apellido"].ToString(),

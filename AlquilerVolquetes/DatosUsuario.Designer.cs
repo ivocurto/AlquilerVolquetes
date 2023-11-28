@@ -53,8 +53,9 @@
             lstDatos.Location = new Point(38, 75);
             lstDatos.Margin = new Padding(3, 2, 3, 2);
             lstDatos.Name = "lstDatos";
-            lstDatos.Size = new Size(395, 323);
+            lstDatos.Size = new Size(1043, 323);
             lstDatos.TabIndex = 4;
+            lstDatos.SelectedIndexChanged += lstDatos_SelectedIndexChanged;
             // 
             // btnBorrarPedido
             // 
@@ -62,7 +63,7 @@
             btnBorrarPedido.BackColor = Color.DeepSkyBlue;
             btnBorrarPedido.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnBorrarPedido.ForeColor = SystemColors.ButtonHighlight;
-            btnBorrarPedido.Location = new Point(106, 438);
+            btnBorrarPedido.Location = new Point(430, 438);
             btnBorrarPedido.Name = "btnBorrarPedido";
             btnBorrarPedido.Size = new Size(255, 55);
             btnBorrarPedido.TabIndex = 25;
@@ -75,7 +76,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(26, 157, 192);
-            ClientSize = new Size(471, 517);
+            ClientSize = new Size(1119, 517);
             Controls.Add(btnBorrarPedido);
             Controls.Add(lstDatos);
             Controls.Add(lblNombreCliente);

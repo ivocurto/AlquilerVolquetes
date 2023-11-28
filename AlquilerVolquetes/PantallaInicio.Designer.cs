@@ -197,6 +197,7 @@
             Name = "PantallaInicio";
             StartPosition = FormStartPosition.Manual;
             Text = "Inicio";
+            WindowState = FormWindowState.Maximized;
             FormClosing += PantallaInicio_FormClosing;
             Load += PantallaInicio_Load;
             panelSideMenu.ResumeLayout(false);

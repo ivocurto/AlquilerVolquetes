@@ -33,6 +33,8 @@
             lstEnviando = new ListBox();
             lblEnviando = new Label();
             linkLabel1 = new LinkLabel();
+            btnDevolverVolquete = new Button();
+            btnCambiarFecha = new Button();
             SuspendLayout();
             // 
             // lblTituloMisVolquetes
@@ -62,7 +64,7 @@
             lstEnviando.Location = new Point(30, 170);
             lstEnviando.Margin = new Padding(35, 10, 35, 10);
             lstEnviando.Name = "lstEnviando";
-            lstEnviando.Size = new Size(656, 435);
+            lstEnviando.Size = new Size(656, 377);
             lstEnviando.TabIndex = 24;
             // 
             // lblEnviando
@@ -87,6 +89,34 @@
             linkLabel1.Size = new Size(100, 23);
             linkLabel1.TabIndex = 0;
             // 
+            // btnDevolverVolquete
+            // 
+            btnDevolverVolquete.Anchor = AnchorStyles.None;
+            btnDevolverVolquete.BackColor = Color.DeepSkyBlue;
+            btnDevolverVolquete.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDevolverVolquete.ForeColor = SystemColors.ButtonHighlight;
+            btnDevolverVolquete.Location = new Point(30, 597);
+            btnDevolverVolquete.Name = "btnDevolverVolquete";
+            btnDevolverVolquete.Size = new Size(254, 69);
+            btnDevolverVolquete.TabIndex = 30;
+            btnDevolverVolquete.Text = "DEVOLVER";
+            btnDevolverVolquete.UseVisualStyleBackColor = false;
+            btnDevolverVolquete.Click += btnDevolverVolquete_Click;
+            // 
+            // btnCambiarFecha
+            // 
+            btnCambiarFecha.Anchor = AnchorStyles.None;
+            btnCambiarFecha.BackColor = Color.DeepSkyBlue;
+            btnCambiarFecha.Font = new Font("Bahnschrift", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCambiarFecha.ForeColor = SystemColors.ButtonHighlight;
+            btnCambiarFecha.Location = new Point(432, 597);
+            btnCambiarFecha.Name = "btnCambiarFecha";
+            btnCambiarFecha.Size = new Size(254, 69);
+            btnCambiarFecha.TabIndex = 31;
+            btnCambiarFecha.Text = "CAMBIAR FECHAS";
+            btnCambiarFecha.UseVisualStyleBackColor = false;
+            btnCambiarFecha.Click += btnCambiarFecha_Click;
+            // 
             // MisVolquetes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -95,6 +125,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(714, 681);
+            Controls.Add(btnCambiarFecha);
+            Controls.Add(btnDevolverVolquete);
             Controls.Add(linkLabel1);
             Controls.Add(lblEnviando);
             Controls.Add(lstEnviando);
@@ -113,5 +145,7 @@
         private ListBox lstEnviando;
         private Label lblEnviando;
         private LinkLabel linkLabel1;
+        private Button btnDevolverVolquete;
+        private Button btnCambiarFecha;
     }
 }

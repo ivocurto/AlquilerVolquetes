@@ -25,7 +25,7 @@ namespace AlquilerVolquetes
         string filePath = "ultimaSesion.json";
         string filePath2 = "ultimaSesion2.json";
         private DataContainer data;
-        private DataContainer data2;
+        private AdminContainer data2;
         private Size previousSize;
         private Point previousLocation;
         private List<PedidoADO> pedidos;
@@ -34,7 +34,7 @@ namespace AlquilerVolquetes
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
-            data2 = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath2);
+            data2 = JsonFileManager.LoadFromJsonGeneric<AdminContainer>(filePath2);
             pedidos = DB.GetPedidos();
             foreach (PedidoADO pedido in pedidos)
             {
@@ -51,14 +51,12 @@ namespace AlquilerVolquetes
             }
             if (data != null && data.CheckboxValue == true)
             {
-                MessageBox.Show("Test");
                 txtUsuario.Text = data.UserObject.NombreUsuario;
                 txtClave.Text = data.UserObject.ClaveUsuario;
                 cbAutoLogin.Checked = true;
             }
             else if (data2 != null && data2.CheckboxValue == true)
             {
-                MessageBox.Show("Test");
                 txtUsuario.Text = data2.AdminObject.NombreUsuario;
                 txtClave.Text = data2.AdminObject.ClaveUsuario;
                 cbAutoLogin.Checked = true;
@@ -105,7 +103,8 @@ namespace AlquilerVolquetes
                 {
                     data = new DataContainer(checkbox, cliente);
                     JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-                    PantallaInicio pantallaInicio = new PantallaInicio(cliente, this);
+                    JsonFileManager.SaveToJsonGeneric<AdminContainer>(filePath2, null);
+                    PantallaInicio pantallaInicio = new PantallaInicio(cliente);
                     previousSize = this.Size;
                     previousLocation = this.Location;
                     MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
@@ -120,8 +119,9 @@ namespace AlquilerVolquetes
                 DialogResult answer = exitoLogin.ShowDialog();
                 if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                 {
-                    data2 = new DataContainer(admin, checkbox);
-                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath2, data2);
+                    data2 = new AdminContainer(admin, checkbox);
+                    JsonFileManager.SaveToJsonGeneric<AdminContainer>(filePath2, data2);
+                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, null);
                     PanelAdmin panelAdmin = new PanelAdmin(admin);
                     panelAdmin.Show();
                     this.Hide();

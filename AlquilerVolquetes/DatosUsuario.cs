@@ -50,12 +50,10 @@ namespace AlquilerVolquetes
 
         private void ProcesarPedido(string selectedText)
         {
-            // Lógica para procesar un pedido
             string idPedido = Regex.Match(selectedText, @"ID del pedido: (\d+)").Groups[1].Value;
 
             if (int.TryParse(idPedido, out int pedido_hash_code))
             {
-                // Remueve el pedido del cliente actual
                 foreach (PedidoADO pedido in pedidos)
                 {
                     if (pedido.Hash_code == pedido_hash_code)
@@ -70,7 +68,6 @@ namespace AlquilerVolquetes
                 }
                 DB.Drop("hash_code", pedido_hash_code);
 
-                // Recarga los datos en el formulario
                 actualizarPantalla();
             }
         }
@@ -84,25 +81,21 @@ namespace AlquilerVolquetes
 
                 foreach (PedidoADO pedido in pedidos)
                 {
-                    // Agrega el ID con formato a la lista
-                    lstDatos.Items.Add($"ID del pedido: {pedido.Hash_code}");
+                    lstDatos.Items.Add($" Dirección: {pedido.Direccion} - Fecha entrega: {pedido.Fecha_ingreso.ToShortDateString()} - Fecha Retiro: {pedido.Fecha_regreso.ToShortDateString()}                                                   ID del pedido: {pedido.Hash_code}");
 
-                    // Agrega cada volquete a la lista con formato
                     if (pedido.Volquetes_chicos != 0)
                     {
-                        lstDatos.Items.Add($"    Volquetes chicos: {pedido.Volquetes_chicos}                                                                                                      {pedido.Hash_code}");
+                        lstDatos.Items.Add($"    Volquetes chicos: {pedido.Volquetes_chicos}                                                                                                                                                                                                {pedido.Hash_code}");
                     }
                     if (pedido.Volquetes_medianos != 0)
                     {
-                        lstDatos.Items.Add($"    Volquetes medianos: {pedido.Volquetes_medianos}                                                                                                      {pedido.Hash_code}");
+                        lstDatos.Items.Add($"    Volquetes medianos: {pedido.Volquetes_medianos}                                                                                                                                                                              {pedido.Hash_code}");
                     }
                     if (pedido.Volquetes_grandes != 0)
                     {
-                        lstDatos.Items.Add($"    Volquetes grandes: {pedido.Volquetes_grandes}                                                                                                      {pedido.Hash_code}");
-                    }
+                        lstDatos.Items.Add($"    Volquetes grandes: {pedido.Volquetes_grandes}                                                                                                                                                                            {pedido.Hash_code}");
+                    }                                           
 
-
-                    // Agrega un elemento en blanco para separar pedidos
                     lstDatos.Items.Add("");
                 }
             }
@@ -163,6 +156,11 @@ namespace AlquilerVolquetes
 
                 processTextDelegate?.Invoke(selectedText);
             }
+        }
+
+        private void lstDatos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

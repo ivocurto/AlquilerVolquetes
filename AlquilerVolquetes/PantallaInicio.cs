@@ -18,12 +18,10 @@ namespace AlquilerVolquetes
         private List<Pedido> clientes;
         private bool flagHome = false;
         private List<Form> formsAbiertos = new List<Form>();
-        private Form inicioS;
-        public PantallaInicio(Cliente usuario, Form inicioSesion)
+        public PantallaInicio(Cliente usuario)
         {
             InitializeComponent();
             abrirFormularioHijo(new Inicio(usuario));
-            inicioS = inicioSesion;
             usuarioAcutal = usuario;
             lblNombreUsuario.Text = $"{usuarioAcutal.NombreUsuario}";
 
@@ -38,14 +36,6 @@ namespace AlquilerVolquetes
                         break;
                     }
                 }
-            }
-
-            if (flagHome == false)
-            {
-                //home = new Home();
-                //home.MdiParent = this;
-                //flagHome = true;
-                //home.Show();
             }
         }
 
@@ -77,6 +67,8 @@ namespace AlquilerVolquetes
                 if (formAbierto != this)
                 {
                     formAbierto.Close();
+                    formsAbiertos.Remove(formAbierto);
+                    break; // Salir del bucle después de cerrar el primer formulario, si hay más.
                 }
             }
         }
@@ -99,6 +91,7 @@ namespace AlquilerVolquetes
         private void btnAlquilar_Click(object sender, EventArgs e)
         {
             abrirFormularioHijo(new PantallaPrincipal(usuarioAcutal, this));
+
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -108,7 +101,8 @@ namespace AlquilerVolquetes
             DialogResult answer = exitoLogin.ShowDialog();
             if (answer == DialogResult.OK)
             {
-                inicioS.Show();
+                InicioSesion inicioSesion = new InicioSesion();
+                inicioSesion.Show();
                 this.Hide();
             }
         }
@@ -116,6 +110,9 @@ namespace AlquilerVolquetes
 
         public void abrirFormularioHijo(Form formularioHijo)
         {
+            // Cerrar el formulario actual si hay alguno abierto
+            CerrarFormsAbiertos();
+
             formularioHijo.TopLevel = false;
             formularioHijo.FormBorderStyle = FormBorderStyle.None;
             formularioHijo.Dock = DockStyle.Fill;
@@ -123,7 +120,11 @@ namespace AlquilerVolquetes
             panelContenedor.Tag = formularioHijo;
             formularioHijo.BringToFront();
             formularioHijo.Show();
+
+            // Agregar el formulario actual a la lista de formularios abiertos
+            formsAbiertos.Add(formularioHijo);
         }
+
 
         private void lblLogin_TextChanged(object sender, EventArgs e)
         {

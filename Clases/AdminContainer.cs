@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace Clases
 {
-    public class DataContainer
+    public class AdminContainer
     {
         public bool CheckboxValue;
-        public Cliente UserObject;
-
-        public DataContainer(bool checkboxValue, Cliente userObject)
+        public Admin AdminObject;
+        public AdminContainer(Admin adminObject, bool checkboxValue)
         {
             CheckboxValue = checkboxValue;
-            UserObject = userObject;
+            AdminObject = adminObject;
         }
 
     }
