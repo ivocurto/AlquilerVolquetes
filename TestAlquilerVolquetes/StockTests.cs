@@ -11,16 +11,16 @@ namespace TestAlquilerVolquetes
     public class StockTests
     {
         [TestMethod]
-        [DataRow("ProductA", 50, 10)] // Adjust values based on your test case
+        [DataRow("Volquete_chico", 9, 1)] 
         public void TestAdd(string producto, int cantidadDisponible, int cantidadAlquilados)
         {
-            // Arrange
+           
             Stock stock = new Stock(producto, cantidadDisponible, cantidadAlquilados);
 
-            // Act
+            
             bool result = stock.Add();
 
-            // Assert
+            
             Assert.IsTrue(result);
         }
 

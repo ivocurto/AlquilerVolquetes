@@ -11,7 +11,7 @@ namespace TestAlquilerVolquetes
     public class AdminADOTests
     {
         [TestMethod]
-        [DataRow("admin@example.com", "AdminName", "AdminPassword")]
+        [DataRow("admin@gmail.com", "Admin", "papafrita123")]
         public void TestAdd(string mail, string nombreAdmin, string clave)
         {
             // Arrange
@@ -30,7 +30,7 @@ namespace TestAlquilerVolquetes
         }
 
         [TestMethod]
-        [DataRow(1)] // Assuming 1 is a valid ID for deletion
+        [DataRow(1)] 
         public void TestDelete(int adminId)
         {
             // Arrange
@@ -57,18 +57,17 @@ namespace TestAlquilerVolquetes
 
             // Assert
             Assert.IsNotNull(result);
-            // Add more assertions based on the expected behavior of your Select method
+            
         }
 
         [TestMethod]
-        [DataRow(1)] // Assuming 1 is a valid ID for updating
+        [DataRow(4)] 
         public void TestUpdate(int adminId)
         {
             // Arrange
             AdminADO admin = new AdminADO
             {
                 Id = adminId,
-                // Set other properties accordingly for a valid update scenario
             };
 
             // Act

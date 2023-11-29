@@ -11,7 +11,7 @@ namespace TestAlquilerVolquetes
     public class UsuarioADOTests
     {
         [TestMethod]
-        [DataRow("John", "Doe", "john.doe@example.com", 123456789, "john_doe", "password")]
+        [DataRow("Franco", "Ferrari", "soydios@gmail.com", 1134325533, "fran53", "soydiosiosi")]
         public void TestAdd(string nombre, string apellido, string mail, int telefono, string nombreUsuario, string clave)
         {
             // Arrange
@@ -33,7 +33,7 @@ namespace TestAlquilerVolquetes
         }
 
         [TestMethod]
-        [DataRow("john.doe@example.com")] // Assuming this email exists for deletion
+        [DataRow("soydios@gmail.com")] 
         public void TestDelete(string mail)
         {
             // Arrange
@@ -63,7 +63,7 @@ namespace TestAlquilerVolquetes
         }
 
         [TestMethod]
-        [DataRow(1, "John", "Doe", "john.doe@example.com", 123456789, "john_doe", "updated_password")]
+        [DataRow(1, "Franco", "Ferrari", "soydios@gmail.com", 1134325533, "fran53", "soydiosiosi")]
         public void TestUpdate(int id, string nombre, string apellido, string mail, int telefono, string nombreUsuario, string clave)
         {
             // Arrange
