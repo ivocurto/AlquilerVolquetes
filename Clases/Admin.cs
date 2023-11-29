@@ -14,7 +14,7 @@ namespace Clases
         public Admin(int id, string nombreUsuario, string mailUsuario, string claveUsuario)
             : base(id, nombreUsuario, mailUsuario, claveUsuario)
         {
-            historialAcciones = JsonFileManager.LoadFromJsonGeneric<List<Dictionary<string, string>>>("historialAdmin.json") ?? new List<Dictionary<string, string>>();
+            //historialAcciones = JsonFileManager.LoadFromJsonGeneric<List<Dictionary<string, string>>>("historialAdmin.json") ?? new List<Dictionary<string, string>>();
 
         }
         public override void ConsutarEstado()
@@ -28,40 +28,40 @@ namespace Clases
        
         }
 
-        public List<Cliente> EliminarCliente(List<Cliente> clientes, string nombreCliente)
-        {
-            foreach(Cliente cliente in clientes)
-            {
+        //public List<Cliente> EliminarCliente(List<Cliente> clientes, string nombreCliente)
+        //{
+        //    foreach(Cliente cliente in clientes)
+        //    {
                 
-                if (cliente.NombreUsuario == nombreCliente )
-                {
-                    clientes.Remove(cliente);
-                    NotificarAccionExitosa("EliminarCliente", cliente.NombreUsuario);
-                    GuardarHistorial();
-                    return clientes;
-                }
-                else
-                {
-                   // throw new InvalidOperationException("Error al eliminar el cliente.");
-                }
-            }
+        //        if (cliente.NombreUsuario == nombreCliente )
+        //        {
+        //            clientes.Remove(cliente);
+        //            NotificarAccionExitosa("EliminarCliente", cliente.NombreUsuario);
+        //            GuardarHistorial();
+        //            return clientes;
+        //        }
+        //        else
+        //        {
+        //           // throw new InvalidOperationException("Error al eliminar el cliente.");
+        //        }
+        //    }
            
-            return clientes;
-        }
+        //    return clientes;
+        //}
 
-        public void EliminarPedidoCliente(Cliente cliente, int indexPedido)
-        {
-            if (indexPedido >= 0 && indexPedido < cliente.Pedidos.Count)
-            {
-                cliente.Pedidos.RemoveAt(indexPedido);
-                NotificarAccionExitosa("EliminarPedidoCliente", cliente.NombreUsuario);
-                GuardarHistorial();
-            }
-            else
-            {
-                throw new IndexOutOfRangeException("Índice de pedido no válido.");
-            }
-        }
+        //public void EliminarPedidoCliente(Cliente cliente, int indexPedido)
+        //{
+        //    if (indexPedido >= 0 && indexPedido < cliente.Pedidos.Count)
+        //    {
+        //        cliente.Pedidos.RemoveAt(indexPedido);
+        //        NotificarAccionExitosa("EliminarPedidoCliente", cliente.NombreUsuario);
+        //        GuardarHistorial();
+        //    }
+        //    else
+        //    {
+        //        throw new IndexOutOfRangeException("Índice de pedido no válido.");
+        //    }
+        //}
 
         //public List<Admin> AgregarAdmin(List<Cliente> clientes, List<Admin> admins, string nombreCliente)
         //{
@@ -85,20 +85,20 @@ namespace Clases
 
         //}
 
-        private void NotificarAccionExitosa(string nombreAccion, string usuarioAfectado)
-        {
-            Dictionary<string, string> registro = new Dictionary<string, string>
-            {
-                { nombreAccion, $"Realizada por: {this.nombreUsuario} -- Usuario afectado: {usuarioAfectado} -- Fecha de realizacion de la acción {DateTime.Now}" }
-            };
-            historialAcciones.Add(registro);
-            GuardarHistorial();
-        }
+        //private void NotificarAccionExitosa(string nombreAccion, string usuarioAfectado)
+        //{
+        //    Dictionary<string, string> registro = new Dictionary<string, string>
+        //    {
+        //        { nombreAccion, $"Realizada por: {this.nombreUsuario} -- Usuario afectado: {usuarioAfectado} -- Fecha de realizacion de la acción {DateTime.Now}" }
+        //    };
+        //    historialAcciones.Add(registro);
+        //    GuardarHistorial();
+        //}
 
-        private void GuardarHistorial()
-        {
-            JsonFileManager.SaveToJsonGeneric("historialAdmin.json", historialAcciones);
-        }
+        //private void GuardarHistorial()
+        //{
+        //    JsonFileManager.SaveToJsonGeneric("historialAdmin.json", historialAcciones);
+        //}
 
 
     }

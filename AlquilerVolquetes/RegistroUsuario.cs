@@ -17,13 +17,13 @@ namespace AlquilerVolquetes
     public partial class RegistroUsuario : Form
     {
         private Size previousSize;
-        public List<Cliente> listaUsuarios;
+        //public List<Cliente> listaUsuarios;
 
         public RegistroUsuario()
         {
             InitializeComponent();
 
-            listaUsuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
+            //listaUsuarios = JsonFileManager.LoadFromJsonGeneric<List<Cliente>>("usuarios.json");
         }
 
         private void RegistroUsuario_Load(object sender, EventArgs e)
