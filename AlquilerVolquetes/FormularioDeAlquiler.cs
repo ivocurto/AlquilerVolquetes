@@ -28,16 +28,16 @@ namespace AlquilerVolquetes
 
             this.Load += async (sender, e) => await FormularioDeAlquiler_Load();
 
-            if (idsPedidos is null)
-            {
-                idsPedidos = new List<int>();
+            //if (idsPedidos is null)
+            //{
+            //    idsPedidos = new List<int>();
 
-                MostrarProductosAComprar();
-            }
-            foreach (Volquete volquete in volquetes)
-            {
-                dataGridView1.Rows.Add(volquete.MedidaVolquete, volquete.Cantidad, $"${volquete.PrecioUnitario}");
-            }
+            //    MostrarProductosAComprar();
+            //}
+            //foreach (Volquete volquete in volquetes)
+            //{
+            //    dataGridView1.Rows.Add(volquete.MedidaVolquete, volquete.Cantidad, $"${volquete.PrecioUnitario}");
+            //}
         }
 
         private async Task FormularioDeAlquiler_Load()

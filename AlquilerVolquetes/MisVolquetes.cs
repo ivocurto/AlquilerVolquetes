@@ -32,12 +32,11 @@ namespace AlquilerVolquetes
             actualizarPantalla();
         }
 
-
         private void btnDevolverVolquete_Click(object sender, EventArgs e)
         {
             if (lstEnviando.SelectedIndex >= 0)
             {
-                ModalExito borrar = new ModalExito("¿Deseas ELIMINAR el elemento seleccionado?");
+                ModalExito borrar = new ModalExito("¿ELIMINAR?");
                 borrar.pictureBox1.Visible = false;
                 DialogResult answer = borrar.ShowDialog();
                 if (answer == DialogResult.OK)
