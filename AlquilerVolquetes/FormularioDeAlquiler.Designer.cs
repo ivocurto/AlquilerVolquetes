@@ -65,7 +65,6 @@
             lblTituloFormularioDePago.Size = new Size(437, 49);
             lblTituloFormularioDePago.TabIndex = 22;
             lblTituloFormularioDePago.Text = "FORMULARIO DE PAGO";
-            lblTituloFormularioDePago.Click += lblTituloFormularioDePago_Click;
             // 
             // btnAlquilar
             // 
@@ -128,7 +127,6 @@
             lblTotal.Size = new Size(220, 36);
             lblTotal.TabIndex = 32;
             lblTotal.Text = "PRECIO TOTAL: $0";
-            lblTotal.Click += lblTotal_Click;
             // 
             // linkLabel1
             // 
@@ -228,7 +226,6 @@
             dataGridView1.ScrollBars = ScrollBars.None;
             dataGridView1.Size = new Size(862, 124);
             dataGridView1.TabIndex = 40;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // medida
             // 
@@ -262,7 +259,6 @@
             dtpDevolucion.Size = new Size(82, 23);
             dtpDevolucion.TabIndex = 35;
             dtpDevolucion.Value = new DateTime(2023, 11, 7, 0, 0, 0, 0);
-            dtpDevolucion.ValueChanged += dtpDevolucion_ValueChanged;
             // 
             // groupBox1
             // 

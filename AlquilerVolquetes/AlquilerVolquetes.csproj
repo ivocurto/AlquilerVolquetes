@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ClasesManejoBaseDatos\ClasesManejoBaseDatos.csproj" />
     <ProjectReference Include="..\Clases\Clases.csproj" />
+    <ProjectReference Include="..\Excepciones\Excepciones.csproj" />
   </ItemGroup>
 
   <ItemGroup>

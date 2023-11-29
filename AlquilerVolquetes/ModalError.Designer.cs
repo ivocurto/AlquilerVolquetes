@@ -35,11 +35,9 @@
             // 
             // lblTitulo
             // 
-            lblTitulo.AutoSize = false;
             lblTitulo.Location = new Point(105, 26);
             lblTitulo.Size = new Size(350, 29);
             lblTitulo.Text = "TITULO";
-            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
@@ -49,20 +47,20 @@
             // lblTipoDeError
             // 
             lblTipoDeError.Font = new Font("Bahnschrift Light", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTipoDeError.Location = new Point(75, 179);
+            lblTipoDeError.Location = new Point(12, 179);
             lblTipoDeError.Name = "lblTipoDeError";
-            lblTipoDeError.Size = new Size(400, 19);
+            lblTipoDeError.Size = new Size(546, 19);
             lblTipoDeError.TabIndex = 27;
             lblTipoDeError.Text = "texto";
             lblTipoDeError.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // ModalErrorLogin
+            // ModalError
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(570, 288);
             Controls.Add(lblTipoDeError);
-            Name = "ModalErrorLogin";
+            Name = "ModalError";
             Text = "ModalErrorLogin";
             Load += ModalErrorLogin_Load;
             Controls.SetChildIndex(lblTitulo, 0);

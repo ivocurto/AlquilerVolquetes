@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Clases;
 using ClasesManejoBaseDatos;
+using Excepciones;
 using MySqlX.XDevAPI;
 
 namespace AlquilerVolquetes
@@ -94,46 +95,14 @@ namespace AlquilerVolquetes
         {
             string telefono = txtTelefono.Text;
             string direccion = txtDireccion.Text;
-            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtDireccion.Text, txtTelefono.Text);                //List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(txtApellido.Text, txtNombre.Text, txtMail.Text, txtDireccion.Text, txtTelefono.Text);
-            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
+
+            try
             {
-                ModalError modal = new ModalError("Por favor, completa todos los campos", "ERROR AL REGISTRARSE");
-                modal.ShowDialog();
-            }
-            else
-            {
-                Pedido pedido;
-                if (pedidos is null)
-                {
-                    pedidos = new List<Pedido>();
-                }
-                List<Volquete> volquetesInstalar = new List<Volquete>();
+                ValidarCampos(telefono, direccion);
 
-                DateTime fechaEntrega = dtpEntrega.Value;
-                DateTime fechaDevolucion = dtpDevolucion.Value;
-                pedido = new Pedido(volquetes, volquetesInstalar, usuarioActual.NombreUsuario, fechaDevolucion, fechaEntrega);
-                pedido.GenerarIdPedido(idsPedidos);
+                Pedido pedido = CrearPedido();
+                GuardarPedidoEnBaseDeDatos(pedido);
 
-                if (pedidos.Count > 1)
-                {
-                    pedido.Index = pedidos.Count() - 1;
-                }
-                else
-                {
-                    pedido.Index = 0;
-                }
-
-                foreach (Volquete volquete in pedido.VolquetesPedidos)
-                {
-                    volquete.Identificador = pedido.IdPedido;
-                }
-                var pedidoADO = new PedidoADO(pedido.IdPedido, usuarioActual.Id, volquetes[0].Cantidad, volquetes[1].Cantidad, volquetes[2].Cantidad, fechaEntrega, fechaDevolucion, direccion);
-                DB.CambiarCantidadDisponible(volquetes[0].Id + 1, volquetes[0].Cantidad, false);
-                DB.CambiarCantidadDisponible(volquetes[1].Id + 1, volquetes[1].Cantidad, false);
-                DB.CambiarCantidadDisponible(volquetes[2].Id + 1, volquetes[2].Cantidad, false);
-                DB.ActualizarAtributoUsuario(usuarioActual.MailUsuario, "telefono", telefono);
-                pedidoADO.Add();
-               
                 ModalExito compraExitosa = new ModalExito("COMPRA EXITOSA");
                 DialogResult result = compraExitosa.ShowDialog();
 
@@ -142,10 +111,80 @@ namespace AlquilerVolquetes
                     PantallaInicio pantallaInicio = new PantallaInicio(usuarioActual);
                     this.Hide();
                     pantallaInicio.Show();
-                    // llevar al formulario de pago
                 }
             }
+            catch (ModalErrorException ex)
+            {
+                ModalError modal = new ModalError(ex.Message, "ERROR AL INGRESAR DATOS");
+                modal.ShowDialog();
+            }
+            catch (TelefonoStringException ex)
+            {
+                ModalError modal = new ModalError(ex.Message, "ERROR AL INGRESAR DATOS");
+                modal.ShowDialog();
+            }
+            catch (TelefonoLongitudException ex)
+            {
+                ModalError modal = new ModalError(ex.Message, "ERROR AL INGRESAR DATOS");
+                modal.ShowDialog();
+            }
+            catch (Exception ex)
+            { 
+                MessageBox.Show("Error inesperado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
+        private void ValidarCampos(string telefono, string direccion)
+        {
+            List<string> datosUsuario = ManejoDeValidaciones.CrearListaDeDatos(direccion, telefono);
+
+            if (!ManejoDeValidaciones.ComprobarStringVacio(datosUsuario))
+            {
+                throw new ModalErrorException("Por favor, completa todos los campos");
+            }
+            if (!EsNumero(telefono))
+            {
+                throw new TelefonoStringException();
+            }
+            if (telefono.Length != 10)
+            {
+                throw new TelefonoLongitudException();
+            }
+        }
+
+        private bool EsNumero(string texto)
+        {
+            return int.TryParse(texto, out _);
+        }
+
+        private Pedido CrearPedido()
+        {
+            Pedido pedido = new Pedido(volquetes, new List<Volquete>(), usuarioActual.NombreUsuario, dtpDevolucion.Value, dtpEntrega.Value);
+            pedido.GenerarIdPedido(idsPedidos);
+
+            // Resto del código para configurar el pedido
+
+            return pedido;
+        }
+
+        private void GuardarPedidoEnBaseDeDatos(Pedido pedido)
+        {
+            PedidoADO pedidoADO = new PedidoADO(pedido.IdPedido, usuarioActual.Id, volquetes[0].Cantidad, volquetes[1].Cantidad, volquetes[2].Cantidad, dtpEntrega.Value, dtpDevolucion.Value, txtDireccion.Text);
+
+            // Resto del código para guardar el pedido en la base de datos
+
+            // Actualizar disponibilidad y atributos en la base de datos
+            DB.CambiarCantidadDisponible(volquetes[0].Id + 1, volquetes[0].Cantidad, false);
+            DB.CambiarCantidadDisponible(volquetes[1].Id + 1, volquetes[1].Cantidad, false);
+            DB.CambiarCantidadDisponible(volquetes[2].Id + 1, volquetes[2].Cantidad, false);
+            DB.ActualizarAtributoUsuario(usuarioActual.MailUsuario, "telefono", txtTelefono.Text);
+
+            // Agregar el pedido a la base de datos
+            pedidoADO.Add();
+        }
+
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -162,26 +201,6 @@ namespace AlquilerVolquetes
         }
 
 
-
-        private void lblTotal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpDevolucion_ValueChanged(object sender, EventArgs e)
-        {
-            MostrarProductosAComprar();
-        }
-
-        private void lblTituloFormularioDePago_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Clases;
 using ClasesManejoBaseDatos;
+using Excepciones;
 
 namespace AlquilerVolquetes
 {
@@ -30,13 +31,14 @@ namespace AlquilerVolquetes
             dtpDevolucion.MinDate = pedidoSeleccionado.Fecha_regreso.AddDays(1);
             try
             {
+                FechaInvalida.ValidarFechas(dtpDevolucion.MinDate, DateTime.Today.AddDays(14));
                 dtpDevolucion.MaxDate = DateTime.Today.AddDays(14);
             }
-            catch (Exception ex)
+            catch (FechaInvalida)
             {
                 dtpDevolucion.MaxDate = pedidoSeleccionado.Fecha_regreso.AddDays(14);   
             }
-            
+
             MisVolquetes = misVolquetes;
             MostrarPrecio();
         }

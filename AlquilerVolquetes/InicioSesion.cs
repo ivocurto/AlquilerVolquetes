@@ -16,7 +16,6 @@ using System.Drawing.Drawing2D;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Reflection.Emit;
 using ClasesManejoBaseDatos;
-using Excepciones;
 
 namespace AlquilerVolquetes
 {
@@ -36,20 +35,7 @@ namespace AlquilerVolquetes
             this.WindowState = FormWindowState.Maximized;
             data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
             data2 = JsonFileManager.LoadFromJsonGeneric<AdminContainer>(filePath2);
-            try
-            {
-                var result = DB.GetPedidos();
-                pedidos = result.Pedidos;
-
-                if (!string.IsNullOrEmpty(result.MensajeError))
-                {
-                    MessageBox.Show(result.MensajeError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (BaseDeDatosCerrada ex)
-            {
-                MessageBox.Show(ex.mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            pedidos = DB.GetPedidos();
             foreach (PedidoADO pedido in pedidos)
             {
                 if (pedido.FechaDeRegresoAlcanzada())
@@ -145,7 +131,6 @@ namespace AlquilerVolquetes
             }
             else
             {
-
                 ModalError ususarioIncorrecto = new ModalError("Nombre de usuario o clave incorrectos", "ERROR AL INICIAR SESIÓN");
                 DialogResult result = ususarioIncorrecto.ShowDialog();
 
@@ -224,7 +209,7 @@ namespace AlquilerVolquetes
             }
         }
 
-        
+
 
         private void OcultarTextoClave(object sender, EventArgs e)
         {
@@ -248,6 +233,6 @@ namespace AlquilerVolquetes
             this.button2.Click += OcultarTextoClave;
         }
 
-       
+
     }
 }

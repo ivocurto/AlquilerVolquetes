@@ -216,7 +216,7 @@ namespace AlquilerVolquetes
             txtReClave.UseSystemPasswordChar = true;
             this.pbCerrado.Visible = true;
             this.button2.Click -= OcultarTextoClave;
-            this.button2.Click += button2_Click;
+            this.button2.Click += button2_Click_1;
         }
 
         private void MostrarTextoClave()
@@ -226,16 +226,11 @@ namespace AlquilerVolquetes
             txtClave.UseSystemPasswordChar = false;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             MostrarTextoClave();
-            this.button2.Click -= button2_Click;
+            this.button2.Click -= button2_Click_1;
             this.button2.Click += OcultarTextoClave;
-        }
-
-        private void pnlLogin_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

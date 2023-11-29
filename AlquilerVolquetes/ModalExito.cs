@@ -13,10 +13,17 @@ namespace AlquilerVolquetes
     public partial class ModalExito : Form
     {
         string tituloModal;
+
+        public ModalExito()
+        {
+            InitializeComponent();
+        }
+
         public ModalExito(string titulo)
         {
             InitializeComponent();
             tituloModal = titulo;
+            lblTitulo.Text = titulo;
         }
 
         private void ModalExitoLogin_Load(object sender, EventArgs e)
@@ -29,5 +36,6 @@ namespace AlquilerVolquetes
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
     }
 }
