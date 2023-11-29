@@ -17,19 +17,16 @@ namespace AlquilerVolquetes
         private FechaActual fechaActual = new FechaActual();
         private List<int> idsPedidos;
 
+        
         public FormularioDeAlquiler(List<Volquete> lista, Cliente usuario, Form formularioPrincipal)
         {
             InitializeComponent();
             volquetes = lista;
             usuarioActual = usuario;
             formPrincipal = formularioPrincipal;
-            dtpEntrega.Value = fechaActual.fechaActual;
-            dtpDevolucion.Value = fechaActual + 3;
-            dtpDevolucion.MinDate = dtpDevolucion.Value;
-            dtpDevolucion.MaxDate = dtpEntrega.Value.AddDays(14);
-            dtpEntrega.MinDate = dtpEntrega.Value;
-            pedidos = JsonFileManager.LoadFromJsonGeneric<List<Pedido>>(path);
-            idsPedidos = JsonFileManager.LoadFromJsonGeneric<List<int>>("idsPedidos.json");
+
+            this.Load += async (sender, e) => await FormularioDeAlquiler_Load();
+
             if (idsPedidos is null)
             {
                 idsPedidos = new List<int>();
@@ -40,6 +37,34 @@ namespace AlquilerVolquetes
             {
                 dataGridView1.Rows.Add(volquete.MedidaVolquete, volquete.Cantidad, $"${volquete.PrecioUnitario}");
             }
+        }
+
+        private async Task FormularioDeAlquiler_Load()
+        {
+            dtpEntrega.Value = fechaActual.fechaActual;
+            dtpDevolucion.Value = fechaActual + 3;
+            dtpDevolucion.MinDate = dtpDevolucion.Value;
+            dtpDevolucion.MaxDate = dtpEntrega.Value.AddDays(14);
+            dtpEntrega.MinDate = dtpEntrega.Value;
+
+            await CargarArchivosAsync();
+
+            if (idsPedidos is null)
+            {
+                idsPedidos = new List<int>();
+                MostrarProductosAComprar();
+            }
+
+            foreach (Volquete volquete in volquetes)
+            {
+                dataGridView1.Rows.Add(volquete.MedidaVolquete, volquete.Cantidad, $"${volquete.PrecioUnitario}");
+            }
+        }
+
+        private async Task CargarArchivosAsync()
+        {
+            pedidos = await JsonFileManager.LoadFromJsonGenericAsync<List<Pedido>>(path);
+            idsPedidos = await JsonFileManager.LoadFromJsonGenericAsync<List<int>>("idsPedidos.json");
         }
 
         private void MostrarProductosAComprar()

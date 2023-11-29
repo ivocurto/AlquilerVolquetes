@@ -33,9 +33,16 @@ namespace AlquilerVolquetes
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-            data = JsonFileManager.LoadFromJsonGeneric<DataContainer>(filePath);
-            data2 = JsonFileManager.LoadFromJsonGeneric<AdminContainer>(filePath2);
+
+            CargarDatosAsync();
+        }
+
+        private async void CargarDatosAsync()
+        {
+            data = await JsonFileManager.LoadFromJsonGenericAsync<DataContainer>(filePath);
+            data2 = await JsonFileManager.LoadFromJsonGenericAsync<AdminContainer>(filePath2);
             pedidos = DB.GetPedidos();
+
             foreach (PedidoADO pedido in pedidos)
             {
                 if (pedido.FechaDeRegresoAlcanzada())
@@ -49,6 +56,7 @@ namespace AlquilerVolquetes
                     DB.CambiarCantidadDisponible(3, cantidadVG, true);
                 }
             }
+
             if (data != null && data.CheckboxValue == true)
             {
                 txtUsuario.Text = data.UserObject.NombreUsuario;
@@ -61,7 +69,6 @@ namespace AlquilerVolquetes
                 txtClave.Text = data2.AdminObject.ClaveUsuario;
                 cbAutoLogin.Checked = true;
             }
-
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -87,7 +94,7 @@ namespace AlquilerVolquetes
             }
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private async void btnIngresar_Click(object sender, EventArgs e)
         {
 
             string nombreUsuario = txtUsuario.Text;
@@ -102,14 +109,14 @@ namespace AlquilerVolquetes
                 if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                 {
                     data = new DataContainer(checkbox, cliente);
-                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, data);
-                    JsonFileManager.SaveToJsonGeneric<AdminContainer>(filePath2, null);
+                    await JsonFileManager.SaveToJsonGenericAsync<DataContainer>(filePath, data);
+                    await JsonFileManager.SaveToJsonGenericAsync<AdminContainer>(filePath2, null);
                     PantallaInicio pantallaInicio = new PantallaInicio(cliente);
                     previousSize = this.Size;
                     previousLocation = this.Location;
                     MantenerPantallaCompleta(this, pantallaInicio, previousSize, previousLocation);
                     pantallaInicio.Show();
-                    this.Hide();
+                    this.Hide(); 
                     return;
                 }
             }
@@ -121,8 +128,8 @@ namespace AlquilerVolquetes
                 if (answer == DialogResult.OK || answer == DialogResult.Cancel)
                 {
                     data2 = new AdminContainer(admin, checkbox);
-                    JsonFileManager.SaveToJsonGeneric<AdminContainer>(filePath2, data2);
-                    JsonFileManager.SaveToJsonGeneric<DataContainer>(filePath, null);
+                    await JsonFileManager.SaveToJsonGenericAsync<AdminContainer>(filePath2, data2);
+                    await JsonFileManager.SaveToJsonGenericAsync<DataContainer>(filePath, null);
                     PanelAdmin panelAdmin = new PanelAdmin(admin);
                     panelAdmin.Show();
                     this.Hide();
