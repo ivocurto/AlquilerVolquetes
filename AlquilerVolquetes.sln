@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClasesManejoBaseDatos", "Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAlquilerVolquetes", "TestAlquilerVolquetes\TestAlquilerVolquetes.csproj", "{C26C8297-A236-4F3F-94C9-EC523084BF7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excepciones", "Excepciones\Excepciones.csproj", "{2F61EAE6-F9AF-4F3A-8667-A04F3025C8D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{C26C8297-A236-4F3F-94C9-EC523084BF7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C26C8297-A236-4F3F-94C9-EC523084BF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26C8297-A236-4F3F-94C9-EC523084BF7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F61EAE6-F9AF-4F3A-8667-A04F3025C8D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F61EAE6-F9AF-4F3A-8667-A04F3025C8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F61EAE6-F9AF-4F3A-8667-A04F3025C8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F61EAE6-F9AF-4F3A-8667-A04F3025C8D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,8 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 using Clases;
+using System.Configuration;
+using Excepciones;
 //using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClasesManejoBaseDatos
@@ -275,11 +277,12 @@ namespace ClasesManejoBaseDatos
             }
         }
 
-        public static List<PedidoADO> GetPedidos()
+        public static (List<PedidoADO> Pedidos, string MensajeError) GetPedidos()
         {
-            string query = $"SELECT * FROM pedidos_cliente";
+            string query = "SELECT * FROM pedidos_cliente";
 
             var pedidos = new List<PedidoADO>();
+            string mensajeError = null;
 
             try
             {
@@ -296,17 +299,27 @@ namespace ClasesManejoBaseDatos
                         pedidos.Add(pedido);
                     }
                 }
-
-                return pedidos;
             }
-            catch (Exception)
+            catch (MySqlException ex)
+            {
+                // Capturar el mensaje de error de MySQL
+                mensajeError = $"Error al obtener pedidos de la base de datos MySQL. Por favor abra la base de datos y reinicie el programa.\n{ex.Message}";
+            }
+            catch (BaseDeDatosCerrada)
             {
                 throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener pedidos: {ex.Message}");
+                mensajeError = "Error al obtener pedidos.";
             }
             finally
             {
                 connection.Close();
             }
+
+            return (pedidos, mensajeError);
         }
 
         public static List<AdminADO> GetAdmins()
@@ -377,45 +390,6 @@ namespace ClasesManejoBaseDatos
             }
         }
 
-        //public static List<UsuarioADO> GetUsuarios(string nombre_usuario)
-        //{
-        //    string query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario";
-
-        //    var usuarios = new List<UsuarioADO>();
-
-        //    try
-        //    {
-        //        connection.Open();
-
-        //        using (var command = new MySqlCommand(query, connection))
-        //        {
-        //            command.Parameters.AddWithValue("@NombreUsuario", nombre_usuario);
-
-        //            using (var reader = command.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    UsuarioADO usuario = new UsuarioADO();
-        //                    AsignarValoresDesdeReader(usuario, reader);
-        //                    usuarios.Add(usuario);
-        //                }
-        //            }
-        //        }
-
-        //        return usuarios;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        connection.Close();
-        //    }
-        //}
-
-
-
         public static void AsignarValoresDesdeReader(PedidoADO pedido, MySqlDataReader reader)
         {
             pedido.Hash_code = Convert.ToInt32(reader["hash_code"]);
@@ -461,7 +435,6 @@ namespace ClasesManejoBaseDatos
 
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
-                    // Agrega el parámetro para evitar la inyección de SQL
                     cmd.Parameters.AddWithValue($"{atributo.ToUpper()}", $"{atributoIngresado.ToLower()}");
 
                     cmd.ExecuteNonQuery();
@@ -668,12 +641,15 @@ namespace ClasesManejoBaseDatos
                                 reader["clave"].ToString()
                             );
                         }
+                        else
+                        {
+                            throw new NoSeEncontroEnBD("Imposible traer un UsuarioADO que no está en la Base de Datos.\n", nombreUsuario);
+                        }
                     }
                 }
             }
             catch (Exception)
             {
-                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
                 throw;
             }
             finally
@@ -713,50 +689,9 @@ namespace ClasesManejoBaseDatos
                                 reader["clave"].ToString()
                             );
                         }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                // Maneja la excepción de manera apropiada (registra, notifica, etc.)
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return cliente;
-        }
-
-        public static UsuarioADO TraerClienteLogueado(string nombreUsuario)
-        {
-            UsuarioADO cliente = null;
-
-            try
-            {
-                connection.Open();
-
-                string query = "SELECT * FROM usuarios WHERE nombre_usuario = @NombreUsuario";
-
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
+                        else
                         {
-                            // Crea un nuevo usuario con los datos de la base de datos
-                            cliente = new UsuarioADO(
-                                Convert.ToInt32(reader["id"]),
-                                reader["nombre"].ToString(),
-                                reader["apellido"].ToString(),
-                                reader["mail"].ToString(),
-                                reader["telefono"] is DBNull ? (int?)null : Convert.ToInt32(reader["telefono"]),
-                                reader["nombre_usuario"].ToString(),
-                                reader["clave"].ToString()
-                            );
+                            throw new NoSeEncontroEnBD("Imposible traer un usuario que no está en la Base de Datos.\n", nombreUsuario);
                         }
                     }
                 }
@@ -800,6 +735,10 @@ namespace ClasesManejoBaseDatos
                                 reader["mail"].ToString(),
                                 reader["clave"].ToString()
                             );
+                        }
+                        else
+                        {
+                            throw new NoSeEncontroEnBD("Imposible traer un admin que no está en la Base de Datos.\n", nombreUsuario);
                         }
                     }
                 }
