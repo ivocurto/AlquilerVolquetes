@@ -73,7 +73,7 @@
             lblRegistrarse.Location = new Point(82, 364);
             lblRegistrarse.Name = "lblRegistrarse";
             lblRegistrarse.Size = new Size(259, 21);
-            lblRegistrarse.TabIndex = 5;
+            lblRegistrarse.TabIndex = 7;
             lblRegistrarse.TabStop = true;
             lblRegistrarse.Text = "¿Ya tienes una cuenta? Iniciar sesión";
             lblRegistrarse.LinkClicked += lblRegistrarse_LinkClicked;
@@ -176,7 +176,7 @@
             txtClave.Margin = new Padding(0);
             txtClave.Name = "txtClave";
             txtClave.Size = new Size(214, 23);
-            txtClave.TabIndex = 3;
+            txtClave.TabIndex = 5;
             txtClave.UseSystemPasswordChar = true;
             txtClave.TextChanged += textBox2_TextChanged;
             // 
@@ -233,7 +233,7 @@
             txtNombre.Margin = new Padding(0);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(214, 23);
-            txtNombre.TabIndex = 95;
+            txtNombre.TabIndex = 1;
             txtNombre.TextChanged += txtNombre_TextChanged;
             // 
             // txtApellido
@@ -247,7 +247,7 @@
             txtApellido.Margin = new Padding(0);
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(214, 23);
-            txtApellido.TabIndex = 94;
+            txtApellido.TabIndex = 2;
             txtApellido.TextChanged += txtApellido_TextChanged;
             // 
             // pictureBox6
@@ -300,7 +300,7 @@
             txtCorreo.Margin = new Padding(0);
             txtCorreo.Name = "txtCorreo";
             txtCorreo.Size = new Size(214, 23);
-            txtCorreo.TabIndex = 1;
+            txtCorreo.TabIndex = 3;
             txtCorreo.TextChanged += textBox3_TextChanged;
             // 
             // pictureBox4
@@ -340,7 +340,7 @@
             txtReClave.Margin = new Padding(0);
             txtReClave.Name = "txtReClave";
             txtReClave.Size = new Size(214, 23);
-            txtReClave.TabIndex = 4;
+            txtReClave.TabIndex = 6;
             txtReClave.UseSystemPasswordChar = true;
             txtReClave.TextChanged += textBox1_TextChanged;
             // 
@@ -381,7 +381,7 @@
             txtUsuario.Margin = new Padding(0);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(214, 23);
-            txtUsuario.TabIndex = 2;
+            txtUsuario.TabIndex = 4;
             txtUsuario.TextChanged += txtUsuario_TextChanged;
             // 
             // lblRegister
@@ -422,7 +422,7 @@
             btnIngresar.Margin = new Padding(0);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(188, 55);
-            btnIngresar.TabIndex = 6;
+            btnIngresar.TabIndex = 8;
             btnIngresar.Text = "REGISTRARSE";
             btnIngresar.UseVisualStyleBackColor = false;
             btnIngresar.Click += btnIngresar_Click_1;

@@ -216,8 +216,6 @@ namespace AlquilerVolquetes
             }
         }
 
-
-
         private void OcultarTextoClave(object sender, EventArgs e)
         {
             txtClave.UseSystemPasswordChar = true;

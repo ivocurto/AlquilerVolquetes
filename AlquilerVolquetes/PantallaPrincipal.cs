@@ -13,17 +13,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Clases;
 using ClasesManejoBaseDatos;
-
 using static System.Windows.Forms.DataFormats;
 
 namespace AlquilerVolquetes
 {
     public partial class PantallaPrincipal : Form
     {
-        //LISTA CARRITO
-        //LISTA CARRITO
         public Cliente usuarioAcutal;
-
         private List<Volquete> volquetes = new List<Volquete>();
         private List<Volquete> volquetesCarrito = new List<Volquete>();
         private Volquete volqueteChico = new Volquete(0, "VOLQUETE CHICO", 800);
@@ -53,7 +49,6 @@ namespace AlquilerVolquetes
             this.lblStockVC.Text = $"Stock: {DB.ObtenerCantidadDisponible(1)}";
             this.lblStockVM.Text = $"Stock: {DB.ObtenerCantidadDisponible(2)}";
             this.lblStockVG.Text = $"Stock: {DB.ObtenerCantidadDisponible(3)}";
-
         }
 
         private void Sumar_Al_Carrito(object sender, EventArgs e, int id)
@@ -61,16 +56,14 @@ namespace AlquilerVolquetes
 
             if (volquetes[id].Cantidad == 0)
             {
-                volquetes[id].Cantidad = 1; // Agrega el producto con la cantidad 1
+                volquetes[id].Cantidad = 1;
             }
             else
             {
-                volquetes[id].Cantidad++; // Le suma 1 a la cantidad del producto con el ID dado
+                volquetes[id].Cantidad++;
             }
 
-            // Actualizar la lista de productos en el carrito
             ActualizarListaCarrito();
-
         }
 
         private void btnAgregarAlCarrito_Click(object sender, EventArgs e)
@@ -80,7 +73,7 @@ namespace AlquilerVolquetes
             foreach (Volquete volquete in volquetes)
             {
                 volquetesCarrito[volquete.Id].Cantidad = 0;
-                volquetesCarrito[volquete.Id].Cantidad += volquete.Cantidad; // Le suma 1 a la cantidad del producto con el ID dado
+                volquetesCarrito[volquete.Id].Cantidad += volquete.Cantidad;
                 volquete.Cantidad = 0;
             }
             lstProductos.Items.Clear();
@@ -90,6 +83,14 @@ namespace AlquilerVolquetes
             lblCantidadVolqueteChico.Text = "0";
             lblCantidadVolqueteMediano.Text = "0";
             lblCantidadVolqueteGrande.Text = "0";
+
+            Carrito carrito = new Carrito(volquetesCarrito, usuarioAcutal, pantallaInicio);
+            DialogResult result = carrito.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                this.Hide();
+            }
 
         }
         private void ActualizarListaCarrito()
@@ -113,22 +114,16 @@ namespace AlquilerVolquetes
         {
             if (volquetes[id].Cantidad > 0)
             {
-                volquetes[id].Cantidad--; // Le resta 1 a la cantidad
+                volquetes[id].Cantidad--;
 
-
-                ActualizarListaCarrito(); // Actualizar la lista de productos en el carrito
+                ActualizarListaCarrito();
             }
         }
-
-
-        //
-
-        //Iniciar formulario
 
         private string Incrementar_Label(object sender, EventArgs e, int id, string label)
         {
             int valor = int.Parse(label);
-            if (valor < DB.ObtenerCantidadDisponible(id+1))
+            if (valor < DB.ObtenerCantidadDisponible(id + 1))
             {
                 valor++;
                 Sumar_Al_Carrito(sender, e, id);
@@ -157,7 +152,6 @@ namespace AlquilerVolquetes
             if (result == DialogResult.OK)
             {
                 this.Hide();
-                // llevar al formulario de pago
             }
         }
 
@@ -197,40 +191,6 @@ namespace AlquilerVolquetes
             }
         }
 
-        private void lblPrecioChico_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCantidadVolqueteChico_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lblCantidadVolqueteMediano_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lblPrecioMediano_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lblCantidadVolqueteGrande_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void lblPrecioGrande_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSumarVG_Click_1(object sender, EventArgs e)
         {
             this.lblCantidadVolqueteGrande.Text = Incrementar_Label(sender, e, 2, this.lblCantidadVolqueteGrande.Text);
@@ -260,17 +220,6 @@ namespace AlquilerVolquetes
         {
             this.lblCantidadVolqueteChico.Text = Decrementar_Label(sender, e, 0, this.lblCantidadVolqueteChico.Text);
         }
-
-        private void PantallaPrincipal_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lstProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
-
 }
 

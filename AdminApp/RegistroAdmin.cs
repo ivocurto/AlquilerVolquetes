@@ -20,7 +20,8 @@ namespace AdminApp
             MostrarLabel(txtMail, lblMail);
             MostrarLabel(txtClave, lblClave);
             MostrarLabel(txtReClave, lblReClave);
-
+            txtClave.UseSystemPasswordChar = true;
+            txtReClave.UseSystemPasswordChar = true;
             listaAdmins = JsonFileManager.LoadFromJsonGeneric<List<Admin>>(rutaArchivoJson);
             if (listaAdmins is null)
             {
@@ -148,8 +149,6 @@ namespace AdminApp
             inicio.Show();
             this.Hide();
         }
-
-
 
         private void OcultarTextoClave(object sender, EventArgs e)
         {

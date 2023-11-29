@@ -84,7 +84,6 @@
             lstProductos.Size = new Size(343, 92);
             lstProductos.TabIndex = 15;
             lstProductos.DrawItem += lstProductos_DrawItem;
-            lstProductos.SelectedIndexChanged += lstProductos_SelectedIndexChanged;
             // 
             // btnAgregarAlCarrito
             // 
@@ -125,7 +124,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(400, 266);
             panel2.TabIndex = 30;
-            panel2.Paint += panel2_Paint;
             // 
             // pictureBox1
             // 
@@ -160,7 +158,6 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 32;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
             // 
             // btnRestarVM
             // 
