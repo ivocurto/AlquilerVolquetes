@@ -74,4 +74,9 @@ El programa es un gestor de alquileres de volquetes, el mismo cuenta con una int
 - CRUD
 
 
+## Agradecimientos
+- Profesores de la Cursada: Germán Scarafilo, Giovanni Luccheta, Mario Rampi.
+
+- Abril Carvani (Edición de imagenes).
+
 
